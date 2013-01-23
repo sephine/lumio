@@ -109,7 +109,7 @@
             self.valueSprite = [CCSprite spriteWithFile:@"Number3.png"];
             break;
         case High:
-            self.valueSprite = [CCSprite spriteWithFile:@"Number9.png"];
+            self.valueSprite = [CCSprite spriteWithFile:@"Number9White.png"];
             break;
         default:
             break;
@@ -152,11 +152,17 @@
         self.gameLayer = gameLayer;
         self.gridLocation = gridLocation;
         
-        //Generate value, start the light on active and set up active time remaining.
+        //Generate value, start the lights on cooldown and active and give them a time between 0 and the max.
         self.lightValue = [self generateLightValue];
-        self.lightState = Active;
         self.isPartOfRoute = NO;
-        self.activeTimeRemaining = [self generateActiveTime];
+        int randomPercentage = arc4random() % 100;
+        if (randomPercentage < PERCENTAGE_OF_LIGHTS_START_ON_COOLDOWN) {
+            self.lightState = Cooldown;
+            self.cooldownTimeRemaining = arc4random() % MAX_COOLDOWN + 1;
+        } else {
+            self.lightState = Active;
+            self.activeTimeRemaining = arc4random() % HIGH_MAX_COUNTDOWN + 1;
+        }
         
         //create the connectors based on grid location.
         self.topConnector = nil;
@@ -247,11 +253,11 @@
         case Occupied:
             [self setSpriteScaleAndColourForActiveTimeRemaining];
             self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY;
-            //if (self.lightValue == High) {
+            if (self.lightValue == High) {
                 self.valueSprite.opacity = OPAQUE;
-            //} else {
-            //    self.valueSprite.opacity = TRANSPARENT;
-            //}
+            } else {
+                self.valueSprite.opacity = TRANSPARENT;
+            }
             //self.innerCircleSprite.opacity = INNER_CIRCLE_OPACITY;
             break;
         case Cooldown:
@@ -281,13 +287,13 @@
 //generates a time based on the split between high countdowns and low countdowns and randomly chooses a time in the given range.
 - (float)generateActiveTime
 {
-    int randomPercentage = arc4random() % 100;
+    //int randomPercentage = arc4random() % 100;
     int countdown;
-    if (randomPercentage < LOW_COUNTDOWN_PERCENTAGE) {
-        countdown = arc4random() % (LOW_MAX_COUNTDOWN - LOW_MIN_COUNTDOWN + 1) + LOW_MIN_COUNTDOWN;
-    } else {
+    //if (randomPercentage < LOW_COUNTDOWN_PERCENTAGE) {
+    //    countdown = arc4random() % (LOW_MAX_COUNTDOWN - LOW_MIN_COUNTDOWN + 1) + LOW_MIN_COUNTDOWN;
+    //} else {
         countdown = arc4random() % (HIGH_MAX_COUNTDOWN - HIGH_MIN_COUNTDOWN + 1) + HIGH_MIN_COUNTDOWN;
-    }
+    //}
     return countdown;
 }
 
