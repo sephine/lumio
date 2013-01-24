@@ -1,5 +1,5 @@
 //
-//  CountdownBar.h
+//  Lives.h
 //  CircleGame
 //
 //  Created by Joanne Dyer on 1/24/13.
@@ -9,17 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "GameLayer.h"
-#import "Light.h"
-#import "Lives.h"
 
-@interface CountdownBar : CCNode {
+@interface Lives : CCNode {
 }
 
 @property (nonatomic) CGPoint position;
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer lives:(Lives *)lives;
-- (void)update:(ccTime)dt;
+- (id)initWithGameLayer:(GameLayer *)gameLayer;
 
-- (void)addValue:(LightValue)value;
+- (void)removeLife;
 
 @end

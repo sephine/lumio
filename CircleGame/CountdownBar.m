@@ -12,9 +12,11 @@
 @interface CountdownBar ()
 
 @property (nonatomic, strong) GameLayer *gameLayer;
+@property (nonatomic, strong) Lives *lives;
 @property (nonatomic, strong) CCSprite *borderSprite;
 @property (nonatomic, strong) CCSprite *centreSprite;
 @property (nonatomic) float value;
+@property (nonatomic) float countdownSpeed;
 
 @end
 
@@ -22,9 +24,11 @@
 
 @synthesize position = _position;
 @synthesize gameLayer = _gameLayer;
+@synthesize lives = _lives;
 @synthesize borderSprite = _borderSprite;
 @synthesize centreSprite = _centreSprite;
 @synthesize value = _value;
+@synthesize countdownSpeed = _countdownSpeed;
 
 - (void)setPosition:(CGPoint)position
 {
@@ -51,11 +55,13 @@
     [self addChild:_centreSprite z:2];
 }
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer
+- (id)initWithGameLayer:(GameLayer *)gameLayer lives:(Lives *)lives
 {
     if (self = [super init]) {
         self.gameLayer = gameLayer;
+        self.lives = lives;
         self.value = 100;
+        self.countdownSpeed = INITIAL_COUNTDOWN_SPEED_IN_PERCENTAGE_PER_SECOND;
         
         self.borderSprite = [CCSprite spriteWithFile:@"CountdownBorder.png"];
         self.centreSprite = [CCSprite spriteWithFile:@"CountdownCentre.png"];
@@ -66,39 +72,38 @@
 
 - (void)update:(ccTime)dt
 {
-    float percentageDecrease = COUNTDOWN_SPEED_IN_PERCENTAGE_PER_SECOND * dt;
+    self.countdownSpeed += COUNTDOWN_SPEED_RATE_OF_CHANGE * dt;
+    
+    float percentageDecrease = self.countdownSpeed * dt;
     self.value -= percentageDecrease;
     
     if (self.value <= 0) {
-        self.value = 0;
-        //TODO GameOver!
+        [self.lives removeLife];
+        self.value = 100;
     }
 }
 
 - (void)addValue:(LightValue)value
 {
-    float newValue;
-    
     if (value == High) {
-        newValue = self.value + COUNTDOWN_HIGH_INCREASE_PERCENTAGE;
+        self.value += COUNTDOWN_HIGH_INCREASE_PERCENTAGE;
     }
     
-    if (newValue > 100) newValue = 100;
-    
-    self.value = newValue;
+    if (self.value > 100) self.value = 100;
 }
 
 - (void)draw
 {
-    self.centreSprite.scaleX = self.value / 100;
+    float valueProportion = self.value / 100.0;
+    self.centreSprite.scaleX = valueProportion;
     
     GLubyte red = 0;
     GLubyte green = 0;
-    if ((self.value / 100) >= CRITICAL_THRESHOLD) {
-        red = 255 - 255 * ((self.value)/100 - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
-        green = 255 * ((self.value)/100 - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
+    if (valueProportion >= CRITICAL_THRESHOLD) {
+        red = 255 - 255 * (valueProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
+        green = 255 * (valueProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
     } else {
-        red = 255 * ((self.value)/100) / CRITICAL_THRESHOLD;
+        red = 255 * valueProportion / CRITICAL_THRESHOLD;
     }
     self.centreSprite.color = ccc3(red, green, 0);
     self.centreSprite.opacity = COUNTDOWN_BAR_OPACITY;

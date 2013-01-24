@@ -163,7 +163,7 @@ static BOOL valueLightExists = NO;
         
         //add the instance to the array of all instances.
         if (!allLightInstances) {
-            allLightInstances = [NSMutableArray array];
+            allLightInstances = [[NSMutableArray alloc] init];
         }
         [allLightInstances addObject:self];
         
@@ -178,7 +178,7 @@ static BOOL valueLightExists = NO;
             self.cooldownTimeRemaining = arc4random() % MAX_COOLDOWN + 1;
         } else {
             self.lightState = Active;
-            self.activeTimeRemaining = arc4random() % HIGH_MAX_COUNTDOWN + 1;
+            self.activeTimeRemaining = arc4random() % MAX_COUNTDOWN + 1;
         }
         
         //create the connectors based on grid location.
@@ -268,7 +268,6 @@ static BOOL valueLightExists = NO;
     self.lightState = Active;
 }
 
-//THIS DOESN'T WORK THE SECOND TIME IT'S CALLED, DON'T KNOW WHY!!!!!!
 + (void)chooseNewValueLight
 {
     int numberOfLights = allLightInstances.count;
@@ -289,7 +288,7 @@ static BOOL valueLightExists = NO;
 {
     self.lightValue = High;
     self.lightState = Active;
-    self.activeTimeRemaining = [self generateActiveTime];
+    self.activeTimeRemaining = [self generateValueActiveTime];
 }
 
 - (void)draw
@@ -339,9 +338,14 @@ static BOOL valueLightExists = NO;
     //if (randomPercentage < LOW_COUNTDOWN_PERCENTAGE) {
     //    countdown = arc4random() % (LOW_MAX_COUNTDOWN - LOW_MIN_COUNTDOWN + 1) + LOW_MIN_COUNTDOWN;
     //} else {
-        countdown = arc4random() % (HIGH_MAX_COUNTDOWN - HIGH_MIN_COUNTDOWN + 1) + HIGH_MIN_COUNTDOWN;
+        countdown = arc4random() % (MAX_COUNTDOWN - MIN_COUNTDOWN + 1) + MIN_COUNTDOWN;
     //}
     return countdown;
+}
+
+- (float)generateValueActiveTime
+{
+    return arc4random() % (MAX_VALUE_COUNTDOWN - MIN_VALUE_COUNTDOWN + 1) + MIN_VALUE_COUNTDOWN;
 }
 
 //generates a random cooldown time within the given range.
@@ -353,15 +357,18 @@ static BOOL valueLightExists = NO;
 //sets the scale and colour of the outer circle sprite based on time remaining. It will start out green then transition to red at the critical threshold then transition to black.
 - (void)setSpriteScaleAndColourForActiveTimeRemaining
 {
-    CGFloat newScale = ((MAX_RADIUS - MIN_RADIUS) * (self.activeTimeRemaining)/HIGH_MAX_COUNTDOWN + MIN_RADIUS)/MAX_RADIUS;
+    float timeProportion = self.activeTimeRemaining / MAX_COUNTDOWN;
+    if (timeProportion > 1) timeProportion = 1;
+    
+    CGFloat newScale = ((MAX_RADIUS - MIN_RADIUS) * timeProportion + MIN_RADIUS)/MAX_RADIUS;
     self.outerCircleSprite.scale = newScale;
     GLubyte red = 0;
     GLubyte green = 0;
-    if ((self.activeTimeRemaining)/HIGH_MAX_COUNTDOWN >= CRITICAL_THRESHOLD) {
-        red = 255 - 255 * ((self.activeTimeRemaining /HIGH_MAX_COUNTDOWN) - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
-        green = 255 * ((self.activeTimeRemaining /HIGH_MAX_COUNTDOWN) - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
+    if (timeProportion >= CRITICAL_THRESHOLD) {
+        red = 255 - 255 * (timeProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
+        green = 255 * (timeProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
     } else {
-        red = 255 * ((self.activeTimeRemaining)/HIGH_MAX_COUNTDOWN) / CRITICAL_THRESHOLD;
+        red = 255 * timeProportion / CRITICAL_THRESHOLD;
     }
     self.outerCircleSprite.color = ccc3(red, green, 0);
 }
