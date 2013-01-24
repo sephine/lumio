@@ -6,7 +6,7 @@
 //  Copyright __MyCompanyName__ 2013. All rights reserved.
 //
 
-#import "cocos2d.h"
+//#import "cocos2d.h"
 
 #import "AppDelegate.h"
 #import "IntroLayer.h"
@@ -93,7 +93,7 @@
 // Supported orientations: Landscape. Customize it for your own needs
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+	return UIInterfaceOrientationIsPortrait(interfaceOrientation);
 }
 
 

@@ -12,6 +12,7 @@
 #import "Light.h"
 #import "Route.h"
 #import "Player.h"
+#import "CountdownBar.h"
 #import "GameConfig.h"
 
 // Needed to obtain the Navigation Controller
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) Player *player;
 @property (nonatomic, strong) Route *route;
 @property (nonatomic, strong) NSMutableArray *twoDimensionallightArray;
+@property (nonatomic, strong) CountdownBar* countdownBar;
 
 @end
 
@@ -33,6 +35,7 @@
 @synthesize player = _player;
 @synthesize route = _route;
 @synthesize twoDimensionallightArray = _twoDimensionallightArray;
+@synthesize countdownBar = _countdownBar;
 
 // Helper class method that creates a Scene with the GameLayer as the only child.
 +(CCScene *) scene
@@ -64,7 +67,7 @@
         
         if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
             background = [CCSprite spriteWithFile:@"GreyBackground.png"];
-            background.rotation = 90;
+            //background.rotation = 90;
         } else {
             background = [CCSprite spriteWithFile:@"GreyBackground.png"];
         }
@@ -84,7 +87,7 @@
             for (int column = 0; column < NUMBER_OF_COLUMNS; column++) {
                 struct GridLocation gridLocation = {row, column};
                 Light *light = [[Light alloc] initWithGameLayer:self gridLocation:gridLocation];
-                light.position = ccp(size.width /NUMBER_OF_COLUMNS * (column + 0.5f), size.height / NUMBER_OF_ROWS * (row + 0.5f));
+                light.position = ccp(GAME_AREA_X_COORD + GAME_AREA_WIDTH /NUMBER_OF_COLUMNS * (column + 0.5f), GAME_AREA_Y_COORD + GAME_AREA_HEIGHT / NUMBER_OF_ROWS * (row + 0.5f));
                 [innerArray addObject:light];
             }
             [self.twoDimensionallightArray addObject:innerArray];
@@ -93,12 +96,16 @@
         //create the route object.
         self.route = [[Route alloc] initWithGameLayer:self lightArray:self.twoDimensionallightArray];
         
+        //create the countdown bar and set its position.
+        self.countdownBar = [[CountdownBar alloc] initWithGameLayer:self];
+        self.countdownBar.position = ccp(COUNTDOWN_BAR_X_COORD, COUNTDOWN_BAR_Y_COORD);
+        
         //add the player starting position to the route. Say this is the first light for now.
         Light *firstLight = [[self.twoDimensionallightArray objectAtIndex:0] objectAtIndex:0];
         [self.route setInitialLight:firstLight];
         
         //add the player and set it to the first light position.
-        self.player = [[Player alloc] initWithGameLayer:self route:self.route currentLight:firstLight];
+        self.player = [[Player alloc] initWithGameLayer:self route:self.route currentLight:firstLight countdownBar:self.countdownBar];
     
         self.isTouchEnabled = YES;
     
@@ -117,6 +124,7 @@
         }
     }
     [self.player update:dt];
+    [self.countdownBar update:dt];
 }
 
 - (void)registerWithTouchDispatcher

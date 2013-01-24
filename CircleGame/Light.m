@@ -22,6 +22,9 @@
 
 @end
 
+static NSMutableArray *allLightInstances = nil;
+static BOOL valueLightExists = NO;
+
 @implementation Light
 
 @synthesize position = _position;
@@ -46,10 +49,10 @@
     self.outerCircleSprite.position = position;
     self.valueSprite.position = position;
     
-    CGSize size = [[CCDirector sharedDirector] winSize];
-    CGPoint topConnectorPosition = ccp(position.x, position.y + 0.5 * size.height / NUMBER_OF_ROWS);
+    //CGSize size = [[CCDirector sharedDirector] winSize];
+    CGPoint topConnectorPosition = ccp(position.x, position.y + 0.5 * GAME_AREA_HEIGHT / NUMBER_OF_ROWS);
     self.topConnector.position = topConnectorPosition;
-    CGPoint rightConnectorPosition = ccp(position.x + 0.5 * size.width / NUMBER_OF_COLUMNS, position.y);
+    CGPoint rightConnectorPosition = ccp(position.x + 0.5 * GAME_AREA_WIDTH / NUMBER_OF_COLUMNS, position.y);
     self.rightConnector.position = rightConnectorPosition;
 }
 
@@ -85,7 +88,13 @@
             break;
         case Cooldown:
             self.innerCircleSprite = [CCSprite spriteWithFile:@"EmptyCircle.png"];
-            self.lightValue = [self generateLightValue];
+            //self.lightValue = [self generateLightValue];
+            LightValue oldValue = self.lightValue;
+            self.lightValue = NoValue;
+            if (oldValue == High) {
+                [Light chooseNewValueLight];
+            }
+            
             self.activeTimeRemaining = [self generateActiveTime];
             self.cooldownTimeRemaining = [self generateCooldownTime];
             [[NSNotificationCenter defaultCenter]
@@ -152,8 +161,16 @@
         self.gameLayer = gameLayer;
         self.gridLocation = gridLocation;
         
+        //add the instance to the array of all instances.
+        if (!allLightInstances) {
+            allLightInstances = [NSMutableArray array];
+        }
+        [allLightInstances addObject:self];
+        
         //Generate value, start the lights on cooldown and active and give them a time between 0 and the max.
-        self.lightValue = [self generateLightValue];
+        //self.lightValue = [self generateLightValue];
+        self.lightValue = NoValue;
+        
         self.isPartOfRoute = NO;
         int randomPercentage = arc4random() % 100;
         if (randomPercentage < PERCENTAGE_OF_LIGHTS_START_ON_COOLDOWN) {
@@ -234,15 +251,45 @@
 - (LightValue)occupyLightAndGetValue
 {
     self.lightState = Occupied;
-    return self.lightValue;
+    LightValue oldValue = self.lightValue;
+    self.lightValue = NoValue;
+    if (oldValue == High || !valueLightExists) {
+        [Light chooseNewValueLight];
+        valueLightExists = YES;
+    }
+    return oldValue;
 }
 
 //used by the player at the moment it moves from a light, sets the state to active again with a new time and value.
 - (void)leaveLight
 {
-    self.lightValue = [self generateLightValue];
+    //self.lightValue = [self generateLightValue];
     self.activeTimeRemaining = [self generateActiveTime];
     self.lightState = Active;
+}
+
+//THIS DOESN'T WORK THE SECOND TIME IT'S CALLED, DON'T KNOW WHY!!!!!!
++ (void)chooseNewValueLight
+{
+    int numberOfLights = allLightInstances.count;
+    
+    //choose an instance to change to a value light. This light can not be almost occupied, or occupied.
+    int randomIndex;
+    Light *chosenLight;
+    do {
+        randomIndex = arc4random() % numberOfLights;
+        chosenLight = [allLightInstances objectAtIndex:randomIndex];
+    } while (chosenLight.lightState == AlmostOccupied || chosenLight.lightState == Occupied);
+    
+    //tell this light to give itself a value.
+    [chosenLight setUpLightWithValue];
+}
+
+- (void)setUpLightWithValue
+{
+    self.lightValue = High;
+    self.lightState = Active;
+    self.activeTimeRemaining = [self generateActiveTime];
 }
 
 - (void)draw
@@ -272,7 +319,7 @@
 }
 
 //generates a random value based on the high, medium and low percentages.
-- (LightValue)generateLightValue
+/*- (LightValue)generateLightValue
 {
     LightValue lightValue = Low;
     int randomPercentage = arc4random() % 100;
@@ -282,7 +329,7 @@
         lightValue = Medium;
     }
     return lightValue;
-}
+}*/
 
 //generates a time based on the split between high countdowns and low countdowns and randomly chooses a time in the given range.
 - (float)generateActiveTime
@@ -311,8 +358,8 @@
     GLubyte red = 0;
     GLubyte green = 0;
     if ((self.activeTimeRemaining)/HIGH_MAX_COUNTDOWN >= CRITICAL_THRESHOLD) {
-        red = 255 - 255 * ((self.activeTimeRemaining)/HIGH_MAX_COUNTDOWN - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
-        green = 255 * ((self.activeTimeRemaining)/HIGH_MAX_COUNTDOWN - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
+        red = 255 - 255 * ((self.activeTimeRemaining /HIGH_MAX_COUNTDOWN) - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
+        green = 255 * ((self.activeTimeRemaining /HIGH_MAX_COUNTDOWN) - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
     } else {
         red = 255 * ((self.activeTimeRemaining)/HIGH_MAX_COUNTDOWN) / CRITICAL_THRESHOLD;
     }

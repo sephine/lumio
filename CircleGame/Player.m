@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) GameLayer *gameLayer;
 @property (nonatomic, strong) Route *route;
+@property (nonatomic, strong) CountdownBar *countdownBar;
 @property (nonatomic, strong) Light *currentLight;
 @property (nonatomic, strong) Light *nextLight;
 @property (nonatomic, strong) CCSprite *sprite;
@@ -25,6 +26,7 @@
 @synthesize position = _position;
 @synthesize gameLayer = _gameLayer;
 @synthesize route = _route;
+@synthesize countdownBar = _countdownBar;
 @synthesize currentLight = _currentLight;
 @synthesize nextLight = _nextLight;
 @synthesize sprite = _sprite;
@@ -44,11 +46,12 @@
     [self addChild:_sprite z:2];
 }
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer route:(id)route currentLight:(Light *)currentLight
+- (id)initWithGameLayer:(GameLayer *)gameLayer route:(id)route currentLight:(Light *)currentLight countdownBar:(CountdownBar *)countdownBar
 {
     if (self = [super init]) {
         self.gameLayer = gameLayer;
         self.route = route;
+        self.countdownBar = countdownBar;
         self.currentLight = currentLight;
         [self.currentLight occupyLightAndGetValue];
         self.position = currentLight.position;
@@ -79,8 +82,9 @@
             //next light has been reached.
             self.currentLight = self.nextLight;
             //[self.route removeFirstLightFromRoute];
-            //TODO use value.
-            [self.currentLight occupyLightAndGetValue];
+            //send value to countdown bar.
+            LightValue value = [self.currentLight occupyLightAndGetValue];
+            [self.countdownBar addValue:value];
             self.position = self.currentLight.position;
             self.nextLight = [self.route getNextLightFromRoute];
             if (self.nextLight) {

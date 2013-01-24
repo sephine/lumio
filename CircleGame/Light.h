@@ -21,7 +21,8 @@ typedef enum {
 typedef enum {
     Low,
     Medium,
-    High
+    High,
+    NoValue
 } LightValue;
 
 struct GridLocation {
@@ -49,6 +50,8 @@ struct GridLocation {
 - (void)almostOccupyLight;
 - (LightValue)occupyLightAndGetValue;
 - (void)leaveLight;
+
++ (void)chooseNewValueLight;
 
 
 @end
