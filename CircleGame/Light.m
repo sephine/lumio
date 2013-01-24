@@ -228,10 +228,9 @@ static BOOL valueLightExists = NO;
 //used by the touch method to check if this sprite has been touched.
 - (CGRect)getBounds
 {
-    CGSize size = [self.innerCircleSprite contentSize];
-    return CGRectMake(self.position.x - size.width * self.innerCircleSprite.anchorPoint.x,
-                      self.position.y - size.height * self.innerCircleSprite.anchorPoint.y,
-                      size.width, size.height);
+    return CGRectMake(self.position.x - SQUARE_SIDE_LENGTH/2,
+                      self.position.y - SQUARE_SIDE_LENGTH/2,
+                      SQUARE_SIDE_LENGTH, SQUARE_SIDE_LENGTH);
 }
 
 //check if this light is in the correct state for routing.
