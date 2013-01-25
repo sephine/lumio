@@ -90,12 +90,12 @@
     //refillCountdownBar when they level up and increase countdownSpeed.
     [self.countdownBar refillBar];
     float speedIncrease;
-    if (self.level <= 5) {
-        speedIncrease = LEVEL_1_TO_5_COUNTDOWN_SPEED_INCREASE;
-    } else if (self.level <= 10) {
-        speedIncrease = LEVEL_6_TO_10_COUNTDOWN_SPEED_INCREASE;
+    if (self.level <= 3) {
+        speedIncrease = LEVEL_1_TO_3_COUNTDOWN_SPEED_INCREASE;
+    } else if (self.level <= 5) {
+        speedIncrease = LEVEL_4_TO_5_COUNTDOWN_SPEED_INCREASE;
     } else {
-        speedIncrease = LEVEL_10_ONWARDS_COUNTDOWN_SPEED_INCREASE;
+        speedIncrease = LEVEL_6_ONWARDS_COUNTDOWN_SPEED_INCREASE;
     }
     [self.countdownBar increaseCountdownSpeed:speedIncrease];
 }
