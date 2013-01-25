@@ -72,14 +72,12 @@
 
 - (void)update:(ccTime)dt
 {
-    self.countdownSpeed += COUNTDOWN_SPEED_RATE_OF_CHANGE * dt;
-    
     float percentageDecrease = self.countdownSpeed * dt;
     self.value -= percentageDecrease;
     
     if (self.value <= 0) {
         [self.lives removeLife];
-        self.value = 100;
+        [self refillBar];
     }
 }
 
@@ -90,6 +88,16 @@
     }
     
     if (self.value > 100) self.value = 100;
+}
+
+- (void)increaseCountdownSpeed:(float)speedIncrease
+{
+    self.countdownSpeed += speedIncrease;
+}
+
+- (void)refillBar
+{
+    self.value = 100;
 }
 
 - (void)draw

@@ -69,6 +69,7 @@
 		B0A0EF1416B1BA1D00E47369 /* Lives3-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF1316B1BA1D00E47369 /* Lives3-hd.png */; };
 		B0A0EF1A16B1BAE900E47369 /* Lives.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0EF1916B1BAE800E47369 /* Lives.m */; };
 		B0A0EF1C16B1D9BF00E47369 /* Number9White.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF1B16B1D9BF00E47369 /* Number9White.png */; };
+		B0A0EF1F16B2F45500E47369 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0EF1E16B2F45500E47369 /* Level.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +147,8 @@
 		B0A0EF1816B1BAE800E47369 /* Lives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lives.h; sourceTree = "<group>"; };
 		B0A0EF1916B1BAE800E47369 /* Lives.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lives.m; sourceTree = "<group>"; };
 		B0A0EF1B16B1D9BF00E47369 /* Number9White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Number9White.png; sourceTree = "<group>"; };
+		B0A0EF1D16B2F45500E47369 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
+		B0A0EF1E16B2F45500E47369 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
 		B38E15D7535B4ABC8FAF569F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02357077101404D92B4E06C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -227,6 +230,8 @@
 				B0A0EF1916B1BAE800E47369 /* Lives.m */,
 				B0A0EEBD16B0B30B00E47369 /* CountdownBar.h */,
 				B0A0EEBE16B0B30B00E47369 /* CountdownBar.m */,
+				B0A0EF1D16B2F45500E47369 /* Level.h */,
+				B0A0EF1E16B2F45500E47369 /* Level.m */,
 				B01B2A6516AB2E2900CD538A /* GameConfig.h */,
 				B01B28E016AB2B5200CD538A /* Resources */,
 				B01B2A5316AB2B5500CD538A /* Supporting Files */,
@@ -439,6 +444,7 @@
 				B09D0BF516AC6EEC00524AE7 /* Connector.m in Sources */,
 				B0A0EEBF16B0B30B00E47369 /* CountdownBar.m in Sources */,
 				B0A0EF1A16B1BAE900E47369 /* Lives.m in Sources */,
+				B0A0EF1F16B2F45500E47369 /* Level.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

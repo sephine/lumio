@@ -21,5 +21,7 @@
 - (void)update:(ccTime)dt;
 
 - (void)addValue:(LightValue)value;
+- (void)increaseCountdownSpeed:(float)speedIncrease;
+- (void)refillBar;
 
 @end
