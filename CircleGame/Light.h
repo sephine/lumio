@@ -51,7 +51,9 @@ struct GridLocation {
 - (LightValue)occupyLightAndGetValue;
 - (void)leaveLight;
 
-+ (void)chooseNewValueLight;
+//used by the light manager.
+- (BOOL)canBeValueLight;
+- (void)setUpLightWithValue;
 
 
 @end

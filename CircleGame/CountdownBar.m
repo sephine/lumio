@@ -73,7 +73,7 @@
     self.value -= percentageDecrease;
     
     if (self.value <= 0) {
-        //TODO GAME OVER!
+        [self.gameLayer gameOver];
     }
 }
 

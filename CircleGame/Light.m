@@ -22,9 +22,6 @@
 
 @end
 
-static NSMutableArray *allLightInstances = nil;
-static BOOL valueLightExists = NO;
-
 @implementation Light
 
 @synthesize position = _position;
@@ -92,7 +89,9 @@ static BOOL valueLightExists = NO;
             LightValue oldValue = self.lightValue;
             self.lightValue = NoValue;
             if (oldValue == High) {
-                [Light chooseNewValueLight];
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:NOTIFICATION_NEW_VALUE_LIGHT_NEEDED
+                 object:self];
             }
             
             self.activeTimeRemaining = [self generateActiveTime];
@@ -160,12 +159,6 @@ static BOOL valueLightExists = NO;
     if (self = [super init]) {
         self.gameLayer = gameLayer;
         self.gridLocation = gridLocation;
-        
-        //add the instance to the array of all instances.
-        if (!allLightInstances) {
-            allLightInstances = [[NSMutableArray alloc] init];
-        }
-        [allLightInstances addObject:self];
         
         //Generate value, start the lights on cooldown and active and give them a time between 0 and the max.
         //self.lightValue = [self generateLightValue];
@@ -252,9 +245,14 @@ static BOOL valueLightExists = NO;
     self.lightState = Occupied;
     LightValue oldValue = self.lightValue;
     self.lightValue = NoValue;
-    if (oldValue == High || !valueLightExists) {
-        [Light chooseNewValueLight];
-        valueLightExists = YES;
+    //if (oldValue == High || !valueLightExists) {
+    //    [Light chooseNewValueLight];
+    //    valueLightExists = YES;
+    //}
+    if (oldValue == High) {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:NOTIFICATION_NEW_VALUE_LIGHT_NEEDED
+         object:self];
     }
     return oldValue;
 }
@@ -267,20 +265,9 @@ static BOOL valueLightExists = NO;
     self.lightState = Active;
 }
 
-+ (void)chooseNewValueLight
+- (BOOL)canBeValueLight
 {
-    int numberOfLights = allLightInstances.count;
-    
-    //choose an instance to change to a value light. This light can not be almost occupied, or occupied.
-    int randomIndex;
-    Light *chosenLight;
-    do {
-        randomIndex = arc4random() % numberOfLights;
-        chosenLight = [allLightInstances objectAtIndex:randomIndex];
-    } while (chosenLight.lightState == AlmostOccupied || chosenLight.lightState == Occupied);
-    
-    //tell this light to give itself a value.
-    [chosenLight setUpLightWithValue];
+    return !(self.lightState == AlmostOccupied || self.lightState == Occupied);
 }
 
 - (void)setUpLightWithValue

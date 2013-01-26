@@ -9,6 +9,8 @@
 
 // Import the interfaces
 #import "GameLayer.h"
+#import "InGameMenuLayer.h"
+#import "LightManager.h"
 #import "Light.h"
 #import "Route.h"
 #import "Player.h"
@@ -23,8 +25,11 @@
 
 @interface GameLayer ()
 
+@property (nonatomic, strong) CCMenu *menuItems;
+@property (nonatomic) BOOL gameIsPaused;
 @property (nonatomic, strong) Player *player;
 @property (nonatomic, strong) Route *route;
+@property (nonatomic, strong) LightManager *lightManager;
 @property (nonatomic, strong) NSMutableArray *twoDimensionallightArray;
 @property (nonatomic, strong) CountdownBar * countdownBar;
 @property (nonatomic, strong) Level *level;
@@ -34,8 +39,11 @@
 // HelloWorldLayer implementation
 @implementation GameLayer
 
+@synthesize menuItems = _menuItems;
+@synthesize gameIsPaused = _gameIsPaused;
 @synthesize player = _player;
 @synthesize route = _route;
+@synthesize lightManager = _lightManager;
 @synthesize twoDimensionallightArray = _twoDimensionallightArray;
 @synthesize countdownBar = _countdownBar;
 @synthesize level = _level;
@@ -50,7 +58,7 @@
 	GameLayer *layer = [GameLayer node];
 	
 	// add layer as a child to scene
-	[scene addChild: layer];
+	[scene addChild: layer z:0];
 	
 	// return the scene
 	return scene;
@@ -79,9 +87,24 @@
         // add the label as a child to this Layer
         [self addChild: background z:0];
         
+        //add the menu items
+        self.gameIsPaused = NO;
+        CCMenuItem *pauseMenuItem = [CCMenuItemImage
+                                        itemWithNormalImage:@"PauseButton.png" selectedImage:@"PauseButton.png"
+                                        target:self selector:@selector(pauseButtonTapped:)];
+        pauseMenuItem.anchorPoint = ccp(0, 0);
+        pauseMenuItem.position = ccp(PAUSE_X_COORD, PAUSE_Y_COORD);
+        
+        self.menuItems = [CCMenu menuWithItems:pauseMenuItem, nil];
+        self.menuItems.position = CGPointZero;
+        [self addChild:self.menuItems];
+        
         //create the player object and add it to layer.
         self.player = [[Player alloc] init];
         //TODO set position and add to layer.
+        
+        //create the light manager and add then add all the lights to it.
+        self.lightManager = [[LightManager alloc]init];
         
         // create and initialize our light effects.
         self.twoDimensionallightArray = [NSMutableArray array];
@@ -91,10 +114,14 @@
                 struct GridLocation gridLocation = {row, column};
                 Light *light = [[Light alloc] initWithGameLayer:self gridLocation:gridLocation];
                 light.position = ccp(GAME_AREA_X_COORD + GAME_AREA_WIDTH /NUMBER_OF_COLUMNS * (column + 0.5f), GAME_AREA_Y_COORD + GAME_AREA_HEIGHT / NUMBER_OF_ROWS * (row + 0.5f));
+                [self.lightManager addToAllLightInstances:light];
                 [innerArray addObject:light];
             }
             [self.twoDimensionallightArray addObject:innerArray];
         }
+        
+        //choose new value light from all the added lights.
+        [self.lightManager chooseNewValueLight];
         
         //create the route object.
         self.route = [[Route alloc] initWithGameLayer:self lightArray:self.twoDimensionallightArray];
@@ -125,14 +152,17 @@
 
 //update method calls similar methods on Light and player to manage transition of lights and movement of player.
 - (void)update:(ccTime)dt {
-    for (NSMutableArray *innerArray in self.twoDimensionallightArray) {
-        for (Light *light in innerArray) {
-            [light update:dt];
+    //only update if game is not paused.
+    if (!self.gameIsPaused) {
+        for (NSMutableArray *innerArray in self.twoDimensionallightArray) {
+            for (Light *light in innerArray) {
+                [light update:dt];
+            }
         }
+        [self.player update:dt];
+        [self.countdownBar update:dt];
+        [self.level update:dt];
     }
-    [self.player update:dt];
-    [self.countdownBar update:dt];
-    [self.level update:dt];
 }
 
 - (void)registerWithTouchDispatcher
@@ -156,6 +186,33 @@
             }
         }
     }
+}
+
+- (void)pauseButtonTapped:(id)sender
+{
+    self.gameIsPaused = YES;
+    InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameLayer:self resumeAvailable:YES];
+    [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
+}
+
+- (void)gameOver
+{
+    self.gameIsPaused = YES;
+    InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameLayer:self resumeAvailable:NO];
+    [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
+}
+
+- (void)unPauseGame
+{
+    self.gameIsPaused = NO;
+}
+
+- (void)restartGame
+{
+    //remove layer and then add it again.
+    [self removeFromParentAndCleanup:YES];
+    GameLayer *layer = [GameLayer node];
+    [[[CCDirector sharedDirector] runningScene] addChild:layer z:0];
 }
 
 @end

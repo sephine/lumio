@@ -69,6 +69,24 @@
 		B0A0EF1416B1BA1D00E47369 /* Lives3-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF1316B1BA1D00E47369 /* Lives3-hd.png */; };
 		B0A0EF1C16B1D9BF00E47369 /* Number9White.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF1B16B1D9BF00E47369 /* Number9White.png */; };
 		B0A0EF1F16B2F45500E47369 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0EF1E16B2F45500E47369 /* Level.m */; };
+		B0A0EF2E16B4495900E47369 /* InGameMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0EF2D16B4495900E47369 /* InGameMenuLayer.m */; };
+		B0A0EF3016B44B0600E47369 /* ResumeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF2F16B44B0600E47369 /* ResumeButton.png */; };
+		B0A0EF3216B44B0A00E47369 /* ResumeButtonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF3116B44B0A00E47369 /* ResumeButtonSelected.png */; };
+		B0A0EF3416B44B1000E47369 /* RestartButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF3316B44B1000E47369 /* RestartButton.png */; };
+		B0A0EF3616B44B1500E47369 /* RestartButtonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF3516B44B1500E47369 /* RestartButtonSelected.png */; };
+		B0A0EF3816B44B1A00E47369 /* MenuButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF3716B44B1A00E47369 /* MenuButton.png */; };
+		B0A0EF3A16B44B1F00E47369 /* MenuButtonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF3916B44B1F00E47369 /* MenuButtonSelected.png */; };
+		B0A0EF4016B44B6000E47369 /* ResumeButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF3F16B44B6000E47369 /* ResumeButton-hd.png */; };
+		B0A0EF4216B44B6400E47369 /* ResumeButtonSelected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF4116B44B6400E47369 /* ResumeButtonSelected-hd.png */; };
+		B0A0EF4416B44B6900E47369 /* RestartButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF4316B44B6900E47369 /* RestartButton-hd.png */; };
+		B0A0EF4616B44B6E00E47369 /* RestartButtonSelected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF4516B44B6E00E47369 /* RestartButtonSelected-hd.png */; };
+		B0A0EF4816B44B7400E47369 /* MenuButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF4716B44B7400E47369 /* MenuButton-hd.png */; };
+		B0A0EF4A16B44B7800E47369 /* MenuButtonSelected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF4916B44B7800E47369 /* MenuButtonSelected-hd.png */; };
+		B0A0EF5416B457C700E47369 /* PauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF5316B457C700E47369 /* PauseButton.png */; };
+		B0A0EF5616B457D100E47369 /* PauseButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF5516B457D100E47369 /* PauseButton-hd.png */; };
+		B0A0EF5816B4618200E47369 /* InGameMenuBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF5716B4618200E47369 /* InGameMenuBackground.png */; };
+		B0A0EF5A16B4618B00E47369 /* InGameMenuBackground-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF5916B4618B00E47369 /* InGameMenuBackground-hd.png */; };
+		B0A0EF5D16B466C200E47369 /* LightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0EF5C16B466C200E47369 /* LightManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +164,26 @@
 		B0A0EF1B16B1D9BF00E47369 /* Number9White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Number9White.png; sourceTree = "<group>"; };
 		B0A0EF1D16B2F45500E47369 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
 		B0A0EF1E16B2F45500E47369 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
+		B0A0EF2C16B4495900E47369 /* InGameMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InGameMenuLayer.h; sourceTree = "<group>"; };
+		B0A0EF2D16B4495900E47369 /* InGameMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InGameMenuLayer.m; sourceTree = "<group>"; };
+		B0A0EF2F16B44B0600E47369 /* ResumeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ResumeButton.png; sourceTree = "<group>"; };
+		B0A0EF3116B44B0A00E47369 /* ResumeButtonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ResumeButtonSelected.png; sourceTree = "<group>"; };
+		B0A0EF3316B44B1000E47369 /* RestartButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RestartButton.png; sourceTree = "<group>"; };
+		B0A0EF3516B44B1500E47369 /* RestartButtonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RestartButtonSelected.png; sourceTree = "<group>"; };
+		B0A0EF3716B44B1A00E47369 /* MenuButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButton.png; sourceTree = "<group>"; };
+		B0A0EF3916B44B1F00E47369 /* MenuButtonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButtonSelected.png; sourceTree = "<group>"; };
+		B0A0EF3F16B44B6000E47369 /* ResumeButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ResumeButton-hd.png"; sourceTree = "<group>"; };
+		B0A0EF4116B44B6400E47369 /* ResumeButtonSelected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ResumeButtonSelected-hd.png"; sourceTree = "<group>"; };
+		B0A0EF4316B44B6900E47369 /* RestartButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RestartButton-hd.png"; sourceTree = "<group>"; };
+		B0A0EF4516B44B6E00E47369 /* RestartButtonSelected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RestartButtonSelected-hd.png"; sourceTree = "<group>"; };
+		B0A0EF4716B44B7400E47369 /* MenuButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MenuButton-hd.png"; sourceTree = "<group>"; };
+		B0A0EF4916B44B7800E47369 /* MenuButtonSelected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MenuButtonSelected-hd.png"; sourceTree = "<group>"; };
+		B0A0EF5316B457C700E47369 /* PauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PauseButton.png; sourceTree = "<group>"; };
+		B0A0EF5516B457D100E47369 /* PauseButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PauseButton-hd.png"; sourceTree = "<group>"; };
+		B0A0EF5716B4618200E47369 /* InGameMenuBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InGameMenuBackground.png; sourceTree = "<group>"; };
+		B0A0EF5916B4618B00E47369 /* InGameMenuBackground-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InGameMenuBackground-hd.png"; sourceTree = "<group>"; };
+		B0A0EF5B16B466C200E47369 /* LightManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightManager.h; sourceTree = "<group>"; };
+		B0A0EF5C16B466C200E47369 /* LightManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightManager.m; sourceTree = "<group>"; };
 		B38E15D7535B4ABC8FAF569F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02357077101404D92B4E06C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -215,8 +253,12 @@
 				B01B2A5E16AB2B5500CD538A /* IntroLayer.m */,
 				B01B2A5A16AB2B5500CD538A /* GameLayer.h */,
 				B01B2A5B16AB2B5500CD538A /* GameLayer.m */,
+				B0A0EF2C16B4495900E47369 /* InGameMenuLayer.h */,
+				B0A0EF2D16B4495900E47369 /* InGameMenuLayer.m */,
 				B01B2A6C16AB2F8C00CD538A /* Light.h */,
 				B01B2A6D16AB2F8C00CD538A /* Light.m */,
+				B0A0EF5B16B466C200E47369 /* LightManager.h */,
+				B0A0EF5C16B466C200E47369 /* LightManager.m */,
 				B01B2A7D16AB5C3000CD538A /* Route.h */,
 				B01B2A7E16AB5C3000CD538A /* Route.m */,
 				B09D0BF316AC6EEC00524AE7 /* Connector.h */,
@@ -285,6 +327,14 @@
 				B0A0EF0916B1BA0400E47369 /* Lives1.png */,
 				B0A0EF0B16B1BA0700E47369 /* Lives2.png */,
 				B0A0EF0D16B1BA0C00E47369 /* Lives3.png */,
+				B0A0EF5316B457C700E47369 /* PauseButton.png */,
+				B0A0EF5716B4618200E47369 /* InGameMenuBackground.png */,
+				B0A0EF2F16B44B0600E47369 /* ResumeButton.png */,
+				B0A0EF3116B44B0A00E47369 /* ResumeButtonSelected.png */,
+				B0A0EF3316B44B1000E47369 /* RestartButton.png */,
+				B0A0EF3516B44B1500E47369 /* RestartButtonSelected.png */,
+				B0A0EF3716B44B1A00E47369 /* MenuButton.png */,
+				B0A0EF3916B44B1F00E47369 /* MenuButtonSelected.png */,
 			);
 			name = SD;
 			sourceTree = "<group>";
@@ -299,12 +349,20 @@
 				B0A0EEF916B1B09A00E47369 /* EmptyCircle-hd.png */,
 				B0A0EEFB16B1B09F00E47369 /* GreyBackground-hd.png */,
 				B0A0EEFD16B1B0A300E47369 /* HConnector-hd.png */,
-				B0A0EEFF16B1B0A800E47369 /* RoutedCircle-hd.png */,
 				B0A0EF0116B1B0AB00E47369 /* VConnector-hd.png */,
+				B0A0EEFF16B1B0A800E47369 /* RoutedCircle-hd.png */,
 				B0A0EF0316B1B0B100E47369 /* WhiteCircle-hd.png */,
 				B0A0EF0F16B1BA1600E47369 /* Lives1-hd.png */,
 				B0A0EF1116B1BA1A00E47369 /* Lives2-hd.png */,
 				B0A0EF1316B1BA1D00E47369 /* Lives3-hd.png */,
+				B0A0EF5516B457D100E47369 /* PauseButton-hd.png */,
+				B0A0EF5916B4618B00E47369 /* InGameMenuBackground-hd.png */,
+				B0A0EF3F16B44B6000E47369 /* ResumeButton-hd.png */,
+				B0A0EF4116B44B6400E47369 /* ResumeButtonSelected-hd.png */,
+				B0A0EF4316B44B6900E47369 /* RestartButton-hd.png */,
+				B0A0EF4516B44B6E00E47369 /* RestartButtonSelected-hd.png */,
+				B0A0EF4716B44B7400E47369 /* MenuButton-hd.png */,
+				B0A0EF4916B44B7800E47369 /* MenuButtonSelected-hd.png */,
 			);
 			name = HD;
 			sourceTree = "<group>";
@@ -402,6 +460,22 @@
 				B0A0EF1216B1BA1A00E47369 /* Lives2-hd.png in Resources */,
 				B0A0EF1416B1BA1D00E47369 /* Lives3-hd.png in Resources */,
 				B0A0EF1C16B1D9BF00E47369 /* Number9White.png in Resources */,
+				B0A0EF3016B44B0600E47369 /* ResumeButton.png in Resources */,
+				B0A0EF3216B44B0A00E47369 /* ResumeButtonSelected.png in Resources */,
+				B0A0EF3416B44B1000E47369 /* RestartButton.png in Resources */,
+				B0A0EF3616B44B1500E47369 /* RestartButtonSelected.png in Resources */,
+				B0A0EF3816B44B1A00E47369 /* MenuButton.png in Resources */,
+				B0A0EF3A16B44B1F00E47369 /* MenuButtonSelected.png in Resources */,
+				B0A0EF4016B44B6000E47369 /* ResumeButton-hd.png in Resources */,
+				B0A0EF4216B44B6400E47369 /* ResumeButtonSelected-hd.png in Resources */,
+				B0A0EF4416B44B6900E47369 /* RestartButton-hd.png in Resources */,
+				B0A0EF4616B44B6E00E47369 /* RestartButtonSelected-hd.png in Resources */,
+				B0A0EF4816B44B7400E47369 /* MenuButton-hd.png in Resources */,
+				B0A0EF4A16B44B7800E47369 /* MenuButtonSelected-hd.png in Resources */,
+				B0A0EF5416B457C700E47369 /* PauseButton.png in Resources */,
+				B0A0EF5616B457D100E47369 /* PauseButton-hd.png in Resources */,
+				B0A0EF5816B4618200E47369 /* InGameMenuBackground.png in Resources */,
+				B0A0EF5A16B4618B00E47369 /* InGameMenuBackground-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +513,8 @@
 				B09D0BF516AC6EEC00524AE7 /* Connector.m in Sources */,
 				B0A0EEBF16B0B30B00E47369 /* CountdownBar.m in Sources */,
 				B0A0EF1F16B2F45500E47369 /* Level.m in Sources */,
+				B0A0EF2E16B4495900E47369 /* InGameMenuLayer.m in Sources */,
+				B0A0EF5D16B466C200E47369 /* LightManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,4 +21,8 @@
 // returns a CCScene that contains the GameLayer as the only child
 +(CCScene *) scene;
 
+- (void)gameOver;
+- (void)unPauseGame;
+- (void)restartGame;
+
 @end
