@@ -67,7 +67,6 @@
 		B0A0EF1016B1BA1600E47369 /* Lives1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF0F16B1BA1600E47369 /* Lives1-hd.png */; };
 		B0A0EF1216B1BA1A00E47369 /* Lives2-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF1116B1BA1A00E47369 /* Lives2-hd.png */; };
 		B0A0EF1416B1BA1D00E47369 /* Lives3-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF1316B1BA1D00E47369 /* Lives3-hd.png */; };
-		B0A0EF1A16B1BAE900E47369 /* Lives.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0EF1916B1BAE800E47369 /* Lives.m */; };
 		B0A0EF1C16B1D9BF00E47369 /* Number9White.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF1B16B1D9BF00E47369 /* Number9White.png */; };
 		B0A0EF1F16B2F45500E47369 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0EF1E16B2F45500E47369 /* Level.m */; };
 /* End PBXBuildFile section */
@@ -144,8 +143,6 @@
 		B0A0EF0F16B1BA1600E47369 /* Lives1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lives1-hd.png"; sourceTree = "<group>"; };
 		B0A0EF1116B1BA1A00E47369 /* Lives2-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lives2-hd.png"; sourceTree = "<group>"; };
 		B0A0EF1316B1BA1D00E47369 /* Lives3-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Lives3-hd.png"; sourceTree = "<group>"; };
-		B0A0EF1816B1BAE800E47369 /* Lives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lives.h; sourceTree = "<group>"; };
-		B0A0EF1916B1BAE800E47369 /* Lives.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lives.m; sourceTree = "<group>"; };
 		B0A0EF1B16B1D9BF00E47369 /* Number9White.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Number9White.png; sourceTree = "<group>"; };
 		B0A0EF1D16B2F45500E47369 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
 		B0A0EF1E16B2F45500E47369 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
@@ -226,8 +223,6 @@
 				B09D0BF416AC6EEC00524AE7 /* Connector.m */,
 				B01B2A8016AB640800CD538A /* Player.h */,
 				B01B2A8116AB640800CD538A /* Player.m */,
-				B0A0EF1816B1BAE800E47369 /* Lives.h */,
-				B0A0EF1916B1BAE800E47369 /* Lives.m */,
 				B0A0EEBD16B0B30B00E47369 /* CountdownBar.h */,
 				B0A0EEBE16B0B30B00E47369 /* CountdownBar.m */,
 				B0A0EF1D16B2F45500E47369 /* Level.h */,
@@ -443,7 +438,6 @@
 				B01B2A8216AB640800CD538A /* Player.m in Sources */,
 				B09D0BF516AC6EEC00524AE7 /* Connector.m in Sources */,
 				B0A0EEBF16B0B30B00E47369 /* CountdownBar.m in Sources */,
-				B0A0EF1A16B1BAE900E47369 /* Lives.m in Sources */,
 				B0A0EF1F16B2F45500E47369 /* Level.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

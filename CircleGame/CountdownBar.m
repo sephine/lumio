@@ -12,7 +12,6 @@
 @interface CountdownBar ()
 
 @property (nonatomic, strong) GameLayer *gameLayer;
-@property (nonatomic, strong) Lives *lives;
 @property (nonatomic, strong) CCSprite *borderSprite;
 @property (nonatomic, strong) CCSprite *centreSprite;
 @property (nonatomic) float value;
@@ -24,7 +23,6 @@
 
 @synthesize position = _position;
 @synthesize gameLayer = _gameLayer;
-@synthesize lives = _lives;
 @synthesize borderSprite = _borderSprite;
 @synthesize centreSprite = _centreSprite;
 @synthesize value = _value;
@@ -55,11 +53,10 @@
     [self addChild:_centreSprite z:2];
 }
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer lives:(Lives *)lives
+- (id)initWithGameLayer:(GameLayer *)gameLayer
 {
     if (self = [super init]) {
         self.gameLayer = gameLayer;
-        self.lives = lives;
         self.value = 100;
         self.countdownSpeed = INITIAL_COUNTDOWN_SPEED_IN_PERCENTAGE_PER_SECOND;
         
@@ -76,8 +73,7 @@
     self.value -= percentageDecrease;
     
     if (self.value <= 0) {
-        [self.lives removeLife];
-        [self refillBar];
+        //TODO GAME OVER!
     }
 }
 

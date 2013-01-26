@@ -13,7 +13,6 @@
 #import "Route.h"
 #import "Player.h"
 #import "CountdownBar.h"
-#import "Lives.h"
 #import "Level.h"
 #import "GameConfig.h"
 
@@ -29,7 +28,6 @@
 @property (nonatomic, strong) NSMutableArray *twoDimensionallightArray;
 @property (nonatomic, strong) CountdownBar * countdownBar;
 @property (nonatomic, strong) Level *level;
-@property (nonatomic, strong) Lives *lives;
 
 @end
 
@@ -41,7 +39,6 @@
 @synthesize twoDimensionallightArray = _twoDimensionallightArray;
 @synthesize countdownBar = _countdownBar;
 @synthesize level = _level;
-@synthesize lives = _lives;
 
 // Helper class method that creates a Scene with the GameLayer as the only child.
 +(CCScene *) scene
@@ -102,12 +99,8 @@
         //create the route object.
         self.route = [[Route alloc] initWithGameLayer:self lightArray:self.twoDimensionallightArray];
         
-        //create the lives object.
-        self.lives = [[Lives alloc] initWithGameLayer:self];
-        self.lives.position = ccp(LIVES_X_COORD, LIVES_Y_COORD);
-        
         //create the countdown bar and set its position.
-        self.countdownBar = [[CountdownBar alloc] initWithGameLayer:self lives:self.lives];
+        self.countdownBar = [[CountdownBar alloc] initWithGameLayer:self];
         self.countdownBar.position = ccp(COUNTDOWN_BAR_X_COORD, COUNTDOWN_BAR_Y_COORD);
         
         //create the level object and set its position.
