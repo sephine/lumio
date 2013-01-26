@@ -191,14 +191,14 @@
 - (void)pauseButtonTapped:(id)sender
 {
     self.gameIsPaused = YES;
-    InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameLayer:self resumeAvailable:YES];
+    InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameLayer:self gameOver:NO];
     [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
 }
 
 - (void)gameOver
 {
     self.gameIsPaused = YES;
-    InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameLayer:self resumeAvailable:NO];
+    InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameLayer:self gameOver:YES];
     [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
 }
 

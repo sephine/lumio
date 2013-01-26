@@ -13,6 +13,6 @@
 @interface InGameMenuLayer : CCLayer {
 }
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer resumeAvailable:(BOOL)resumeAvailable;
+- (id)initWithGameLayer:(GameLayer *)gameLayer gameOver:(BOOL)gameOver;
 
 @end

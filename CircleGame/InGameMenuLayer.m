@@ -18,7 +18,7 @@
 
 @synthesize gameLayer = _gameLayer;
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer resumeAvailable:(BOOL)resumeAvailable
+- (id)initWithGameLayer:(GameLayer *)gameLayer gameOver:(BOOL)gameOver
 {
 	if( (self=[super init]) ) {
         self.gameLayer = gameLayer;
@@ -39,12 +39,20 @@
         // add the background as a child to this Layer
         [self addChild: background z:0];
         
+        //add game over sprite if game over is true.
+        if (gameOver) {
+            CCSprite *gameOverSprite = [CCSprite spriteWithFile:@"GameOver.png"];
+            gameOverSprite.position = ccp(55, 440);
+            gameOverSprite.anchorPoint = ccp(0, 1);
+            [self addChild: gameOverSprite z:1];
+        }
+        
         //Create the Resume Menu Item.
         CCMenuItemImage *resumeMenuItem = [CCMenuItemImage
                                     itemWithNormalImage:@"ResumeButton.png" selectedImage:@"ResumeButtonSelected.png"
                                     target:self selector:@selector(resumeButtonTapped:)];
         resumeMenuItem.anchorPoint = ccp(0, 1);
-        resumeMenuItem.position = ccp(49, 404);
+        resumeMenuItem.position = ccp(49, 410);
         
         //Create the Restart Menu Item.
         CCMenuItemImage *restartMenuItem = [CCMenuItemImage
@@ -52,11 +60,11 @@
                                       target:self selector:@selector(restartButtonTapped:)];
         restartMenuItem.anchorPoint = ccp(0, 1);
         
-        //Change the position based on whether resume is available.
-        if (resumeAvailable) {
-            restartMenuItem.position = ccp(140, 333);
+        //Change the position based on whether it is a game over screen.
+        if (gameOver) {
+            restartMenuItem.position = ccp(130, 350);
         } else {
-            restartMenuItem.position = ccp(100, 370);
+            restartMenuItem.position = ccp(140, 333);
         }
         
         //Create the 'Main Menu' Menu Item.
@@ -65,19 +73,19 @@
                                        target:self selector:@selector(mainMenuButtonTapped:)];
         mainMenuMenuItem.anchorPoint = ccp(0, 1);
         
-        //Change the position based on whether resume is available.
-        if (resumeAvailable) {
-            mainMenuMenuItem.position = ccp(45, 197);
-        } else {
+        //Change the position based on whether it is a game over screen.
+        if (gameOver) {
             mainMenuMenuItem.position = ccp(55, 210);
+        } else {
+            mainMenuMenuItem.position = ccp(45, 197);            
         }
 
-        //Only add resumeMenuItem if resume is available.
+        //Only add resumeMenuItem it is not a game over screen.
         CCMenu *inGameMenu;
-        if (resumeAvailable) {
-            inGameMenu = [CCMenu menuWithItems:resumeMenuItem, restartMenuItem, mainMenuMenuItem, nil];
+        if (gameOver) {
+            inGameMenu = [CCMenu menuWithItems:restartMenuItem, mainMenuMenuItem, nil];
         } else {
-            inGameMenu = [CCMenu menuWithItems:restartMenuItem, mainMenuMenuItem, nil];            
+            inGameMenu = [CCMenu menuWithItems:resumeMenuItem, restartMenuItem, mainMenuMenuItem, nil];
         }
         inGameMenu.position = CGPointZero;
         [self addChild:inGameMenu];

@@ -87,6 +87,8 @@
 		B0A0EF5816B4618200E47369 /* InGameMenuBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF5716B4618200E47369 /* InGameMenuBackground.png */; };
 		B0A0EF5A16B4618B00E47369 /* InGameMenuBackground-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF5916B4618B00E47369 /* InGameMenuBackground-hd.png */; };
 		B0A0EF5D16B466C200E47369 /* LightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0EF5C16B466C200E47369 /* LightManager.m */; };
+		B0A0EF5F16B471E200E47369 /* GameOver.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF5E16B471E200E47369 /* GameOver.png */; };
+		B0A0EF6116B471EC00E47369 /* GameOver-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF6016B471EC00E47369 /* GameOver-hd.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -184,6 +186,8 @@
 		B0A0EF5916B4618B00E47369 /* InGameMenuBackground-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InGameMenuBackground-hd.png"; sourceTree = "<group>"; };
 		B0A0EF5B16B466C200E47369 /* LightManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightManager.h; sourceTree = "<group>"; };
 		B0A0EF5C16B466C200E47369 /* LightManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightManager.m; sourceTree = "<group>"; };
+		B0A0EF5E16B471E200E47369 /* GameOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameOver.png; sourceTree = "<group>"; };
+		B0A0EF6016B471EC00E47369 /* GameOver-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GameOver-hd.png"; sourceTree = "<group>"; };
 		B38E15D7535B4ABC8FAF569F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02357077101404D92B4E06C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -335,6 +339,7 @@
 				B0A0EF3516B44B1500E47369 /* RestartButtonSelected.png */,
 				B0A0EF3716B44B1A00E47369 /* MenuButton.png */,
 				B0A0EF3916B44B1F00E47369 /* MenuButtonSelected.png */,
+				B0A0EF5E16B471E200E47369 /* GameOver.png */,
 			);
 			name = SD;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 				B0A0EF4516B44B6E00E47369 /* RestartButtonSelected-hd.png */,
 				B0A0EF4716B44B7400E47369 /* MenuButton-hd.png */,
 				B0A0EF4916B44B7800E47369 /* MenuButtonSelected-hd.png */,
+				B0A0EF6016B471EC00E47369 /* GameOver-hd.png */,
 			);
 			name = HD;
 			sourceTree = "<group>";
@@ -476,6 +482,8 @@
 				B0A0EF5616B457D100E47369 /* PauseButton-hd.png in Resources */,
 				B0A0EF5816B4618200E47369 /* InGameMenuBackground.png in Resources */,
 				B0A0EF5A16B4618B00E47369 /* InGameMenuBackground-hd.png in Resources */,
+				B0A0EF5F16B471E200E47369 /* GameOver.png in Resources */,
+				B0A0EF6116B471EC00E47369 /* GameOver-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
