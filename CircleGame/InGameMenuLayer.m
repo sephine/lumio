@@ -7,6 +7,7 @@
 //
 
 #import "InGameMenuLayer.h"
+#import "MenuLayer.h"
 
 @interface InGameMenuLayer ()
 
@@ -119,7 +120,7 @@
 
 - (void)mainMenuButtonTapped:(id)sender
 {
-    
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.7 scene:[MenuLayer scene] withColor:ccBLACK]];
 }
 
 @end
