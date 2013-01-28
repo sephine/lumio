@@ -82,6 +82,12 @@
     switch (lightState) {
         case Active:
             self.innerCircleSprite = [CCSprite spriteWithFile:@"BlackCircle.png"];
+            self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY;
+            if (self.lightValue == High) {
+                self.valueSprite.opacity = OPAQUE;
+            } else {
+                self.valueSprite.opacity = TRANSPARENT;
+            }
             break;
         case Cooldown:
             self.innerCircleSprite = [CCSprite spriteWithFile:@"EmptyCircle.png"];
@@ -99,6 +105,9 @@
             [[NSNotificationCenter defaultCenter]
              postNotificationName:NOTIFICATION_LIGHT_ON_COOLDOWN
              object:self];
+            
+            self.outerCircleSprite.opacity = TRANSPARENT;
+            self.valueSprite.opacity = TRANSPARENT;
             break;
         default:
             break;
@@ -135,16 +144,6 @@
 }
 
 //when you change the file for a sprite you need to remove the sprite and add it again.
-- (void)setOuterCircleSprite:(CCSprite *)outerCircleSprite
-{
-    [_outerCircleSprite removeFromParentAndCleanup:YES];
-    _outerCircleSprite = outerCircleSprite;
-    _outerCircleSprite.position = self.position;
-    _outerCircleSprite.anchorPoint = ccp(0.5, 0.5);
-    [self addChild:_outerCircleSprite z:1];
-}
-
-//when you change the file for a sprite you need to remove the sprite and add it again.
 - (void)setValueSprite:(CCSprite *)valueSprite
 {
     [_valueSprite removeFromParentAndCleanup:YES];
@@ -160,6 +159,12 @@
         self.gameLayer = gameLayer;
         self.gridLocation = gridLocation;
         
+        //create outer sprite and add to layer. The other layers are added in their setters as they are frequently changed.
+        self.outerCircleSprite = [CCSprite spriteWithFile:@"WhiteCircle.png"];
+        self.outerCircleSprite.position = self.position;
+        self.outerCircleSprite.anchorPoint = ccp(0.5, 0.5);
+        [self addChild:_outerCircleSprite z:1];
+        
         //Generate value, start the lights on cooldown and active and give them a time between 0 and the max.
         //self.lightValue = [self generateLightValue];
         self.lightValue = NoValue;
@@ -172,6 +177,7 @@
         } else {
             self.lightState = Active;
             self.activeTimeRemaining = arc4random() % MAX_COUNTDOWN + 1;
+            [self setSpriteScaleAndColourForActiveTimeRemaining];
         }
         
         //create the connectors based on grid location.
@@ -185,11 +191,8 @@
             self.rightConnector = [[Connector alloc] initWithGameLayer:self.gameLayer orientation:Horizontal];
         }
         
-        //Create sprites and add to layer.
+        //add to game layer.
         [self.gameLayer addChild:self];
-        
-        //sprites are added to the layer in their setters.
-        self.outerCircleSprite = [CCSprite spriteWithFile:@"WhiteCircle.png"];
     }
     return self;
 }
@@ -202,17 +205,21 @@
             self.activeTimeRemaining -= dt;
             if (self.activeTimeRemaining < 0) {
                 self.lightState = Cooldown;
+            } else {
+                [self setSpriteScaleAndColourForActiveTimeRemaining];
             }
             break;
         case Cooldown:
             self.cooldownTimeRemaining -= dt;
             if (self.cooldownTimeRemaining < 0) {
                 self.lightState = Active;
+                [self setSpriteScaleAndColourForActiveTimeRemaining];
             }
             break;
         case AlmostOccupied:
             self.activeTimeRemaining -= dt;
             if (self.activeTimeRemaining < 0) self.activeTimeRemaining = 0;
+            [self setSpriteScaleAndColourForActiveTimeRemaining];
         default:
             break;
     }
@@ -275,32 +282,6 @@
     self.lightValue = High;
     self.lightState = Active;
     self.activeTimeRemaining = [self generateValueActiveTime];
-}
-
-- (void)draw
-{
-    switch (self.lightState) {
-        case Active:
-        case AlmostOccupied:
-        case Occupied:
-            [self setSpriteScaleAndColourForActiveTimeRemaining];
-            self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY;
-            if (self.lightValue == High) {
-                self.valueSprite.opacity = OPAQUE;
-            } else {
-                self.valueSprite.opacity = TRANSPARENT;
-            }
-            //self.innerCircleSprite.opacity = INNER_CIRCLE_OPACITY;
-            break;
-        case Cooldown:
-            [self setSpriteScaleAndColourForActiveTimeRemaining];
-            self.outerCircleSprite.opacity = TRANSPARENT;
-            self.valueSprite.opacity = TRANSPARENT;
-            //self.innerCircleSprite.opacity = TRANSPARENT;
-            break;
-        default:
-            break;
-    }
 }
 
 //generates a random value based on the high, medium and low percentages.

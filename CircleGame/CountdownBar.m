@@ -50,6 +50,7 @@
     _centreSprite = centreSprite;
     _centreSprite.position = self.position;
     _centreSprite.anchorPoint = ccp(0, 0);
+    _centreSprite.opacity = COUNTDOWN_BAR_OPACITY;
     [self addChild:_centreSprite z:2];
 }
 
@@ -63,17 +64,22 @@
         self.borderSprite = [CCSprite spriteWithFile:@"CountdownBorder.png"];
         self.centreSprite = [CCSprite spriteWithFile:@"CountdownCentre.png"];
         [self.gameLayer addChild:self];
+        
+        [self setTheCentreSpriteScaleAndColour];
     }
     return self;
 }
 
 - (void)update:(ccTime)dt
 {
+    //decrease the value based on the time passed and the speed of decrease.
     float percentageDecrease = self.countdownSpeed * dt;
     self.value -= percentageDecrease;
     
     if (self.value <= 0) {
         [self.gameLayer gameOver];
+    } else {
+        [self setTheCentreSpriteScaleAndColour];
     }
 }
 
@@ -96,8 +102,9 @@
     self.value = 100;
 }
 
-- (void)draw
+- (void)setTheCentreSpriteScaleAndColour
 {
+    //modify the scale and colour of the bar based on the value.
     float valueProportion = self.value / 100.0;
     self.centreSprite.scaleX = valueProportion;
     
@@ -110,7 +117,6 @@
         red = 255 * valueProportion / CRITICAL_THRESHOLD;
     }
     self.centreSprite.color = ccc3(red, green, 0);
-    self.centreSprite.opacity = COUNTDOWN_BAR_OPACITY;
 }
 
 @end

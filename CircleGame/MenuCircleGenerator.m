@@ -78,6 +78,8 @@
         [self.spriteArray addObject:sprite6];
         float sprite6Timer = 4;
         [self.timeArray addObject:[NSNumber numberWithFloat:sprite6Timer]];
+        
+        [self setTheSpritesScaleAndColour];
     }
     return self;
 }
@@ -86,16 +88,19 @@
 - (void)update:(ccTime)dt
 {
     for (int i = 0; i < 6; i++) {
-        float currentSpriteTimer = [[self.timeArray objectAtIndex:i] floatValue];
-        currentSpriteTimer -= dt;
-        if (currentSpriteTimer <= 0) currentSpriteTimer = 24;
-        [self.timeArray replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:currentSpriteTimer]];
+        //reduce the time by dt.
+        float time = [[self.timeArray objectAtIndex:i] floatValue];
+        time -= dt;
+        if (time <= 0) time = 24;
+        [self.timeArray replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:time]];
     }
+    [self setTheSpritesScaleAndColour];
 }
 
-- (void)draw
+- (void)setTheSpritesScaleAndColour
 {
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++) {        
+        //change the size and colour of the sprites based on the time.
         CCSprite *sprite = [self.spriteArray objectAtIndex:i];
         float time = [[self.timeArray objectAtIndex:i] floatValue];
         float timeProportion = time / 24;

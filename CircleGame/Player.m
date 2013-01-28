@@ -62,8 +62,14 @@
     return self;
 }
 
-//used to move the player along the route.
 - (void)update:(ccTime)dt
+{
+    float distanceTravelled = SPEED_IN_POINTS_PER_SECOND * dt;
+    [self movePlayerAlongRouteWithDistance:distanceTravelled];
+}
+
+//used to move the player along the route.
+- (void)movePlayerAlongRouteWithDistance:(float)distanceTravelled
 {
     if (!self.nextLight) {
         self.nextLight = [self.route getNextLightFromRoute];
@@ -77,7 +83,6 @@
         CGFloat differenceInHeight = self.nextLight.position.y - self.position.y;
         CGFloat differenceInWidth = self.nextLight.position.x - self.position.x;
         
-        float distanceTravelled = SPEED_IN_POINTS_PER_SECOND * dt;
         if ((differenceInWidth > 0 && distanceTravelled > differenceInWidth) || (differenceInWidth < 0 && distanceTravelled > -differenceInWidth) ||  (differenceInHeight > 0 && distanceTravelled > differenceInHeight) || (differenceInHeight < 0 && distanceTravelled > -differenceInHeight)) {
             //next light has been reached.
             self.currentLight = self.nextLight;
@@ -122,10 +127,4 @@
         }
     }
 }
-
-- (void)draw
-{
-    
-}
-
 @end
