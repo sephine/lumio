@@ -99,6 +99,8 @@
 		B0A0EF7B16B4A05100E47369 /* NewGameButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF7A16B4A05100E47369 /* NewGameButton-hd.png */; };
 		B0A0EF7D16B4A11400E47369 /* NewGameButtonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF7C16B4A11400E47369 /* NewGameButtonSelected.png */; };
 		B0A0EF7F16B4A11A00E47369 /* NewGameButtonSelected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF7E16B4A11A00E47369 /* NewGameButtonSelected-hd.png */; };
+		B0A0EF9D16B6D17900E47369 /* AlternateWhiteCircle-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF9C16B6D17900E47369 /* AlternateWhiteCircle-hd.png */; };
+		B0A0EFA316B711DC00E47369 /* PowerUpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0EFA216B711DB00E47369 /* PowerUpManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -210,6 +212,9 @@
 		B0A0EF7A16B4A05100E47369 /* NewGameButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewGameButton-hd.png"; sourceTree = "<group>"; };
 		B0A0EF7C16B4A11400E47369 /* NewGameButtonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NewGameButtonSelected.png; sourceTree = "<group>"; };
 		B0A0EF7E16B4A11A00E47369 /* NewGameButtonSelected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewGameButtonSelected-hd.png"; sourceTree = "<group>"; };
+		B0A0EF9C16B6D17900E47369 /* AlternateWhiteCircle-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlternateWhiteCircle-hd.png"; sourceTree = "<group>"; };
+		B0A0EFA116B711DB00E47369 /* PowerUpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpManager.h; sourceTree = "<group>"; };
+		B0A0EFA216B711DB00E47369 /* PowerUpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpManager.m; sourceTree = "<group>"; };
 		B38E15D7535B4ABC8FAF569F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02357077101404D92B4E06C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -295,6 +300,8 @@
 				B09D0BF416AC6EEC00524AE7 /* Connector.m */,
 				B01B2A8016AB640800CD538A /* Player.h */,
 				B01B2A8116AB640800CD538A /* Player.m */,
+				B0A0EFA116B711DB00E47369 /* PowerUpManager.h */,
+				B0A0EFA216B711DB00E47369 /* PowerUpManager.m */,
 				B0A0EEBD16B0B30B00E47369 /* CountdownBar.h */,
 				B0A0EEBE16B0B30B00E47369 /* CountdownBar.m */,
 				B0A0EF1D16B2F45500E47369 /* Level.h */,
@@ -403,6 +410,7 @@
 				B0A0EF7216B4996800E47369 /* MenuCircle-hd.png */,
 				B0A0EF7A16B4A05100E47369 /* NewGameButton-hd.png */,
 				B0A0EF7E16B4A11A00E47369 /* NewGameButtonSelected-hd.png */,
+				B0A0EF9C16B6D17900E47369 /* AlternateWhiteCircle-hd.png */,
 			);
 			name = HD;
 			sourceTree = "<group>";
@@ -526,6 +534,7 @@
 				B0A0EF7B16B4A05100E47369 /* NewGameButton-hd.png in Resources */,
 				B0A0EF7D16B4A11400E47369 /* NewGameButtonSelected.png in Resources */,
 				B0A0EF7F16B4A11A00E47369 /* NewGameButtonSelected-hd.png in Resources */,
+				B0A0EF9D16B6D17900E47369 /* AlternateWhiteCircle-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +576,7 @@
 				B0A0EF5D16B466C200E47369 /* LightManager.m in Sources */,
 				B0A0EF6416B4868E00E47369 /* MenuCircleGenerator.m in Sources */,
 				B0A0EF6716B488F000E47369 /* MenuLayer.m in Sources */,
+				B0A0EFA316B711DC00E47369 /* PowerUpManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

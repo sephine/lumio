@@ -184,30 +184,29 @@
 //used by player when it starts moving to the next light in the route from the first.
 - (void)removeFirstLightFromRoute
 {
-    if (self.lightsInRoute.count >= 1) {
+    int count = self.lightsInRoute.count;
+    if (count >= 2) {
         Light *firstLight = [self.lightsInRoute objectAtIndex:0];
         firstLight.isPartOfRoute = NO;
         
-        //update connector states.
-        if (self.lightsInRoute.count >= 2) {
-            Light *secondLight = [self.lightsInRoute objectAtIndex:1];
-            Direction routeDirection = [self getDirectionBetweenFirstLight:firstLight andSecondLight:secondLight];
-            switch (routeDirection) {
-                case Up:
-                    firstLight.topConnector.state = Enabled;
-                    break;
-                case Down:
-                    secondLight.topConnector.state = Enabled;
-                    break;
-                case Left:
-                    secondLight.rightConnector.state = Enabled;
-                    break;
-                case Right:
-                    firstLight.rightConnector.state = Enabled;
-                    break;
-                default:
-                    break;
-            }
+    //update connector states.
+        Light *secondLight = [self.lightsInRoute objectAtIndex:1];
+        Direction routeDirection = [self getDirectionBetweenFirstLight:firstLight andSecondLight:secondLight];
+        switch (routeDirection) {
+            case Up:
+                firstLight.topConnector.state = Enabled;
+                break;
+            case Down:
+                secondLight.topConnector.state = Enabled;
+                break;
+            case Left:
+                secondLight.rightConnector.state = Enabled;
+                break;
+            case Right:
+                firstLight.rightConnector.state = Enabled;
+                break;
+            default:
+                break;
         }
         
         [self.lightsInRoute removeObjectAtIndex:0];

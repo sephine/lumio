@@ -100,7 +100,7 @@
                  object:self];
             }
             
-            self.activeTimeRemaining = [self generateActiveTime];
+            self.activeTimeRemaining = [self generateSpawnActiveTime];
             self.cooldownTimeRemaining = [self generateCooldownTime];
             [[NSNotificationCenter defaultCenter]
              postNotificationName:NOTIFICATION_LIGHT_ON_COOLDOWN
@@ -160,7 +160,7 @@
         self.gridLocation = gridLocation;
         
         //create outer sprite and add to layer. The other layers are added in their setters as they are frequently changed.
-        self.outerCircleSprite = [CCSprite spriteWithFile:@"WhiteCircle.png"];
+        self.outerCircleSprite = [CCSprite spriteWithFile:@"AlternateWhiteCircle.png"];
         self.outerCircleSprite.position = self.position;
         self.outerCircleSprite.anchorPoint = ccp(0.5, 0.5);
         [self addChild:_outerCircleSprite z:1];
@@ -176,7 +176,7 @@
             self.cooldownTimeRemaining = arc4random() % MAX_COOLDOWN + 1;
         } else {
             self.lightState = Active;
-            self.activeTimeRemaining = arc4random() % MAX_COUNTDOWN + 1;
+            self.activeTimeRemaining = arc4random() % MAX_REFRESH_COUNTDOWN + 1;
             [self setSpriteScaleAndColourForActiveTimeRemaining];
         }
         
@@ -268,7 +268,7 @@
 - (void)leaveLight
 {
     //self.lightValue = [self generateLightValue];
-    self.activeTimeRemaining = [self generateActiveTime];
+    self.activeTimeRemaining = [self generateRefreshActiveTime];
     self.lightState = Active;
 }
 
@@ -298,16 +298,14 @@
 }*/
 
 //generates a time based on the split between high countdowns and low countdowns and randomly chooses a time in the given range.
-- (float)generateActiveTime
+- (float)generateRefreshActiveTime
 {
-    //int randomPercentage = arc4random() % 100;
-    int countdown;
-    //if (randomPercentage < LOW_COUNTDOWN_PERCENTAGE) {
-    //    countdown = arc4random() % (LOW_MAX_COUNTDOWN - LOW_MIN_COUNTDOWN + 1) + LOW_MIN_COUNTDOWN;
-    //} else {
-        countdown = arc4random() % (MAX_COUNTDOWN - MIN_COUNTDOWN + 1) + MIN_COUNTDOWN;
-    //}
-    return countdown;
+    return arc4random() % (MAX_REFRESH_COUNTDOWN - MIN_REFRESH_COUNTDOWN + 1) + MIN_REFRESH_COUNTDOWN;
+}
+
+- (float)generateSpawnActiveTime
+{
+    return arc4random() % (MAX_SPAWN_COUNTDOWN - MIN_SPAWN_COUNTDOWN + 1) + MIN_SPAWN_COUNTDOWN;
 }
 
 - (float)generateValueActiveTime
@@ -324,7 +322,7 @@
 //sets the scale and colour of the outer circle sprite based on time remaining. It will start out green then transition to red at the critical threshold then transition to black.
 - (void)setSpriteScaleAndColourForActiveTimeRemaining
 {
-    float timeProportion = self.activeTimeRemaining / MAX_COUNTDOWN;
+    float timeProportion = self.activeTimeRemaining / MAX_REFRESH_COUNTDOWN;
     if (timeProportion > 1) timeProportion = 1;
     
     CGFloat newScale = ((MAX_RADIUS - MIN_RADIUS) * timeProportion + MIN_RADIUS)/MAX_RADIUS;

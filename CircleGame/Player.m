@@ -65,12 +65,16 @@
 - (void)update:(ccTime)dt
 {
     float distanceTravelled = SPEED_IN_POINTS_PER_SECOND * dt;
-    [self movePlayerAlongRouteWithDistance:distanceTravelled];
+    
+    do {
+    distanceTravelled = [self getRemainingDistanceAfterMovingPlayerAlongRouteWithDistance:distanceTravelled];
+    } while (distanceTravelled > 0);
 }
 
 //used to move the player along the route.
-- (void)movePlayerAlongRouteWithDistance:(float)distanceTravelled
+- (float)getRemainingDistanceAfterMovingPlayerAlongRouteWithDistance:(float)distanceTravelled
 {
+    float remainingDistance = 0;
     if (!self.nextLight) {
         self.nextLight = [self.route getNextLightFromRoute];
         if (self.nextLight) {
@@ -78,7 +82,9 @@
             [self.currentLight leaveLight];
             [self.nextLight almostOccupyLight];
         }
-    } else {
+    }
+    
+    if (self.nextLight) {
         //either difference in height will be equal or difference in width.
         CGFloat differenceInHeight = self.nextLight.position.y - self.position.y;
         CGFloat differenceInWidth = self.nextLight.position.x - self.position.x;
@@ -91,28 +97,18 @@
             LightValue value = [self.currentLight occupyLightAndGetValue];
             [self.countdownBar addValue:value];
             self.position = self.currentLight.position;
-            self.nextLight = [self.route getNextLightFromRoute];
-            if (self.nextLight) {
-                [self.route removeFirstLightFromRoute];
-                [self.currentLight leaveLight];
-                [self.nextLight almostOccupyLight];
-                if (differenceInWidth > 0) {
-                    distanceTravelled -= differenceInWidth;
-                } else if (differenceInWidth < 0) {
-                    distanceTravelled += differenceInWidth;
-                } else if (differenceInHeight > 0) {
-                    distanceTravelled -= differenceInHeight;
-                } else if (differenceInHeight < 0) {
-                    distanceTravelled += differenceInHeight;
-                }
-                differenceInHeight = self.nextLight.position.y - self.position.y;
-                differenceInWidth = self.nextLight.position.x - self.position.x;
-            } else {
-                distanceTravelled = 0;
+            self.nextLight = nil;
+            
+            if (differenceInWidth > 0) {
+                remainingDistance = distanceTravelled - differenceInWidth;
+            } else if (differenceInWidth < 0) {
+                remainingDistance = distanceTravelled + differenceInWidth;
+            } else if (differenceInHeight > 0) {
+                remainingDistance = distanceTravelled - differenceInHeight;
+            } else if (differenceInHeight < 0) {
+                remainingDistance = distanceTravelled + differenceInHeight;
             }
-        }
-        
-        if (differenceInWidth > 0) {
+        } else if (differenceInWidth > 0) {
             CGPoint newPosition = ccp(self.position.x + distanceTravelled, self.position.y);
             self.position = newPosition;
         } else if (differenceInWidth < 0) {
@@ -126,5 +122,6 @@
             self.position = newPosition;
         }
     }
+    return remainingDistance;
 }
 @end
