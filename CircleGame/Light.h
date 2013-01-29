@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "GameLayer.h"
 #import "Connector.h"
+#import "Route.h"
 
 typedef enum {
     Active,
@@ -30,10 +31,13 @@ struct GridLocation {
     int column;
 };
 
+@class Route;
+
 @interface Light : CCNode {
 }
 
 @property (nonatomic) CGPoint position;
+@property (nonatomic, strong) Route *route;
 @property (nonatomic) struct GridLocation gridLocation;
 @property (nonatomic) BOOL isPartOfRoute;
 @property (nonatomic, strong) Connector *topConnector;

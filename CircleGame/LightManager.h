@@ -13,7 +13,10 @@
 @interface LightManager : CCNode {
 }
 
-- (void)addToAllLightInstances:(Light *)light;
+- (id)initWithLightArray:(NSMutableArray *)lightArray;
+- (void)update:(ccTime)dt;
+
 - (void)chooseNewValueLight;
+- (Light *)findSelectedLightFromLocation:(CGPoint)location;
 
 @end

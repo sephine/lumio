@@ -21,7 +21,7 @@
 @implementation Route
 
 @synthesize gameLayer = _gameLayer;
-@synthesize twoDimensionalLightArray = _twoDimensionalLightArray;
+//@synthesize twoDimensionalLightArray = _twoDimensionalLightArray;
 @synthesize lightsInRoute = _lightsInRoute;
 
 - (id)initWithGameLayer:(GameLayer *)gameLayer lightArray:(NSMutableArray *)lightArray
@@ -30,22 +30,21 @@
         self.gameLayer = gameLayer;
         [self.gameLayer addChild:self];
         self.twoDimensionalLightArray = lightArray;
-        self.lightsInRoute = [NSMutableArray array];
+        //give all the lights in the array a reference to itself.
+        for (NSMutableArray *innerArray in self.twoDimensionalLightArray) {
+            for (Light *light in innerArray) {
+                light.route = self;
+            }
+        }
         
-        //add self as listener to the light on cooldown notifcication.
-        [[NSNotificationCenter defaultCenter]
-         addObserver:self
-         selector:@selector(lightOnCooldownEventHandler:)
-         name:NOTIFICATION_LIGHT_ON_COOLDOWN
-         object:nil];
+        self.lightsInRoute = [NSMutableArray array];
     }
     return self;
 }
 
-//handles the events sent by lights when they enter cooldown and so need to be removed from the route.
-- (void)lightOnCooldownEventHandler:(NSNotification *)notification
+//called by lights when they enter cooldown and so need to be removed from the route.
+- (void)lightNowOnCooldown:(Light *)light;
 {
-    Light *light = (Light *)notification.object;
     [self removeLightAndAllFollowingFromRoute:light];
 }
 

@@ -11,18 +11,18 @@
 
 @interface LightManager ()
 
-@property (nonatomic, strong) NSMutableArray *allLightInstances;
+@property (nonatomic, strong) NSMutableArray *twoDimensionalLightArray;
 
 @end
 
 @implementation LightManager
 
-@synthesize allLightInstances = _allLightInstances;
+@synthesize twoDimensionalLightArray = _twoDimensionalLightArray;
 
-- (id)init
+- (id)initWithLightArray:(NSMutableArray *)lightArray
 {
     if (self = [super init]) {
-        self.allLightInstances = [NSMutableArray array];
+        self.twoDimensionalLightArray = lightArray;
         
         //add self as listener to the new value light needed notifcication.
         [[NSNotificationCenter defaultCenter]
@@ -34,9 +34,12 @@
     return self;
 }
 
-- (void)addToAllLightInstances:(Light *)light
-{
-    [self.allLightInstances addObject:light];
+- (void)update:(ccTime)dt {
+    for (NSMutableArray *innerArray in self.twoDimensionalLightArray) {
+        for (Light *light in innerArray) {
+            [light update:dt];
+        }
+    }
 }
 
 //handles the events sent by lights when a value light has been occupied.
@@ -46,19 +49,33 @@
 }
 
 - (void)chooseNewValueLight
-{
-    int numberOfLights = self.allLightInstances.count;
-    
+{    
     //choose an instance to change to a value light. This light can not be almost occupied, or occupied.
-    int randomIndex;
+    int randomRowIndex, randomColumnIndex;
     Light *chosenLight;
     do {
-        randomIndex = arc4random() % numberOfLights;
-        chosenLight = [self.allLightInstances objectAtIndex:randomIndex];
+        //as the board is square we can just choose a row at random then a column at random.
+        randomRowIndex = arc4random() % NUMBER_OF_ROWS;
+        randomColumnIndex = arc4random() % NUMBER_OF_COLUMNS;
+        chosenLight = [[self.twoDimensionalLightArray objectAtIndex:randomRowIndex] objectAtIndex:randomColumnIndex];
     } while (![chosenLight canBeValueLight]);
     
     //tell this light to give itself a value.
     [chosenLight setUpLightWithValue];
+}
+
+- (Light *)findSelectedLightFromLocation:(CGPoint)location {
+    //go through all the lights seeing if they contain the point.
+    Light *selectedLight = nil;
+    for (NSMutableArray *innerArray in self.twoDimensionalLightArray) {
+        for (Light *light in innerArray) {
+            if (CGRectContainsPoint([light getBounds], location)) {
+                selectedLight = light;
+                break;
+            }
+        }
+    }
+    return selectedLight;
 }
 
 @end

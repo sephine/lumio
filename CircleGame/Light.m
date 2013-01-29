@@ -25,6 +25,7 @@
 @implementation Light
 
 @synthesize position = _position;
+@synthesize route = _route;
 @synthesize gridLocation = _gridLocation;
 @synthesize isPartOfRoute = _isPartOfRoute;
 @synthesize topConnector = _topConnector;
@@ -102,9 +103,7 @@
             
             self.activeTimeRemaining = [self generateSpawnActiveTime];
             self.cooldownTimeRemaining = [self generateCooldownTime];
-            [[NSNotificationCenter defaultCenter]
-             postNotificationName:NOTIFICATION_LIGHT_ON_COOLDOWN
-             object:self];
+            [self.route lightNowOnCooldown:self];
             
             self.outerCircleSprite.opacity = TRANSPARENT;
             self.valueSprite.opacity = TRANSPARENT;

@@ -30,7 +30,6 @@
 @property (nonatomic, strong) Player *player;
 @property (nonatomic, strong) Route *route;
 @property (nonatomic, strong) LightManager *lightManager;
-@property (nonatomic, strong) NSMutableArray *twoDimensionallightArray;
 @property (nonatomic, strong) CountdownBar * countdownBar;
 @property (nonatomic, strong) Level *level;
 
@@ -44,7 +43,6 @@
 @synthesize player = _player;
 @synthesize route = _route;
 @synthesize lightManager = _lightManager;
-@synthesize twoDimensionallightArray = _twoDimensionallightArray;
 @synthesize countdownBar = _countdownBar;
 @synthesize level = _level;
 
@@ -103,28 +101,27 @@
         self.player = [[Player alloc] init];
         //TODO set position and add to layer.
         
-        //create the light manager and add then add all the lights to it.
-        self.lightManager = [[LightManager alloc]init];
-        
         // create and initialize our light effects.
-        self.twoDimensionallightArray = [NSMutableArray array];
+        NSMutableArray *twoDimensionallightArray = [NSMutableArray array];
         for (int row = 0; row < NUMBER_OF_ROWS; row++) {
             NSMutableArray *innerArray = [NSMutableArray array];
             for (int column = 0; column < NUMBER_OF_COLUMNS; column++) {
                 struct GridLocation gridLocation = {row, column};
                 Light *light = [[Light alloc] initWithGameLayer:self gridLocation:gridLocation];
                 light.position = ccp(GAME_AREA_X_COORD + GAME_AREA_WIDTH /NUMBER_OF_COLUMNS * (column + 0.5f), GAME_AREA_Y_COORD + GAME_AREA_HEIGHT / NUMBER_OF_ROWS * (row + 0.5f));
-                [self.lightManager addToAllLightInstances:light];
                 [innerArray addObject:light];
             }
-            [self.twoDimensionallightArray addObject:innerArray];
+            [twoDimensionallightArray addObject:innerArray];
         }
+        
+        //create the light manager and pass it the light array.
+        self.lightManager = [[LightManager alloc] initWithLightArray:twoDimensionallightArray];
         
         //choose new value light from all the added lights.
         [self.lightManager chooseNewValueLight];
         
         //create the route object.
-        self.route = [[Route alloc] initWithGameLayer:self lightArray:self.twoDimensionallightArray];
+        self.route = [[Route alloc] initWithGameLayer:self lightArray:twoDimensionallightArray];
         
         //create the countdown bar and set its position.
         self.countdownBar = [[CountdownBar alloc] initWithGameLayer:self];
@@ -135,7 +132,7 @@
         self.level.position = ccp(LEVEL_X_COORD, LEVEL_Y_COORD);
         
         //add the player starting position to the route. Choose a light near the middle.
-        Light *firstLight = [[self.twoDimensionallightArray objectAtIndex:4] objectAtIndex:3];
+        Light *firstLight = [[twoDimensionallightArray objectAtIndex:4] objectAtIndex:3];
         [self.route setInitialLight:firstLight];
         
         //add the player and set it to the first light position.
@@ -154,11 +151,7 @@
 - (void)update:(ccTime)dt {
     //only update if game is not paused.
     if (!self.gameIsPaused) {
-        for (NSMutableArray *innerArray in self.twoDimensionallightArray) {
-            for (Light *light in innerArray) {
-                [light update:dt];
-            }
-        }
+        [self.lightManager update:dt];
         [self.player update:dt];
         [self.countdownBar update:dt];
         [self.level update:dt];
@@ -177,14 +170,10 @@
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint location = [self convertTouchToNodeSpace:touch];
     
-    //go through all the lights seeing if they were touched.
-    for (NSMutableArray *innerArray in self.twoDimensionallightArray) {
-        for (Light *light in innerArray) {
-            if (CGRectContainsPoint([light getBounds], location)) {
-                [self.route lightSelected:light];
-                break;
-            }
-        }
+    //find if any of the lights were touched and then call selected light on it.
+    Light *selectedLight = [self.lightManager findSelectedLightFromLocation:location];
+    if (selectedLight) {
+        [self.route lightSelected:selectedLight];
     }
 }
 

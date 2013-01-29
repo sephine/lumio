@@ -19,6 +19,8 @@ typedef enum {
     None
 } Direction;
 
+@class Light;
+
 @interface Route : CCNode {
 }
 
@@ -31,5 +33,8 @@ typedef enum {
 //used by player for movement.
 - (Light *)getNextLightFromRoute;
 - (void)removeFirstLightFromRoute;
+
+//used by a light when it enters cooldown.
+- (void)lightNowOnCooldown:(Light *)light;
 
 @end
