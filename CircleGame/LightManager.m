@@ -121,6 +121,8 @@
 //called by a light when it enters cooldown, will update the state of the relevant connectors and ensure it if removed from the route.
 - (void)lightNowOnCooldown:(Light *)light
 {
+    [self.route removeLightFromRoute:light];
+    
     if (light.row < NUMBER_OF_ROWS - 1) {
         light.topConnector.state = Disabled;
     }
@@ -135,8 +137,6 @@
         Light *lightToTheLeft = [self getLightAtRow:light.row column:(light.column - 1)];
         lightToTheLeft.rightConnector.state = Disabled;
     }
-    
-    [self.route removeLightFromRoute:light];
 }
 
 @end

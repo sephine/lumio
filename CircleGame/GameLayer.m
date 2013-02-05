@@ -178,9 +178,12 @@
 
 - (void)pauseButtonTapped:(id)sender
 {
-    self.gameIsPaused = YES;
-    InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameLayer:self gameOver:NO];
-    [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
+    //make sure the button does nothing if the game is already paused.
+    if (!self.gameIsPaused) {
+        self.gameIsPaused = YES;
+        InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameLayer:self gameOver:NO];
+        [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
+    }
 }
 
 - (void)gameOver
