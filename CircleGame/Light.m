@@ -83,7 +83,7 @@
     switch (lightState) {
         case Active:
             self.innerCircleSprite = [CCSprite spriteWithFile:@"BlackCircle.png"];
-            self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY;
+            //self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY;
             if (self.lightValue == High) {
                 self.valueSprite.opacity = OPAQUE;
             } else {
@@ -105,7 +105,7 @@
             self.cooldownTimeRemaining = [self generateCooldownTime];
             [self.route lightNowOnCooldown:self];
             
-            self.outerCircleSprite.opacity = TRANSPARENT;
+            //self.outerCircleSprite.opacity = TRANSPARENT;
             self.valueSprite.opacity = TRANSPARENT;
             break;
         default:
@@ -162,6 +162,7 @@
         self.outerCircleSprite = [CCSprite spriteWithFile:@"AlternateWhiteCircle.png"];
         self.outerCircleSprite.position = self.position;
         self.outerCircleSprite.anchorPoint = ccp(0.5, 0.5);
+        self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY; //TEMP
         [self addChild:_outerCircleSprite z:1];
         
         //Generate value, start the lights on cooldown and active and give them a time between 0 and the max.
@@ -176,8 +177,8 @@
         } else {
             self.lightState = Active;
             self.activeTimeRemaining = arc4random() % MAX_REFRESH_COUNTDOWN + 1;
-            [self setSpriteScaleAndColourForActiveTimeRemaining];
         }
+        [self setSpriteScaleAndColourForTimeRemaining];
         
         //create the connectors based on grid location.
         self.topConnector = nil;
@@ -204,21 +205,20 @@
             self.activeTimeRemaining -= dt;
             if (self.activeTimeRemaining < 0) {
                 self.lightState = Cooldown;
-            } else {
-                [self setSpriteScaleAndColourForActiveTimeRemaining];
             }
+            [self setSpriteScaleAndColourForTimeRemaining];
             break;
         case Cooldown:
             self.cooldownTimeRemaining -= dt;
             if (self.cooldownTimeRemaining < 0) {
                 self.lightState = Active;
-                [self setSpriteScaleAndColourForActiveTimeRemaining];
             }
+            [self setSpriteScaleAndColourForTimeRemaining];
             break;
         case AlmostOccupied:
             self.activeTimeRemaining -= dt;
             if (self.activeTimeRemaining < 0) self.activeTimeRemaining = 0;
-            [self setSpriteScaleAndColourForActiveTimeRemaining];
+            [self setSpriteScaleAndColourForTimeRemaining];
         default:
             break;
     }
@@ -318,13 +318,21 @@
     return arc4random() % (MAX_COOLDOWN - MIN_COOLDOWN + 1) + MIN_COOLDOWN;
 }
 
-//sets the scale and colour of the outer circle sprite based on time remaining. It will start out green then transition to red at the critical threshold then transition to black.
-- (void)setSpriteScaleAndColourForActiveTimeRemaining
+//sets the scale and colour of the outer circle sprite based on the active or cooldown time remaining. It will start out green then transition to red at the critical threshold then transition to black.
+- (void)setSpriteScaleAndColourForTimeRemaining
 {
-    float timeProportion = self.activeTimeRemaining / MAX_REFRESH_COUNTDOWN;
-    if (timeProportion > 1) timeProportion = 1;
+    float timeProportion;
+    CGFloat newScale;
+    if (self.lightState == Cooldown) {
+        timeProportion = self.cooldownTimeRemaining / MAX_REFRESH_COUNTDOWN;
+        if (timeProportion > 1) timeProportion = 1;
+        newScale = 12.0/MAX_RADIUS;
+    } else {
+        timeProportion = self.activeTimeRemaining / MAX_REFRESH_COUNTDOWN;
+        if (timeProportion > 1) timeProportion = 1;
+        newScale = ((MAX_RADIUS - MIN_RADIUS) * timeProportion + MIN_RADIUS)/MAX_RADIUS;
+    }
     
-    CGFloat newScale = ((MAX_RADIUS - MIN_RADIUS) * timeProportion + MIN_RADIUS)/MAX_RADIUS;
     self.outerCircleSprite.scale = newScale;
     GLubyte red = 0;
     GLubyte green = 0;
