@@ -12,7 +12,7 @@
 @interface Connector ()
 
 @property (nonatomic, strong) GameLayer *gameLayer;
-@property (nonatomic) Orientation orientation;
+@property (nonatomic) ConnectorOrientation orientation;
 @property (nonatomic, strong) CCSprite *sprite;
 
 @end
@@ -51,7 +51,7 @@
     }
 }
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer orientation:(Orientation)orientation
+- (id)initWithGameLayer:(GameLayer *)gameLayer orientation:(ConnectorOrientation)orientation
 {
     if (self = [super init]) {
         self.gameLayer = gameLayer;

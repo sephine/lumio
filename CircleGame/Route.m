@@ -74,7 +74,7 @@
         Light *lastLightInRoute = [self.lightsInRoute lastObject];
         
         //get direction between lights.
-        Direction routeDirection = [self getDirectionBetweenFirstLight:lastLightInRoute andSecondLight:light];
+        RouteDirection routeDirection = [self getDirectionBetweenFirstLight:lastLightInRoute andSecondLight:light];
 
         //If route direction is left or right go through each light in the columns between the light and the last light in the route checking if they are in the correct state. If route direction is up or down, go through rows.
         if (routeDirection == Right) {
@@ -188,7 +188,7 @@
         
     //update connector states.
         Light *secondLight = [self.lightsInRoute objectAtIndex:1];
-        Direction routeDirection = [self getDirectionBetweenFirstLight:firstLight andSecondLight:secondLight];
+        RouteDirection routeDirection = [self getDirectionBetweenFirstLight:firstLight andSecondLight:secondLight];
         switch (routeDirection) {
             case Up:
                 firstLight.topConnector.state = Enabled;
@@ -219,35 +219,39 @@
     if ([self.lightsInRoute containsObject:light]) {
         int lightIndex = [self.lightsInRoute indexOfObject:light];
         
-        //update connectors of previous light.
+        int initialIndex;
         if (lightIndex >= 1) {
-            Light *previousLight = [self.lightsInRoute objectAtIndex:lightIndex - 1];
-            Light *light = [self.lightsInRoute objectAtIndex:lightIndex];
-            Direction routeDirection = [self getDirectionBetweenFirstLight:previousLight andSecondLight:light];
-            if (routeDirection == Up) {
-                previousLight.topConnector.state = Enabled;
-            } else if (routeDirection == Right) {
-                previousLight.rightConnector.state = Enabled;
-            }
-        
-            //go through lights to remove and set them as not part of a route and update their connectors.
-            int arrayLength = self.lightsInRoute.count;
-            for (int i = lightIndex; i < arrayLength; i++) {
-                Light *currentLight = [self.lightsInRoute objectAtIndex:i];
-                currentLight.isPartOfRoute = NO;
-                currentLight.topConnector.state = Enabled;
-                currentLight.rightConnector.state = Enabled;
-            }
-            NSRange rangeOfIndices = {lightIndex, arrayLength - lightIndex};
-            [self.lightsInRoute removeObjectsInRange:rangeOfIndices];
+            initialIndex = lightIndex - 1;
+        } else {
+            initialIndex = lightIndex;
+            light.isPartOfRoute = NO;
         }
+        int arrayLength = self.lightsInRoute.count;
+        for (int i = initialIndex; i < arrayLength - 1; i++) {
+            Light *previousLight = [self.lightsInRoute objectAtIndex:i];
+            Light *nextLight = [self.lightsInRoute objectAtIndex:i + 1];
+            nextLight.isPartOfRoute = NO;
+            RouteDirection routeDirection = [self getDirectionBetweenFirstLight:previousLight andSecondLight:nextLight];
+            if (routeDirection == Up) {
+                previousLight.topConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
+            } else if (routeDirection == Right) {
+                previousLight.rightConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
+            } else if (routeDirection == Down) {
+                nextLight.topConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
+            } else if (routeDirection == Left) {
+                nextLight.rightConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
+            }
+        }
+        
+        NSRange rangeOfIndices = {lightIndex, arrayLength - lightIndex};
+        [self.lightsInRoute removeObjectsInRange:rangeOfIndices];
     }
 }
 
 //gets direction between two lights (up, down, left, right) to help with routing.
-- (Direction)getDirectionBetweenFirstLight:(Light *)firstLight andSecondLight:(Light *)secondLight
+- (RouteDirection)getDirectionBetweenFirstLight:(Light *)firstLight andSecondLight:(Light *)secondLight
 {
-    Direction direction = None;
+    RouteDirection direction = None;
     BOOL rowsAreEqual = (secondLight.row == firstLight.row);
     BOOL columnsAreEqual = (secondLight.column == firstLight.column);
     

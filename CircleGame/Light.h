@@ -12,20 +12,7 @@
 #import "Connector.h"
 //#import "Route.h"
 #import "LightManager.h"
-
-typedef enum {
-    Active,
-    Cooldown,
-    AlmostOccupied,
-    Occupied
-} LightState;
-
-typedef enum {
-    Low,
-    Medium,
-    High,
-    NoValue
-} LightValue;
+#import "Common.h"
 
 //@class Route;
 @class LightManager;
@@ -57,7 +44,7 @@ typedef enum {
 
 //used by the light manager.
 - (BOOL)canBeValueLight;
-- (void)setUpLightWithValue;
+- (void)setUpLightWithValue:(LightValue)value;
 
 
 @end

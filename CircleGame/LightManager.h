@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "Light.h"
 #import "Route.h"
+#import "Common.h"
 
 @class Light;
 @class Route;
@@ -22,7 +23,7 @@
 - (id)initWithLightArray:(NSMutableArray *)lightArray;
 - (void)update:(ccTime)dt;
 
-- (void)chooseNewValueLight;
+- (void)chooseNewLightWithValue:(LightValue)value;
 - (void)lightNowActive:(Light *)light;
 - (void)lightNowOnCooldown:(Light *)light;
 

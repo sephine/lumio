@@ -87,6 +87,10 @@
 {
     if (value == High) {
         self.value += COUNTDOWN_HIGH_INCREASE_PERCENTAGE;
+    } else if (value == Medium) {
+        self.value += COUNTDOWN_MEDIUM_INCREASE_PERCENTAGE;
+    } else if (value == Low) {
+        self.value += COUNTDOWN_LOW_INCREASE_PERCENTAGE;
     }
     
     if (self.value > 100) self.value = 100;

@@ -36,13 +36,6 @@
                 }
             }
         }
-        
-        //add self as listener to the new value light needed notifcication.
-        [[NSNotificationCenter defaultCenter]
-         addObserver:self
-         selector:@selector(newValueLightNeededEventHandler:)
-         name:NOTIFICATION_NEW_VALUE_LIGHT_NEEDED
-         object:nil];
     }
     return self;
 }
@@ -55,13 +48,7 @@
     }
 }
 
-//handles the events sent by lights when a value light has been occupied.
-- (void)newValueLightNeededEventHandler:(NSNotification *)notification
-{
-    [self chooseNewValueLight];
-}
-
-- (void)chooseNewValueLight
+- (void)chooseNewLightWithValue:(LightValue)value
 {    
     //choose an instance to change to a value light. This light can not be almost occupied, or occupied.
     int randomRowIndex, randomColumnIndex;
@@ -70,11 +57,11 @@
         //as the board is square we can just choose a row at random then a column at random.
         randomRowIndex = arc4random() % NUMBER_OF_ROWS;
         randomColumnIndex = arc4random() % NUMBER_OF_COLUMNS;
-        chosenLight = [[self.twoDimensionalLightArray objectAtIndex:randomRowIndex] objectAtIndex:randomColumnIndex];
+        chosenLight = [self getLightAtRow:randomRowIndex column:randomColumnIndex];
     } while (![chosenLight canBeValueLight]);
     
     //tell this light to give itself a value.
-    [chosenLight setUpLightWithValue];
+    [chosenLight setUpLightWithValue:value];
 }
 
 - (Light *)getSelectedLightFromLocation:(CGPoint)location {

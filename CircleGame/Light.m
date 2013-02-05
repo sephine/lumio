@@ -86,7 +86,7 @@
             self.innerCircleSprite = [CCSprite spriteWithFile:@"BlackCircle.png"];
             [self.lightManager lightNowActive:self];
             //self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY;
-            if (self.lightValue == High) {
+            if (self.lightValue != NoValue) {
                 self.valueSprite.opacity = OPAQUE;
             } else {
                 self.valueSprite.opacity = TRANSPARENT;
@@ -97,10 +97,8 @@
             //self.lightValue = [self generateLightValue];
             LightValue oldValue = self.lightValue;
             self.lightValue = NoValue;
-            if (oldValue == High) {
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:NOTIFICATION_NEW_VALUE_LIGHT_NEEDED
-                 object:self];
+            if (oldValue != NoValue) {
+                [self.lightManager chooseNewLightWithValue:oldValue];
             }
             
             self.activeTimeRemaining = [self generateSpawnActiveTime];
@@ -127,7 +125,7 @@
             self.valueSprite = [CCSprite spriteWithFile:@"Number3.png"];
             break;
         case High:
-            self.valueSprite = [CCSprite spriteWithFile:@"Number9White.png"];
+            self.valueSprite = [CCSprite spriteWithFile:@"Number9.png"];
             break;
         default:
             break;
@@ -254,14 +252,8 @@
     self.lightState = Occupied;
     LightValue oldValue = self.lightValue;
     self.lightValue = NoValue;
-    //if (oldValue == High || !valueLightExists) {
-    //    [Light chooseNewValueLight];
-    //    valueLightExists = YES;
-    //}
-    if (oldValue == High) {
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:NOTIFICATION_NEW_VALUE_LIGHT_NEEDED
-         object:self];
+    if (oldValue != NoValue) {
+        [self.lightManager chooseNewLightWithValue:oldValue];
     }
     return oldValue;
 }
@@ -276,12 +268,12 @@
 
 - (BOOL)canBeValueLight
 {
-    return !(self.lightState == AlmostOccupied || self.lightState == Occupied);
+    return !(self.lightState == AlmostOccupied || self.lightState == Occupied || self.lightValue != NoValue);
 }
 
-- (void)setUpLightWithValue
+- (void)setUpLightWithValue:(LightValue)value
 {
-    self.lightValue = High;
+    self.lightValue = value;
     self.lightState = Active;
     self.activeTimeRemaining = [self generateValueActiveTime];
 }

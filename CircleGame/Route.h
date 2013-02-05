@@ -12,14 +12,6 @@
 #import "Light.h"
 #import "LightManager.h"
 
-typedef enum {
-    Up,
-    Down,
-    Left,
-    Right,
-    None
-} Direction;
-
 @class Light;
 @class LightManager;
 

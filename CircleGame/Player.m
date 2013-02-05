@@ -89,7 +89,7 @@
         CGFloat differenceInHeight = self.nextLight.position.y - self.position.y;
         CGFloat differenceInWidth = self.nextLight.position.x - self.position.x;
         
-        if ((differenceInWidth > 0 && distanceTravelled > differenceInWidth) || (differenceInWidth < 0 && distanceTravelled > -differenceInWidth) ||  (differenceInHeight > 0 && distanceTravelled > differenceInHeight) || (differenceInHeight < 0 && distanceTravelled > -differenceInHeight)) {
+        if ((differenceInWidth > 0 && distanceTravelled > differenceInWidth) || (differenceInWidth < 0 && distanceTravelled > -differenceInWidth) ||  (differenceInHeight > 0 && distanceTravelled > differenceInHeight) || (differenceInHeight < 0 && distanceTravelled > -differenceInHeight) || (differenceInWidth == 0 && differenceInHeight == 0)) {
             //next light has been reached.
             self.currentLight = self.nextLight;
             //[self.route removeFirstLightFromRoute];
@@ -107,6 +107,8 @@
                 remainingDistance = distanceTravelled - differenceInHeight;
             } else if (differenceInHeight < 0) {
                 remainingDistance = distanceTravelled + differenceInHeight;
+            } else {
+                remainingDistance = distanceTravelled;
             }
         } else if (differenceInWidth > 0) {
             CGPoint newPosition = ccp(self.position.x + distanceTravelled, self.position.y);

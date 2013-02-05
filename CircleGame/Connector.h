@@ -9,17 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "GameLayer.h"
-
-typedef enum {
-    Horizontal,
-    Vertical
-} Orientation;
-
-typedef enum {
-    Routed,
-    Enabled,
-    Disabled
-} ConnectorState;
+#import "Common.h"
 
 @interface Connector : CCNode {
 }
@@ -27,6 +17,6 @@ typedef enum {
 @property (nonatomic) CGPoint position;
 @property (nonatomic) ConnectorState state;
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer orientation:(Orientation)orientation;
+- (id)initWithGameLayer:(GameLayer *)gameLayer orientation:(ConnectorOrientation)orientation;
 
 @end
