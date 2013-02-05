@@ -106,8 +106,7 @@
         for (int row = 0; row < NUMBER_OF_ROWS; row++) {
             NSMutableArray *innerArray = [NSMutableArray array];
             for (int column = 0; column < NUMBER_OF_COLUMNS; column++) {
-                struct GridLocation gridLocation = {row, column};
-                Light *light = [[Light alloc] initWithGameLayer:self gridLocation:gridLocation];
+                Light *light = [[Light alloc] initWithGameLayer:self row:row column:column];
                 light.position = ccp(GAME_AREA_X_COORD + GAME_AREA_WIDTH /NUMBER_OF_COLUMNS * (column + 0.5f), GAME_AREA_Y_COORD + GAME_AREA_HEIGHT / NUMBER_OF_ROWS * (row + 0.5f));
                 [innerArray addObject:light];
             }
@@ -121,7 +120,7 @@
         [self.lightManager chooseNewValueLight];
         
         //create the route object.
-        self.route = [[Route alloc] initWithGameLayer:self lightArray:twoDimensionallightArray];
+        self.route = [[Route alloc] initWithGameLayer:self lightManager:self.lightManager];
         
         //create the countdown bar and set its position.
         self.countdownBar = [[CountdownBar alloc] initWithGameLayer:self];
@@ -171,7 +170,7 @@
     CGPoint location = [self convertTouchToNodeSpace:touch];
     
     //find if any of the lights were touched and then call selected light on it.
-    Light *selectedLight = [self.lightManager findSelectedLightFromLocation:location];
+    Light *selectedLight = [self.lightManager getSelectedLightFromLocation:location];
     if (selectedLight) {
         [self.route lightSelected:selectedLight];
     }

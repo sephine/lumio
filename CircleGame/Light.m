@@ -12,7 +12,6 @@
 @interface Light ()
 
 @property (nonatomic, strong) GameLayer *gameLayer;
-@property (nonatomic) LightState lightState;
 @property (nonatomic) LightValue lightValue;
 @property (nonatomic, strong) CCSprite *innerCircleSprite;
 @property (nonatomic, strong) CCSprite *outerCircleSprite;
@@ -25,8 +24,10 @@
 @implementation Light
 
 @synthesize position = _position;
-@synthesize route = _route;
-@synthesize gridLocation = _gridLocation;
+//@synthesize route = _route;
+@synthesize lightManager = _lightManager;
+@synthesize row = _row;
+@synthesize column = _column;
 @synthesize isPartOfRoute = _isPartOfRoute;
 @synthesize topConnector = _topConnector;
 @synthesize rightConnector = _rightConnector;
@@ -83,6 +84,7 @@
     switch (lightState) {
         case Active:
             self.innerCircleSprite = [CCSprite spriteWithFile:@"BlackCircle.png"];
+            [self.lightManager lightNowActive:self];
             //self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY;
             if (self.lightValue == High) {
                 self.valueSprite.opacity = OPAQUE;
@@ -103,7 +105,7 @@
             
             self.activeTimeRemaining = [self generateSpawnActiveTime];
             self.cooldownTimeRemaining = [self generateCooldownTime];
-            [self.route lightNowOnCooldown:self];
+            [self.lightManager lightNowOnCooldown:self];
             
             //self.outerCircleSprite.opacity = TRANSPARENT;
             self.valueSprite.opacity = TRANSPARENT;
@@ -152,11 +154,12 @@
     [self addChild:_valueSprite z:3];
 }
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer gridLocation:(struct GridLocation)gridLocation
+- (id)initWithGameLayer:(GameLayer *)gameLayer row:(int)row column:(int)column
 {
     if (self = [super init]) {
         self.gameLayer = gameLayer;
-        self.gridLocation = gridLocation;
+        self.row = row;
+        self.column = column;
         
         //create outer sprite and add to layer. The other layers are added in their setters as they are frequently changed.
         self.outerCircleSprite = [CCSprite spriteWithFile:@"AlternateWhiteCircle.png"];
@@ -164,6 +167,17 @@
         self.outerCircleSprite.anchorPoint = ccp(0.5, 0.5);
         self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY; //TEMP
         [self addChild:_outerCircleSprite z:1];
+        
+        //create the connectors based on grid location.
+        self.topConnector = nil;
+        if (self.row != NUMBER_OF_ROWS - 1) {
+            self.topConnector = [[Connector alloc] initWithGameLayer:self.gameLayer orientation:Vertical];
+        }
+        
+        self.rightConnector = nil;
+        if (self.column != NUMBER_OF_COLUMNS - 1) {
+            self.rightConnector = [[Connector alloc] initWithGameLayer:self.gameLayer orientation:Horizontal];
+        }
         
         //Generate value, start the lights on cooldown and active and give them a time between 0 and the max.
         //self.lightValue = [self generateLightValue];
@@ -179,17 +193,6 @@
             self.activeTimeRemaining = arc4random() % MAX_REFRESH_COUNTDOWN + 1;
         }
         [self setSpriteScaleAndColourForTimeRemaining];
-        
-        //create the connectors based on grid location.
-        self.topConnector = nil;
-        if (self.gridLocation.row != NUMBER_OF_ROWS - 1) {
-            self.topConnector = [[Connector alloc] initWithGameLayer:self.gameLayer orientation:Vertical];
-        }
-        
-        self.rightConnector = nil;
-        if (self.gridLocation.column != NUMBER_OF_COLUMNS - 1) {
-            self.rightConnector = [[Connector alloc] initWithGameLayer:self.gameLayer orientation:Horizontal];
-        }
         
         //add to game layer.
         [self.gameLayer addChild:self];

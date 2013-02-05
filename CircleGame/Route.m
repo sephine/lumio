@@ -13,7 +13,7 @@
 
 //light stays on route when occupied, array should never be empty.
 @property (nonatomic, strong) GameLayer *gameLayer;
-@property (nonatomic, strong) NSMutableArray *twoDimensionalLightArray;
+@property (nonatomic, strong) LightManager *lightManager;
 @property (nonatomic, strong) NSMutableArray *lightsInRoute;
 
 @end
@@ -21,21 +21,25 @@
 @implementation Route
 
 @synthesize gameLayer = _gameLayer;
-//@synthesize twoDimensionalLightArray = _twoDimensionalLightArray;
+@synthesize lightManager = _lightManager;
 @synthesize lightsInRoute = _lightsInRoute;
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer lightArray:(NSMutableArray *)lightArray
+- (id)initWithGameLayer:(GameLayer *)gameLayer lightManager:(LightManager *)lightManager
 {
     if (self = [super init]) {
         self.gameLayer = gameLayer;
         [self.gameLayer addChild:self];
-        self.twoDimensionalLightArray = lightArray;
+        
+        self.lightManager = lightManager;
+        //set the light manager route property to self.
+        self.lightManager.route = self;
+        
         //give all the lights in the array a reference to itself.
-        for (NSMutableArray *innerArray in self.twoDimensionalLightArray) {
+        /*for (NSMutableArray *innerArray in self.twoDimensionalLightArray) {
             for (Light *light in innerArray) {
                 light.route = self;
             }
-        }
+        }*/
         
         self.lightsInRoute = [NSMutableArray array];
     }
@@ -43,7 +47,7 @@
 }
 
 //called by lights when they enter cooldown and so need to be removed from the route.
-- (void)lightNowOnCooldown:(Light *)light;
+- (void)removeLightFromRoute:(Light *)light;
 {
     [self removeLightAndAllFollowingFromRoute:light];
 }
@@ -75,11 +79,9 @@
         //If route direction is left or right go through each light in the columns between the light and the last light in the route checking if they are in the correct state. If route direction is up or down, go through rows.
         if (routeDirection == Right) {
             viableRoute = YES;
-            //get inner array for the relevant row.
-            NSMutableArray *innerArray = [self.twoDimensionalLightArray objectAtIndex:light.gridLocation.row];
-            for (int column = lastLightInRoute.gridLocation.column + 1; column <= light.gridLocation.column; column++) {
-                //get light for the relevant column.
-                Light *lightAtLocation = [innerArray objectAtIndex:column];
+            for (int column = lastLightInRoute.column + 1; column <= light.column; column++) {
+                //get light for the relevant row and column.
+                Light *lightAtLocation = [self.lightManager getLightAtRow:light.row column:column];
                 
                 //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
                 if ([lightAtLocation canAddLightToRoute]) {
@@ -91,11 +93,9 @@
             }
         } else if (routeDirection == Left) {
             viableRoute = YES;
-            //get inner array for the relevant row.
-            NSMutableArray *innerArray = [self.twoDimensionalLightArray objectAtIndex:light.gridLocation.row];
-            for (int column = lastLightInRoute.gridLocation.column - 1; column >= light.gridLocation.column; column--) {
-                //get light for the relevant column.
-                Light *lightAtLocation = [innerArray objectAtIndex:column];
+            for (int column = lastLightInRoute.column - 1; column >= light.column; column--) {
+                //get light for the relevant row and column.
+                Light *lightAtLocation = [self.lightManager getLightAtRow:light.row column:column];
                 
                 //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
                 if ([lightAtLocation canAddLightToRoute]) {
@@ -107,10 +107,9 @@
             }
         } else if (routeDirection == Up) {
             viableRoute = YES;
-            for (int row = lastLightInRoute.gridLocation.row + 1; row <= light.gridLocation.row; row++) {
-                //get light for the relevant row.
-                NSMutableArray *innerArray = [self.twoDimensionalLightArray objectAtIndex:row];
-                Light *lightAtLocation = [innerArray objectAtIndex:light.gridLocation.column];
+            for (int row = lastLightInRoute.row + 1; row <= light.row; row++) {                
+                //get light for the relevant row and column.
+                Light *lightAtLocation = [self.lightManager getLightAtRow:row column:light.column];
                 
                 //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
                 if ([lightAtLocation canAddLightToRoute]) {
@@ -122,10 +121,9 @@
             }
         } else if (routeDirection == Down) {
             viableRoute = YES;
-            for (int row = lastLightInRoute.gridLocation.row - 1; row >= light.gridLocation.row; row--) {
-                //get light for the relevant row.
-                NSMutableArray *innerArray = [self.twoDimensionalLightArray objectAtIndex:row];
-                Light *lightAtLocation = [innerArray objectAtIndex:light.gridLocation.column];
+            for (int row = lastLightInRoute.row - 1; row >= light.row; row--) {
+                //get light for the relevant row and column.
+                Light *lightAtLocation = [self.lightManager getLightAtRow:row column:light.column];
                 
                 //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
                 if ([lightAtLocation canAddLightToRoute]) {
@@ -250,17 +248,17 @@
 - (Direction)getDirectionBetweenFirstLight:(Light *)firstLight andSecondLight:(Light *)secondLight
 {
     Direction direction = None;
-    BOOL rowsAreEqual = (secondLight.gridLocation.row == firstLight.gridLocation.row);
-    BOOL columnsAreEqual = (secondLight.gridLocation.column == firstLight.gridLocation.column);
+    BOOL rowsAreEqual = (secondLight.row == firstLight.row);
+    BOOL columnsAreEqual = (secondLight.column == firstLight.column);
     
     if (rowsAreEqual) {
-        if (firstLight.gridLocation.column < secondLight.gridLocation.column) {
+        if (firstLight.column < secondLight.column) {
             direction = Right;
         } else {
             direction = Left;
         }
     } else if (columnsAreEqual) {
-        if (firstLight.gridLocation.row < secondLight.gridLocation.row) {
+        if (firstLight.row < secondLight.row) {
             direction = Up;
         } else {
             direction = Down;

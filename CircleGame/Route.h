@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "GameLayer.h"
 #import "Light.h"
+#import "LightManager.h"
 
 typedef enum {
     Up,
@@ -20,11 +21,12 @@ typedef enum {
 } Direction;
 
 @class Light;
+@class LightManager;
 
 @interface Route : CCNode {
 }
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer lightArray:(NSMutableArray *)lightArray;
+- (id)initWithGameLayer:(GameLayer *)gameLayer lightManager:(LightManager *)lightManager;
 
 //used by gameLayer in setup and upon light selection
 - (void)setInitialLight:(Light *)light;
@@ -34,7 +36,7 @@ typedef enum {
 - (Light *)getNextLightFromRoute;
 - (void)removeFirstLightFromRoute;
 
-//used by a light when it enters cooldown.
-- (void)lightNowOnCooldown:(Light *)light;
+//used by the light manager when a light enters cooldown.
+- (void)removeLightFromRoute:(Light *)light;
 
 @end

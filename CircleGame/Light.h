@@ -10,7 +10,8 @@
 #import "cocos2d.h"
 #import "GameLayer.h"
 #import "Connector.h"
-#import "Route.h"
+//#import "Route.h"
+#import "LightManager.h"
 
 typedef enum {
     Active,
@@ -26,24 +27,23 @@ typedef enum {
     NoValue
 } LightValue;
 
-struct GridLocation {
-    int row;
-    int column;
-};
-
-@class Route;
+//@class Route;
+@class LightManager;
 
 @interface Light : CCNode {
 }
 
 @property (nonatomic) CGPoint position;
-@property (nonatomic, strong) Route *route;
-@property (nonatomic) struct GridLocation gridLocation;
+//@property (nonatomic, strong) Route *route;
+@property (nonatomic, strong) LightManager *lightManager;
+@property (nonatomic) LightState lightState;
+@property (nonatomic) int row;
+@property (nonatomic) int column;
 @property (nonatomic) BOOL isPartOfRoute;
 @property (nonatomic, strong) Connector *topConnector;
 @property (nonatomic, strong) Connector *rightConnector;
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer gridLocation:(struct GridLocation)gridLocation;
+- (id)initWithGameLayer:(GameLayer *)gameLayer row:(int)row column:(int)column;
 - (void)update:(ccTime)dt;
 - (CGRect)getBounds;
 
