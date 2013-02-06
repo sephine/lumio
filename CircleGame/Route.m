@@ -219,32 +219,27 @@
     if ([self.lightsInRoute containsObject:light]) {
         int lightIndex = [self.lightsInRoute indexOfObject:light];
         
-        int initialIndex;
         if (lightIndex >= 1) {
-            initialIndex = lightIndex - 1;
-        } else {
-            initialIndex = lightIndex;
-            light.isPartOfRoute = NO;
-        }
-        int arrayLength = self.lightsInRoute.count;
-        for (int i = initialIndex; i < arrayLength - 1; i++) {
-            Light *previousLight = [self.lightsInRoute objectAtIndex:i];
-            Light *nextLight = [self.lightsInRoute objectAtIndex:i + 1];
-            nextLight.isPartOfRoute = NO;
-            RouteDirection routeDirection = [self getDirectionBetweenFirstLight:previousLight andSecondLight:nextLight];
-            if (routeDirection == Up) {
-                previousLight.topConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
-            } else if (routeDirection == Right) {
-                previousLight.rightConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
-            } else if (routeDirection == Down) {
-                nextLight.topConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
-            } else if (routeDirection == Left) {
-                nextLight.rightConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
+            int arrayLength = self.lightsInRoute.count;
+            for (int i = lightIndex - 1; i < arrayLength - 1; i++) {
+                Light *previousLight = [self.lightsInRoute objectAtIndex:i];
+                Light *nextLight = [self.lightsInRoute objectAtIndex:i + 1];
+                nextLight.isPartOfRoute = NO;
+                RouteDirection routeDirection = [self getDirectionBetweenFirstLight:previousLight andSecondLight:nextLight];
+                if (routeDirection == Up) {
+                    previousLight.topConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
+                } else if (routeDirection == Right) {
+                    previousLight.rightConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
+                } else if (routeDirection == Down) {
+                    nextLight.topConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
+                } else if (routeDirection == Left) {
+                    nextLight.rightConnector.state = (previousLight.lightState == Cooldown || nextLight.lightState == Cooldown) ? Disabled : Enabled;
+                }
             }
-        }
         
-        NSRange rangeOfIndices = {lightIndex, arrayLength - lightIndex};
-        [self.lightsInRoute removeObjectsInRange:rangeOfIndices];
+            NSRange rangeOfIndices = {lightIndex, arrayLength - lightIndex};
+            [self.lightsInRoute removeObjectsInRange:rangeOfIndices];
+        }
     }
 }
 

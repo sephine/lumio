@@ -33,6 +33,7 @@
 - (id)initWithGameLayer:(GameLayer *)gameLayer row:(int)row column:(int)column;
 - (void)update:(ccTime)dt;
 - (CGRect)getBounds;
+- (void)setAsInitialLight;
 
 //used by route.
 - (BOOL)canAddLightToRoute;

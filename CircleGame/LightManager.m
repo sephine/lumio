@@ -48,8 +48,22 @@
     }
 }
 
+- (void)chooseFirstLightWithValue:(LightValue)value
+{
+    NSNumber *boxedValue = [NSNumber numberWithInt:value];
+    [self chooseNewLightFollowingDelayWithValue:boxedValue];
+}
+
 - (void)chooseNewLightWithValue:(LightValue)value
-{    
+{
+    NSNumber *boxedValue = [NSNumber numberWithInt:value];
+    [self performSelector:@selector(chooseNewLightFollowingDelayWithValue:) withObject:boxedValue afterDelay:NEW_VALUE_DELAY_IN_SECONDS];
+}
+
+- (void)chooseNewLightFollowingDelayWithValue:(NSNumber *)value
+{
+    LightValue lightValue = [value intValue];
+    
     //choose an instance to change to a value light. This light can not be almost occupied, or occupied.
     int randomRowIndex, randomColumnIndex;
     Light *chosenLight;
@@ -61,7 +75,7 @@
     } while (![chosenLight canBeValueLight]);
     
     //tell this light to give itself a value.
-    [chosenLight setUpLightWithValue:value];
+    [chosenLight setUpLightWithValue:lightValue];
 }
 
 - (Light *)getSelectedLightFromLocation:(CGPoint)location {

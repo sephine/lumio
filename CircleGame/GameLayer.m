@@ -113,13 +113,17 @@
             [twoDimensionallightArray addObject:innerArray];
         }
         
+        //set the middle light to the initial light.
+        Light *firstLight = [[twoDimensionallightArray objectAtIndex:4] objectAtIndex:3];
+        [firstLight setAsInitialLight];
+        
         //create the light manager and pass it the light array.
         self.lightManager = [[LightManager alloc] initWithLightArray:twoDimensionallightArray];
         
         //choose a high, medium and low new value light from all the added lights.
-        [self.lightManager chooseNewLightWithValue:High];
-        [self.lightManager chooseNewLightWithValue:Medium];
-        [self.lightManager chooseNewLightWithValue:Low];
+        [self.lightManager chooseFirstLightWithValue:High];
+        [self.lightManager chooseFirstLightWithValue:Medium];
+        [self.lightManager chooseFirstLightWithValue:Low];
         
         //create the route object.
         self.route = [[Route alloc] initWithGameLayer:self lightManager:self.lightManager];
@@ -132,8 +136,7 @@
         self.level = [[Level alloc] initWithGameLayer:self countdownBar:self.countdownBar];
         self.level.position = ccp(LEVEL_X_COORD, LEVEL_Y_COORD);
         
-        //add the player starting position to the route. Choose a light near the middle.
-        Light *firstLight = [[twoDimensionallightArray objectAtIndex:4] objectAtIndex:3];
+        //add the player starting position to the route.
         [self.route setInitialLight:firstLight];
         
         //add the player and set it to the first light position.

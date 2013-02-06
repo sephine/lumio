@@ -15,6 +15,7 @@
 @property (nonatomic) LightValue lightValue;
 @property (nonatomic, strong) CCSprite *innerCircleSprite;
 @property (nonatomic, strong) CCSprite *outerCircleSprite;
+@property (nonatomic, strong) CCSprite *routedSprite;
 @property (nonatomic, strong) CCSprite *valueSprite;
 @property (nonatomic) ccTime activeTimeRemaining;
 @property (nonatomic) ccTime cooldownTimeRemaining;
@@ -36,6 +37,7 @@
 @synthesize gameLayer = _gameLayer;
 @synthesize innerCircleSprite = _innerCircleSprite;
 @synthesize outerCircleSprite = _outerCircleSprite;
+@synthesize routedSprite = _routedSprite;
 @synthesize valueSprite = _valueSprite;
 @synthesize activeTimeRemaining = _activeTimeRemaining;
 @synthesize cooldownTimeRemaining = _cooldownTimeRemaining;
@@ -46,6 +48,7 @@
     _position = position;
     self.innerCircleSprite.position = position;
     self.outerCircleSprite.position = position;
+    self.routedSprite.position = position;
     self.valueSprite.position = position;
     
     //CGSize size = [[CCDirector sharedDirector] winSize];
@@ -60,20 +63,9 @@
 {
     _isPartOfRoute = isPartOfRoute;
     if (isPartOfRoute) {
-        self.innerCircleSprite = [CCSprite spriteWithFile:@"RoutedCircle.png"];
+        self.routedSprite.opacity = OPAQUE;
     } else {
-        switch (self.lightState) {
-            case Active:
-            case AlmostOccupied:
-            case Occupied:
-                self.innerCircleSprite = [CCSprite spriteWithFile:@"BlackCircle.png"];
-                break;
-            case Cooldown:
-                self.innerCircleSprite = [CCSprite spriteWithFile:@"EmptyCircle.png"];
-                break;
-            default:
-                break;
-        }
+        self.routedSprite.opacity = TRANSPARENT;
     }
 }
 
@@ -85,12 +77,6 @@
         case Active:
             self.innerCircleSprite = [CCSprite spriteWithFile:@"BlackCircle.png"];
             [self.lightManager lightNowActive:self];
-            //self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY;
-            if (self.lightValue != NoValue) {
-                self.valueSprite.opacity = OPAQUE;
-            } else {
-                self.valueSprite.opacity = TRANSPARENT;
-            }
             break;
         case Cooldown:
             self.innerCircleSprite = [CCSprite spriteWithFile:@"EmptyCircle.png"];
@@ -104,9 +90,6 @@
             self.activeTimeRemaining = [self generateSpawnActiveTime];
             self.cooldownTimeRemaining = [self generateCooldownTime];
             [self.lightManager lightNowOnCooldown:self];
-            
-            //self.outerCircleSprite.opacity = TRANSPARENT;
-            self.valueSprite.opacity = TRANSPARENT;
             break;
         default:
             break;
@@ -120,12 +103,18 @@
     switch (lightValue) {
         case Low:
             self.valueSprite = [CCSprite spriteWithFile:@"Number1.png"];
+            self.valueSprite.opacity = OPAQUE;
             break;
         case Medium:
             self.valueSprite = [CCSprite spriteWithFile:@"Number3.png"];
+            self.valueSprite.opacity = OPAQUE;
             break;
         case High:
             self.valueSprite = [CCSprite spriteWithFile:@"Number9.png"];
+            self.valueSprite.opacity = OPAQUE;
+            break;
+        case NoValue:
+            self.valueSprite.opacity = TRANSPARENT;
             break;
         default:
             break;
@@ -149,7 +138,7 @@
     _valueSprite = valueSprite;
     _valueSprite.position = self.position;
     _valueSprite.anchorPoint = ccp(0.5, 0.5);
-    [self addChild:_valueSprite z:3];
+    [self addChild:_valueSprite z:4];
 }
 
 - (id)initWithGameLayer:(GameLayer *)gameLayer row:(int)row column:(int)column
@@ -158,13 +147,21 @@
         self.gameLayer = gameLayer;
         self.row = row;
         self.column = column;
+        self.lightValue = NoValue;
         
-        //create outer sprite and add to layer. The other layers are added in their setters as they are frequently changed.
+        //create outer sprite and routed sprite and add to layer. The other layers are added in their setters as they are frequently changed.
         self.outerCircleSprite = [CCSprite spriteWithFile:@"AlternateWhiteCircle.png"];
         self.outerCircleSprite.position = self.position;
         self.outerCircleSprite.anchorPoint = ccp(0.5, 0.5);
         self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY; //TEMP
-        [self addChild:_outerCircleSprite z:1];
+        [self addChild:self.outerCircleSprite z:1];
+        
+        self.routedSprite = [CCSprite spriteWithFile:@"RoutedLayer.png"];
+        self.routedSprite.position = self.position;
+        self.routedSprite.anchorPoint = ccp(0.5, 0.5);
+        self.routedSprite.opacity = TRANSPARENT;
+        [self addChild:self.routedSprite z:3];
+        self.isPartOfRoute = NO;
         
         //create the connectors based on grid location.
         self.topConnector = nil;
@@ -179,9 +176,6 @@
         
         //Generate value, start the lights on cooldown and active and give them a time between 0 and the max.
         //self.lightValue = [self generateLightValue];
-        self.lightValue = NoValue;
-        
-        self.isPartOfRoute = NO;
         int randomPercentage = arc4random() % 100;
         if (randomPercentage < PERCENTAGE_OF_LIGHTS_START_ON_COOLDOWN) {
             self.lightState = Cooldown;
@@ -223,6 +217,12 @@
         default:
             break;
     }
+}
+
+- (void)setAsInitialLight
+{
+    self.lightState = Active;
+    self.lightState = Occupied;
 }
 
 //used by the touch method to check if this sprite has been touched.

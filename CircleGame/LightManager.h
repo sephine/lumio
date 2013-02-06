@@ -23,6 +23,7 @@
 - (id)initWithLightArray:(NSMutableArray *)lightArray;
 - (void)update:(ccTime)dt;
 
+- (void)chooseFirstLightWithValue:(LightValue)value;
 - (void)chooseNewLightWithValue:(LightValue)value;
 - (void)lightNowActive:(Light *)light;
 - (void)lightNowOnCooldown:(Light *)light;
