@@ -10,8 +10,21 @@
 
 @interface PowerUpManager ()
 
+@property (nonatomic, strong) Player *player;
+
 @end
 
 @implementation PowerUpManager
+
+@synthesize player = _player;
+
+- (id)initWithPlayer:(Player *)player
+{
+    if (self = [super init]) {
+        self.hasCharge = NO;
+        self.player = player;
+    }
+    return self;
+}
 
 @end

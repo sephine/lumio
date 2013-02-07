@@ -39,6 +39,7 @@
 - (BOOL)canAddLightToRoute;
 
 //used by player.
+- (void)chargeLight;
 - (void)almostOccupyLight;
 - (LightValue)occupyLightAndGetValue;
 - (void)leaveLight;

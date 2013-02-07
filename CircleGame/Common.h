@@ -13,13 +13,15 @@ typedef enum {
     Active,
     Cooldown,
     AlmostOccupied,
-    Occupied
+    Occupied,
+    Charging
 } LightState;
 
 typedef enum {
     Low,
     Medium,
     High,
+    Charge,
     NoValue
 } LightValue;
 

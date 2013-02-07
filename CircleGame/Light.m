@@ -19,6 +19,7 @@
 @property (nonatomic, strong) CCSprite *valueSprite;
 @property (nonatomic) ccTime activeTimeRemaining;
 @property (nonatomic) ccTime cooldownTimeRemaining;
+@property (nonatomic) ccTime chargeTimeRemaining;
 
 @end
 
@@ -41,6 +42,7 @@
 @synthesize valueSprite = _valueSprite;
 @synthesize activeTimeRemaining = _activeTimeRemaining;
 @synthesize cooldownTimeRemaining = _cooldownTimeRemaining;
+@synthesize chargeTimeRemaining = _chargeTimeRemaining;
 
 //when the light position is set also need to set the position of it's sprites and connectors.
 - (void)setPosition:(CGPoint)position
@@ -76,10 +78,12 @@
     switch (lightState) {
         case Active:
             self.innerCircleSprite = [CCSprite spriteWithFile:@"BlackCircle.png"];
+            self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY;
             [self.lightManager lightNowActive:self];
             break;
         case Cooldown:
             self.innerCircleSprite = [CCSprite spriteWithFile:@"EmptyCircle.png"];
+            self.outerCircleSprite.opacity = TRANSPARENT;
             //self.lightValue = [self generateLightValue];
             LightValue oldValue = self.lightValue;
             self.lightValue = NoValue;
@@ -91,6 +95,8 @@
             self.cooldownTimeRemaining = [self generateCooldownTime];
             [self.lightManager lightNowOnCooldown:self];
             break;
+        case Charging:
+            self.chargeTimeRemaining = CHARGE_TIME;
         default:
             break;
     }
@@ -111,6 +117,10 @@
             break;
         case High:
             self.valueSprite = [CCSprite spriteWithFile:@"Number9.png"];
+            self.valueSprite.opacity = OPAQUE;
+            break;
+        case Charge:
+            self.valueSprite = [CCSprite spriteWithFile:@"ChargeValue.png"];
             self.valueSprite.opacity = OPAQUE;
             break;
         case NoValue:
@@ -153,7 +163,6 @@
         self.outerCircleSprite = [CCSprite spriteWithFile:@"AlternateWhiteCircle.png"];
         self.outerCircleSprite.position = self.position;
         self.outerCircleSprite.anchorPoint = ccp(0.5, 0.5);
-        self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY; //TEMP
         [self addChild:self.outerCircleSprite z:1];
         
         self.routedSprite = [CCSprite spriteWithFile:@"RoutedLayer.png"];
@@ -210,6 +219,13 @@
             }
             [self setSpriteScaleAndColourForTimeRemaining];
             break;
+        case Charging:
+            self.chargeTimeRemaining -= dt;
+            if (self.chargeTimeRemaining < 0) {
+                self.lightState = Active;
+            }
+            [self setSpriteScaleAndColourForTimeRemaining];
+            break;
         case AlmostOccupied:
             self.activeTimeRemaining -= dt;
             if (self.activeTimeRemaining < 0) self.activeTimeRemaining = 0;
@@ -231,6 +247,12 @@
     return CGRectMake(self.position.x - SQUARE_SIDE_LENGTH/2,
                       self.position.y - SQUARE_SIDE_LENGTH/2,
                       SQUARE_SIDE_LENGTH, SQUARE_SIDE_LENGTH);
+}
+
+//used by the player when it selects the light to be charged and has a charge.
+- (void)chargeLight
+{
+    self.lightState = Charging;
 }
 
 //check if this light is in the correct state for routing.

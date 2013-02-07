@@ -11,12 +11,16 @@
 #import "GameLayer.h"
 #import "Light.h"
 #import "LightManager.h"
+#import "Player.h"
 
 @class Light;
 @class LightManager;
+@class Player;
 
 @interface Route : CCNode {
 }
+
+@property (nonatomic, strong) Player *player;
 
 - (id)initWithGameLayer:(GameLayer *)gameLayer lightManager:(LightManager *)lightManager;
 

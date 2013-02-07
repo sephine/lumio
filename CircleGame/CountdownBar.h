@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "GameLayer.h"
-#import "Light.h"
+#import "Common.h"
 
 @interface CountdownBar : CCNode {
 }

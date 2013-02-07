@@ -13,6 +13,9 @@
 		B0036F4F16C1660F00D9EB7E /* Number9.png in Resources */ = {isa = PBXBuildFile; fileRef = B0036F4E16C1660F00D9EB7E /* Number9.png */; };
 		B0036F5216C2B42900D9EB7E /* RoutedLayer.png in Resources */ = {isa = PBXBuildFile; fileRef = B0036F5116C2B42900D9EB7E /* RoutedLayer.png */; };
 		B0036F5416C2B43400D9EB7E /* RoutedLayer-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0036F5316C2B43400D9EB7E /* RoutedLayer-hd.png */; };
+		B0036F5616C419B700D9EB7E /* ChargeValue.png in Resources */ = {isa = PBXBuildFile; fileRef = B0036F5516C419B700D9EB7E /* ChargeValue.png */; };
+		B0036F5816C419C700D9EB7E /* ChargedBlueCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = B0036F5716C419C700D9EB7E /* ChargedBlueCircle.png */; };
+		B0036F5A16C419D300D9EB7E /* ChargedBlueCircle-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0036F5916C419D300D9EB7E /* ChargedBlueCircle-hd.png */; };
 		B01B28CE16AB2B5200CD538A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28CD16AB2B5200CD538A /* QuartzCore.framework */; };
 		B01B28D016AB2B5200CD538A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28CF16AB2B5200CD538A /* OpenGLES.framework */; };
 		B01B28D216AB2B5200CD538A /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28D116AB2B5200CD538A /* OpenAL.framework */; };
@@ -110,6 +113,9 @@
 		B0036F5016C16F1D00D9EB7E /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		B0036F5116C2B42900D9EB7E /* RoutedLayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RoutedLayer.png; sourceTree = "<group>"; };
 		B0036F5316C2B43400D9EB7E /* RoutedLayer-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RoutedLayer-hd.png"; sourceTree = "<group>"; };
+		B0036F5516C419B700D9EB7E /* ChargeValue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChargeValue.png; sourceTree = "<group>"; };
+		B0036F5716C419C700D9EB7E /* ChargedBlueCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChargedBlueCircle.png; sourceTree = "<group>"; };
+		B0036F5916C419D300D9EB7E /* ChargedBlueCircle-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChargedBlueCircle-hd.png"; sourceTree = "<group>"; };
 		B01B28C916AB2B5200CD538A /* CircleGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircleGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01B28CD16AB2B5200CD538A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B01B28CF16AB2B5200CD538A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -324,6 +330,7 @@
 				B0036F4A16C1660600D9EB7E /* Number1.png */,
 				B0036F4C16C1660B00D9EB7E /* Number3.png */,
 				B0036F4E16C1660F00D9EB7E /* Number9.png */,
+				B0036F5516C419B700D9EB7E /* ChargeValue.png */,
 				B01B28E116AB2B5200CD538A /* Default.png */,
 				B01B28E316AB2B5200CD538A /* Default-Landscape~ipad.png */,
 				B01B28E516AB2B5200CD538A /* fps_images.png */,
@@ -355,6 +362,7 @@
 			children = (
 				B0A0EEE516B1B05F00E47369 /* BlackCircle.png */,
 				B0A0EF0716B1B36400E47369 /* BlueCircle.png */,
+				B0036F5716C419C700D9EB7E /* ChargedBlueCircle.png */,
 				B0A0EEE116B1B00700E47369 /* CountdownBorder.png */,
 				B0A0EEE716B1B06500E47369 /* CountdownCentre.png */,
 				B0A0EEE916B1B06900E47369 /* EmptyCircle.png */,
@@ -388,6 +396,7 @@
 			children = (
 				B0A0EEF516B1B08D00E47369 /* BlackCircle-hd.png */,
 				B0A0EF0516B1B35C00E47369 /* BlueCircle-hd.png */,
+				B0036F5916C419D300D9EB7E /* ChargedBlueCircle-hd.png */,
 				B0A0EEE316B1B01300E47369 /* CountdownBorder-hd.png */,
 				B0A0EEF716B1B09400E47369 /* CountdownCentre-hd.png */,
 				B0A0EEF916B1B09A00E47369 /* EmptyCircle-hd.png */,
@@ -537,6 +546,9 @@
 				B0036F4F16C1660F00D9EB7E /* Number9.png in Resources */,
 				B0036F5216C2B42900D9EB7E /* RoutedLayer.png in Resources */,
 				B0036F5416C2B43400D9EB7E /* RoutedLayer-hd.png in Resources */,
+				B0036F5616C419B700D9EB7E /* ChargeValue.png in Resources */,
+				B0036F5816C419C700D9EB7E /* ChargedBlueCircle.png in Resources */,
+				B0036F5A16C419D300D9EB7E /* ChargedBlueCircle-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,10 +12,14 @@
 #import "Route.h"
 #import "CountdownBar.h"
 
+@class Route;
+@class Light;
+
 @interface Player : CCNode {
 }
 
 @property (nonatomic) CGPoint position;
+@property (nonatomic) BOOL hasCharge;
 
 - (id)initWithGameLayer:(GameLayer *)gameLayer route:(Route *)route currentLight:(Light *)currentLight countdownBar:(CountdownBar *)countdownBar;
 - (void)update:(ccTime)dt;

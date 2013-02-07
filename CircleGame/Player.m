@@ -17,6 +17,7 @@
 @property (nonatomic, strong) CountdownBar *countdownBar;
 @property (nonatomic, strong) Light *currentLight;
 @property (nonatomic, strong) Light *nextLight;
+@property (nonatomic, strong) Light *possibleLight;
 @property (nonatomic, strong) CCSprite *sprite;
 
 @end
@@ -24,17 +25,29 @@
 @implementation Player
 
 @synthesize position = _position;
+@synthesize hasCharge = _hasCharge;
 @synthesize gameLayer = _gameLayer;
 @synthesize route = _route;
 @synthesize countdownBar = _countdownBar;
 @synthesize currentLight = _currentLight;
 @synthesize nextLight = _nextLight;
+@synthesize possibleLight = _possibleLight;
 @synthesize sprite = _sprite;
 
 - (void)setPosition:(CGPoint)position
 {
     _position = position;
     self.sprite.position = position;
+}
+
+- (void)setHasCharge:(BOOL)hasCharge
+{
+    _hasCharge = hasCharge;
+    if (hasCharge) {
+        self.sprite = [CCSprite spriteWithFile:@"ChargedBlueCircle.png"];
+    } else {
+        self.sprite = [CCSprite spriteWithFile:@"BlueCircle.png"];
+    }
 }
 
 - (void)setSprite:(CCSprite *)sprite
@@ -51,12 +64,13 @@
     if (self = [super init]) {
         self.gameLayer = gameLayer;
         self.route = route;
+        self.route.player = self;
         self.countdownBar = countdownBar;
         self.currentLight = currentLight;
         [self.currentLight occupyLightAndGetValue];
         self.position = currentLight.position;
         
-        self.sprite = [CCSprite spriteWithFile:@"BlueCircle.png"];
+        self.hasCharge = NO;
         [self.gameLayer addChild:self];
     }
     return self;
@@ -75,13 +89,28 @@
 - (float)getRemainingDistanceAfterMovingPlayerAlongRouteWithDistance:(float)distanceTravelled
 {
     float remainingDistance = 0;
-    if (!self.nextLight) {
-        self.nextLight = [self.route getNextLightFromRoute];
-        if (self.nextLight) {
-            [self.route removeFirstLightFromRoute];
-            [self.currentLight leaveLight];
-            [self.nextLight almostOccupyLight];
+    if (!self.nextLight && !self.possibleLight) {
+        Light *nextLightInRoute = [self.route getNextLightFromRoute];
+        if (nextLightInRoute) {
+            if (nextLightInRoute.lightState == Cooldown) {
+                self.possibleLight = nextLightInRoute;
+                self.possibleLight.lightState = Charging;
+            } else {
+                self.nextLight = nextLightInRoute;
+                [self.route removeFirstLightFromRoute];
+                [self.currentLight leaveLight];
+                [self.nextLight almostOccupyLight];
+            }
         }
+    }
+    
+    if (self.possibleLight && self.possibleLight.lightState == Active) {
+        self.nextLight = self.possibleLight;
+        self.possibleLight = nil;
+        self.hasCharge = NO;
+        [self.route removeFirstLightFromRoute];
+        [self.currentLight leaveLight];
+        [self.nextLight almostOccupyLight];
     }
     
     if (self.nextLight) {
@@ -95,7 +124,12 @@
             //[self.route removeFirstLightFromRoute];
             //send value to countdown bar.
             LightValue value = [self.currentLight occupyLightAndGetValue];
-            [self.countdownBar addValue:value];
+            if (value == Charge) {
+                self.hasCharge = YES;
+            } else {
+                [self.countdownBar addValue:value];
+            }
+            
             self.position = self.currentLight.position;
             self.nextLight = nil;
             

@@ -120,10 +120,11 @@
         //create the light manager and pass it the light array.
         self.lightManager = [[LightManager alloc] initWithLightArray:twoDimensionallightArray];
         
-        //choose a high, medium and low new value light from all the added lights.
+        //choose a high, medium, low and charge new value light from all the added lights.
         [self.lightManager chooseFirstLightWithValue:High];
         [self.lightManager chooseFirstLightWithValue:Medium];
         [self.lightManager chooseFirstLightWithValue:Low];
+        [self.lightManager chooseFirstLightWithValue:Charge];
         
         //create the route object.
         self.route = [[Route alloc] initWithGameLayer:self lightManager:self.lightManager];

@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "Player.h"
 
 @interface PowerUpManager : CCNode {
-    
 }
+
+@property (nonatomic) BOOL hasCharge;
+
+- (id)initWithPlayer:(Player *)player;
 
 @end
