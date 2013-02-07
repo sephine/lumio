@@ -71,112 +71,109 @@
         [self removeLightAndAllFollowingFromRoute:light];
     } else {        
         Light *lastLightInRoute = [self.lightsInRoute lastObject];
-        //can only continue expanding the route if the last light in the route is not an inactive light (one which will need to be charged to enter)
-        if (lastLightInRoute.lightState != Cooldown && lastLightInRoute.lightState != Charging) {
-            //Check if a route between this light and the current last light in the route is viable. If yes, add all the between to the route and note which direction the route goes.
-            BOOL viableRoute = NO;
-            BOOL routeContainsCooldownLight = self.containsCooldownLight;
-            NSMutableArray *lightsToAddToRoute = [NSMutableArray array];
-            //first check if the light is either directly horizontal or directly vertical from the last light in the route.
-            RouteDirection routeDirection = [self getDirectionBetweenFirstLight:lastLightInRoute andSecondLight:light];
+        //Check if a route between this light and the current last light in the route is viable. If yes, add all the between to the route and note which direction the route goes.
+        BOOL viableRoute = NO;
+        BOOL routeContainsCooldownLight = self.containsCooldownLight;
+        NSMutableArray *lightsToAddToRoute = [NSMutableArray array];
+        //first check if the light is either directly horizontal or directly vertical from the last light in the route.
+        RouteDirection routeDirection = [self getDirectionBetweenFirstLight:lastLightInRoute andSecondLight:light];
 
-            //If route direction is left or right go through each light in the columns between the light and the last light in the route checking if they are in the correct state. If route direction is up or down, go through rows.
-            if (routeDirection == Right) {
-                viableRoute = YES;
-                for (int column = lastLightInRoute.column + 1; column <= light.column; column++) {
-                    //get light for the relevant row and column.
-                    Light *lightAtLocation = [self.lightManager getLightAtRow:light.row column:column];
-                    
-                    //if the light is in the correct state to be routed, or is the selected light and the player is charged add it to the array of lights to add, else break the loop as no lights will be added.
-                    if ([lightAtLocation canAddLightToRoute]) {
-                        [lightsToAddToRoute addObject:lightAtLocation];
-                    } else if (self.player.hasCharge && !routeContainsCooldownLight && lightAtLocation.lightState == Cooldown) {
-                        [lightsToAddToRoute addObject:lightAtLocation];
-                        routeContainsCooldownLight = YES;
-                    } else {
-                        viableRoute = NO;
-                        break;
-                    }
-                }
-            } else if (routeDirection == Left) {
-                viableRoute = YES;
-                for (int column = lastLightInRoute.column - 1; column >= light.column; column--) {
-                    //get light for the relevant row and column.
-                    Light *lightAtLocation = [self.lightManager getLightAtRow:light.row column:column];
-                    
-                    //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
-                    if ([lightAtLocation canAddLightToRoute]) {
-                        [lightsToAddToRoute addObject:lightAtLocation];
-                    } else if (self.player.hasCharge && !routeContainsCooldownLight && lightAtLocation.lightState == Cooldown) {
-                        [lightsToAddToRoute addObject:lightAtLocation];
-                        routeContainsCooldownLight = YES;
-                    } else {
-                        viableRoute = NO;
-                        break;
-                    }
-                }
-            } else if (routeDirection == Up) {
-                viableRoute = YES;
-                for (int row = lastLightInRoute.row + 1; row <= light.row; row++) {                
-                    //get light for the relevant row and column.
-                    Light *lightAtLocation = [self.lightManager getLightAtRow:row column:light.column];
-                    
-                    //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
-                    if ([lightAtLocation canAddLightToRoute]) {
-                        [lightsToAddToRoute addObject:lightAtLocation];
-                    } else if (self.player.hasCharge && !routeContainsCooldownLight && lightAtLocation.lightState == Cooldown) {
-                        [lightsToAddToRoute addObject:lightAtLocation];
-                        routeContainsCooldownLight = YES;
-                    } else {
-                        viableRoute = NO;
-                        break;
-                    }
-                }
-            } else if (routeDirection == Down) {
-                viableRoute = YES;
-                for (int row = lastLightInRoute.row - 1; row >= light.row; row--) {
-                    //get light for the relevant row and column.
-                    Light *lightAtLocation = [self.lightManager getLightAtRow:row column:light.column];
-                    
-                    //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
-                    if ([lightAtLocation canAddLightToRoute]) {
-                        [lightsToAddToRoute addObject:lightAtLocation];
-                    } else if (self.player.hasCharge && !routeContainsCooldownLight && lightAtLocation.lightState == Cooldown) {
-                        [lightsToAddToRoute addObject:lightAtLocation];
-                        routeContainsCooldownLight = YES;
-                    } else {
-                        viableRoute = NO;
-                        break;
-                    }
+        //If route direction is left or right go through each light in the columns between the light and the last light in the route checking if they are in the correct state. If route direction is up or down, go through rows.
+        if (routeDirection == Right) {
+            viableRoute = YES;
+            for (int column = lastLightInRoute.column + 1; column <= light.column; column++) {
+                //get light for the relevant row and column.
+                Light *lightAtLocation = [self.lightManager getLightAtRow:light.row column:column];
+                
+                //if the light is in the correct state to be routed, or is the selected light and the player is charged add it to the array of lights to add, else break the loop as no lights will be added.
+                if ([lightAtLocation canAddLightToRoute]) {
+                    [lightsToAddToRoute addObject:lightAtLocation];
+                } else if (self.player.hasCharge && !routeContainsCooldownLight && lightAtLocation.lightState == Cooldown) {
+                    [lightsToAddToRoute addObject:lightAtLocation];
+                    routeContainsCooldownLight = YES;
+                } else {
+                    viableRoute = NO;
+                    break;
                 }
             }
-            
-            //if the route ended up being viable, add all the of the lights between the provided light and the last light in the array to the route and set up their connectors.
-            if (viableRoute) {
-                [self.lightsInRoute addObjectsFromArray:lightsToAddToRoute];
-                self.containsCooldownLight = routeContainsCooldownLight;
-                int numberOfNewLights = lightsToAddToRoute.count;
-                for (int i = 0; i < numberOfNewLights; i++) {
-                    Light *lightAtIndex = [lightsToAddToRoute objectAtIndex:i];
-                    lightAtIndex.isPartOfRoute = YES;
-                    switch (routeDirection) {
-                        case Up:
-                            lastLightInRoute.topConnector.state = Routed;
-                            if (i < numberOfNewLights - 1) lightAtIndex.topConnector.state = Routed;
-                            break;
-                        case Down:
-                            lightAtIndex.topConnector.state = Routed;
-                            break;
-                        case Left:
-                            lightAtIndex.rightConnector.state = Routed;
-                            break;
-                        case Right:
-                            lastLightInRoute.rightConnector.state = Routed;
-                            if (i < numberOfNewLights - 1) lightAtIndex.rightConnector.state = Routed;
-                            break;
-                        default:
-                            break;
-                    }
+        } else if (routeDirection == Left) {
+            viableRoute = YES;
+            for (int column = lastLightInRoute.column - 1; column >= light.column; column--) {
+                //get light for the relevant row and column.
+                Light *lightAtLocation = [self.lightManager getLightAtRow:light.row column:column];
+                
+                //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
+                if ([lightAtLocation canAddLightToRoute]) {
+                    [lightsToAddToRoute addObject:lightAtLocation];
+                } else if (self.player.hasCharge && !routeContainsCooldownLight && lightAtLocation.lightState == Cooldown) {
+                    [lightsToAddToRoute addObject:lightAtLocation];
+                    routeContainsCooldownLight = YES;
+                } else {
+                    viableRoute = NO;
+                    break;
+                }
+            }
+        } else if (routeDirection == Up) {
+            viableRoute = YES;
+            for (int row = lastLightInRoute.row + 1; row <= light.row; row++) {                
+                //get light for the relevant row and column.
+                Light *lightAtLocation = [self.lightManager getLightAtRow:row column:light.column];
+                
+                //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
+                if ([lightAtLocation canAddLightToRoute]) {
+                    [lightsToAddToRoute addObject:lightAtLocation];
+                } else if (self.player.hasCharge && !routeContainsCooldownLight && lightAtLocation.lightState == Cooldown) {
+                    [lightsToAddToRoute addObject:lightAtLocation];
+                    routeContainsCooldownLight = YES;
+                } else {
+                    viableRoute = NO;
+                    break;
+                }
+            }
+        } else if (routeDirection == Down) {
+            viableRoute = YES;
+            for (int row = lastLightInRoute.row - 1; row >= light.row; row--) {
+                //get light for the relevant row and column.
+                Light *lightAtLocation = [self.lightManager getLightAtRow:row column:light.column];
+                
+                //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
+                if ([lightAtLocation canAddLightToRoute]) {
+                    [lightsToAddToRoute addObject:lightAtLocation];
+                } else if (self.player.hasCharge && !routeContainsCooldownLight && lightAtLocation.lightState == Cooldown) {
+                    [lightsToAddToRoute addObject:lightAtLocation];
+                    routeContainsCooldownLight = YES;
+                } else {
+                    viableRoute = NO;
+                    break;
+                }
+            }
+        }
+        
+        //if the route ended up being viable, add all the of the lights between the provided light and the last light in the array to the route and set up their connectors.
+        if (viableRoute) {
+            [self.lightsInRoute addObjectsFromArray:lightsToAddToRoute];
+            self.containsCooldownLight = routeContainsCooldownLight;
+            int numberOfNewLights = lightsToAddToRoute.count;
+            for (int i = 0; i < numberOfNewLights; i++) {
+                Light *lightAtIndex = [lightsToAddToRoute objectAtIndex:i];
+                lightAtIndex.isPartOfRoute = YES;
+                switch (routeDirection) {
+                    case Up:
+                        lastLightInRoute.topConnector.state = Routed;
+                        if (i < numberOfNewLights - 1) lightAtIndex.topConnector.state = Routed;
+                        break;
+                    case Down:
+                        lightAtIndex.topConnector.state = Routed;
+                        break;
+                    case Left:
+                        lightAtIndex.rightConnector.state = Routed;
+                        break;
+                    case Right:
+                        lastLightInRoute.rightConnector.state = Routed;
+                        if (i < numberOfNewLights - 1) lightAtIndex.rightConnector.state = Routed;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
