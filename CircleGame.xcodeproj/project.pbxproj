@@ -33,6 +33,7 @@
 		B0036FE616C831C000D9EB7E /* objective-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0036FE516C831C000D9EB7E /* objective-hd.png */; };
 		B0036FE816C8327300D9EB7E /* player-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0036FE716C8327300D9EB7E /* player-hd.png */; };
 		B0036FEA16C8327700D9EB7E /* playerbuffed-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0036FE916C8327700D9EB7E /* playerbuffed-hd.png */; };
+		B003702016C83E2B00D9EB7E /* BlueRoutedLayer-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B003701F16C83E2B00D9EB7E /* BlueRoutedLayer-hd.png */; };
 		B01B28CE16AB2B5200CD538A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28CD16AB2B5200CD538A /* QuartzCore.framework */; };
 		B01B28D016AB2B5200CD538A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28CF16AB2B5200CD538A /* OpenGLES.framework */; };
 		B01B28D216AB2B5200CD538A /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28D116AB2B5200CD538A /* OpenAL.framework */; };
@@ -150,6 +151,7 @@
 		B0036FE516C831C000D9EB7E /* objective-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "objective-hd.png"; sourceTree = "<group>"; };
 		B0036FE716C8327300D9EB7E /* player-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player-hd.png"; sourceTree = "<group>"; };
 		B0036FE916C8327700D9EB7E /* playerbuffed-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playerbuffed-hd.png"; sourceTree = "<group>"; };
+		B003701F16C83E2B00D9EB7E /* BlueRoutedLayer-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BlueRoutedLayer-hd.png"; sourceTree = "<group>"; };
 		B01B28C916AB2B5200CD538A /* CircleGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircleGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01B28CD16AB2B5200CD538A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B01B28CF16AB2B5200CD538A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -397,6 +399,7 @@
 				B0036F4A16C1660600D9EB7E /* Number1.png */,
 				B0036F4C16C1660B00D9EB7E /* Number3.png */,
 				B0036F4E16C1660F00D9EB7E /* Number9.png */,
+				B003701F16C83E2B00D9EB7E /* BlueRoutedLayer-hd.png */,
 				B0036F5516C419B700D9EB7E /* ChargeValue.png */,
 				B01B28E116AB2B5200CD538A /* Default.png */,
 				B01B28E316AB2B5200CD538A /* Default-Landscape~ipad.png */,
@@ -633,6 +636,7 @@
 				B0036FE616C831C000D9EB7E /* objective-hd.png in Resources */,
 				B0036FE816C8327300D9EB7E /* player-hd.png in Resources */,
 				B0036FEA16C8327700D9EB7E /* playerbuffed-hd.png in Resources */,
+				B003702016C83E2B00D9EB7E /* BlueRoutedLayer-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

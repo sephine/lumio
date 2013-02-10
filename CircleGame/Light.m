@@ -173,7 +173,7 @@
         self.outerCircleSprite.anchorPoint = ccp(0.5, 0.5);
         [self addChild:self.outerCircleSprite z:1];
         
-        self.routedSprite = [CCSprite spriteWithFile:@"RoutedLayer.png"];
+        self.routedSprite = [CCSprite spriteWithFile:@"BlueRoutedLayer.png"];
         self.routedSprite.position = self.position;
         self.routedSprite.anchorPoint = ccp(0.5, 0.5);
         self.routedSprite.opacity = TRANSPARENT;

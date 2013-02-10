@@ -36,12 +36,12 @@
     _state = state;
     switch (_state) {
         case Routed:
-            self.sprite.color = ccc3(255, 255, 0);
+            self.sprite = [CCSprite spriteWithFile:@"HConnectorRouted.png"];
             self.sprite.opacity = OPAQUE;
             break;
         case Enabled:
-            self.sprite.color = ccc3(0, 0, 0);
-            self.sprite.opacity = OPAQUE;
+            self.sprite = [CCSprite spriteWithFile:@"HConnector.png"];
+            self.sprite.opacity = TRANSPARENT;
             break;
         case Disabled:
             self.sprite.opacity = TRANSPARENT;
@@ -51,24 +51,28 @@
     }
 }
 
+//when you change the file for a sprite you need to remove the sprite and add it again.
+- (void)setSprite:(CCSprite *)sprite
+{
+    [_sprite removeFromParentAndCleanup:YES];
+    _sprite = sprite;
+    _sprite.position = self.position;
+    _sprite.anchorPoint = ccp(0.5, 0.5);
+    if (self.orientation == Vertical) {
+        _sprite.rotation = 90;
+    }
+    [self addChild:_sprite];
+}
+
 - (id)initWithGameLayer:(GameLayer *)gameLayer orientation:(ConnectorOrientation)orientation
 {
     if (self = [super init]) {
         self.gameLayer = gameLayer;
         self.orientation = orientation;
         
-        //Create sprite and add to layer.
-        [self.gameLayer addChild:self];
-        if (self.orientation == Vertical) {
-            self.sprite = [CCSprite spriteWithFile:@"VConnector.png"];
-        } else {
-            self.sprite = [CCSprite spriteWithFile:@"HConnector.png"];
-        }
-        self.sprite.anchorPoint = ccp(0.5, 0.5);
-        
-        //set the state to Enabled, this will set the sprite to the correct opacity and colour.
+        //set the state to Enabled, this will set the sprite to the correct image and add it to the layer.
         self.state = Enabled;
-        [self addChild:self.sprite z:100];
+        [self.gameLayer addChild:self];
     }
     return self;
 }
