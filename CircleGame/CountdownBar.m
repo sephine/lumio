@@ -14,6 +14,7 @@
 @property (nonatomic, strong) GameLayer *gameLayer;
 @property (nonatomic, strong) CCSprite *borderSprite;
 @property (nonatomic, strong) CCSprite *centreSprite;
+@property (nonatomic, strong) CCSprite *maskSprite;
 @property (nonatomic) float value;
 @property (nonatomic) float countdownSpeed;
 
@@ -25,6 +26,7 @@
 @synthesize gameLayer = _gameLayer;
 @synthesize borderSprite = _borderSprite;
 @synthesize centreSprite = _centreSprite;
+@synthesize maskSprite = _maskSprite;
 @synthesize value = _value;
 @synthesize countdownSpeed = _countdownSpeed;
 
@@ -32,26 +34,8 @@
 {
     _position = position;
     self.borderSprite.position = position;
-    self.centreSprite.position = ccp(position.x + 4, position.y + 4);
-}
-
-- (void)setBorderSprite:(CCSprite *)borderSprite
-{
-    [_borderSprite removeFromParentAndCleanup:YES];
-    _borderSprite = borderSprite;
-    _borderSprite.position = self.position;
-    _borderSprite.anchorPoint = ccp(0, 0);
-    [self addChild:_borderSprite z:1];
-}
-
-- (void)setCentreSprite:(CCSprite *)centreSprite
-{
-    [_centreSprite removeFromParentAndCleanup:YES];
-    _centreSprite = centreSprite;
-    _centreSprite.position = self.position;
-    _centreSprite.anchorPoint = ccp(0, 0);
-    _centreSprite.opacity = COUNTDOWN_BAR_OPACITY;
-    [self addChild:_centreSprite z:2];
+    self.centreSprite.position = ccp(position.x + 4, position.y + 7);
+    self.maskSprite.position = ccp(position.x + 4 + 235, position.y + 6);
 }
 
 - (id)initWithGameLayer:(GameLayer *)gameLayer
@@ -61,8 +45,21 @@
         self.value = 100;
         self.countdownSpeed = INITIAL_COUNTDOWN_SPEED_IN_PERCENTAGE_PER_SECOND;
         
-        self.borderSprite = [CCSprite spriteWithFile:@"CountdownBorder.png"];
-        self.centreSprite = [CCSprite spriteWithFile:@"CountdownCentre.png"];
+        self.centreSprite = [CCSprite spriteWithFile:@"energy.png"];
+        self.centreSprite.position = self.position;
+        self.centreSprite.anchorPoint = ccp(0, 0);
+        [self addChild:self.centreSprite z:1];
+        
+        self.maskSprite = [CCSprite spriteWithFile:@"energymask.png"];
+        self.maskSprite.position = self.position;
+        self.maskSprite.anchorPoint = ccp(1, 0);
+        [self addChild:self.maskSprite z:2];
+        
+        self.borderSprite = [CCSprite spriteWithFile:@"energybar.png"];
+        self.borderSprite.position = self.position;
+        self.borderSprite.anchorPoint = ccp(0, 0);
+        [self addChild:self.borderSprite z:3];
+        
         [self.gameLayer addChild:self];
         
         [self setTheCentreSpriteScaleAndColour];
@@ -108,11 +105,13 @@
 
 - (void)setTheCentreSpriteScaleAndColour
 {
-    //modify the scale and colour of the bar based on the value.
+    //modify the scale of the mask based on the value.
     float valueProportion = self.value / 100.0;
-    self.centreSprite.scaleX = valueProportion;
+    self.maskSprite.scaleX = 1 - valueProportion;
     
-    GLubyte red = 0;
+    //self.centreSprite.scaleX = valueProportion;
+    
+    /*GLubyte red = 0;
     GLubyte green = 0;
     if (valueProportion >= CRITICAL_THRESHOLD) {
         red = 255 - 255 * (valueProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
@@ -120,7 +119,7 @@
     } else {
         red = 255 * valueProportion / CRITICAL_THRESHOLD;
     }
-    self.centreSprite.color = ccc3(red, green, 0);
+    self.centreSprite.color = ccc3(red, green, 0);*/
 }
 
 @end

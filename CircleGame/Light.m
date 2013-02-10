@@ -54,9 +54,9 @@
     self.valueSprite.position = position;
     
     //CGSize size = [[CCDirector sharedDirector] winSize];
-    CGPoint topConnectorPosition = ccp(position.x, position.y + 0.5 * GAME_AREA_HEIGHT / NUMBER_OF_ROWS);
+    CGPoint topConnectorPosition = ccp(position.x, position.y + 0.5 * SQUARE_SIDE_LENGTH);
     self.topConnector.position = topConnectorPosition;
-    CGPoint rightConnectorPosition = ccp(position.x + 0.5 * GAME_AREA_WIDTH / NUMBER_OF_COLUMNS, position.y);
+    CGPoint rightConnectorPosition = ccp(position.x + 0.5 * SQUARE_SIDE_LENGTH, position.y);
     self.rightConnector.position = rightConnectorPosition;
 }
 
@@ -77,12 +77,20 @@
     _lightState = lightState;
     switch (lightState) {
         case Active:
-            self.innerCircleSprite = [CCSprite spriteWithFile:@"BlackCircle.png"];
-            self.outerCircleSprite.opacity = OUTER_CIRCLE_OPACITY;
+            if (self.lightValue == NoValue) {
+                self.innerCircleSprite = [CCSprite spriteWithFile:@"active.png"];
+                self.outerCircleSprite.opacity = OPAQUE;
+            } else if (self.lightValue == Charge ) {
+                self.innerCircleSprite = [CCSprite spriteWithFile:@"buffcircle.png"];
+                self.outerCircleSprite.opacity = TRANSPARENT;
+            } else {
+                self.innerCircleSprite = [CCSprite spriteWithFile:@"buffcircle.png"]; //TODO prefer purple to white
+                self.outerCircleSprite.opacity = TRANSPARENT;
+            }
             [self.lightManager lightNowActive:self];
             break;
         case Cooldown:
-            self.innerCircleSprite = [CCSprite spriteWithFile:@"EmptyCircle.png"];
+            self.innerCircleSprite = [CCSprite spriteWithFile:@"inactive.png"];
             self.outerCircleSprite.opacity = TRANSPARENT;
             //self.lightValue = [self generateLightValue];
             LightValue oldValue = self.lightValue;
@@ -108,19 +116,19 @@
     _lightValue = lightValue;
     switch (lightValue) {
         case Low:
-            self.valueSprite = [CCSprite spriteWithFile:@"Number1.png"];
+            self.valueSprite = [CCSprite spriteWithFile:@"1star.png"];
             self.valueSprite.opacity = OPAQUE;
             break;
         case Medium:
-            self.valueSprite = [CCSprite spriteWithFile:@"Number3.png"];
+            self.valueSprite = [CCSprite spriteWithFile:@"2star.png"];
             self.valueSprite.opacity = OPAQUE;
             break;
         case High:
-            self.valueSprite = [CCSprite spriteWithFile:@"Number9.png"];
+            self.valueSprite = [CCSprite spriteWithFile:@"3star.png"];
             self.valueSprite.opacity = OPAQUE;
             break;
         case Charge:
-            self.valueSprite = [CCSprite spriteWithFile:@"ChargeValue.png"];
+            self.valueSprite = [CCSprite spriteWithFile:@"buff.png"];
             self.valueSprite.opacity = OPAQUE;
             break;
         case NoValue:
@@ -160,7 +168,7 @@
         self.lightValue = NoValue;
         
         //create outer sprite and routed sprite and add to layer. The other layers are added in their setters as they are frequently changed.
-        self.outerCircleSprite = [CCSprite spriteWithFile:@"AlternateWhiteCircle.png"];
+        self.outerCircleSprite = [CCSprite spriteWithFile:@"glow.png"];
         self.outerCircleSprite.position = self.position;
         self.outerCircleSprite.anchorPoint = ccp(0.5, 0.5);
         [self addChild:self.outerCircleSprite z:1];
@@ -201,37 +209,39 @@
     return self;
 }
 
-//updates the time remaining on the timers.
+//updates the time remaining on the timers (unless the light has a value in which case it lasts forever).
 - (void)update:(ccTime)dt
 {
-    switch (self.lightState) {
-        case Active:
-            self.activeTimeRemaining -= dt;
-            if (self.activeTimeRemaining < 0) {
-                self.lightState = Cooldown;
-            }
-            [self setSpriteScaleAndColourForTimeRemaining];
-            break;
-        case Cooldown:
-            self.cooldownTimeRemaining -= dt;
-            if (self.cooldownTimeRemaining < 0) {
-                self.lightState = Active;
-            }
-            [self setSpriteScaleAndColourForTimeRemaining];
-            break;
-        case Charging:
-            self.chargeTimeRemaining -= dt;
-            if (self.chargeTimeRemaining < 0) {
-                self.lightState = Active;
-            }
-            [self setSpriteScaleAndColourForTimeRemaining];
-            break;
-        case AlmostOccupied:
-            self.activeTimeRemaining -= dt;
-            if (self.activeTimeRemaining < 0) self.activeTimeRemaining = 0;
-            [self setSpriteScaleAndColourForTimeRemaining];
-        default:
-            break;
+    if (self.lightValue == NoValue) {
+        switch (self.lightState) {
+            case Active:
+                self.activeTimeRemaining -= dt;
+                if (self.activeTimeRemaining < 0) {
+                    self.lightState = Cooldown;
+                }
+                [self setSpriteScaleAndColourForTimeRemaining];
+                break;
+            case Cooldown:
+                self.cooldownTimeRemaining -= dt;
+                if (self.cooldownTimeRemaining < 0) {
+                    self.lightState = Active;
+                }
+                [self setSpriteScaleAndColourForTimeRemaining];
+                break;
+            case Charging:
+                self.chargeTimeRemaining -= dt;
+                if (self.chargeTimeRemaining < 0) {
+                    self.lightState = Active;
+                }
+                [self setSpriteScaleAndColourForTimeRemaining];
+                break;
+            case AlmostOccupied:
+                self.activeTimeRemaining -= dt;
+                if (self.activeTimeRemaining < 0) self.activeTimeRemaining = 0;
+                [self setSpriteScaleAndColourForTimeRemaining];
+            default:
+                break;
+        }
     }
 }
 
@@ -271,9 +281,9 @@
 //used by the player when it reaches the light, returns the value of the light.
 - (LightValue)occupyLightAndGetValue
 {
-    self.lightState = Occupied;
     LightValue oldValue = self.lightValue;
     self.lightValue = NoValue;
+    self.lightState = Occupied;
     if (oldValue != NoValue) {
         [self.lightManager chooseNewLightWithValue:oldValue];
     }
@@ -297,7 +307,6 @@
 {
     self.lightValue = value;
     self.lightState = Active;
-    self.activeTimeRemaining = [self generateValueActiveTime];
 }
 
 //generates a random value based on the high, medium and low percentages.
@@ -324,11 +333,6 @@
     return arc4random() % (MAX_SPAWN_COUNTDOWN - MIN_SPAWN_COUNTDOWN + 1) + MIN_SPAWN_COUNTDOWN;
 }
 
-- (float)generateValueActiveTime
-{
-    return arc4random() % (MAX_VALUE_COUNTDOWN - MIN_VALUE_COUNTDOWN + 1) + MIN_VALUE_COUNTDOWN;
-}
-
 //generates a random cooldown time within the given range.
 - (float)generateCooldownTime
 {
@@ -340,24 +344,27 @@
 {
     float timeProportion;
     CGFloat newScale;
-    if (self.lightState == Cooldown) {
-        timeProportion = self.cooldownTimeRemaining / MAX_REFRESH_COUNTDOWN;
-        if (timeProportion > 1) timeProportion = 1;
-        newScale = 12.0/MAX_RADIUS;
-    } else {
-        timeProportion = self.activeTimeRemaining / MAX_REFRESH_COUNTDOWN;
-        if (timeProportion > 1) timeProportion = 1;
-        newScale = ((MAX_RADIUS - MIN_RADIUS) * timeProportion + MIN_RADIUS)/MAX_RADIUS;
-    }
+    //if (self.lightState == Cooldown) {
+    //    timeProportion = self.cooldownTimeRemaining / MAX_REFRESH_COUNTDOWN;
+    //    if (timeProportion > 1) timeProportion = 1;
+    //    newScale = 12.0/MAX_RADIUS;
+    //} else {
+    timeProportion = self.activeTimeRemaining / MAX_REFRESH_COUNTDOWN;
+    if (timeProportion > 1) timeProportion = 1;
+    newScale = ((MAX_RADIUS - MIN_RADIUS) * timeProportion + MIN_RADIUS)/MAX_RADIUS;
+    //}
     
     self.outerCircleSprite.scale = newScale;
     GLubyte red = 0;
     GLubyte green = 0;
-    if (timeProportion >= CRITICAL_THRESHOLD) {
-        red = 255 - 255 * (timeProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
-        green = 255 * (timeProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
+    if (timeProportion >= SPEED_UP_THRESHOLD) {
+        red = 130 - 130 * (timeProportion - SPEED_UP_THRESHOLD) / (1 - SPEED_UP_THRESHOLD);
+        green = 125 + 130 * (timeProportion - SPEED_UP_THRESHOLD) / (1 - SPEED_UP_THRESHOLD);
+    } else if (timeProportion >= CRITICAL_THRESHOLD) {
+        red = 255 - 125 * (timeProportion - CRITICAL_THRESHOLD) / (SPEED_UP_THRESHOLD - CRITICAL_THRESHOLD);
+        green = 125 * (timeProportion - CRITICAL_THRESHOLD) / (SPEED_UP_THRESHOLD - CRITICAL_THRESHOLD);
     } else {
-        red = 255 * timeProportion / CRITICAL_THRESHOLD;
+        red = 240 * timeProportion / CRITICAL_THRESHOLD + 15;
     }
     self.outerCircleSprite.color = ccc3(red, green, 0);
 }

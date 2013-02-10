@@ -9,38 +9,46 @@
 #ifndef GameConfig_h
 #define GameConfig_h
 
-//TODO Radius should be determined by size of screen.
-#define GAME_AREA_X_COORD 2
-#define GAME_AREA_Y_COORD 38
-#define GAME_AREA_HEIGHT 405
-#define GAME_AREA_WIDTH  315
-#define SQUARE_SIDE_LENGTH 45
-#define COUNTDOWN_BAR_X_COORD 15
-#define COUNTDOWN_BAR_Y_COORD 445
-#define LEVEL_X_COORD 205
-#define LEVEL_Y_COORD 445
+//main game area positions.
+#define GAME_AREA_X_COORD 10
+#define GAME_AREA_Y_COORD 37
+#define SQUARE_SIDE_LENGTH 43
+#define NUMBER_OF_ROWS 9
+#define NUMBER_OF_COLUMNS 7
+
+//header positions.
+#define HEADER_X_COORD 0
+#define HEADER_Y_COORD 432
+#define COUNTDOWN_BAR_X_COORD 10
+#define COUNTDOWN_BAR_Y_COORD 436
 #define PAUSE_X_COORD 270
-#define PAUSE_Y_COORD 10
+#define PAUSE_Y_COORD 438
+
+//footer positions.
+#define FOOTER_X_COORD 0
+#define FOOTER_Y_COORD 2
+#define LEVEL_X_COORD 205
+#define LEVEL_Y_COORD 5
 #define LEVEL_WIDTH 60
 #define LEVEL_HEIGHT 25
 #define TIME_LABEL_OFFSET 70
 #define TIME_WIDTH 25
 #define TIME_HEIGHT 25
-#define NUMBER_OF_ROWS 9
-#define NUMBER_OF_COLUMNS 7
+
 #define MAX_RADIUS 25
-#define MIN_RADIUS 15.0
+#define MIN_RADIUS 20.0
 #define LOW_COUNTDOWN_PERCENTAGE 10
 #define MAX_VALUE_COUNTDOWN 6000//30 TEMP trying out infinite values.
 #define MIN_VALUE_COUNTDOWN 6000//25 TEMP trying out infinite values.
-#define MAX_REFRESH_COUNTDOWN 13
-#define MIN_REFRESH_COUNTDOWN 10
+#define MAX_REFRESH_COUNTDOWN 15//13
+#define MIN_REFRESH_COUNTDOWN 12//10
 #define MAX_SPAWN_COUNTDOWN 9
 #define MIN_SPAWN_COUNTDOWN 7
-#define MAX_COOLDOWN 16
+#define MAX_COOLDOWN 20 //16
 #define MIN_COOLDOWN 7
 #define CHARGE_TIME 0.5
 #define NUMBER_OF_SEGMENTS 45
+#define SPEED_UP_THRESHOLD 0.5
 #define CRITICAL_THRESHOLD 0.2 //proportion
 #define INNER_CIRCLE_OPACITY 255
 #define OUTER_CIRCLE_OPACITY 150
@@ -61,7 +69,7 @@
 #define COUNTDOWN_HIGH_INCREASE_PERCENTAGE 24.0
 #define COUNTDOWN_MEDIUM_INCREASE_PERCENTAGE 18.0
 #define COUNTDOWN_LOW_INCREASE_PERCENTAGE 12.0
-#define COUNTDOWN_BAR_OPACITY 150
+//#define COUNTDOWN_BAR_OPACITY 150
 #define LEVEL_LENGTH_IN_SECONDS 60
 
 #endif

@@ -13,7 +13,7 @@
 #import "cocos2d.h"
 
 // HelloWorldLayer
-@interface GameLayer : CCLayer
+@interface GameLayer : CCLayerColor
 {
 }
 //<GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>

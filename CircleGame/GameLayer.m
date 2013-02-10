@@ -67,28 +67,22 @@
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
-	if( (self=[super init]) ) {
-
-        // ask director for the window size
-        CGSize size = [[CCDirector sharedDirector] winSize];
+	if( (self=[super initWithColor:ccc4(15, 15, 15, 255)]) ) {
         
-        CCSprite *background;
+        //add the header which will include the countdown bar and the pause button.
+        CCSprite *header = [CCSprite spriteWithFile:@"topmenu.png"];
+        header.position = ccp(HEADER_X_COORD, HEADER_Y_COORD);
+        header.anchorPoint = ccp(0, 0);
+        [self addChild:header z:0];
         
-        if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
-            background = [CCSprite spriteWithFile:@"GreyBackground.png"];
-            //background.rotation = 90;
-        } else {
-            background = [CCSprite spriteWithFile:@"GreyBackground.png"];
-        }
-        background.position = ccp(size.width/2, size.height/2);
-
-        // add the label as a child to this Layer
-        [self addChild: background z:0];
+        //create the countdown bar and set its position. It adds itself to the layer.
+        self.countdownBar = [[CountdownBar alloc] initWithGameLayer:self];
+        self.countdownBar.position = ccp(COUNTDOWN_BAR_X_COORD, COUNTDOWN_BAR_Y_COORD);
         
-        //add the menu items
+        //add the pause button.
         self.gameIsPaused = NO;
         CCMenuItem *pauseMenuItem = [CCMenuItemImage
-                                        itemWithNormalImage:@"PauseButton.png" selectedImage:@"PauseButton.png"
+                                        itemWithNormalImage:@"pause.png" selectedImage:@"pause.png"
                                         target:self selector:@selector(pauseButtonTapped:)];
         pauseMenuItem.anchorPoint = ccp(0, 0);
         pauseMenuItem.position = ccp(PAUSE_X_COORD, PAUSE_Y_COORD);
@@ -96,6 +90,16 @@
         self.menuItems = [CCMenu menuWithItems:pauseMenuItem, nil];
         self.menuItems.position = CGPointZero;
         [self addChild:self.menuItems];
+        
+        //add the footer TODO add level and score.
+        CCSprite *footer = [CCSprite spriteWithFile:@"footer.png"];
+        footer.position = ccp(FOOTER_X_COORD, FOOTER_Y_COORD);
+        footer.anchorPoint = ccp(0, 0);
+        [self addChild:footer z:0];
+        
+        //create the level object and set its position.
+        self.level = [[Level alloc] initWithGameLayer:self countdownBar:self.countdownBar];
+        self.level.position = ccp(LEVEL_X_COORD, LEVEL_Y_COORD);
         
         //create the player object and add it to layer.
         self.player = [[Player alloc] init];
@@ -107,7 +111,7 @@
             NSMutableArray *innerArray = [NSMutableArray array];
             for (int column = 0; column < NUMBER_OF_COLUMNS; column++) {
                 Light *light = [[Light alloc] initWithGameLayer:self row:row column:column];
-                light.position = ccp(GAME_AREA_X_COORD + GAME_AREA_WIDTH /NUMBER_OF_COLUMNS * (column + 0.5f), GAME_AREA_Y_COORD + GAME_AREA_HEIGHT / NUMBER_OF_ROWS * (row + 0.5f));
+                light.position = ccp(GAME_AREA_X_COORD + SQUARE_SIDE_LENGTH * (column + 0.5f), GAME_AREA_Y_COORD + SQUARE_SIDE_LENGTH * (row + 0.5f));
                 [innerArray addObject:light];
             }
             [twoDimensionallightArray addObject:innerArray];
@@ -128,14 +132,6 @@
         
         //create the route object.
         self.route = [[Route alloc] initWithGameLayer:self lightManager:self.lightManager];
-        
-        //create the countdown bar and set its position.
-        self.countdownBar = [[CountdownBar alloc] initWithGameLayer:self];
-        self.countdownBar.position = ccp(COUNTDOWN_BAR_X_COORD, COUNTDOWN_BAR_Y_COORD);
-        
-        //create the level object and set its position.
-        self.level = [[Level alloc] initWithGameLayer:self countdownBar:self.countdownBar];
-        self.level.position = ccp(LEVEL_X_COORD, LEVEL_Y_COORD);
         
         //add the player starting position to the route.
         [self.route setInitialLight:firstLight];

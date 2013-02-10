@@ -44,9 +44,9 @@
 {
     _hasCharge = hasCharge;
     if (hasCharge) {
-        self.sprite = [CCSprite spriteWithFile:@"ChargedBlueCircle.png"];
+        self.sprite = [CCSprite spriteWithFile:@"playerbuffed.png"];
     } else {
-        self.sprite = [CCSprite spriteWithFile:@"BlueCircle.png"];
+        self.sprite = [CCSprite spriteWithFile:@"player.png"];
     }
 }
 
