@@ -196,7 +196,7 @@
         int randomPercentage = arc4random() % 100;
         if (randomPercentage < PERCENTAGE_OF_LIGHTS_START_ON_COOLDOWN) {
             self.lightState = Cooldown;
-            self.cooldownTimeRemaining = arc4random() % MAX_COOLDOWN + 1;
+            self.cooldownTimeRemaining = arc4random() % INITIAL_MAX_COOLDOWN + 1;
         } else {
             self.lightState = Active;
             self.activeTimeRemaining = arc4random() % MAX_REFRESH_COUNTDOWN + 1;
@@ -336,7 +336,9 @@
 //generates a random cooldown time within the given range.
 - (float)generateCooldownTime
 {
-    return arc4random() % (MAX_COOLDOWN - MIN_COOLDOWN + 1) + MIN_COOLDOWN;
+    //return arc4random() % (MAX_COOLDOWN - MIN_COOLDOWN + 1) + MIN_COOLDOWN;
+    int maxCooldown = self.lightManager.maxCooldown;
+    return arc4random() % (maxCooldown - MIN_COOLDOWN + 1) + MIN_COOLDOWN;
 }
 
 //sets the scale and colour of the outer circle sprite based on the active or cooldown time remaining. It will start out green then transition to red at the critical threshold then transition to black.

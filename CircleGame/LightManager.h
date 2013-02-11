@@ -19,6 +19,8 @@
 }
 
 @property (nonatomic, strong) Route *route;
+//@property (nonatomic) ccTime spawnCountdown;
+@property (nonatomic) int maxCooldown;
 
 - (id)initWithLightArray:(NSMutableArray *)lightArray;
 - (void)update:(ccTime)dt;

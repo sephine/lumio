@@ -97,10 +97,6 @@
         footer.anchorPoint = ccp(0, 0);
         [self addChild:footer z:0];
         
-        //create the level object and set its position.
-        self.level = [[Level alloc] initWithGameLayer:self countdownBar:self.countdownBar];
-        self.level.position = ccp(LEVEL_X_COORD, LEVEL_Y_COORD);
-        
         //create the player object and add it to layer.
         self.player = [[Player alloc] init];
         //TODO set position and add to layer.
@@ -129,6 +125,10 @@
         [self.lightManager chooseFirstLightWithValue:Medium];
         [self.lightManager chooseFirstLightWithValue:Low];
         [self.lightManager chooseFirstLightWithValue:Charge];
+        
+        //create the level object and set its position.
+        self.level = [[Level alloc] initWithGameLayer:self countdownBar:self.countdownBar lightManager:self.lightManager];
+        self.level.position = ccp(LEVEL_X_COORD, LEVEL_Y_COORD);
         
         //create the route object.
         self.route = [[Route alloc] initWithGameLayer:self lightManager:self.lightManager];

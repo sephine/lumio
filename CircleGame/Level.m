@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) GameLayer *gameLayer;
 @property (nonatomic, strong) CountdownBar *countdownBar;
+@property (nonatomic, strong) LightManager *lightManager;
 //TODO change this to the better CCLabelBMFont using a tool like heiro??
 @property (nonatomic, strong) CCLabelTTF *levelLabel;
 @property (nonatomic, strong) CCLabelTTF *timeLabel;
@@ -26,6 +27,7 @@
 @synthesize position = _position;
 @synthesize gameLayer = _gameLayer;
 @synthesize countdownBar = _countdownBar;
+@synthesize lightManager = _lightManager;
 @synthesize levelLabel = _levelLabel;
 @synthesize timeLabel = _timeLabel;
 @synthesize level = _level;
@@ -38,12 +40,16 @@
     self.timeLabel.position = ccp(position.x + TIME_LABEL_OFFSET, position.y);
 }
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer countdownBar:(CountdownBar *)countdownBar
+- (id)initWithGameLayer:(GameLayer *)gameLayer countdownBar:(CountdownBar *)countdownBar lightManager:(LightManager *)lightManager
 {
     if (self = [super init]) {
         self.gameLayer = gameLayer;
         self.countdownBar = countdownBar;
         [self.gameLayer addChild:self];
+        
+        //set up the light manager with the intial max cooldown.
+        self.lightManager = lightManager;
+        self.lightManager.maxCooldown = INITIAL_MAX_COOLDOWN;
         
         self.level = 1;
         NSString *levelString = [NSString stringWithFormat:@"lvl %d", self.level];
@@ -100,6 +106,9 @@
         speedIncrease = LEVEL_11_ONWARDS_COUNTDOWN_SPEED_INCREASE;
     }
     [self.countdownBar increaseCountdownSpeed:speedIncrease];
+    
+    //update the lightmanager cooldown based on the new level.
+    self.lightManager.maxCooldown = INITIAL_MAX_COOLDOWN + MAX_COOLDOWN_INCREASE * self.level;
 }
 
 @end

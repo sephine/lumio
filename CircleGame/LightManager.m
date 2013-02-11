@@ -18,6 +18,8 @@
 @implementation LightManager
 
 @synthesize route = _route;
+//@synthesize spawnCountdown = _spawnCountdown;
+@synthesize maxCooldown = _maxCooldown;
 @synthesize twoDimensionalLightArray = _twoDimensionalLightArray;
 
 - (id)initWithLightArray:(NSMutableArray *)lightArray

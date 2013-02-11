@@ -10,13 +10,14 @@
 #import "cocos2d.h"
 #import "GameLayer.h"
 #import "CountdownBar.h"
+#import "LightManager.h"
 
 @interface Level : CCNode {
 }
 
 @property (nonatomic) CGPoint position;
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer countdownBar:(CountdownBar *)countdownBar;
+- (id)initWithGameLayer:(GameLayer *)gameLayer countdownBar:(CountdownBar *)countdownBar lightManager:(LightManager *)lightManager;
 - (void)update:(ccTime)dt;
 
 @end
