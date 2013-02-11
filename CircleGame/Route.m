@@ -198,29 +198,35 @@
     if (count >= 2) {
         Light *firstLight = [self.lightsInRoute objectAtIndex:0];
         firstLight.isPartOfRoute = NO;
-        
-    //update connector states.
-        Light *secondLight = [self.lightsInRoute objectAtIndex:1];
-        RouteDirection routeDirection = [self getDirectionBetweenFirstLight:firstLight andSecondLight:secondLight];
-        switch (routeDirection) {
-            case Up:
-                firstLight.topConnector.state = Enabled;
-                break;
-            case Down:
-                secondLight.topConnector.state = Enabled;
-                break;
-            case Left:
-                secondLight.rightConnector.state = Enabled;
-                break;
-            case Right:
-                firstLight.rightConnector.state = Enabled;
-                break;
-            default:
-                break;
-        }
-        
         [self.lightsInRoute removeObjectAtIndex:0];
         [self updateContainsCooldownLight];
+        
+        //update connector states following delay of the time it takes to travel half the distance between the lights.
+        float delay = SQUARE_SIDE_LENGTH / SPEED_IN_POINTS_PER_SECOND / 2.0;
+        [self performSelector:@selector(updateConntectorsFollowingDelayForFirstLight:) withObject:firstLight afterDelay:delay];
+    }
+}
+
+- (void)updateConntectorsFollowingDelayForFirstLight:(Light *)firstLight
+{
+    //The previous first light will have been removed from the array.
+    Light *secondLight = [self.lightsInRoute objectAtIndex:0];
+    RouteDirection routeDirection = [self getDirectionBetweenFirstLight:firstLight andSecondLight:secondLight];
+    switch (routeDirection) {
+        case Up:
+            firstLight.topConnector.state = Enabled;
+            break;
+        case Down:
+            secondLight.topConnector.state = Enabled;
+            break;
+        case Left:
+            secondLight.rightConnector.state = Enabled;
+            break;
+        case Right:
+            firstLight.rightConnector.state = Enabled;
+            break;
+        default:
+            break;
     }
 }
 

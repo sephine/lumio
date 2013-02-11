@@ -103,19 +103,19 @@
 {
     if (light.row < NUMBER_OF_ROWS - 1) {
         Light *lightAbove = [self getLightAtRow:(light.row + 1) column:light.column];
-        light.topConnector.state = lightAbove.lightState == Cooldown ? Disabled : Enabled;
+        if (light.topConnector.state != Routed) light.topConnector.state = lightAbove.lightState == Cooldown ? Disabled : Enabled;
     }
     if (light.column < NUMBER_OF_COLUMNS - 1) {
         Light *lightToTheRight = [self getLightAtRow:light.row column:(light.column + 1)];
-        light.rightConnector.state = lightToTheRight.lightState == Cooldown ? Disabled : Enabled;
+        if (light.rightConnector.state != Routed) light.rightConnector.state = lightToTheRight.lightState == Cooldown ? Disabled : Enabled;
     }
     if (light.row > 0) {
         Light *lightBelow = [self getLightAtRow:(light.row - 1) column:light.column];
-        lightBelow.topConnector.state = lightBelow.lightState == Cooldown ? Disabled : Enabled;
+        if (lightBelow.topConnector.state != Routed) lightBelow.topConnector.state = lightBelow.lightState == Cooldown ? Disabled : Enabled;
     }
     if (light.column > 0) {
         Light *lightToTheLeft = [self getLightAtRow:light.row column:(light.column - 1)];
-        lightToTheLeft.rightConnector.state = lightToTheLeft.lightState == Cooldown ? Disabled : Enabled;
+        if (lightToTheLeft.rightConnector.state != Routed) lightToTheLeft.rightConnector.state = lightToTheLeft.lightState == Cooldown ? Disabled : Enabled;
     }
 }
 
