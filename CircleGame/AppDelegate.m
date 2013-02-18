@@ -10,6 +10,9 @@
 
 #import "AppDelegate.h"
 #import "IntroLayer.h"
+#import "GameLayer.h"
+#import "InGameMenuLayer.h"
+#import "GameConfig.h"
 
 @implementation AppController
 
@@ -102,6 +105,15 @@
 {
 	if( [navController_ visibleViewController] == director_ )
 		[director_ pause];
+    //pause the game and open up the pause screen.
+    CCScene *currentScene = [[CCDirector sharedDirector] runningScene];
+    GameLayer *gameLayer = (GameLayer *)[currentScene getChildByTag:GAME_LAYER_TAG];
+    
+    if (!gameLayer.gameIsPaused) {
+        gameLayer.gameIsPaused = YES;
+        InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameOver:NO];
+        [currentScene addChild:menuLayer z:1];
+    }
 }
 
 // call got rejected

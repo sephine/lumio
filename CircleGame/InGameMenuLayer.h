@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "GameLayer.h"
 
 @interface InGameMenuLayer : CCLayer {
 }
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer gameOver:(BOOL)gameOver;
+- (id)initWithGameOver:(BOOL)gameOver;
 
 @end

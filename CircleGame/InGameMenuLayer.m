@@ -8,6 +8,8 @@
 
 #import "InGameMenuLayer.h"
 #import "MenuLayer.h"
+#import "GameLayer.h"
+#import "GameConfig.h"
 
 @interface InGameMenuLayer ()
 
@@ -19,10 +21,10 @@
 
 @synthesize gameLayer = _gameLayer;
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer gameOver:(BOOL)gameOver
+- (id)initWithGameOver:(BOOL)gameOver
 {
 	if( (self=[super init]) ) {
-        self.gameLayer = gameLayer;
+        self.gameLayer = (GameLayer *)[[[CCDirector sharedDirector] runningScene] getChildByTag:GAME_LAYER_TAG];
         
         // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];

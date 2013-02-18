@@ -26,7 +26,6 @@
 @interface GameLayer ()
 
 @property (nonatomic, strong) CCMenu *menuItems;
-@property (nonatomic) BOOL gameIsPaused;
 @property (nonatomic, strong) Player *player;
 @property (nonatomic, strong) Route *route;
 @property (nonatomic, strong) LightManager *lightManager;
@@ -56,7 +55,7 @@
 	GameLayer *layer = [GameLayer node];
 	
 	// add layer as a child to scene
-	[scene addChild: layer z:0];
+	[scene addChild: layer z:0 tag:GAME_LAYER_TAG];
 	
 	// return the scene
 	return scene;
@@ -183,7 +182,7 @@
     //make sure the button does nothing if the game is already paused.
     if (!self.gameIsPaused) {
         self.gameIsPaused = YES;
-        InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameLayer:self gameOver:NO];
+        InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameOver:NO];
         [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
     }
 }
@@ -191,7 +190,7 @@
 - (void)gameOver
 {
     self.gameIsPaused = YES;
-    InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameLayer:self gameOver:YES];
+    InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameOver:YES];
     [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
 }
 
