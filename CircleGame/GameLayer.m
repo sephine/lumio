@@ -204,7 +204,7 @@
     //remove layer and then add it again.
     [self removeFromParentAndCleanup:YES];
     GameLayer *layer = [GameLayer node];
-    [[[CCDirector sharedDirector] runningScene] addChild:layer z:0];
+    [[[CCDirector sharedDirector] runningScene] addChild:layer z:0 tag:GAME_LAYER_TAG];
 }
 
 @end

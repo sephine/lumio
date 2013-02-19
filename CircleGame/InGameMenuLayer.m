@@ -13,18 +13,19 @@
 
 @interface InGameMenuLayer ()
 
-@property (nonatomic, strong) GameLayer *gameLayer;
+@property (nonatomic) BOOL gameOver;
 
 @end
 
 @implementation InGameMenuLayer
 
-@synthesize gameLayer = _gameLayer;
+@synthesize gameOver = _gameOver;
 
 - (id)initWithGameOver:(BOOL)gameOver
 {
 	if( (self=[super init]) ) {
-        self.gameLayer = (GameLayer *)[[[CCDirector sharedDirector] runningScene] getChildByTag:GAME_LAYER_TAG];
+        
+        self.gameOver = gameOver;
         
         // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
@@ -43,7 +44,7 @@
         [self addChild: background z:0];
         
         //add game over sprite if game over is true.
-        if (gameOver) {
+        if (self.gameOver) {
             CCSprite *gameOverSprite = [CCSprite spriteWithFile:@"GameOver.png"];
             gameOverSprite.position = ccp(55, 440);
             gameOverSprite.anchorPoint = ccp(0, 1);
@@ -64,7 +65,7 @@
         restartMenuItem.anchorPoint = ccp(0, 1);
         
         //Change the position based on whether it is a game over screen.
-        if (gameOver) {
+        if (self.gameOver) {
             restartMenuItem.position = ccp(130, 350);
         } else {
             restartMenuItem.position = ccp(140, 333);
@@ -77,7 +78,7 @@
         mainMenuMenuItem.anchorPoint = ccp(0, 1);
         
         //Change the position based on whether it is a game over screen.
-        if (gameOver) {
+        if (self.gameOver) {
             mainMenuMenuItem.position = ccp(55, 210);
         } else {
             mainMenuMenuItem.position = ccp(45, 197);            
@@ -85,7 +86,7 @@
 
         //Only add resumeMenuItem it is not a game over screen.
         CCMenu *inGameMenu;
-        if (gameOver) {
+        if (self.gameOver) {
             inGameMenu = [CCMenu menuWithItems:restartMenuItem, mainMenuMenuItem, nil];
         } else {
             inGameMenu = [CCMenu menuWithItems:resumeMenuItem, restartMenuItem, mainMenuMenuItem, nil];
@@ -110,19 +111,30 @@
 
 - (void)resumeButtonTapped:(id)sender
 {
-    [self.gameLayer unPauseGame];
+    GameLayer *gameLayer = (GameLayer *)[[[CCDirector sharedDirector] runningScene] getChildByTag:GAME_LAYER_TAG];
+    [gameLayer unPauseGame];
     [self removeFromParentAndCleanup:YES];
 }
 
 - (void)restartButtonTapped:(id)sender
 {
-    [self.gameLayer restartGame];
+    GameLayer *gameLayer = (GameLayer *)[[[CCDirector sharedDirector] runningScene] getChildByTag:GAME_LAYER_TAG];
+    [gameLayer restartGame];
     [self removeFromParentAndCleanup:YES];
 }
 
 - (void)mainMenuButtonTapped:(id)sender
 {
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.7 scene:[MenuLayer scene] withColor:ccBLACK]];
+    //remove the pause layer but do not unpause the game and push the menu scene. The new scene should only be provided the current scene if continue should be displayed (because it is not game over).
+    [self removeFromParentAndCleanup:YES];
+    CCScene *currentScene = [[CCDirector sharedDirector] runningScene];
+    if (self.gameOver) {
+        [[CCDirector sharedDirector] pushScene:[CCTransitionFade transitionWithDuration:0.7 scene:[MenuLayer scene] withColor:ccBLACK]];
+    } else {
+        [[CCDirector sharedDirector] pushScene:[CCTransitionFade transitionWithDuration:0.7 scene:[MenuLayer sceneWithPreviousScene:currentScene] withColor:ccBLACK]];
+    }
 }
+
+//TODO saving game and opening on main menu i guess (not pause screen).
 
 @end

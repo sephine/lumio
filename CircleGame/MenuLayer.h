@@ -14,5 +14,6 @@
 
 // returns a CCScene that contains the MenuLayer as the only child
 +(CCScene *) scene;
++ (CCScene *)sceneWithPreviousScene:(CCScene *)previousScene;
 
 @end
