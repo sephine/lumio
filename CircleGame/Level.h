@@ -12,12 +12,14 @@
 #import "CountdownBar.h"
 #import "LightManager.h"
 
+@class LightManager;
+
 @interface Level : CCNode {
 }
 
 @property (nonatomic) CGPoint position;
 
 - (id)initWithGameLayer:(GameLayer *)gameLayer countdownBar:(CountdownBar *)countdownBar lightManager:(LightManager *)lightManager;
-- (void)update:(ccTime)dt;
+- (void)increaseLevel;
 
 @end

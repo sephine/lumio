@@ -16,6 +16,7 @@
 #import "Player.h"
 #import "CountdownBar.h"
 #import "Level.h"
+#import "Score.h"
 #import "GameConfig.h"
 
 // Needed to obtain the Navigation Controller
@@ -31,6 +32,7 @@
 @property (nonatomic, strong) LightManager *lightManager;
 @property (nonatomic, strong) CountdownBar * countdownBar;
 @property (nonatomic, strong) Level *level;
+@property (nonatomic, strong) Score *score;
 
 @end
 
@@ -44,6 +46,7 @@
 @synthesize lightManager = _lightManager;
 @synthesize countdownBar = _countdownBar;
 @synthesize level = _level;
+@synthesize score = _score;
 
 // Helper class method that creates a Scene with the GameLayer as the only child.
 +(CCScene *) scene
@@ -129,6 +132,10 @@
         self.level = [[Level alloc] initWithGameLayer:self countdownBar:self.countdownBar lightManager:self.lightManager];
         self.level.position = ccp(LEVEL_X_COORD, LEVEL_Y_COORD);
         
+        //create the score object and set its position.
+        self.score = [[Score alloc] initWithGameLayer:self level:self.level];
+        self.score.position = ccp(SCORE_X_COORD, SCORE_Y_COORD);
+        
         //create the route object.
         self.route = [[Route alloc] initWithGameLayer:self lightManager:self.lightManager];
         
@@ -136,7 +143,7 @@
         [self.route setInitialLight:firstLight];
         
         //add the player and set it to the first light position.
-        self.player = [[Player alloc] initWithGameLayer:self route:self.route currentLight:firstLight countdownBar:self.countdownBar];
+        self.player = [[Player alloc] initWithGameLayer:self route:self.route currentLight:firstLight countdownBar:self.countdownBar score:self.score];
     
         self.isTouchEnabled = YES;
     
@@ -154,7 +161,6 @@
         [self.lightManager update:dt];
         [self.player update:dt];
         [self.countdownBar update:dt];
-        [self.level update:dt];
     }
 }
 

@@ -63,6 +63,7 @@
 		B01B2A6E16AB2F8C00CD538A /* Light.m in Sources */ = {isa = PBXBuildFile; fileRef = B01B2A6D16AB2F8C00CD538A /* Light.m */; };
 		B01B2A7F16AB5C3000CD538A /* Route.m in Sources */ = {isa = PBXBuildFile; fileRef = B01B2A7E16AB5C3000CD538A /* Route.m */; };
 		B01B2A8216AB640800CD538A /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B01B2A8116AB640800CD538A /* Player.m */; };
+		B091131416D3E86A00387A3F /* Score.m in Sources */ = {isa = PBXBuildFile; fileRef = B091131316D3E86A00387A3F /* Score.m */; };
 		B09D0BF516AC6EEC00524AE7 /* Connector.m in Sources */ = {isa = PBXBuildFile; fileRef = B09D0BF416AC6EEC00524AE7 /* Connector.m */; };
 		B0A0EEBF16B0B30B00E47369 /* CountdownBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0EEBE16B0B30B00E47369 /* CountdownBar.m */; };
 		B0A0EEE216B1B00700E47369 /* CountdownBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EEE116B1B00700E47369 /* CountdownBorder.png */; };
@@ -122,7 +123,6 @@
 		B0A0EF7D16B4A11400E47369 /* NewGameButtonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF7C16B4A11400E47369 /* NewGameButtonSelected.png */; };
 		B0A0EF7F16B4A11A00E47369 /* NewGameButtonSelected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF7E16B4A11A00E47369 /* NewGameButtonSelected-hd.png */; };
 		B0A0EF9D16B6D17900E47369 /* AlternateWhiteCircle-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0A0EF9C16B6D17900E47369 /* AlternateWhiteCircle-hd.png */; };
-		B0A0EFA316B711DC00E47369 /* PowerUpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A0EFA216B711DB00E47369 /* PowerUpManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,6 +192,8 @@
 		B01B2A7E16AB5C3000CD538A /* Route.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Route.m; sourceTree = "<group>"; };
 		B01B2A8016AB640800CD538A /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		B01B2A8116AB640800CD538A /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		B091131216D3E86A00387A3F /* Score.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Score.h; sourceTree = "<group>"; };
+		B091131316D3E86A00387A3F /* Score.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Score.m; sourceTree = "<group>"; };
 		B09D0BF316AC6EEC00524AE7 /* Connector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connector.h; sourceTree = "<group>"; };
 		B09D0BF416AC6EEC00524AE7 /* Connector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Connector.m; sourceTree = "<group>"; };
 		B0A0EEBD16B0B30B00E47369 /* CountdownBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountdownBar.h; sourceTree = "<group>"; };
@@ -258,8 +260,6 @@
 		B0A0EF7C16B4A11400E47369 /* NewGameButtonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NewGameButtonSelected.png; sourceTree = "<group>"; };
 		B0A0EF7E16B4A11A00E47369 /* NewGameButtonSelected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NewGameButtonSelected-hd.png"; sourceTree = "<group>"; };
 		B0A0EF9C16B6D17900E47369 /* AlternateWhiteCircle-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AlternateWhiteCircle-hd.png"; sourceTree = "<group>"; };
-		B0A0EFA116B711DB00E47369 /* PowerUpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpManager.h; sourceTree = "<group>"; };
-		B0A0EFA216B711DB00E47369 /* PowerUpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpManager.m; sourceTree = "<group>"; };
 		B38E15D7535B4ABC8FAF569F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E02357077101404D92B4E06C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -376,12 +376,12 @@
 				B09D0BF416AC6EEC00524AE7 /* Connector.m */,
 				B01B2A8016AB640800CD538A /* Player.h */,
 				B01B2A8116AB640800CD538A /* Player.m */,
-				B0A0EFA116B711DB00E47369 /* PowerUpManager.h */,
-				B0A0EFA216B711DB00E47369 /* PowerUpManager.m */,
 				B0A0EEBD16B0B30B00E47369 /* CountdownBar.h */,
 				B0A0EEBE16B0B30B00E47369 /* CountdownBar.m */,
 				B0A0EF1D16B2F45500E47369 /* Level.h */,
 				B0A0EF1E16B2F45500E47369 /* Level.m */,
+				B091131216D3E86A00387A3F /* Score.h */,
+				B091131316D3E86A00387A3F /* Score.m */,
 				B01B2A6516AB2E2900CD538A /* GameConfig.h */,
 				B0036F5016C16F1D00D9EB7E /* Common.h */,
 				B01B28E016AB2B5200CD538A /* Resources */,
@@ -682,7 +682,7 @@
 				B0A0EF5D16B466C200E47369 /* LightManager.m in Sources */,
 				B0A0EF6416B4868E00E47369 /* MenuCircleGenerator.m in Sources */,
 				B0A0EF6716B488F000E47369 /* MenuLayer.m in Sources */,
-				B0A0EFA316B711DC00E47369 /* PowerUpManager.m in Sources */,
+				B091131416D3E86A00387A3F /* Score.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

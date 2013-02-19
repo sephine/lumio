@@ -16,9 +16,7 @@
 @property (nonatomic, strong) LightManager *lightManager;
 //TODO change this to the better CCLabelBMFont using a tool like heiro??
 @property (nonatomic, strong) CCLabelTTF *levelLabel;
-@property (nonatomic, strong) CCLabelTTF *timeLabel;
 @property (nonatomic) int level;
-@property (nonatomic) ccTime time;
 
 @end
 
@@ -29,15 +27,12 @@
 @synthesize countdownBar = _countdownBar;
 @synthesize lightManager = _lightManager;
 @synthesize levelLabel = _levelLabel;
-@synthesize timeLabel = _timeLabel;
 @synthesize level = _level;
-@synthesize time = _time;
 
 - (void)setPosition:(CGPoint)position
 {
     _position = position;
     self.levelLabel.position = position;
-    self.timeLabel.position = ccp(position.x + TIME_LABEL_OFFSET, position.y);
 }
 
 - (id)initWithGameLayer:(GameLayer *)gameLayer countdownBar:(CountdownBar *)countdownBar lightManager:(LightManager *)lightManager
@@ -52,45 +47,22 @@
         self.lightManager.maxCooldown = INITIAL_MAX_COOLDOWN;
         
         self.level = 1;
-        NSString *levelString = [NSString stringWithFormat:@"lvl %d", self.level];
+        NSString *levelString = [NSString stringWithFormat:@"Level - %d", self.level];
         self.levelLabel = [CCLabelTTF labelWithString:levelString
                                            dimensions:CGSizeMake(LEVEL_WIDTH, LEVEL_HEIGHT)
                                             alignment:UITextAlignmentLeft
                                              fontName:@"Helvetica"
-                                             fontSize:22];
+                                             fontSize:20];
         self.levelLabel.anchorPoint = ccp(0, 0);
         [self addChild:self.levelLabel];
-
-        self.time = LEVEL_LENGTH_IN_SECONDS;
-        NSString *timeString = [NSString stringWithFormat:@"%d", (int)ceil(self.time)];
-        self.timeLabel = [CCLabelTTF labelWithString:timeString
-                                           dimensions:CGSizeMake(TIME_WIDTH, TIME_HEIGHT)
-                                            alignment:UITextAlignmentRight
-                                             fontName:@"Helvetica"
-                                             fontSize:22];
-        self.timeLabel.anchorPoint = ccp(0, 0);
-        [self addChild:self.timeLabel];
     }
     return self;
-}
-
-- (void)update:(ccTime)dt
-{
-    self.time -= dt;
-    
-    if (self.time <= 0) {
-        [self increaseLevel];
-        self.time = LEVEL_LENGTH_IN_SECONDS;
-    }
-    
-    NSString *timeString = [NSString stringWithFormat:@"%d", (int)ceil(self.time)];
-    [self.timeLabel setString:timeString];
 }
 
 - (void)increaseLevel
 {
     self.level += 1;
-    NSString *levelString = [NSString stringWithFormat:@"lvl %d", self.level];
+    NSString *levelString = [NSString stringWithFormat:@"Level - %d", self.level];
     [self.levelLabel setString:levelString];
     
     //refillCountdownBar when they level up and increase countdownSpeed.

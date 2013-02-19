@@ -15,6 +15,7 @@
 @property (nonatomic, strong) GameLayer *gameLayer;
 @property (nonatomic, strong) Route *route;
 @property (nonatomic, strong) CountdownBar *countdownBar;
+@property (nonatomic, strong) Score *score;
 @property (nonatomic, strong) Light *currentLight;
 @property (nonatomic, strong) Light *nextLight;
 @property (nonatomic, strong) Light *possibleLight;
@@ -29,6 +30,7 @@
 @synthesize gameLayer = _gameLayer;
 @synthesize route = _route;
 @synthesize countdownBar = _countdownBar;
+@synthesize score = _score;
 @synthesize currentLight = _currentLight;
 @synthesize nextLight = _nextLight;
 @synthesize possibleLight = _possibleLight;
@@ -59,13 +61,14 @@
     [self addChild:_sprite z:2];
 }
 
-- (id)initWithGameLayer:(GameLayer *)gameLayer route:(id)route currentLight:(Light *)currentLight countdownBar:(CountdownBar *)countdownBar
+- (id)initWithGameLayer:(GameLayer *)gameLayer route:(id)route currentLight:(Light *)currentLight countdownBar:(CountdownBar *)countdownBar score:(Score *)score
 {
     if (self = [super init]) {
         self.gameLayer = gameLayer;
         self.route = route;
         self.route.player = self;
         self.countdownBar = countdownBar;
+        self.score = score;
         self.currentLight = currentLight;
         [self.currentLight occupyLightAndGetValue];
         self.position = currentLight.position;
@@ -128,6 +131,7 @@
                 self.hasCharge = YES;
             } else {
                 [self.countdownBar addValue:value];
+                [self.score increaseScoreByValue:value];
             }
             
             self.position = self.currentLight.position;
