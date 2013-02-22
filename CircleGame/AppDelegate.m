@@ -109,9 +109,9 @@
     CCScene *currentScene = [[CCDirector sharedDirector] runningScene];
     GameLayer *gameLayer = (GameLayer *)[currentScene getChildByTag:GAME_LAYER_TAG];
     
-    if (!gameLayer.gameIsPaused) {
+    if (gameLayer && !gameLayer.gameIsPaused) {
         gameLayer.gameIsPaused = YES;
-        InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameOver:NO];
+        InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initForPauseMenu];
         [currentScene addChild:menuLayer z:1];
     }
 }

@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "MenuLayer.h"
+#import "BaseMenuLayer.h"
 
 @interface MenuCircleGenerator : CCNode {
 }
 
-- (id)initWithMenuLayer:(MenuLayer *)menuLayer;
+- (id)initWithMenuLayer:(BaseMenuLayer *)menuLayer;
 - (void)update:(ccTime)dt;
 
 @end

@@ -12,6 +12,7 @@
 @interface InGameMenuLayer : CCLayer {
 }
 
-- (id)initWithGameOver:(BOOL)gameOver;
+- (id)initForPauseMenu;
+- (id)initForGameOverMenuWithScore:(int)score;
 
 @end

@@ -11,7 +11,7 @@
 
 @interface MenuCircleGenerator ()
 
-@property (nonatomic, strong) MenuLayer *menuLayer;
+@property (nonatomic, strong) BaseMenuLayer *menuLayer;
 @property (nonatomic, strong) NSMutableArray *spriteArray;
 @property (nonatomic, strong) NSMutableArray *timeArray;
 
@@ -23,7 +23,7 @@
 @synthesize spriteArray = _spriteArray;
 @synthesize timeArray = _timeArray;
 
-- (id)initWithMenuLayer:(MenuLayer *)menuLayer
+- (id)initWithMenuLayer:(BaseMenuLayer *)menuLayer
 {
     if (self = [super init]) {
         self.menuLayer = menuLayer;

@@ -7,6 +7,7 @@
 //
 
 #import "CountdownBar.h"
+#import "SimpleAudioEngine.h"
 #import "GameConfig.h"
 
 @interface CountdownBar ()
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) CCSprite *maskSprite;
 @property (nonatomic) float value;
 @property (nonatomic) float countdownSpeed;
+@property (nonatomic) ccTime glowTimeRemaining;
 
 @end
 
@@ -29,6 +31,7 @@
 @synthesize maskSprite = _maskSprite;
 @synthesize value = _value;
 @synthesize countdownSpeed = _countdownSpeed;
+@synthesize glowTimeRemaining = _glowTimeRemaining;
 
 - (void)setPosition:(CGPoint)position
 {
@@ -44,6 +47,7 @@
         self.gameLayer = gameLayer;
         self.value = 100;
         self.countdownSpeed = INITIAL_COUNTDOWN_SPEED_IN_PERCENTAGE_PER_SECOND;
+        self.glowTimeRemaining = 0;
         
         self.centreSprite = [CCSprite spriteWithFile:@"energy.png"];
         self.centreSprite.position = self.position;
@@ -69,15 +73,34 @@
 
 - (void)update:(ccTime)dt
 {
+    float initialTimeRemaining = self.value / self.countdownSpeed;
+    
     //decrease the value based on the time passed and the speed of decrease.
     float percentageDecrease = self.countdownSpeed * dt;
     self.value -= percentageDecrease;
+    
+    self.glowTimeRemaining -= dt;
+    if (self.glowTimeRemaining < 0) self.glowTimeRemaining = 0;
     
     if (self.value <= 0) {
         [self.gameLayer gameOver];
     } else {
         [self setTheCentreSpriteScaleAndColour];
     }
+    
+    //play warning sound once in warning zone.
+    float newTimeRemaining = self.value / self.countdownSpeed;
+    if (newTimeRemaining <= COUNTDOWN_WARNING_START_TIME && initialTimeRemaining > COUNTDOWN_WARNING_START_TIME) {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"warningSoundEffect.wav"];
+    }
+    
+    //if (newTimeRemaining <= COUNTDOWN_WARNING_START_TIME) {
+    //    float initialSoundTimeRemaining = fmodf(initialTimeRemaining, COUNTDOWN_WARNING_START_TIME /4);
+    //    float newSoundTimeRemaining = fmodf(newTimeRemaining, COUNTDOWN_WARNING_START_TIME /4);
+    //    if (newSoundTimeRemaining > initialSoundTimeRemaining) {
+    //        [[SimpleAudioEngine sharedEngine] playEffect:@"drumSoundEffect.mp3"];
+    //    }
+    //}
 }
 
 - (void)addValue:(LightValue)value
@@ -101,6 +124,7 @@
 - (void)refillBar
 {
     self.value = 100;
+    self.glowTimeRemaining = COUNTDOWN_BAR_GLOW_TIME;
 }
 
 - (void)setTheCentreSpriteScaleAndColour
@@ -109,17 +133,36 @@
     float valueProportion = self.value / 100.0;
     self.maskSprite.scaleX = 1 - valueProportion;
     
-    //self.centreSprite.scaleX = valueProportion;
-    
-    /*GLubyte red = 0;
-    GLubyte green = 0;
-    if (valueProportion >= CRITICAL_THRESHOLD) {
-        red = 255 - 255 * (valueProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
-        green = 255 * (valueProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
+    //change the colour to black if time left until bar empties is less than the warning time.
+    GLubyte red, green;
+    float timeRemaining = self.value / self.countdownSpeed;
+    if (timeRemaining <= COUNTDOWN_WARNING_START_TIME) {
+        float flashTimeProportion = fmodf(timeRemaining, COUNTDOWN_BAR_WARNING_FLASH_TIME) / COUNTDOWN_BAR_WARNING_FLASH_TIME;
+        if (flashTimeProportion <= 0.4) {
+            red = 3 - 3 * flashTimeProportion * 2.5;
+            green = 171 - 171 * flashTimeProportion * 2.5;
+        } else if (flashTimeProportion >= 0.6) {
+            red = 0 + 3 * (flashTimeProportion - 0.6) * 2.5;
+            green = 0 + 171 * (flashTimeProportion - 0.6) * 2.5;
+        } else {
+            red = 0;
+            green = 0;
+        }
     } else {
-        red = 255 * valueProportion / CRITICAL_THRESHOLD;
+        //change the colour to white based on glow time remaining.
+        float glowTimeProportion = self.glowTimeRemaining/ COUNTDOWN_BAR_GLOW_TIME;
+        if (glowTimeProportion <= 0.4) {
+            red = 3 + 97 * glowTimeProportion * 2.5;
+            green = 171 + 59 * glowTimeProportion * 2.5;
+        } else if (glowTimeProportion >= 0.6) {
+            red = 100 - 97 * (glowTimeProportion - 0.6) * 2.5;
+            green = 230 - 59 * (glowTimeProportion - 0.6) * 2.5;
+        } else {
+            red = 100;
+            green = 230;
+        }
     }
-    self.centreSprite.color = ccc3(red, green, 0);*/
+    self.centreSprite.color = ccc3(red, green, 255);
 }
 
 @end

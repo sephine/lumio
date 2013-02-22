@@ -8,6 +8,7 @@
 
 #import "Player.h"
 #import "Light.h"
+#import "SimpleAudioEngine.h"
 #import "GameConfig.h"
 
 @interface Player ()
@@ -129,9 +130,11 @@
             LightValue value = [self.currentLight occupyLightAndGetValue];
             if (value == Charge) {
                 self.hasCharge = YES;
-            } else {
+                [[SimpleAudioEngine sharedEngine] playEffect:@"purpleSoundEffect.wav"];
+            } else if (value != NoValue) {
                 [self.countdownBar addValue:value];
                 [self.score increaseScoreByValue:value];
+                [[SimpleAudioEngine sharedEngine] playEffect:@"purpleSoundEffect.wav"];
             }
             
             self.position = self.currentLight.position;

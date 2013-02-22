@@ -17,6 +17,7 @@
 #import "CountdownBar.h"
 #import "Level.h"
 #import "Score.h"
+#import "GameKitHelper.h"
 #import "GameConfig.h"
 
 // Needed to obtain the Navigation Controller
@@ -128,6 +129,9 @@
         [self.lightManager chooseFirstLightWithValue:Low];
         [self.lightManager chooseFirstLightWithValue:Charge];
         
+        //TODO remove second charge possibly.
+        [self.lightManager chooseFirstLightWithValue:Charge];
+        
         //create the level object and set its position.
         self.level = [[Level alloc] initWithGameLayer:self countdownBar:self.countdownBar lightManager:self.lightManager];
         self.level.position = ccp(LEVEL_X_COORD, LEVEL_Y_COORD);
@@ -188,7 +192,7 @@
     //make sure the button does nothing if the game is already paused.
     if (!self.gameIsPaused) {
         self.gameIsPaused = YES;
-        InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameOver:NO];
+        InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initForPauseMenu];
         [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
     }
 }
@@ -196,7 +200,15 @@
 - (void)gameOver
 {
     self.gameIsPaused = YES;
-    InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initWithGameOver:YES];
+    
+    //submit score to game center.
+    int score = self.score.scoreValue;
+    
+    GameKitHelper *helper = [GameKitHelper sharedGameKitHelper];
+    [helper submitScore:score];
+    
+    //TODO pass score to layer for display?
+    InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initForGameOverMenuWithScore:score];
     [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "Level.h"
+#import "SimpleAudioEngine.h"
 #import "GameConfig.h"
 
 @interface Level ()
@@ -52,7 +53,8 @@
                                            dimensions:CGSizeMake(LEVEL_WIDTH, LEVEL_HEIGHT)
                                             alignment:UITextAlignmentLeft
                                              fontName:@"Helvetica"
-                                             fontSize:20];
+                                             fontSize:19];
+        self.levelLabel.color = ccc3(3, 171, 255);
         self.levelLabel.anchorPoint = ccp(0, 0);
         [self addChild:self.levelLabel];
     }
@@ -62,6 +64,7 @@
 - (void)increaseLevel
 {
     self.level += 1;
+    if (self.level > MAX_LEVEL) self.level = MAX_LEVEL;
     NSString *levelString = [NSString stringWithFormat:@"Level - %d", self.level];
     [self.levelLabel setString:levelString];
     
@@ -81,6 +84,9 @@
     
     //update the lightmanager cooldown based on the new level.
     self.lightManager.maxCooldown = INITIAL_MAX_COOLDOWN + MAX_COOLDOWN_INCREASE * self.level;
+    
+    //play level up sound.
+    [[SimpleAudioEngine sharedEngine] playEffect:@"levelUpSoundEffect.wav"];
 }
 
 @end

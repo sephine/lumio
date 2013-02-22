@@ -18,8 +18,9 @@
 }
 
 @property (nonatomic) CGPoint position;
+@property (nonatomic) int scoreValue;
 
 - (id)initWithGameLayer:(GameLayer *)gameLayer level:(Level *)level;
-- (void)increaseScoreByValue:(LightValue)value;
+- (void)increaseScoreByValue:(LightValue)lightValue;
 
 @end
