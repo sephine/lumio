@@ -54,7 +54,6 @@
 		B00ABD7316D6F70A00DC78F4 /* energy-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B00ABD7216D6F70A00DC78F4 /* energy-hd.png */; };
 		B00ABD7516D70D2C00DC78F4 /* purpleSoundEffect.wav in Resources */ = {isa = PBXBuildFile; fileRef = B00ABD7416D70D2C00DC78F4 /* purpleSoundEffect.wav */; };
 		B00ABD7716D70E7F00DC78F4 /* levelUpSoundEffect.wav in Resources */ = {isa = PBXBuildFile; fileRef = B00ABD7616D70E7F00DC78F4 /* levelUpSoundEffect.wav */; };
-		B00ABD7916D710CA00DC78F4 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B00ABD7816D710CA00DC78F4 /* music.mp3 */; };
 		B00ABD7D16D7DDFC00DC78F4 /* warningSoundEffect.wav in Resources */ = {isa = PBXBuildFile; fileRef = B00ABD7C16D7DDFC00DC78F4 /* warningSoundEffect.wav */; };
 		B01B28CE16AB2B5200CD538A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28CD16AB2B5200CD538A /* QuartzCore.framework */; };
 		B01B28D016AB2B5200CD538A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28CF16AB2B5200CD538A /* OpenGLES.framework */; };
@@ -198,7 +197,6 @@
 		B00ABD7216D6F70A00DC78F4 /* energy-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "energy-hd.png"; sourceTree = "<group>"; };
 		B00ABD7416D70D2C00DC78F4 /* purpleSoundEffect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = purpleSoundEffect.wav; sourceTree = "<group>"; };
 		B00ABD7616D70E7F00DC78F4 /* levelUpSoundEffect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = levelUpSoundEffect.wav; sourceTree = "<group>"; };
-		B00ABD7816D710CA00DC78F4 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		B00ABD7C16D7DDFC00DC78F4 /* warningSoundEffect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = warningSoundEffect.wav; sourceTree = "<group>"; };
 		B01B28C916AB2B5200CD538A /* CircleGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircleGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01B28CD16AB2B5200CD538A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -474,7 +472,6 @@
 				B00ABD7416D70D2C00DC78F4 /* purpleSoundEffect.wav */,
 				B00ABD7616D70E7F00DC78F4 /* levelUpSoundEffect.wav */,
 				B00ABD7C16D7DDFC00DC78F4 /* warningSoundEffect.wav */,
-				B00ABD7816D710CA00DC78F4 /* music.mp3 */,
 				B01B28F716AB2B5200CD538A /* Info.plist */,
 				B01B28F816AB2B5200CD538A /* iTunesArtwork */,
 			);
@@ -731,7 +728,6 @@
 				B00ABD7316D6F70A00DC78F4 /* energy-hd.png in Resources */,
 				B00ABD7516D70D2C00DC78F4 /* purpleSoundEffect.wav in Resources */,
 				B00ABD7716D70E7F00DC78F4 /* levelUpSoundEffect.wav in Resources */,
-				B00ABD7916D710CA00DC78F4 /* music.mp3 in Resources */,
 				B00ABD7D16D7DDFC00DC78F4 /* warningSoundEffect.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
