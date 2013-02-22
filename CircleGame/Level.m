@@ -43,9 +43,10 @@
         self.countdownBar = countdownBar;
         [self.gameLayer addChild:self];
         
-        //set up the light manager with the intial max cooldown.
+        //set up the light manager with the intial max cooldown and an initial no countdown reduction.
         self.lightManager = lightManager;
         self.lightManager.maxCooldown = INITIAL_MAX_COOLDOWN;
+        self.lightManager.countdownReduction = 0;
         
         self.level = 1;
         NSString *levelString = [NSString stringWithFormat:@"Level - %d", self.level];
@@ -84,6 +85,9 @@
     
     //update the lightmanager cooldown based on the new level.
     self.lightManager.maxCooldown = INITIAL_MAX_COOLDOWN + MAX_COOLDOWN_INCREASE * self.level;
+    int countdownReduction = self.level / NUMBER_OF_LEVELS_FOR_COUNTDOWN_REDUCTION;
+    if (countdownReduction > MAX_COUNTDOWN_REDUCTION) countdownReduction = MAX_COUNTDOWN_REDUCTION;
+    self.lightManager.countdownReduction = countdownReduction;
     
     //play level up sound.
     [[SimpleAudioEngine sharedEngine] playEffect:@"levelUpSoundEffect.wav"];

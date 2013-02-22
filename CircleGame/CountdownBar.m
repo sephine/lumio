@@ -73,7 +73,7 @@
 
 - (void)update:(ccTime)dt
 {
-    float initialTimeRemaining = self.value / self.countdownSpeed;
+    float initialValue = self.value;
     
     //decrease the value based on the time passed and the speed of decrease.
     float percentageDecrease = self.countdownSpeed * dt;
@@ -89,8 +89,7 @@
     }
     
     //play warning sound once in warning zone.
-    float newTimeRemaining = self.value / self.countdownSpeed;
-    if (newTimeRemaining <= COUNTDOWN_WARNING_START_TIME && initialTimeRemaining > COUNTDOWN_WARNING_START_TIME) {
+    if (self.value <= COUNTDOWN_WARNING_START_PERCENTAGE && initialValue > COUNTDOWN_WARNING_START_PERCENTAGE) {
         [[SimpleAudioEngine sharedEngine] playEffect:@"warningSoundEffect.wav"];
     }
     
@@ -136,14 +135,14 @@
     //change the colour to black if time left until bar empties is less than the warning time.
     GLubyte red, green;
     float timeRemaining = self.value / self.countdownSpeed;
-    if (timeRemaining <= COUNTDOWN_WARNING_START_TIME) {
+    if (self.value <= COUNTDOWN_WARNING_START_PERCENTAGE) {
         float flashTimeProportion = fmodf(timeRemaining, COUNTDOWN_BAR_WARNING_FLASH_TIME) / COUNTDOWN_BAR_WARNING_FLASH_TIME;
-        if (flashTimeProportion <= 0.4) {
-            red = 3 - 3 * flashTimeProportion * 2.5;
-            green = 171 - 171 * flashTimeProportion * 2.5;
-        } else if (flashTimeProportion >= 0.6) {
-            red = 0 + 3 * (flashTimeProportion - 0.6) * 2.5;
-            green = 0 + 171 * (flashTimeProportion - 0.6) * 2.5;
+        if (flashTimeProportion <= 0.5) {
+            red = 3 - 3 * flashTimeProportion * 2;
+            green = 171 - 171 * flashTimeProportion * 2;
+        } else if (flashTimeProportion >= 0.5) {
+            red = 0 + 3 * (flashTimeProportion - 0.5) * 2;
+            green = 0 + 171 * (flashTimeProportion - 0.5) * 2;
         } else {
             red = 0;
             green = 0;

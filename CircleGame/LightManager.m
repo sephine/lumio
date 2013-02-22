@@ -20,6 +20,7 @@
 @synthesize route = _route;
 //@synthesize spawnCountdown = _spawnCountdown;
 @synthesize maxCooldown = _maxCooldown;
+@synthesize countdownReduction = _countdownReduction;
 @synthesize twoDimensionalLightArray = _twoDimensionalLightArray;
 
 - (id)initWithLightArray:(NSMutableArray *)lightArray

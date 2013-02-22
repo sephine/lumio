@@ -325,12 +325,14 @@
 //generates a time based on the split between high countdowns and low countdowns and randomly chooses a time in the given range.
 - (float)generateRefreshActiveTime
 {
-    return arc4random() % (MAX_REFRESH_COUNTDOWN - MIN_REFRESH_COUNTDOWN + 1) + MIN_REFRESH_COUNTDOWN;
+    float activeTimeBeforeReduction = arc4random() % (MAX_REFRESH_COUNTDOWN - MIN_REFRESH_COUNTDOWN + 1) + MIN_REFRESH_COUNTDOWN;
+    return activeTimeBeforeReduction - self.lightManager.countdownReduction;
 }
 
 - (float)generateSpawnActiveTime
 {
-    return arc4random() % (MAX_SPAWN_COUNTDOWN - MIN_SPAWN_COUNTDOWN + 1) + MIN_SPAWN_COUNTDOWN;
+    float spawnTimeBeforeReduction = arc4random() % (MAX_SPAWN_COUNTDOWN - MIN_SPAWN_COUNTDOWN + 1) + MIN_SPAWN_COUNTDOWN;
+    return spawnTimeBeforeReduction - self.lightManager.countdownReduction;
 }
 
 //generates a random cooldown time within the given range.
