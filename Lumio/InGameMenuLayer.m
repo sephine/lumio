@@ -32,10 +32,10 @@
         CCSprite *background;
         
         if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
-            background = [CCSprite spriteWithFile:@"InGameMenuBackground.png"];
+            background = [CCSprite spriteWithFile:@"NewInGameMenuBackground.png"];
             //background.rotation = 90;
         } else {
-            background = [CCSprite spriteWithFile:@"InGameMenuBackground.png"];
+            background = [CCSprite spriteWithFile:@"NewInGameMenuBackground.png"];
         }
         background.position = ccp(size.width/2, size.height/2);
         
@@ -68,57 +68,91 @@
 {
     self.gameOver = gameOver;
     
-    //get the old high score if possible and see if this score beats it.
-    GameKitHelper *helper = [GameKitHelper sharedGameKitHelper];
-    int64_t highScore = helper.highScore;
-    BOOL isNewHighScore = NO;
-    if (helper.highScoreFetchedOK && (int64_t)score > highScore) {
-        //store the new high score. The high score will only be loaded from game center the first time.
-        isNewHighScore = YES;
-        highScore = (int64_t)score;
-        helper.highScore = highScore;
-    }
-    
-    //TODO change this to show score and if it's a new high score or the current high score.
-    //add game over sprite if game over is true.
-    if (self.gameOver) {
-        CCSprite *gameOverSprite = [CCSprite spriteWithFile:@"GameOver.png"];
-        gameOverSprite.position = ccp(55, 440);
-        gameOverSprite.anchorPoint = ccp(0, 1);
-        [self addChild: gameOverSprite z:1];
+    if (!self.gameOver) {
+        NSString *pausedString = @"Paused";
+        CCLabelTTF *pausedLabel = [CCLabelTTF labelWithString:pausedString
+                                                 dimensions:CGSizeMake(140, 45)
+                                                  alignment:UITextAlignmentCenter
+                                                   fontName:@"Helvetica"
+                                                   fontSize:19];
+        pausedLabel.color = ccc3(160, 48, 252);
+        pausedLabel.position = ccp(90, 285);
+        pausedLabel.anchorPoint = ccp(0, 0);
+        [self addChild:pausedLabel];
+    } else {
+        //get the old high score if possible and see if this score beats it.
+        GameKitHelper *helper = [GameKitHelper sharedGameKitHelper];
+        int64_t highScore = 3000; // TEMP helper.highScore;
+        helper.highScoreFetchedOK = YES; // TEMP remove entirely!
+        BOOL isNewHighScore = NO;
+        if (helper.highScoreFetchedOK && (int64_t)score > highScore) {
+            //store the new high score. The high score will only be loaded from game center the first time.
+            isNewHighScore = YES;
+            highScore = (int64_t)score;
+            helper.highScore = highScore;
+        }
+        
+        NSString *scoreString = [NSString stringWithFormat:@"Score:\n%d", score];
+        CCLabelTTF *scoreLabel = [CCLabelTTF labelWithString:scoreString
+                                                   dimensions:CGSizeMake(140, 45)
+                                                    alignment:UITextAlignmentCenter
+                                                     fontName:@"Helvetica"
+                                                     fontSize:19];
+        scoreLabel.color = ccc3(160, 48, 252);
+        scoreLabel.position = ccp(90, 285);
+        scoreLabel.anchorPoint = ccp(0, 0);
+        [self addChild:scoreLabel];
+        
+        if (helper.highScoreFetchedOK) {
+            NSString *highScoreString;
+            if (isNewHighScore) {
+                highScoreString = @"New High\nScore!";
+            } else {
+                highScoreString = [NSString stringWithFormat:@"High Score:\n%lld", highScore];
+            }
+            CCLabelTTF *highScoreLabel = [CCLabelTTF labelWithString:highScoreString
+                                                      dimensions:CGSizeMake(140, 45)
+                                                       alignment:UITextAlignmentCenter
+                                                        fontName:@"Helvetica"
+                                                        fontSize:19];
+            highScoreLabel.color = ccc3(184, 108, 252);
+            highScoreLabel.position = ccp(90, 235);
+            highScoreLabel.anchorPoint = ccp(0, 0);
+            [self addChild:highScoreLabel];
+        }
     }
     
     //Create the Resume Menu Item.
     CCMenuItemImage *resumeMenuItem = [CCMenuItemImage
-                                itemWithNormalImage:@"ResumeButton.png" selectedImage:@"ResumeButtonSelected.png"
+                                itemWithNormalImage:@"NewResumeButton.png" selectedImage:@"NewResumeButtonSelected.png"
                                 target:self selector:@selector(resumeButtonTapped:)];
     resumeMenuItem.anchorPoint = ccp(0, 1);
-    resumeMenuItem.position = ccp(49, 410);
+    resumeMenuItem.position = ccp(100, 255);
     
     //Create the Restart Menu Item.
     CCMenuItemImage *restartMenuItem = [CCMenuItemImage
-                                  itemWithNormalImage:@"RestartButton.png" selectedImage:@"RestartButtonSelected.png"
+                                  itemWithNormalImage:@"NewRestartButton.png" selectedImage:@"NewRestartButtonSelected.png"
                                   target:self selector:@selector(restartButtonTapped:)];
     restartMenuItem.anchorPoint = ccp(0, 1);
     
     //Change the position based on whether it is a game over screen.
     if (self.gameOver) {
-        restartMenuItem.position = ccp(130, 350);
+        restartMenuItem.position = ccp(100, 215);
     } else {
-        restartMenuItem.position = ccp(140, 333);
+        restartMenuItem.position = ccp(100, 215);
     }
     
     //Create the 'Main Menu' Menu Item.
     CCMenuItem *mainMenuMenuItem = [CCMenuItemImage
-                                   itemWithNormalImage:@"MenuButton.png" selectedImage:@"MenuButtonSelected.png"
+                                   itemWithNormalImage:@"NewMainMenuButton.png" selectedImage:@"NewMainMenuButtonSelected.png"
                                    target:self selector:@selector(mainMenuButtonTapped:)];
     mainMenuMenuItem.anchorPoint = ccp(0, 1);
     
     //Change the position based on whether it is a game over screen.
     if (self.gameOver) {
-        mainMenuMenuItem.position = ccp(55, 210);
+        mainMenuMenuItem.position = ccp(100, 175);
     } else {
-        mainMenuMenuItem.position = ccp(45, 197);            
+        mainMenuMenuItem.position = ccp(100, 175);
     }
 
     //Only add resumeMenuItem it is not a game over screen.

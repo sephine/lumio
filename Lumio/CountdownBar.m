@@ -133,22 +133,25 @@
     self.maskSprite.scaleX = 1 - valueProportion;
     
     //change the colour to black if time left until bar empties is less than the warning time.
-    GLubyte red, green;
+    GLubyte red, green, blue;
     float timeRemaining = self.value / self.countdownSpeed;
     if (self.value <= COUNTDOWN_WARNING_START_PERCENTAGE) {
         float flashTimeProportion = fmodf(timeRemaining, COUNTDOWN_BAR_WARNING_FLASH_TIME) / COUNTDOWN_BAR_WARNING_FLASH_TIME;
-        if (flashTimeProportion <= 0.5) {
-            red = 3 - 3 * flashTimeProportion * 2;
+        /*if (flashTimeProportion <= 0.5) {
+            red = 3 + 252 * flashTimeProportion * 2;
             green = 171 - 171 * flashTimeProportion * 2;
-        } else if (flashTimeProportion >= 0.5) {
-            red = 0 + 3 * (flashTimeProportion - 0.5) * 2;
-            green = 0 + 171 * (flashTimeProportion - 0.5) * 2;
+            blue = 255 - 255 * flashTimeProportion * 2;
         } else {
-            red = 0;
-            green = 0;
-        }
+            red = 255 - 252 * (flashTimeProportion - 0.5) * 2;
+            green = 0 + 171 * (flashTimeProportion - 0.5) * 2;
+            blue = 0 + 255 * (flashTimeProportion - 0.5) * 2;
+        }*/
+        red = 0;
+        green = 0;
+        blue = 255;
     } else {
         //change the colour to white based on glow time remaining.
+        blue = 255;
         float glowTimeProportion = self.glowTimeRemaining/ COUNTDOWN_BAR_GLOW_TIME;
         if (glowTimeProportion <= 0.4) {
             red = 3 + 97 * glowTimeProportion * 2.5;
@@ -161,7 +164,7 @@
             green = 230;
         }
     }
-    self.centreSprite.color = ccc3(red, green, 255);
+    self.centreSprite.color = ccc3(red, green, blue);
 }
 
 @end
