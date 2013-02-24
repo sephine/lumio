@@ -107,18 +107,25 @@
         sprite.scale = timeProportion;
         GLubyte red = 0;
         GLubyte green = 0;
-        if (timeProportion >= CRITICAL_THRESHOLD) {
-            red = 255 - 255 * (timeProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
-            green = 255 * (timeProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
+        GLubyte blue = 0; //TEMP
+        if (timeProportion >= MENU_CRITICAL_THRESHOLD) {
+            //red = 255 - 255 * (timeProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
+            //green = 255 * (timeProportion - CRITICAL_THRESHOLD) / (1 - CRITICAL_THRESHOLD);
+            red = 3;
+            green = 171;
+            blue = 255; //3 171 255
         } else {
-            red = 255 * timeProportion / CRITICAL_THRESHOLD;
+            //red = 255 * timeProportion / CRITICAL_THRESHOLD;
+            red = 3 * timeProportion / MENU_CRITICAL_THRESHOLD;
+            green = 171 * timeProportion / MENU_CRITICAL_THRESHOLD;
+            blue = 255 * timeProportion / MENU_CRITICAL_THRESHOLD;
         }
-        sprite.color = ccc3(red, green, 0);
+        sprite.color = ccc3(red, green, blue);
         
         if (time >= 23) {
-            sprite.opacity = 60 * (24 - time);
+            sprite.opacity = 30 * (24 - time); //TEMP 60
         } else {
-            sprite.opacity = 60;
+            sprite.opacity = 30;
         }
     }
 }
