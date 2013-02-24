@@ -31,7 +31,7 @@
         
         //TODO for now show the selected button image for about as the tile of the page.
         CCSprite *aboutTitle = [CCSprite spriteWithFile:@"AboutButtonSelected.png"];
-        aboutTitle.position = ccp(160, 295);
+        aboutTitle.position = ccp(160, 330);
         [self addChild:aboutTitle];
         
         //Create the How To Play Menu Item.
@@ -50,7 +50,7 @@
                                           target:self selector:@selector(reviewAppButtonTapped:)];
         
         CCMenu *menu = [CCMenu menuWithItems:howToPlayMenuItem, leaderboardMenuItem, reviewAppMenuItem, nil];
-        menu.position = ccp(160, 205);
+        menu.position = ccp(160, 230);
         [menu alignItemsVerticallyWithPadding:10.0];
         [self addChild:menu];
         

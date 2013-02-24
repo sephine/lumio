@@ -60,12 +60,12 @@
 //#define SPAWN_COUNTDOWN_DECREASE
 //#define MAX_COOLDOWN 20 //16
 #define MIN_COOLDOWN 7
-#define INITIAL_MAX_COOLDOWN 25//15
-#define MAX_COOLDOWN_INCREASE 1
+#define INITIAL_MAX_COOLDOWN 30//15
+#define MAX_COOLDOWN_INCREASE 0.5
 #define CHARGE_TIME 0//0.5
 #define NUMBER_OF_SEGMENTS 45
 #define SPEED_UP_THRESHOLD 0.5
-#define CRITICAL_THRESHOLD 0.2 //proportion
+#define CRITICAL_THRESHOLD 0.1 //proportion
 #define INNER_CIRCLE_OPACITY 255
 #define OUTER_CIRCLE_OPACITY 150
 #define OPAQUE 255
@@ -99,13 +99,10 @@
 #define MAX_LEVEL 999
 #define MAX_SCORE 999999
 
-#define LIGHT_STATE_KEY @"LightState"
-#define LIGHT_VALUE_KEY @"LightValue"
-//#define LIGHT_ROW_KEY @"LightRow"
-//#define LIGHT_COLUMN_KEY @"LightColumn"
-#define LIGHT_ACTIVE_TIME_KEY @"LightActiveTime"
-#define LIGHT_COOLDOWN_TIME_KEY @"LightCooldownTime"
-#define LIGHT_CHARGE_TIME_KEY @"LightChargeTime"
+#define SOUND_EFFECTS_ON_KEY @"soundEffectsOnKey"
+#define MUSIC_ON_KEY @"musicOnKey"
+#define SOUND_EFFECTS_VOLUME 0.25f
+#define MUSIC_VOLUME 0.2f
 
 #define HIGH_SCORE_CATEGORY @"blah" //TODO
 

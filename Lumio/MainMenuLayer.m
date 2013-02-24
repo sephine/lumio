@@ -10,6 +10,7 @@
 #import "BaseMenuLayer.h"
 #import "GameLayer.h"
 #import "AboutLayer.h"
+#import "SettingsLayer.h"
 #import "GameConfig.h"
 
 @interface MainMenuLayer ()
@@ -29,6 +30,11 @@
     if (self = [super init]) {
         self.baseLayer = baseLayer;
         self.showContinue = showContinue;
+        
+        //add the logo to the top of the page.
+        CCSprite *logo = [CCSprite spriteWithFile:@"logo.png"];
+        logo.position = ccp(160, 347);
+        [self addChild:logo];
         
         //Create the Continue Menu Item.
         CCMenuItemImage *continueMenuItem = [CCMenuItemImage
@@ -57,7 +63,7 @@
             menu = [CCMenu menuWithItems:newGameMenuItem, aboutMenuItem, settingsMenuItem, nil];
         }
         
-        menu.position = ccp(160, 250);
+        menu.position = ccp(160, 190);
         [menu alignItemsVerticallyWithPadding:10.0];
         [self addChild:menu];
     }
@@ -90,7 +96,11 @@
 
 - (void)settingsButtonTapped:(id)sender
 {
-    //TODO
+    SettingsLayer *settingsLayer = [[SettingsLayer alloc] initWithBaseLayer:self.baseLayer showContinue:self.showContinue];
+    [[[CCDirector sharedDirector] runningScene] addChild:settingsLayer z:1];
+    
+    [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[settingsLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [self removeFromParentAndCleanup:YES];
 }
 
 @end

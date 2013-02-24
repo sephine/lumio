@@ -25,7 +25,44 @@
 
 @synthesize gameScene = _gameScene;
 @synthesize circles = _circles;
-//@synthesize containerScene = _containerScene;
+
+- (BOOL)soundEffectsOn
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL soundEffectsOn;
+    if ([defaults objectForKey:SOUND_EFFECTS_ON_KEY]) {
+        soundEffectsOn = [defaults boolForKey:SOUND_EFFECTS_ON_KEY];
+    } else {
+        soundEffectsOn = YES;
+        [defaults setBool:soundEffectsOn forKey:SOUND_EFFECTS_ON_KEY];
+    }
+    return soundEffectsOn;
+}
+
+- (void)setSoundEffectsOn:(BOOL)soundEffectsOn
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:soundEffectsOn forKey:SOUND_EFFECTS_ON_KEY];
+}
+
+- (BOOL)musicOn
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL musicOn;
+    if ([defaults objectForKey:MUSIC_ON_KEY]) {
+        musicOn = [defaults boolForKey:MUSIC_ON_KEY];
+    } else {
+        musicOn = YES;
+        [defaults setBool:musicOn forKey:MUSIC_ON_KEY];
+    }
+    return musicOn;
+}
+
+- (void)setMusicOn:(BOOL)musicOn
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:musicOn forKey:MUSIC_ON_KEY];
+}
 
 // Helper class method that creates a Scene with the MenuLayer as the only child.
 +(CCScene *) scene
@@ -60,26 +97,10 @@
 
 - (id)initWithPreviousScene:(CCScene *)previousScene
 {
-    if (self = [self init]) {
+    if( (self=[super initWithColor:ccc4(15, 15, 15, 255)]) ) {
         
         //authenticate the player when the menu screen is created.
         [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
-        
-        // ask director for the window size
-        CGSize size = [[CCDirector sharedDirector] winSize];
-        
-        CCSprite *background;
-        
-        if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
-            background = [CCSprite spriteWithFile:@"MenuBackground.png"];
-            //background.rotation = 90;
-        } else {
-            background = [CCSprite spriteWithFile:@"MenuBackground.png"];
-        }
-        background.position = ccp(size.width/2, size.height/2);
-        
-        // add the background as a child to this Layer
-        [self addChild: background z:0];
         
         //create the menu circle generator.
         self.circles = [[MenuCircleGenerator alloc] initWithMenuLayer:self];
@@ -94,13 +115,28 @@
         }
         [self addChild:menuLayer z:1];
         
-        //play background music. TODO
-        //[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music.mp3"];
-        //[CDAudioManager sharedManager].backgroundMusic.volume = 0.2f;
+        //preload all the sound and music if this is the first time the menu is shown (when previous scene is nil).
+        if (!previousScene) {
+            SimpleAudioEngine *sae = [SimpleAudioEngine sharedEngine];
+            [sae preloadEffect:@"levelUpSoundEfect.wav"];
+            [sae preloadEffect:@"purpleSoundEfect.wav"];
+            [sae preloadEffect:@"warningSoundEfect.wav"];
+            [sae preloadBackgroundMusic:@"music.mp3"];
+            //TODO add all the other sounds and music.
+            
+            //load sound and music settings and set the volumes accordingly.
+            sae.effectsVolume = self.soundEffectsOn ? SOUND_EFFECTS_VOLUME : 0;
+            sae.backgroundMusicVolume = self.musicOn ? MUSIC_VOLUME : 0;
+            
+            //play background music. TODO
+            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music.mp3"];
+        }
         
         self.isTouchEnabled = YES;
         
         [self schedule:@selector(update:)];
+        
+        //TODO add button press sound.
     }
     return self;
 }
