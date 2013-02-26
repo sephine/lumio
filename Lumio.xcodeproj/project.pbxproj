@@ -114,10 +114,10 @@
 		B0DBC89916DC2B490050F9CF /* BackButtonSelected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DBC89816DC2B490050F9CF /* BackButtonSelected-hd.png */; };
 		B0DBC89B16DC2B500050F9CF /* NextButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DBC89A16DC2B500050F9CF /* NextButton-hd.png */; };
 		B0DBC89D16DC2B560050F9CF /* NextButtonSelected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DBC89C16DC2B560050F9CF /* NextButtonSelected-hd.png */; };
-		B0DBC8A016DC31000050F9CF /* HowToPlayMovementLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DBC89F16DC30FF0050F9CF /* HowToPlayMovementLayer.m */; };
-		B0DBC8A316DC31160050F9CF /* HowToPlayPowerupLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DBC8A216DC31160050F9CF /* HowToPlayPowerupLayer.m */; };
 		B0DBC8A516DC38B10050F9CF /* DoneButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DBC8A416DC38B10050F9CF /* DoneButton-hd.png */; };
 		B0DBC8A716DC38B60050F9CF /* DoneButtonSelected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DBC8A616DC38B60050F9CF /* DoneButtonSelected-hd.png */; };
+		B0DBC8AA16DC44580050F9CF /* HowToPlayMovementLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DBC8A916DC44580050F9CF /* HowToPlayMovementLayer.m */; };
+		B0DBC8AD16DC44630050F9CF /* HowToPlayPowerupLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DBC8AC16DC44620050F9CF /* HowToPlayPowerupLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -253,12 +253,12 @@
 		B0DBC89816DC2B490050F9CF /* BackButtonSelected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BackButtonSelected-hd.png"; path = "Lumio/Resources/HD Images/Menu/BackButtonSelected-hd.png"; sourceTree = SOURCE_ROOT; };
 		B0DBC89A16DC2B500050F9CF /* NextButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NextButton-hd.png"; path = "Lumio/Resources/HD Images/Menu/NextButton-hd.png"; sourceTree = SOURCE_ROOT; };
 		B0DBC89C16DC2B560050F9CF /* NextButtonSelected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NextButtonSelected-hd.png"; path = "Lumio/Resources/HD Images/Menu/NextButtonSelected-hd.png"; sourceTree = SOURCE_ROOT; };
-		B0DBC89E16DC30FF0050F9CF /* HowToPlayMovementLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowToPlayMovementLayer.h; sourceTree = SOURCE_ROOT; };
-		B0DBC89F16DC30FF0050F9CF /* HowToPlayMovementLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowToPlayMovementLayer.m; sourceTree = SOURCE_ROOT; };
-		B0DBC8A116DC31150050F9CF /* HowToPlayPowerupLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowToPlayPowerupLayer.h; sourceTree = SOURCE_ROOT; };
-		B0DBC8A216DC31160050F9CF /* HowToPlayPowerupLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowToPlayPowerupLayer.m; sourceTree = SOURCE_ROOT; };
 		B0DBC8A416DC38B10050F9CF /* DoneButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DoneButton-hd.png"; path = "Lumio/Resources/HD Images/Menu/DoneButton-hd.png"; sourceTree = SOURCE_ROOT; };
 		B0DBC8A616DC38B60050F9CF /* DoneButtonSelected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DoneButtonSelected-hd.png"; path = "Lumio/Resources/HD Images/Menu/DoneButtonSelected-hd.png"; sourceTree = SOURCE_ROOT; };
+		B0DBC8A816DC44540050F9CF /* HowToPlayMovementLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HowToPlayMovementLayer.h; path = Lumio/HowToPlayMovementLayer.h; sourceTree = SOURCE_ROOT; };
+		B0DBC8A916DC44580050F9CF /* HowToPlayMovementLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HowToPlayMovementLayer.m; path = Lumio/HowToPlayMovementLayer.m; sourceTree = SOURCE_ROOT; };
+		B0DBC8AB16DC445E0050F9CF /* HowToPlayPowerupLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HowToPlayPowerupLayer.h; path = Lumio/HowToPlayPowerupLayer.h; sourceTree = SOURCE_ROOT; };
+		B0DBC8AC16DC44620050F9CF /* HowToPlayPowerupLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HowToPlayPowerupLayer.m; path = Lumio/HowToPlayPowerupLayer.m; sourceTree = SOURCE_ROOT; };
 		B7CBF786D3264DF6BFED9013 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -436,10 +436,10 @@
 				B0DBC82D16DA71D80050F9CF /* SettingsLayer.m */,
 				B0DBC88D16DC27B90050F9CF /* HowToPlayAimLayer.h */,
 				B0DBC88E16DC27C10050F9CF /* HowToPlayAimLayer.m */,
-				B0DBC89E16DC30FF0050F9CF /* HowToPlayMovementLayer.h */,
-				B0DBC89F16DC30FF0050F9CF /* HowToPlayMovementLayer.m */,
-				B0DBC8A116DC31150050F9CF /* HowToPlayPowerupLayer.h */,
-				B0DBC8A216DC31160050F9CF /* HowToPlayPowerupLayer.m */,
+				B0DBC8A816DC44540050F9CF /* HowToPlayMovementLayer.h */,
+				B0DBC8A916DC44580050F9CF /* HowToPlayMovementLayer.m */,
+				B0DBC8AB16DC445E0050F9CF /* HowToPlayPowerupLayer.h */,
+				B0DBC8AC16DC44620050F9CF /* HowToPlayPowerupLayer.m */,
 				B00ABDB016D827B000DC78F4 /* GameLayer.h */,
 				B00ABDB116D827B500DC78F4 /* GameLayer.m */,
 				B00ABDB316D827C100DC78F4 /* InGameMenuLayer.h */,
@@ -740,8 +740,8 @@
 				B00ABEF916D83F7700DC78F4 /* main.m in Sources */,
 				B0DBC82E16DA71D80050F9CF /* SettingsLayer.m in Sources */,
 				B0DBC88F16DC27C10050F9CF /* HowToPlayAimLayer.m in Sources */,
-				B0DBC8A016DC31000050F9CF /* HowToPlayMovementLayer.m in Sources */,
-				B0DBC8A316DC31160050F9CF /* HowToPlayPowerupLayer.m in Sources */,
+				B0DBC8AA16DC44580050F9CF /* HowToPlayMovementLayer.m in Sources */,
+				B0DBC8AD16DC44630050F9CF /* HowToPlayPowerupLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
