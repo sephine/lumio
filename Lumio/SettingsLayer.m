@@ -105,7 +105,7 @@
                                                                          selector:@selector(backwardsButtonTapped:)];
         
         CCMenu *backwardsMenu = [CCMenu menuWithItems:backwardsMenuItem, nil];
-        backwardsMenu.position = ccp(96, 51);
+        backwardsMenu.position = ccp(76, 51);
         [self addChild:backwardsMenu];
     }
     return self;
