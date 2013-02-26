@@ -19,6 +19,7 @@
 @interface GameKitHelper : NSObject <GKLeaderboardViewControllerDelegate>
 
 @property (nonatomic, strong) id<GameKitHelperProtocol> delegate;
+@property (nonatomic) BOOL authenticationAttempted;
 @property (nonatomic) int64_t highScore;
 @property (nonatomic) BOOL highScoreFetchedOK;
 

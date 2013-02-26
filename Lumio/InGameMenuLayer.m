@@ -82,8 +82,7 @@
     } else {
         //get the old high score if possible and see if this score beats it.
         GameKitHelper *helper = [GameKitHelper sharedGameKitHelper];
-        int64_t highScore = 3000; // TEMP helper.highScore;
-        helper.highScoreFetchedOK = YES; // TEMP remove entirely!
+        int64_t highScore = helper.highScore;
         BOOL isNewHighScore = NO;
         if (helper.highScoreFetchedOK && (int64_t)score > highScore) {
             //store the new high score. The high score will only be loaded from game center the first time.

@@ -8,6 +8,7 @@
 
 #import "AboutLayer.h"
 #import "MainMenuLayer.h"
+#import "HowToPlayAimLayer.h"
 #import "GameKitHelper.h"
 
 @interface AboutLayer ()
@@ -56,11 +57,11 @@
         
         //Create the Backwards Menu Item and put it in its own menu.
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
-                                              itemWithNormalImage:@"BackwardsButton.png" selectedImage:@"BackwardsButtonSelected.png"
+                                              itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
         
         CCMenu *backwardsMenu = [CCMenu menuWithItems:backwardsMenuItem, nil];
-        backwardsMenu.position = ccp(40, 40);
+        backwardsMenu.position = ccp(96, 51);
         [self addChild:backwardsMenu];
     }
     return self;
@@ -68,8 +69,11 @@
 
 - (void)howToPlayButtonTapped:(id)sender
 {
-    //TODO
-}
+    HowToPlayAimLayer *howToPlayLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:NO];
+    [[[CCDirector sharedDirector] runningScene] addChild:howToPlayLayer z:1];
+    
+    [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[howToPlayLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [self removeFromParentAndCleanup:YES];}
 
 - (void)leaderboardButtonTapped:(id)sender
 {
@@ -80,7 +84,7 @@
 - (void)reviewAppButtonTapped:(id)sender
 {
     //TODO change the appID!
-    NSString *appID = @"285691333";
+    NSString *appID = @"608072046";
     NSString *urlstring = [NSString stringWithFormat: @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", appID];
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString:urlstring]];
 }

@@ -11,6 +11,7 @@
 #import "GameLayer.h"
 #import "AboutLayer.h"
 #import "SettingsLayer.h"
+#import "HowToPlayAimLayer.h"
 #import "GameConfig.h"
 
 @interface MainMenuLayer ()
@@ -72,7 +73,15 @@
 
 - (void)newGameButtonTapped:(id)sender
 {
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.6 scene:[GameLayer scene] withColor:ccBLACK]];
+    if (self.baseLayer.firstPlay) {
+        HowToPlayAimLayer *howToPlayLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseLayer showContinue:self.showContinue goToGame:YES];
+        [[[CCDirector sharedDirector] runningScene] addChild:howToPlayLayer z:1];
+        
+        [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[howToPlayLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+        [self removeFromParentAndCleanup:YES];
+    } else {
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.6 scene:[GameLayer scene] withColor:ccBLACK]];
+    }
 }
 
 - (void)continueButtonTapped:(id)sender

@@ -64,6 +64,25 @@
     [defaults setBool:musicOn forKey:MUSIC_ON_KEY];
 }
 
+- (BOOL)firstPlay
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL firstPlay;
+    if ([defaults objectForKey:FIRST_PLAY_KEY]) {
+        firstPlay = [defaults boolForKey:FIRST_PLAY_KEY];
+    } else {
+        firstPlay = YES;
+        [defaults setBool:firstPlay forKey:FIRST_PLAY_KEY];
+    }
+    return firstPlay;
+}
+
+- (void)setFirstPlay:(BOOL)firstPlay
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:firstPlay forKey:FIRST_PLAY_KEY];
+}
+
 // Helper class method that creates a Scene with the MenuLayer as the only child.
 +(CCScene *) scene
 {
@@ -99,24 +118,12 @@
 {
     if( (self=[super initWithColor:ccc4(15, 15, 15, 255)]) ) {
         
-        //authenticate the player when the menu screen is created.
-        [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
-        
-        //create the menu circle generator.
-        self.circles = [[MenuCircleGenerator alloc] initWithMenuLayer:self];
-        
-        //currently if a previous scene is provided it will always be the game scene. Create the main menu layer scene with continue or not as appropriate.
-        MainMenuLayer *menuLayer;
-        if (previousScene) {
-            self.gameScene = previousScene;
-            menuLayer = [[MainMenuLayer alloc] initWithBaseLayer:self showContinue:YES];
-        } else {
-            menuLayer = [[MainMenuLayer alloc] initWithBaseLayer:self showContinue:NO];
-        }
-        [self addChild:menuLayer z:1];
-        
-        //preload all the sound and music if this is the first time the menu is shown (when previous scene is nil).
-        if (!previousScene) {
+        //authenticate the player and preload the sound and music when the menu screen is shown for the first time.
+        GameKitHelper *helper = [GameKitHelper sharedGameKitHelper];
+        if (!helper.authenticationAttempted) {
+            [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+            
+            //preload sound and music.
             SimpleAudioEngine *sae = [SimpleAudioEngine sharedEngine];
             [sae preloadEffect:@"levelUpSoundEfect.wav"];
             [sae preloadEffect:@"purpleSoundEfect.wav"];
@@ -131,6 +138,19 @@
             //play background music. TODO
             [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music.mp3"];
         }
+        
+        //create the menu circle generator.
+        self.circles = [[MenuCircleGenerator alloc] initWithMenuLayer:self];
+        
+        //currently if a previous scene is provided it will always be the game scene. Create the main menu layer scene with continue or not as appropriate.
+        MainMenuLayer *menuLayer;
+        if (previousScene) {
+            self.gameScene = previousScene;
+            menuLayer = [[MainMenuLayer alloc] initWithBaseLayer:self showContinue:YES];
+        } else {
+            menuLayer = [[MainMenuLayer alloc] initWithBaseLayer:self showContinue:NO];
+        }
+        [self addChild:menuLayer z:1];
         
         self.isTouchEnabled = YES;
         

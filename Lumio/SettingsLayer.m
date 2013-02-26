@@ -99,13 +99,13 @@
         [self addChild:menu];
         
         //Create the Backwards Menu Item and put it in its own menu.
-        CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage itemWithNormalImage:@"BackwardsButton.png"
-                                                                    selectedImage:@"BackwardsButtonSelected.png"
+        CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage itemWithNormalImage:@"BackButton.png"
+                                                                    selectedImage:@"BackButtonSelected.png"
                                                                            target:self
                                                                          selector:@selector(backwardsButtonTapped:)];
         
         CCMenu *backwardsMenu = [CCMenu menuWithItems:backwardsMenuItem, nil];
-        backwardsMenu.position = ccp(40, 40);
+        backwardsMenu.position = ccp(96, 51);
         [self addChild:backwardsMenu];
     }
     return self;

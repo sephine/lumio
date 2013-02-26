@@ -12,7 +12,7 @@
 
 @interface GameKitHelper () <GKGameCenterControllerDelegate>
 
-@property (nonatomic) BOOL gameCenterFeaturesEnabled;
+@property (nonatomic) BOOL userAuthenticated;
 
 @end
 
@@ -21,7 +21,8 @@
 @synthesize delegate = _delegate;
 @synthesize lastError = _lastError;
 //@synthesize inGame = _inGame;
-@synthesize gameCenterFeaturesEnabled = _gameCenterFeaturesEnabled;
+@synthesize userAuthenticated = _gameCenterFeaturesEnabled;
+@synthesize authenticationAttempted = _authenticationAttempted;
 @synthesize highScore = _highScore;
 @synthesize highScoreFetchedOK = _highScoreFetchedOK;
 
@@ -52,27 +53,55 @@
         //get the player's high score from game center.
         self.highScore = 0;
         self.highScoreFetchedOK = NO;
-        [self getHighScore];
+        self.authenticationAttempted = NO;
+        
+        //set up the notification for if the player authentication has changed (used for ios 5).
+        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+        [notificationCenter addObserver:self selector:@selector(authenticationChanged) name:GKPlayerAuthenticationDidChangeNotificationName object:nil];
     }
     return self;
 }
 
 - (void)authenticateLocalPlayer
 {
+    self.authenticationAttempted = YES;
+    NSString *reqSysVer = @"6.0";
+    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-    
-    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
-        self.lastError = error;
-        
-        if (viewController) {
-            //TODO ensure this either doesn't appear in game or that it pauses the game.
-            [self presentViewController:viewController];
-        } else if (localPlayer.isAuthenticated) {
-            self.gameCenterFeaturesEnabled = YES;
-        } else {
-            self.gameCenterFeaturesEnabled = NO;
-        }
-    };
+    if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending)
+    {
+        // Gamekit login for ios 6
+        localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
+            self.lastError = error;
+            
+            if (viewController) {
+                //TODO ensure this either doesn't appear in game or that it pauses the game.
+                [self presentViewController:viewController];
+            } else if (localPlayer.isAuthenticated) {
+                self.userAuthenticated = YES;
+                [self getHighScore];
+            } else {
+                self.userAuthenticated = NO;
+                self.highScoreFetchedOK = NO;
+                self.highScore = 0;
+            }
+        };
+    } else {
+        // Gamekit login for ios 5
+        [localPlayer authenticateWithCompletionHandler:nil];
+    }
+}
+
+- (void)authenticationChanged
+{
+    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    self.userAuthenticated = localPlayer.isAuthenticated;
+    if (self.userAuthenticated) {
+        [self getHighScore];
+    } else {
+        self.highScoreFetchedOK = NO;
+        self.highScore = 0;
+    }
 }
 
 - (void)presentViewController:(UIViewController *)viewController
@@ -84,7 +113,7 @@
 - (void)submitScore:(int64_t)score
 {
     //only try and submit score if game center features enabled.
-    if (!self.gameCenterFeaturesEnabled) {
+    if (!self.userAuthenticated) {
         NSLog(@"Player not authenticated");
     } else {
         //create score object, there is only one score category. Set the value to the score.
@@ -104,7 +133,9 @@
 
 - (void)getHighScore
 {
-    if (!self.gameCenterFeaturesEnabled) {
+    self.highScoreFetchedOK = NO;
+    self.highScore = 0;
+    if (!self.userAuthenticated) {
         NSLog(@"Player not authenticated");
     } else {
         NSString *localPlayerID = [GKLocalPlayer localPlayer].playerID;

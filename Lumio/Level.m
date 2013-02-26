@@ -84,8 +84,8 @@
     [self.countdownBar increaseCountdownSpeed:speedIncrease];
     
     //update the lightmanager cooldown based on the new level.
-    self.lightManager.maxCooldown = INITIAL_MAX_COOLDOWN + MAX_COOLDOWN_INCREASE * self.level;
-    int countdownReduction = self.level / NUMBER_OF_LEVELS_FOR_COUNTDOWN_REDUCTION;
+    self.lightManager.maxCooldown = INITIAL_MAX_COOLDOWN + MAX_COOLDOWN_INCREASE * (self.level - 1);
+    float countdownReduction = (self.level - 1) * COUNTDOWN_REDUCTION_PER_LEVEL;
     if (countdownReduction > MAX_COUNTDOWN_REDUCTION) countdownReduction = MAX_COUNTDOWN_REDUCTION;
     self.lightManager.countdownReduction = countdownReduction;
     

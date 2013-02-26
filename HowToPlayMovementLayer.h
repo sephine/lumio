@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "BaseMenuLayer.h"
+#import "CCLayerWithTransparency.h"
 
 @interface HowToPlayMovementLayer : CCLayerWithTransparency {
-    
 }
+
+- (id)initWithBaseLayer:(BaseMenuLayer *)baseLayer showContinue:(BOOL)showContinue goToGame:(BOOL)goToGame;
 
 @end

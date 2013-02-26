@@ -15,6 +15,7 @@
 @property (nonatomic, strong) CCScene *gameScene;
 @property (nonatomic) BOOL soundEffectsOn;
 @property (nonatomic) BOOL musicOn;
+@property (nonatomic) BOOL firstPlay;
 
 // returns a CCScene that contains the MenuLayer as the only child
 +(CCScene *) scene;
