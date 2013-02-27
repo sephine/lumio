@@ -76,6 +76,8 @@
 		B01B28DC16AB2B5200CD538A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28DB16AB2B5200CD538A /* CoreGraphics.framework */; };
 		B01B28DE16AB2B5200CD538A /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28DD16AB2B5200CD538A /* GameKit.framework */; };
 		B0D8A43616D84D230022641B /* BlueRoutedLayer-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D8A43516D84D230022641B /* BlueRoutedLayer-hd.png */; };
+		B0DB62AC16DE647400B25E19 /* ReadyLayer-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DB62AB16DE647400B25E19 /* ReadyLayer-hd.png */; };
+		B0DB62B316DE6B3600B25E19 /* ReadyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DB62B216DE6B3600B25E19 /* ReadyLayer.m */; };
 		B0DBC81416D961C40050F9CF /* NewResumeButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DBC81316D961C40050F9CF /* NewResumeButton-hd.png */; };
 		B0DBC81616D961C80050F9CF /* NewResumeButtonSelected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DBC81516D961C80050F9CF /* NewResumeButtonSelected-hd.png */; };
 		B0DBC81816D961CE0050F9CF /* NewRestartButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DBC81716D961CE0050F9CF /* NewRestartButton-hd.png */; };
@@ -213,6 +215,9 @@
 		B01B28DB16AB2B5200CD538A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B01B28DD16AB2B5200CD538A /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		B0D8A43516D84D230022641B /* BlueRoutedLayer-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BlueRoutedLayer-hd.png"; path = "Lumio/Resources/HD Images/Game/BlueRoutedLayer-hd.png"; sourceTree = SOURCE_ROOT; };
+		B0DB62AB16DE647400B25E19 /* ReadyLayer-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ReadyLayer-hd.png"; path = "Lumio/Resources/HD Images/Menu/ReadyLayer-hd.png"; sourceTree = SOURCE_ROOT; };
+		B0DB62B116DE6B3100B25E19 /* ReadyLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadyLayer.h; path = Lumio/ReadyLayer.h; sourceTree = SOURCE_ROOT; };
+		B0DB62B216DE6B3600B25E19 /* ReadyLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReadyLayer.m; path = Lumio/ReadyLayer.m; sourceTree = SOURCE_ROOT; };
 		B0DBC81316D961C40050F9CF /* NewResumeButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NewResumeButton-hd.png"; path = "Lumio/Resources/HD Images/Menu/NewResumeButton-hd.png"; sourceTree = SOURCE_ROOT; };
 		B0DBC81516D961C80050F9CF /* NewResumeButtonSelected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NewResumeButtonSelected-hd.png"; path = "Lumio/Resources/HD Images/Menu/NewResumeButtonSelected-hd.png"; sourceTree = SOURCE_ROOT; };
 		B0DBC81716D961CE0050F9CF /* NewRestartButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NewRestartButton-hd.png"; path = "Lumio/Resources/HD Images/Menu/NewRestartButton-hd.png"; sourceTree = SOURCE_ROOT; };
@@ -342,6 +347,7 @@
 				B0DBC8A416DC38B10050F9CF /* DoneButton-hd.png */,
 				B0DBC8A616DC38B60050F9CF /* DoneButtonSelected-hd.png */,
 				B00ABEA216D8322B00DC78F4 /* MenuCircle-hd.png */,
+				B0DB62AB16DE647400B25E19 /* ReadyLayer-hd.png */,
 				B0DBC81316D961C40050F9CF /* NewResumeButton-hd.png */,
 				B0DBC81516D961C80050F9CF /* NewResumeButtonSelected-hd.png */,
 				B0DBC81716D961CE0050F9CF /* NewRestartButton-hd.png */,
@@ -442,6 +448,8 @@
 				B0DBC8AC16DC44620050F9CF /* HowToPlayPowerupLayer.m */,
 				B00ABDB016D827B000DC78F4 /* GameLayer.h */,
 				B00ABDB116D827B500DC78F4 /* GameLayer.m */,
+				B0DB62B116DE6B3100B25E19 /* ReadyLayer.h */,
+				B0DB62B216DE6B3600B25E19 /* ReadyLayer.m */,
 				B00ABDB316D827C100DC78F4 /* InGameMenuLayer.h */,
 				B00ABDB416D827C700DC78F4 /* InGameMenuLayer.m */,
 				B00ABDB616D827DB00DC78F4 /* MenuCircleGenerator.h */,
@@ -664,6 +672,7 @@
 				B0DBC89D16DC2B560050F9CF /* NextButtonSelected-hd.png in Resources */,
 				B0DBC8A516DC38B10050F9CF /* DoneButton-hd.png in Resources */,
 				B0DBC8A716DC38B60050F9CF /* DoneButtonSelected-hd.png in Resources */,
+				B0DB62AC16DE647400B25E19 /* ReadyLayer-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +751,7 @@
 				B0DBC88F16DC27C10050F9CF /* HowToPlayAimLayer.m in Sources */,
 				B0DBC8AA16DC44580050F9CF /* HowToPlayMovementLayer.m in Sources */,
 				B0DBC8AD16DC44630050F9CF /* HowToPlayPowerupLayer.m in Sources */,
+				B0DB62B316DE6B3600B25E19 /* ReadyLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

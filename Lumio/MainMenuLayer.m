@@ -9,6 +9,7 @@
 #import "MainMenuLayer.h"
 #import "BaseMenuLayer.h"
 #import "GameLayer.h"
+#import "ReadyLayer.h"
 #import "AboutLayer.h"
 #import "SettingsLayer.h"
 #import "HowToPlayAimLayer.h"
@@ -86,12 +87,16 @@
 
 - (void)continueButtonTapped:(id)sender
 {
-    //go back to previous game scene and unpause the game layer.
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.6 scene:self.baseLayer.gameScene withColor:ccBLACK]];
-    GameLayer *gameLayer = (GameLayer *)[self.baseLayer.gameScene getChildByTag:GAME_LAYER_TAG];
+    //go back to previous game scene and add the ready layer.
+    CCScene *gameScene = self.baseLayer.gameScene;
+    ReadyLayer *readyLayer = [[ReadyLayer alloc] init];
+    [gameScene addChild:readyLayer z:2];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.6 scene:gameScene withColor:ccBLACK]];
+    //GameLayer *gameLayer = (GameLayer *)[gameScene getChildByTag:GAME_LAYER_TAG];
     
     //[self scheduleOnce:@selector(unPauseGameLayer:) delay:0.7];
-    [[[CCDirector sharedDirector] scheduler] scheduleSelector:@selector(unPauseGame) forTarget:gameLayer interval:0 paused:YES repeat:0 delay:0.6];
+    //[[[CCDirector sharedDirector] scheduler] scheduleSelector:@selector(unPauseGame) forTarget:gameLayer interval:0 paused:YES repeat:0 delay:0.6];
+    
 }
 
 - (void)aboutButtonTapped:(id)sender

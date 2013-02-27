@@ -10,6 +10,7 @@
 // Import the interfaces
 #import "GameLayer.h"
 #import "InGameMenuLayer.h"
+#import "ReadyLayer.h"
 #import "LightManager.h"
 #import "Light.h"
 #import "Route.h"
@@ -55,11 +56,15 @@
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
 	
-	// 'layer' is an autorelease object.
-	GameLayer *layer = [GameLayer node];
+	// 'gameLayer' is an autorelease object.
+	GameLayer *gameLayer = [GameLayer node];
+    
+    //readylayer will initially cover the paused game layer.
+    ReadyLayer *readyLayer = [ReadyLayer node];
 	
-	// add layer as a child to scene
-	[scene addChild: layer z:0 tag:GAME_LAYER_TAG];
+	// add gameLayer as a child to scene
+	[scene addChild:gameLayer z:0 tag:GAME_LAYER_TAG];
+    [scene addChild:readyLayer z:1];
 	
 	// return the scene
 	return scene;
@@ -72,6 +77,9 @@
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super initWithColor:ccc4(15, 15, 15, 255)]) ) {
         
+        //gamelayer starts paused and covered by the ready layer.
+        self.gameIsPaused = YES;
+        
         //add the header which will include the countdown bar and the pause button.
         CCSprite *header = [CCSprite spriteWithFile:@"topmenu.png"];
         header.position = ccp(HEADER_X_COORD, HEADER_Y_COORD);
@@ -83,7 +91,6 @@
         self.countdownBar.position = ccp(COUNTDOWN_BAR_X_COORD, COUNTDOWN_BAR_Y_COORD);
         
         //add the pause button.
-        self.gameIsPaused = NO;
         CCMenuItem *pauseMenuItem = [CCMenuItemImage
                                         itemWithNormalImage:@"pause.png" selectedImage:@"pause.png"
                                         target:self selector:@selector(pauseButtonTapped:)];
@@ -152,8 +159,6 @@
         self.isTouchEnabled = YES;
     
         [self schedule:@selector(update:)];
-        
-
 	}
 	return self;
 }
@@ -222,6 +227,7 @@
     //remove layer and then add it again.
     [self removeFromParentAndCleanup:YES];
     GameLayer *layer = [GameLayer node];
+    [layer unPauseGame];
     [[[CCDirector sharedDirector] runningScene] addChild:layer z:0 tag:GAME_LAYER_TAG];
 }
 
