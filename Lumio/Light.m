@@ -197,6 +197,9 @@
         if (randomPercentage < PERCENTAGE_OF_LIGHTS_START_ON_COOLDOWN) {
             self.lightState = Cooldown;
             self.cooldownTimeRemaining = arc4random() % INITIAL_MAX_COOLDOWN + 1;
+        } else if (randomPercentage < PERCENTAGE_OF_LIGHTS_START_ON_COOLDOWN + PERCENTAGE_OF_LIGHTS_START_ON_MAX_COUNTDOWN) {
+            self.lightState = Active;
+            self.activeTimeRemaining = arc4random() % (MAX_REFRESH_COUNTDOWN - MIN_REFRESH_COUNTDOWN + 1) + MIN_REFRESH_COUNTDOWN;
         } else {
             self.lightState = Active;
             self.activeTimeRemaining = arc4random() % MAX_REFRESH_COUNTDOWN + 1;
