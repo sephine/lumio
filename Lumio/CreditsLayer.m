@@ -49,7 +49,7 @@
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
-        backwardsMenuItem.position = ccp(BACK_X_COORD, size.height == 568 ? BACK_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : BACK_Y_COORD);
+        backwardsMenuItem.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
         
         CCMenu *menu = [CCMenu menuWithItems:licenseMenuItem, backwardsMenuItem, nil];
         menu.position = CGPointZero;

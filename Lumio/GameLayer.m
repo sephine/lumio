@@ -85,18 +85,18 @@
         
         //add the header which will include the countdown bar and the pause button.
         CCSprite *header = [CCSprite spriteWithFile:@"topmenu.png"];
-        header.position = ccp(HEADER_X_COORD, size.height == 568 ? HEADER_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : HEADER_Y_COORD);
+        header.position = ccp(HEADER_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_HEADER_Y_COORD : HEADER_Y_COORD);
         [self addChild:header z:0];
         
         //create the countdown bar and set its position. It adds itself to the layer.
         self.countdownBar = [[CountdownBar alloc] initWithGameLayer:self];
-        self.countdownBar.position = ccp(COUNTDOWN_BAR_X_COORD, size.height == 568 ? COUNTDOWN_BAR_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : COUNTDOWN_BAR_Y_COORD);
+        self.countdownBar.position = ccp(COUNTDOWN_BAR_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_COUNTDOWN_BAR_Y_COORD : COUNTDOWN_BAR_Y_COORD);
         
         //add the pause button.
         CCMenuItem *pauseMenuItem = [CCMenuItemImage
                                         itemWithNormalImage:@"pause.png" selectedImage:@"pause.png"
                                         target:self selector:@selector(pauseButtonTapped:)];
-        pauseMenuItem.position = ccp(PAUSE_X_COORD, size.height == 568 ? PAUSE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : PAUSE_Y_COORD);
+        pauseMenuItem.position = ccp(PAUSE_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_PAUSE_Y_COORD : PAUSE_Y_COORD);
         
         self.menuItems = [CCMenu menuWithItems:pauseMenuItem, nil];
         self.menuItems.position = CGPointZero;
@@ -104,7 +104,7 @@
         
         //add the footer TODO add level and score.
         CCSprite *footer = [CCSprite spriteWithFile:@"footer.png"];
-        footer.position = ccp(FOOTER_X_COORD, size.height == 568 ? FOOTER_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : FOOTER_Y_COORD);
+        footer.position = ccp(FOOTER_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_FOOTER_Y_COORD : FOOTER_Y_COORD);
         [self addChild:footer z:0];
         
         //create the player object and add it to layer.
@@ -143,11 +143,11 @@
         
         //create the level object and set its position.
         self.level = [[Level alloc] initWithGameLayer:self countdownBar:self.countdownBar lightManager:self.lightManager];
-        self.level.position = ccp(LEVEL_X_COORD, size.height == 568 ? LEVEL_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : LEVEL_Y_COORD);
+        self.level.position = ccp(LEVEL_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_LEVEL_Y_COORD : LEVEL_Y_COORD);
         
         //create the score object and set its position.
         self.score = [[Score alloc] initWithGameLayer:self level:self.level];
-        self.score.position = ccp(SCORE_X_COORD, size.height == 568 ? SCORE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : SCORE_Y_COORD);
+        self.score.position = ccp(SCORE_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_SCORE_Y_COORD : SCORE_Y_COORD);
         
         //create the route object.
         self.route = [[Route alloc] initWithGameLayer:self lightManager:self.lightManager];
