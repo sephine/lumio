@@ -9,6 +9,7 @@
 #import "AboutLayer.h"
 #import "MainMenuLayer.h"
 #import "HowToPlayAimLayer.h"
+#import "CreditsLayer.h"
 #import "GameKitHelper.h"
 
 @interface AboutLayer ()
@@ -32,7 +33,7 @@
         
         //TODO for now show the selected button image for about as the tile of the page.
         CCSprite *aboutTitle = [CCSprite spriteWithFile:@"AboutButtonSelected.png"];
-        aboutTitle.position = ccp(160, 330);
+        aboutTitle.position = ccp(160, 340);
         [self addChild:aboutTitle];
         
         //Create the How To Play Menu Item.
@@ -50,8 +51,13 @@
                                           itemWithNormalImage:@"ReviewAppButton.png" selectedImage:@"ReviewAppButtonSelected.png"
                                           target:self selector:@selector(reviewAppButtonTapped:)];
         
-        CCMenu *menu = [CCMenu menuWithItems:howToPlayMenuItem, leaderboardMenuItem, reviewAppMenuItem, nil];
-        menu.position = ccp(160, 230);
+        //Create the Credits Menu Item.
+        CCMenuItemImage *creditsMenuItem = [CCMenuItemImage
+                                              itemWithNormalImage:@"CreditsButton.png" selectedImage:@"CreditsButtonSelected.png"
+                                              target:self selector:@selector(creditsButtonTapped:)];
+        
+        CCMenu *menu = [CCMenu menuWithItems:howToPlayMenuItem, leaderboardMenuItem, reviewAppMenuItem, creditsMenuItem, nil];
+        menu.position = ccp(160, 218); //230
         [menu alignItemsVerticallyWithPadding:10.0];
         [self addChild:menu];
         
@@ -73,7 +79,8 @@
     [[[CCDirector sharedDirector] runningScene] addChild:howToPlayLayer z:1];
     
     [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[howToPlayLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
-    [self removeFromParentAndCleanup:YES];}
+    [self removeFromParentAndCleanup:YES];
+}
 
 - (void)leaderboardButtonTapped:(id)sender
 {
@@ -87,6 +94,15 @@
     NSString *appID = @"608072046";
     NSString *urlstring = [NSString stringWithFormat: @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", appID];
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString:urlstring]];
+}
+
+- (void)creditsButtonTapped:(id)sender
+{
+    CreditsLayer *creditsLayer = [[CreditsLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
+    [[[CCDirector sharedDirector] runningScene] addChild:creditsLayer z:1];
+    
+    [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[creditsLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [self removeFromParentAndCleanup:YES];
 }
 
 - (void)backwardsButtonTapped:(id)sender
