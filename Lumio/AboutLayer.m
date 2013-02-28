@@ -51,7 +51,7 @@
         
         //Create the Review App Menu Item.
         CCMenuItemImage *reviewAppMenuItem = [CCMenuItemImage
-                                          itemWithNormalImage:@"ReviewAppButton.png" selectedImage:@"ReviewAppButtonSelected.png"
+                                          itemWithNormalImage:@"LeaveARatingButton.png" selectedImage:@"LeaveARatingButtonSelected.png"
                                           target:self selector:@selector(reviewAppButtonTapped:)];
         
         //Create the Credits Menu Item.

@@ -121,7 +121,8 @@
         //authenticate the player and preload the sound and music when the menu screen is shown for the first time.
         GameKitHelper *helper = [GameKitHelper sharedGameKitHelper];
         if (!helper.authenticationAttempted) {
-            [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+            //delay authenticating the player until the transition has finished so that the banner appearing doesn't make it stutter.
+            [[GameKitHelper sharedGameKitHelper] performSelector:@selector(authenticateLocalPlayer) withObject:nil afterDelay:INTRO_TRANSITION_TIME];
             
             //preload sound and music.
             SimpleAudioEngine *sae = [SimpleAudioEngine sharedEngine];
