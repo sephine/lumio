@@ -71,13 +71,13 @@
     if (!self.gameOver) {
         NSString *pausedString = @"Paused";
         CCLabelTTF *pausedLabel = [CCLabelTTF labelWithString:pausedString
-                                                 dimensions:CGSizeMake(140, 45)
+                                                 dimensions:CGSizeMake(PAUSED_LABEL_WIDTH, PAUSED_LABEL_HEIGHT)
                                                   alignment:UITextAlignmentCenter
-                                                   fontName:@"Helvetica"
-                                                   fontSize:19];
-        pausedLabel.color = ccc3(160, 48, 252);
-        pausedLabel.position = ccp(90, 285);
-        pausedLabel.anchorPoint = ccp(0, 0);
+                                                   fontName:FONT_NAME
+                                                   fontSize:FONT_SIZE];
+        pausedLabel.color = STANDARD_PURPLE;
+        pausedLabel.position = ccp(PAUSED_LABEL_X_COORD, PAUSED_LABEL_Y_COORD);
+        pausedLabel.anchorPoint = ccp(PAUSED_LABEL_ANCHOR_X_COORD, PAUSED_LABEL_ANCHOR_Y_COORD);
         [self addChild:pausedLabel];
     } else {
         //get the old high score if possible and see if this score beats it.
@@ -93,13 +93,13 @@
         
         NSString *scoreString = [NSString stringWithFormat:@"Score:\n%d", score];
         CCLabelTTF *scoreLabel = [CCLabelTTF labelWithString:scoreString
-                                                   dimensions:CGSizeMake(140, 45)
+                                                   dimensions:CGSizeMake(SCORE_LABEL_WIDTH, SCORE_LABEL_HEIGHT)
                                                     alignment:UITextAlignmentCenter
-                                                     fontName:@"Helvetica"
-                                                     fontSize:19];
-        scoreLabel.color = ccc3(160, 48, 252);
-        scoreLabel.position = ccp(90, 285);
-        scoreLabel.anchorPoint = ccp(0, 0);
+                                                     fontName:FONT_NAME
+                                                     fontSize:FONT_SIZE];
+        scoreLabel.color = STANDARD_PURPLE;
+        scoreLabel.position = ccp(SCORE_LABEL_X_COORD, SCORE_LABEL_Y_COORD);
+        scoreLabel.anchorPoint = ccp(SCORE_LABEL_ANCHOR_X_COORD, SCORE_LABEL_ANCHOR_Y_COORD);
         [self addChild:scoreLabel];
         
         if (helper.highScoreFetchedOK) {
@@ -110,13 +110,13 @@
                 highScoreString = [NSString stringWithFormat:@"High Score:\n%lld", highScore];
             }
             CCLabelTTF *highScoreLabel = [CCLabelTTF labelWithString:highScoreString
-                                                      dimensions:CGSizeMake(140, 45)
+                                                      dimensions:CGSizeMake(HIGH_SCORE_LABEL_WIDTH, HIGH_SCORE_LABEL_HEIGHT)
                                                        alignment:UITextAlignmentCenter
-                                                        fontName:@"Helvetica"
-                                                        fontSize:19];
-            highScoreLabel.color = ccc3(184, 108, 252);
-            highScoreLabel.position = ccp(90, 235);
-            highScoreLabel.anchorPoint = ccp(0, 0);
+                                                        fontName:FONT_NAME
+                                                        fontSize:FONT_SIZE];
+            highScoreLabel.color = STANDARD_PINK;
+            highScoreLabel.position = ccp(HIGH_SCORE_LABEL_X_COORD, HIGH_SCORE_LABEL_Y_COORD);
+            highScoreLabel.anchorPoint = ccp(HIGH_SCORE_LABEL_ANCHOR_X_COORD, HIGH_SCORE_LABEL_ANCHOR_Y_COORD);
             [self addChild:highScoreLabel];
         }
     }
@@ -125,34 +125,20 @@
     CCMenuItemImage *resumeMenuItem = [CCMenuItemImage
                                 itemWithNormalImage:@"NewResumeButton.png" selectedImage:@"NewResumeButtonSelected.png"
                                 target:self selector:@selector(resumeButtonTapped:)];
-    resumeMenuItem.anchorPoint = ccp(0, 1);
-    resumeMenuItem.position = ccp(100, 255);
+    resumeMenuItem.position = ccp(RESUME_BUTTON_X_COORD, RESUME_BUTTON_Y_COORD);
     
     //Create the Restart Menu Item.
     CCMenuItemImage *restartMenuItem = [CCMenuItemImage
                                   itemWithNormalImage:@"NewRestartButton.png" selectedImage:@"NewRestartButtonSelected.png"
                                   target:self selector:@selector(restartButtonTapped:)];
-    restartMenuItem.anchorPoint = ccp(0, 1);
-    
-    //Change the position based on whether it is a game over screen.
-    if (self.gameOver) {
-        restartMenuItem.position = ccp(100, 215);
-    } else {
-        restartMenuItem.position = ccp(100, 215);
-    }
+    restartMenuItem.position = ccp(RESTART_BUTTON_X_COORD, RESTART_BUTTON_Y_COORD);
+
     
     //Create the 'Main Menu' Menu Item.
     CCMenuItem *mainMenuMenuItem = [CCMenuItemImage
                                    itemWithNormalImage:@"NewMainMenuButton.png" selectedImage:@"NewMainMenuButtonSelected.png"
                                    target:self selector:@selector(mainMenuButtonTapped:)];
-    mainMenuMenuItem.anchorPoint = ccp(0, 1);
-    
-    //Change the position based on whether it is a game over screen.
-    if (self.gameOver) {
-        mainMenuMenuItem.position = ccp(100, 175);
-    } else {
-        mainMenuMenuItem.position = ccp(100, 175);
-    }
+    mainMenuMenuItem.position = ccp(MENU_BUTTON_X_COORD, MENU_BUTTON_Y_COORD);
 
     //Only add resumeMenuItem it is not a game over screen.
     CCMenu *inGameMenu;
@@ -195,12 +181,10 @@
     [self removeFromParentAndCleanup:YES];
     CCScene *currentScene = [[CCDirector sharedDirector] runningScene];
     if (self.gameOver) {
-        [[CCDirector sharedDirector] pushScene:[CCTransitionFade transitionWithDuration:0.6 scene:[BaseMenuLayer scene] withColor:ccBLACK]];
+        [[CCDirector sharedDirector] pushScene:[CCTransitionFade transitionWithDuration:MENU_TRANSITION_TIME scene:[BaseMenuLayer scene] withColor:ccBLACK]];
     } else {
-        [[CCDirector sharedDirector] pushScene:[CCTransitionFade transitionWithDuration:0.6 scene:[BaseMenuLayer sceneWithPreviousScene:currentScene] withColor:ccBLACK]];
+        [[CCDirector sharedDirector] pushScene:[CCTransitionFade transitionWithDuration:MENU_TRANSITION_TIME scene:[BaseMenuLayer sceneWithPreviousScene:currentScene] withColor:ccBLACK]];
     }
 }
-
-//TODO saving game and opening on main menu i guess (not pause screen).
 
 @end

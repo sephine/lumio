@@ -56,7 +56,6 @@
                                              fontName:FONT_NAME
                                              fontSize:FONT_SIZE];
         self.levelLabel.color = STANDARD_BLUE;
-        self.levelLabel.anchorPoint = ccp(0, 0);
         [self addChild:self.levelLabel];
     }
     return self;

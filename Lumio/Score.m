@@ -52,13 +52,11 @@
                                              fontName:FONT_NAME
                                              fontSize:FONT_SIZE];
         self.scoreLabel.color = STANDARD_PURPLE;
-        self.scoreLabel.anchorPoint = ccp(0, 0);
         [self addChild:self.scoreLabel];
         
         //add the star sprite
         CCSprite *starSprite = [CCSprite spriteWithFile:@"1star.png"];
         starSprite.position = ccp(STAR_SPRITE_X_COORD, STAR_SPRITE_Y_COORD);
-        starSprite.anchorPoint = ccp(0.5, 0.5);
         [self addChild:starSprite];
         
         //add the stars remaining label.
@@ -69,7 +67,6 @@
                                              fontName:FONT_NAME
                                              fontSize:FONT_SIZE];
         self.starsToLevelUpLabel.color = STANDARD_BLUE;
-        self.starsToLevelUpLabel.anchorPoint = ccp(0, 0);
         self.starsToLevelUpLabel.position =ccp(STARS_REMAINING_X_COORD, STARS_REMAINING_Y_COORD);
         [self addChild:self.starsToLevelUpLabel];
     }

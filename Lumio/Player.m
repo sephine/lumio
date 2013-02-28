@@ -58,7 +58,6 @@
     [_sprite removeFromParentAndCleanup:YES];
     _sprite = sprite;
     _sprite.position = self.position;
-    _sprite.anchorPoint = ccp(0.5, 0.5);
     [self addChild:_sprite z:2];
 }
 

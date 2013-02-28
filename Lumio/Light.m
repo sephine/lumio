@@ -145,7 +145,6 @@
     [_innerCircleSprite removeFromParentAndCleanup:YES];
     _innerCircleSprite = innerCircleSprite;
     _innerCircleSprite.position = self.position;
-    _innerCircleSprite.anchorPoint = ccp(0.5, 0.5);
     [self addChild:_innerCircleSprite z:2];
 }
 
@@ -155,7 +154,6 @@
     [_valueSprite removeFromParentAndCleanup:YES];
     _valueSprite = valueSprite;
     _valueSprite.position = self.position;
-    _valueSprite.anchorPoint = ccp(0.5, 0.5);
     [self addChild:_valueSprite z:4];
 }
 
@@ -170,12 +168,10 @@
         //create outer sprite and routed sprite and add to layer. The other layers are added in their setters as they are frequently changed.
         self.outerCircleSprite = [CCSprite spriteWithFile:@"glow.png"];
         self.outerCircleSprite.position = self.position;
-        self.outerCircleSprite.anchorPoint = ccp(0.5, 0.5);
         [self addChild:self.outerCircleSprite z:1];
         
         self.routedSprite = [CCSprite spriteWithFile:@"BlueRoutedLayer.png"];
         self.routedSprite.position = self.position;
-        self.routedSprite.anchorPoint = ccp(0.5, 0.5);
         self.routedSprite.opacity = TRANSPARENT;
         [self addChild:self.routedSprite z:3];
         self.isPartOfRoute = NO;

@@ -116,7 +116,7 @@
 
 - (id)initWithPreviousScene:(CCScene *)previousScene
 {
-    if( (self=[super initWithColor:ccc4(15, 15, 15, 255)]) ) {
+    if( (self=[super initWithColor:STANDARD_BACKGROUND]) ) {
         
         //authenticate the player and preload the sound and music when the menu screen is shown for the first time.
         GameKitHelper *helper = [GameKitHelper sharedGameKitHelper];

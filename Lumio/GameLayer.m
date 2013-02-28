@@ -75,7 +75,7 @@
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
-	if( (self=[super initWithColor:ccc4(15, 15, 15, 255)]) ) {
+	if( (self=[super initWithColor:STANDARD_BACKGROUND]) ) {
         
         //gamelayer starts paused and covered by the ready layer.
         self.gameIsPaused = YES;
@@ -83,7 +83,6 @@
         //add the header which will include the countdown bar and the pause button.
         CCSprite *header = [CCSprite spriteWithFile:@"topmenu.png"];
         header.position = ccp(HEADER_X_COORD, HEADER_Y_COORD);
-        header.anchorPoint = ccp(0, 0);
         [self addChild:header z:0];
         
         //create the countdown bar and set its position. It adds itself to the layer.
@@ -94,7 +93,6 @@
         CCMenuItem *pauseMenuItem = [CCMenuItemImage
                                         itemWithNormalImage:@"pause.png" selectedImage:@"pause.png"
                                         target:self selector:@selector(pauseButtonTapped:)];
-        pauseMenuItem.anchorPoint = ccp(0, 0);
         pauseMenuItem.position = ccp(PAUSE_X_COORD, PAUSE_Y_COORD);
         
         self.menuItems = [CCMenu menuWithItems:pauseMenuItem, nil];
@@ -104,7 +102,6 @@
         //add the footer TODO add level and score.
         CCSprite *footer = [CCSprite spriteWithFile:@"footer.png"];
         footer.position = ccp(FOOTER_X_COORD, FOOTER_Y_COORD);
-        footer.anchorPoint = ccp(0, 0);
         [self addChild:footer z:0];
         
         //create the player object and add it to layer.
@@ -124,7 +121,7 @@
         }
         
         //set the middle light to the initial light.
-        Light *firstLight = [[twoDimensionallightArray objectAtIndex:4] objectAtIndex:3];
+        Light *firstLight = [[twoDimensionallightArray objectAtIndex:MIDDLE_ROW_INDEX] objectAtIndex:MIDDLE_COLUMN_INDEX];
         [firstLight setAsInitialLight];
         
         //create the light manager and pass it the light array.
@@ -142,6 +139,7 @@
         //create the level object and set its position.
         self.level = [[Level alloc] initWithGameLayer:self countdownBar:self.countdownBar lightManager:self.lightManager];
         self.level.position = ccp(LEVEL_X_COORD, LEVEL_Y_COORD);
+        self.level.anchorPoint = ccp(0, 0);
         
         //create the score object and set its position.
         self.score = [[Score alloc] initWithGameLayer:self level:self.level];
