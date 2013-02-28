@@ -136,7 +136,7 @@
     GLubyte red, green, blue;
     float timeRemaining = self.value / self.countdownSpeed;
     if (self.value <= COUNTDOWN_WARNING_START_PERCENTAGE) {
-        float flashTimeProportion = fmodf(timeRemaining, COUNTDOWN_BAR_WARNING_FLASH_TIME) / COUNTDOWN_BAR_WARNING_FLASH_TIME;
+        //float flashTimeProportion = fmodf(timeRemaining, COUNTDOWN_BAR_WARNING_FLASH_TIME) / COUNTDOWN_BAR_WARNING_FLASH_TIME;
         /*if (flashTimeProportion <= 0.5) {
             red = 3 + 252 * flashTimeProportion * 2;
             green = 171 - 171 * flashTimeProportion * 2;

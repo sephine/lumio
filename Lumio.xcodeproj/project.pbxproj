@@ -210,7 +210,7 @@
 		B00ABED616D8340500DC78F4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Lumio/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		B00ABEF816D83F7700DC78F4 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Lumio/main.m; sourceTree = SOURCE_ROOT; };
 		B00ABEFA16D83F8F00DC78F4 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = Lumio/Prefix.pch; sourceTree = SOURCE_ROOT; };
-		B01B28C916AB2B5200CD538A /* lumio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lumio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B01B28C916AB2B5200CD538A /* Lumio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lumio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01B28CD16AB2B5200CD538A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B01B28CF16AB2B5200CD538A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		B01B28D116AB2B5200CD538A /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -419,7 +419,7 @@
 		B01B28CA16AB2B5200CD538A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B01B28C916AB2B5200CD538A /* lumio.app */,
+				B01B28C916AB2B5200CD538A /* Lumio.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -581,7 +581,7 @@
 			);
 			name = Lumio;
 			productName = CircleGame;
-			productReference = B01B28C916AB2B5200CD538A /* lumio.app */;
+			productReference = B01B28C916AB2B5200CD538A /* Lumio.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -836,7 +836,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Lumio/Resources/Info.plist;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_NAME = lumio;
+				PRODUCT_NAME = Lumio;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -853,7 +853,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Lumio/Resources/Info.plist;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_NAME = lumio;
+				PRODUCT_NAME = Lumio;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

@@ -104,7 +104,7 @@
 #define SOUND_EFFECTS_ON_KEY @"soundEffectsOnKey"
 #define MUSIC_ON_KEY @"musicOnKey"
 #define FIRST_PLAY_KEY @"firstPlayKey"
-#define SOUND_EFFECTS_VOLUME 0.25f
+#define SOUND_EFFECTS_VOLUME 0.2f
 #define MUSIC_VOLUME 0.2f
 
 #define HIGH_SCORE_CATEGORY @"1" //TODO
