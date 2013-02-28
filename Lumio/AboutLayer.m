@@ -32,9 +32,11 @@
         self.baseMenuLayer = baseLayer;
         self.showContinue = showContinue;
         
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        
         //TODO for now show the selected button image for about as the tile of the page.
         CCSprite *aboutTitle = [CCSprite spriteWithFile:@"AboutButtonSelected.png"];
-        aboutTitle.position = ccp(ABOUT_TITLE_X_COORD, ABOUT_TITLE_Y_COORD);
+        aboutTitle.position = ccp(ABOUT_TITLE_X_COORD, size.height == 568 ? ABOUT_TITLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : ABOUT_TITLE_Y_COORD);
         [self addChild:aboutTitle];
         
         //Create the How To Play Menu Item.
@@ -58,7 +60,7 @@
                                               target:self selector:@selector(creditsButtonTapped:)];
         
         CCMenu *menu = [CCMenu menuWithItems:howToPlayMenuItem, leaderboardMenuItem, reviewAppMenuItem, creditsMenuItem, nil];
-        menu.position = ccp(ABOUT_MENU_X_COORD, ABOUT_MENU_Y_COORD); //230
+        menu.position = ccp(ABOUT_MENU_X_COORD, size.height == 568 ? ABOUT_MENU_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : ABOUT_MENU_Y_COORD); //230
         [menu alignItemsVerticallyWithPadding:MENU_PADDING];
         [self addChild:menu];
         
@@ -68,7 +70,7 @@
                                               target:self selector:@selector(backwardsButtonTapped:)];
         
         CCMenu *backwardsMenu = [CCMenu menuWithItems:backwardsMenuItem, nil];
-        backwardsMenu.position = ccp(BACK_X_COORD, BACK_Y_COORD);
+        backwardsMenu.position = ccp(BACK_X_COORD, size.height == 568 ? BACK_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : BACK_Y_COORD);
         [self addChild:backwardsMenu];
     }
     return self;

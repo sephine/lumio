@@ -44,6 +44,9 @@
         
         [self.gameLayer addChild:self];
         
+        // ask director for the window size
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        
         self.scoreValue = 0;
         NSString *scoreString = [NSString stringWithFormat:@"Score - %d", self.scoreValue];
         self.scoreLabel = [CCLabelTTF labelWithString:scoreString
@@ -56,7 +59,7 @@
         
         //add the star sprite
         CCSprite *starSprite = [CCSprite spriteWithFile:@"1star.png"];
-        starSprite.position = ccp(STAR_SPRITE_X_COORD, STAR_SPRITE_Y_COORD);
+        starSprite.position = ccp(STAR_SPRITE_X_COORD, size.height == 568 ? STAR_SPRITE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : STAR_SPRITE_Y_COORD);
         [self addChild:starSprite];
         
         //add the stars remaining label.
@@ -67,7 +70,7 @@
                                              fontName:FONT_NAME
                                              fontSize:FONT_SIZE];
         self.starsToLevelUpLabel.color = STANDARD_BLUE;
-        self.starsToLevelUpLabel.position =ccp(STARS_REMAINING_X_COORD, STARS_REMAINING_Y_COORD);
+        self.starsToLevelUpLabel.position =ccp(STARS_REMAINING_X_COORD, size.height == 568 ? STARS_REMAINING_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : STARS_REMAINING_Y_COORD);
         [self addChild:self.starsToLevelUpLabel];
     }
     return self;

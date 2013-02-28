@@ -30,14 +30,16 @@
         self.baseMenuLayer = baseLayer;
         self.showContinue = showContinue;
         
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        
         //TODO for now show the selected button image for settings as the tile of the page.
         CCSprite *settingsTitle = [CCSprite spriteWithFile:@"SettingsButtonSelected.png"];
-        settingsTitle.position = ccp(SETTINGS_TITLE_X_COORD, SETTINGS_TITLE_Y_COORD);
+        settingsTitle.position = ccp(SETTINGS_TITLE_X_COORD, size.height == 568 ? SETTINGS_TITLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : SETTINGS_TITLE_Y_COORD);
         [self addChild:settingsTitle];
         
         //Add the Sound Effects Title.
         CCSprite *soundEffectsTitle = [CCSprite spriteWithFile:@"SoundEffects.png"];
-        soundEffectsTitle.position = ccp(SOUND_EFFECTS_TITLE_X_COORD, SOUND_EFFECTS_TITLE_Y_COORD);
+        soundEffectsTitle.position = ccp(SOUND_EFFECTS_TITLE_X_COORD, size.height == 568 ? SOUND_EFFECTS_TITLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : SOUND_EFFECTS_TITLE_Y_COORD);
         [self addChild:soundEffectsTitle];
         
         //Create the Sound Effects Setting Toggle Menu Items.
@@ -62,11 +64,11 @@
                                                              selector:@selector(soundEffectsSettingButtonTapped:)
                                                                 items:soundEffectsOffMenuItem, soundEffectsOnMenuItem, nil];
         }
-        soundEffectsToggleItem.position = ccp(SOUND_EFFECTS_TOGGLE_X_COORD, SOUND_EFFECTS_TOGGLE_Y_COORD);
+        soundEffectsToggleItem.position = ccp(SOUND_EFFECTS_TOGGLE_X_COORD, size.height == 568 ? SOUND_EFFECTS_TOGGLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : SOUND_EFFECTS_TOGGLE_Y_COORD);
         
         //Add the Music Title.
         CCSprite *musicTitle = [CCSprite spriteWithFile:@"Music.png"];
-        musicTitle.position = ccp(MUSIC_TITLE_X_COORD, MUSIC_TITLE_Y_COORD);
+        musicTitle.position = ccp(MUSIC_TITLE_X_COORD, size.height == 568 ? MUSIC_TITLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : MUSIC_TITLE_Y_COORD);
         [self addChild:musicTitle];
         
         //Create the Music Setting Menu Item.
@@ -91,7 +93,7 @@
                                                       selector:@selector(musicSettingButtonTapped:)
                                                          items:musicOffMenuItem, musicOnMenuItem, nil];
         }
-        musicToggleItem.position = ccp(MUSIC_TOGGLE_X_COORD, MUSIC_TOGGLE_Y_COORD);
+        musicToggleItem.position = ccp(MUSIC_TOGGLE_X_COORD, size.height == 568 ? MUSIC_TOGGLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : MUSIC_TOGGLE_Y_COORD);
         
         //create the menu.
         CCMenu *menu = [CCMenu menuWithItems:soundEffectsToggleItem, musicToggleItem, nil];
@@ -105,7 +107,7 @@
                                                                          selector:@selector(backwardsButtonTapped:)];
         
         CCMenu *backwardsMenu = [CCMenu menuWithItems:backwardsMenuItem, nil];
-        backwardsMenu.position = ccp(BACK_X_COORD, BACK_Y_COORD);
+        backwardsMenu.position = ccp(BACK_X_COORD, size.height == 568 ? BACK_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : BACK_Y_COORD);
         [self addChild:backwardsMenu];
     }
     return self;

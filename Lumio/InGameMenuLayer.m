@@ -68,6 +68,9 @@
 {
     self.gameOver = gameOver;
     
+    // ask director for the window size
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
     if (!self.gameOver) {
         NSString *pausedString = @"Paused";
         CCLabelTTF *pausedLabel = [CCLabelTTF labelWithString:pausedString
@@ -76,7 +79,7 @@
                                                    fontName:FONT_NAME
                                                    fontSize:FONT_SIZE];
         pausedLabel.color = STANDARD_PURPLE;
-        pausedLabel.position = ccp(PAUSED_LABEL_X_COORD, PAUSED_LABEL_Y_COORD);
+        pausedLabel.position = ccp(PAUSED_LABEL_X_COORD, size.height == 568 ? PAUSED_LABEL_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : PAUSED_LABEL_Y_COORD);
         pausedLabel.anchorPoint = ccp(PAUSED_LABEL_ANCHOR_X_COORD, PAUSED_LABEL_ANCHOR_Y_COORD);
         [self addChild:pausedLabel];
     } else {
@@ -98,7 +101,7 @@
                                                      fontName:FONT_NAME
                                                      fontSize:FONT_SIZE];
         scoreLabel.color = STANDARD_PURPLE;
-        scoreLabel.position = ccp(SCORE_LABEL_X_COORD, SCORE_LABEL_Y_COORD);
+        scoreLabel.position = ccp(SCORE_LABEL_X_COORD, size.height == 568 ? SCORE_LABEL_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : SCORE_LABEL_Y_COORD);
         scoreLabel.anchorPoint = ccp(SCORE_LABEL_ANCHOR_X_COORD, SCORE_LABEL_ANCHOR_Y_COORD);
         [self addChild:scoreLabel];
         
@@ -115,7 +118,7 @@
                                                         fontName:FONT_NAME
                                                         fontSize:FONT_SIZE];
             highScoreLabel.color = STANDARD_PINK;
-            highScoreLabel.position = ccp(HIGH_SCORE_LABEL_X_COORD, HIGH_SCORE_LABEL_Y_COORD);
+            highScoreLabel.position = ccp(HIGH_SCORE_LABEL_X_COORD, size.height == 568 ? HIGH_SCORE_LABEL_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : HIGH_SCORE_LABEL_Y_COORD);
             highScoreLabel.anchorPoint = ccp(HIGH_SCORE_LABEL_ANCHOR_X_COORD, HIGH_SCORE_LABEL_ANCHOR_Y_COORD);
             [self addChild:highScoreLabel];
         }
@@ -125,20 +128,20 @@
     CCMenuItemImage *resumeMenuItem = [CCMenuItemImage
                                 itemWithNormalImage:@"NewResumeButton.png" selectedImage:@"NewResumeButtonSelected.png"
                                 target:self selector:@selector(resumeButtonTapped:)];
-    resumeMenuItem.position = ccp(RESUME_BUTTON_X_COORD, RESUME_BUTTON_Y_COORD);
+    resumeMenuItem.position = ccp(RESUME_BUTTON_X_COORD, size.height == 568 ? RESUME_BUTTON_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : RESUME_BUTTON_Y_COORD);
     
     //Create the Restart Menu Item.
     CCMenuItemImage *restartMenuItem = [CCMenuItemImage
                                   itemWithNormalImage:@"NewRestartButton.png" selectedImage:@"NewRestartButtonSelected.png"
                                   target:self selector:@selector(restartButtonTapped:)];
-    restartMenuItem.position = ccp(RESTART_BUTTON_X_COORD, RESTART_BUTTON_Y_COORD);
+    restartMenuItem.position = ccp(RESTART_BUTTON_X_COORD, size.height == 568 ? RESTART_BUTTON_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : RESTART_BUTTON_Y_COORD);
 
     
     //Create the 'Main Menu' Menu Item.
     CCMenuItem *mainMenuMenuItem = [CCMenuItemImage
                                    itemWithNormalImage:@"NewMainMenuButton.png" selectedImage:@"NewMainMenuButtonSelected.png"
                                    target:self selector:@selector(mainMenuButtonTapped:)];
-    mainMenuMenuItem.position = ccp(MENU_BUTTON_X_COORD, MENU_BUTTON_Y_COORD);
+    mainMenuMenuItem.position = ccp(MENU_BUTTON_X_COORD, size.height == 568 ? MENU_BUTTON_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : MENU_BUTTON_Y_COORD);
 
     //Only add resumeMenuItem it is not a game over screen.
     CCMenu *inGameMenu;

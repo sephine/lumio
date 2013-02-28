@@ -33,9 +33,11 @@
         self.baseLayer = baseLayer;
         self.showContinue = showContinue;
         
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        
         //add the logo to the top of the page.
         CCSprite *logo = [CCSprite spriteWithFile:@"logo.png"];
-        logo.position = ccp(LOGO_X_COORD, LOGO_Y_COORD);
+        logo.position = ccp(LOGO_X_COORD, size.height == 568 ? LOGO_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : LOGO_Y_COORD);
         [self addChild:logo];
         
         //Create the Continue Menu Item.
@@ -65,7 +67,7 @@
             menu = [CCMenu menuWithItems:newGameMenuItem, aboutMenuItem, settingsMenuItem, nil];
         }
         
-        menu.position = ccp(MAIN_MENU_MENU_X_COORD, MAIN_MENU_MENU_Y_COORD);
+        menu.position = ccp(MAIN_MENU_MENU_X_COORD, size.height == 568 ? MAIN_MENU_MENU_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : MAIN_MENU_MENU_Y_COORD);
         [menu alignItemsVerticallyWithPadding:MENU_PADDING];
         [self addChild:menu];
     }

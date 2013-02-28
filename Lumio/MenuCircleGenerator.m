@@ -31,43 +31,46 @@
         self.spriteArray = [NSMutableArray array];
         self.timeArray = [NSMutableArray array];
         
+        // ask director for the window size
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        
         CCSprite *sprite1 = [CCSprite spriteWithFile:@"MenuCircle.png"];
-        sprite1.position = ccp(CIRCLE_1_X_COORD, CIRCLE_1_Y_COORD);
+        sprite1.position = ccp(CIRCLE_1_X_COORD, size.height == 568 ? CIRCLE_1_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : CIRCLE_1_Y_COORD);
         [self addChild:sprite1];
         [self.spriteArray addObject:sprite1];
         float sprite1Timer = CIRCLE_1_INITIAL_TIME;
         [self.timeArray addObject:[NSNumber numberWithFloat:sprite1Timer]];
         
         CCSprite *sprite2 = [CCSprite spriteWithFile:@"MenuCircle.png"];
-        sprite2.position = ccp(CIRCLE_2_X_COORD, CIRCLE_2_Y_COORD);
+        sprite2.position = ccp(CIRCLE_2_X_COORD, size.height == 568 ? CIRCLE_2_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : CIRCLE_2_Y_COORD);
         [self addChild:sprite2];
         [self.spriteArray addObject:sprite2];
         float sprite2Timer = CIRCLE_2_INITIAL_TIME;
         [self.timeArray addObject:[NSNumber numberWithFloat:sprite2Timer]];
         
         CCSprite *sprite3 = [CCSprite spriteWithFile:@"MenuCircle.png"];
-        sprite3.position = ccp(CIRCLE_3_X_COORD, CIRCLE_3_Y_COORD);
+        sprite3.position = ccp(CIRCLE_3_X_COORD, size.height == 568 ? CIRCLE_3_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : CIRCLE_3_Y_COORD);
         [self addChild:sprite3];
         [self.spriteArray addObject:sprite3];
         float sprite3Timer = CIRCLE_3_INITIAL_TIME;
         [self.timeArray addObject:[NSNumber numberWithFloat:sprite3Timer]];
         
         CCSprite *sprite4 = [CCSprite spriteWithFile:@"MenuCircle.png"];
-        sprite4.position = ccp(CIRCLE_4_X_COORD, CIRCLE_4_Y_COORD);
+        sprite4.position = ccp(CIRCLE_4_X_COORD, size.height == 568 ? CIRCLE_4_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : CIRCLE_4_Y_COORD);
         [self addChild:sprite4];
         [self.spriteArray addObject:sprite4];
         float sprite4Timer = CIRCLE_4_INITIAL_TIME;
         [self.timeArray addObject:[NSNumber numberWithFloat:sprite4Timer]];
         
         CCSprite *sprite5 = [CCSprite spriteWithFile:@"MenuCircle.png"];
-        sprite5.position = ccp(CIRCLE_5_X_COORD, CIRCLE_5_Y_COORD);
+        sprite5.position = ccp(CIRCLE_5_X_COORD, size.height == 568 ? CIRCLE_5_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : CIRCLE_5_Y_COORD);
         [self addChild:sprite5];
         [self.spriteArray addObject:sprite5];
         float sprite5Timer = CIRCLE_5_INITIAL_TIME;
         [self.timeArray addObject:[NSNumber numberWithFloat:sprite5Timer]];
         
         CCSprite *sprite6 = [CCSprite spriteWithFile:@"MenuCircle.png"];
-        sprite6.position = ccp(CIRCLE_6_X_COORD, CIRCLE_6_Y_COORD);
+        sprite6.position = ccp(CIRCLE_6_X_COORD, size.height == 568 ? CIRCLE_6_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : CIRCLE_6_Y_COORD);
         [self addChild:sprite6];
         [self.spriteArray addObject:sprite6];
         float sprite6Timer = CIRCLE_6_INITIAL_TIME;

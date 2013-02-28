@@ -47,12 +47,12 @@
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
-        backwardsMenuItem.position = ccp(BACK_X_COORD, BACK_Y_COORD);
+        backwardsMenuItem.position = ccp(BACK_X_COORD, size.height == 568 ? BACK_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : BACK_Y_COORD);
         
         CCMenuItemImage *forwardsMenuItem = [CCMenuItemImage
                                              itemWithNormalImage:@"NextButton.png" selectedImage:@"NextButtonSelected.png"
                                              target:self selector:@selector(forwardsButtonTapped:)];
-        forwardsMenuItem.position = ccp(NEXT_X_COORD, NEXT_Y_COORD);
+        forwardsMenuItem.position = ccp(NEXT_X_COORD, size.height == 568 ? NEXT_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : NEXT_Y_COORD);
         
         CCMenu *menu = [CCMenu menuWithItems:backwardsMenuItem, forwardsMenuItem, nil];
         menu.position = CGPointZero;

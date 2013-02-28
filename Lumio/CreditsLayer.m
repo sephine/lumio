@@ -43,13 +43,13 @@
                                             selectedImage:@"LicenseButtonSelected.png"
                                             target:self
                                             selector:@selector(licenseButtonTapped:)];
-        licenseMenuItem.position = ccp(LICENSE_X_COORD, LICENSE_Y_COORD);
+        licenseMenuItem.position = ccp(LICENSE_X_COORD, size.height == 568 ? LICENSE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : LICENSE_Y_COORD);
         
         //Create the Backwards Menu Item and add to menu
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
-        backwardsMenuItem.position = ccp(BACK_X_COORD, BACK_Y_COORD);
+        backwardsMenuItem.position = ccp(BACK_X_COORD, size.height == 568 ? BACK_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : BACK_Y_COORD);
         
         CCMenu *menu = [CCMenu menuWithItems:licenseMenuItem, backwardsMenuItem, nil];
         menu.position = CGPointZero;
