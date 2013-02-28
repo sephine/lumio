@@ -9,6 +9,7 @@
 #import "HowToPlayMovementLayer.h"
 #import "HowToPlayAimLayer.h"
 #import "HowToPlayPowerupLayer.h"
+#import "GameConfig.h"
 
 @interface HowToPlayMovementLayer ()
 
@@ -46,12 +47,12 @@
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
-        backwardsMenuItem.position = ccp(76, 51);
+        backwardsMenuItem.position = ccp(BACK_X_COORD, BACK_Y_COORD);
         
         CCMenuItemImage *forwardsMenuItem = [CCMenuItemImage
                                              itemWithNormalImage:@"NextButton.png" selectedImage:@"NextButtonSelected.png"
                                              target:self selector:@selector(forwardsButtonTapped:)];
-        forwardsMenuItem.position = ccp(250, 51);
+        forwardsMenuItem.position = ccp(NEXT_X_COORD, NEXT_Y_COORD);
         
         CCMenu *menu = [CCMenu menuWithItems:backwardsMenuItem, forwardsMenuItem, nil];
         menu.position = CGPointZero;
@@ -65,7 +66,7 @@
     HowToPlayAimLayer *aimLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:aimLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[aimLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[aimLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -74,7 +75,7 @@
     HowToPlayPowerupLayer *powerupLayer = [[HowToPlayPowerupLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:powerupLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[powerupLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[powerupLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 

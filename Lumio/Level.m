@@ -46,16 +46,16 @@
         //set up the light manager with the intial max cooldown and an initial no countdown reduction.
         self.lightManager = lightManager;
         self.lightManager.maxCooldown = INITIAL_MAX_COOLDOWN;
-        self.lightManager.countdownReduction = 0;
+        self.lightManager.countdownReduction = INITIAL_COUNTDOWN_REDUCTION;
         
         self.level = 1;
         NSString *levelString = [NSString stringWithFormat:@"Level - %d", self.level];
         self.levelLabel = [CCLabelTTF labelWithString:levelString
                                            dimensions:CGSizeMake(LEVEL_WIDTH, LEVEL_HEIGHT)
                                             alignment:UITextAlignmentLeft
-                                             fontName:@"Helvetica"
-                                             fontSize:19];
-        self.levelLabel.color = ccc3(3, 171, 255);
+                                             fontName:FONT_NAME
+                                             fontSize:FONT_SIZE];
+        self.levelLabel.color = STANDARD_BLUE;
         self.levelLabel.anchorPoint = ccp(0, 0);
         [self addChild:self.levelLabel];
     }

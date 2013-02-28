@@ -10,6 +10,7 @@
 #import "MainMenuLayer.h"
 #import "AboutLayer.h"
 #import "HowToPlayMovementLayer.h"
+#import "GameConfig.h"
 
 @interface HowToPlayAimLayer ()
 
@@ -47,12 +48,12 @@
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
-        backwardsMenuItem.position = ccp(76, 51);
+        backwardsMenuItem.position = ccp(BACK_X_COORD, BACK_Y_COORD);
         
         CCMenuItemImage *forwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"NextButton.png" selectedImage:@"NextButtonSelected.png"
                                               target:self selector:@selector(forwardsButtonTapped:)];
-        forwardsMenuItem.position = ccp(250, 51);
+        forwardsMenuItem.position = ccp(NEXT_X_COORD, NEXT_Y_COORD);
         
         CCMenu *menu = [CCMenu menuWithItems:backwardsMenuItem, forwardsMenuItem, nil];
         menu.position = CGPointZero;
@@ -72,7 +73,7 @@
     }
     [[[CCDirector sharedDirector] runningScene] addChild:newLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[newLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[newLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -81,7 +82,7 @@
     HowToPlayMovementLayer *movementLayer = [[HowToPlayMovementLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:movementLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[movementLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[movementLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 

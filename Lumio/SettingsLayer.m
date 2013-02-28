@@ -32,12 +32,12 @@
         
         //TODO for now show the selected button image for settings as the tile of the page.
         CCSprite *settingsTitle = [CCSprite spriteWithFile:@"SettingsButtonSelected.png"];
-        settingsTitle.position = ccp(160, 330);
+        settingsTitle.position = ccp(SETTINGS_TITLE_X_COORD, SETTINGS_TITLE_Y_COORD);
         [self addChild:settingsTitle];
         
         //Add the Sound Effects Title.
         CCSprite *soundEffectsTitle = [CCSprite spriteWithFile:@"SoundEffects.png"];
-        soundEffectsTitle.position = ccp(160, 275);
+        soundEffectsTitle.position = ccp(SOUND_EFFECTS_TITLE_X_COORD, SOUND_EFFECTS_TITLE_Y_COORD);
         [self addChild:soundEffectsTitle];
         
         //Create the Sound Effects Setting Toggle Menu Items.
@@ -62,11 +62,11 @@
                                                              selector:@selector(soundEffectsSettingButtonTapped:)
                                                                 items:soundEffectsOffMenuItem, soundEffectsOnMenuItem, nil];
         }
-        soundEffectsToggleItem.position = ccp(160, 240);
+        soundEffectsToggleItem.position = ccp(SOUND_EFFECTS_TOGGLE_X_COORD, SOUND_EFFECTS_TOGGLE_Y_COORD);
         
         //Add the Music Title.
         CCSprite *musicTitle = [CCSprite spriteWithFile:@"Music.png"];
-        musicTitle.position = ccp(160, 195);
+        musicTitle.position = ccp(MUSIC_TITLE_X_COORD, MUSIC_TITLE_Y_COORD);
         [self addChild:musicTitle];
         
         //Create the Music Setting Menu Item.
@@ -91,7 +91,7 @@
                                                       selector:@selector(musicSettingButtonTapped:)
                                                          items:musicOffMenuItem, musicOnMenuItem, nil];
         }
-        musicToggleItem.position = ccp(160, 160);
+        musicToggleItem.position = ccp(MUSIC_TOGGLE_X_COORD, MUSIC_TOGGLE_Y_COORD);
         
         //create the menu.
         CCMenu *menu = [CCMenu menuWithItems:soundEffectsToggleItem, musicToggleItem, nil];
@@ -105,7 +105,7 @@
                                                                          selector:@selector(backwardsButtonTapped:)];
         
         CCMenu *backwardsMenu = [CCMenu menuWithItems:backwardsMenuItem, nil];
-        backwardsMenu.position = ccp(76, 51);
+        backwardsMenu.position = ccp(BACK_X_COORD, BACK_Y_COORD);
         [self addChild:backwardsMenu];
     }
     return self;
@@ -115,14 +115,14 @@
 {
     BOOL newSetting = !self.baseMenuLayer.soundEffectsOn;
     self.baseMenuLayer.soundEffectsOn = newSetting;
-    [SimpleAudioEngine sharedEngine].effectsVolume = newSetting ? SOUND_EFFECTS_VOLUME : 0;
+    [SimpleAudioEngine sharedEngine].effectsVolume = newSetting ? SOUND_EFFECTS_VOLUME : SILENT;
 }
 
 - (void)musicSettingButtonTapped:(id)sender
 {
     BOOL newSetting = !self.baseMenuLayer.musicOn;
     self.baseMenuLayer.musicOn = newSetting;
-    [SimpleAudioEngine sharedEngine].backgroundMusicVolume = newSetting ? MUSIC_VOLUME : 0;
+    [SimpleAudioEngine sharedEngine].backgroundMusicVolume = newSetting ? MUSIC_VOLUME : SILENT;
     
     //restart the music if it is turned back on.
     if (newSetting) [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music.mp3"];
@@ -133,7 +133,7 @@
     MainMenuLayer *mainMenuLayer = [[MainMenuLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:mainMenuLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[mainMenuLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[mainMenuLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 

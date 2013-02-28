@@ -10,6 +10,7 @@
 #import "MainMenuLayer.h"
 #import "HowToPlayAimLayer.h"
 #import "CreditsLayer.h"
+#import "GameConfig.h"
 #import "GameKitHelper.h"
 
 @interface AboutLayer ()
@@ -33,7 +34,7 @@
         
         //TODO for now show the selected button image for about as the tile of the page.
         CCSprite *aboutTitle = [CCSprite spriteWithFile:@"AboutButtonSelected.png"];
-        aboutTitle.position = ccp(160, 340);
+        aboutTitle.position = ccp(ABOUT_TITLE_X_COORD, ABOUT_TITLE_Y_COORD);
         [self addChild:aboutTitle];
         
         //Create the How To Play Menu Item.
@@ -57,8 +58,8 @@
                                               target:self selector:@selector(creditsButtonTapped:)];
         
         CCMenu *menu = [CCMenu menuWithItems:howToPlayMenuItem, leaderboardMenuItem, reviewAppMenuItem, creditsMenuItem, nil];
-        menu.position = ccp(160, 218); //230
-        [menu alignItemsVerticallyWithPadding:10.0];
+        menu.position = ccp(ABOUT_MENU_X_COORD, ABOUT_MENU_Y_COORD); //230
+        [menu alignItemsVerticallyWithPadding:MENU_PADDING];
         [self addChild:menu];
         
         //Create the Backwards Menu Item and put it in its own menu.
@@ -67,7 +68,7 @@
                                               target:self selector:@selector(backwardsButtonTapped:)];
         
         CCMenu *backwardsMenu = [CCMenu menuWithItems:backwardsMenuItem, nil];
-        backwardsMenu.position = ccp(76, 51);
+        backwardsMenu.position = ccp(BACK_X_COORD, BACK_Y_COORD);
         [self addChild:backwardsMenu];
     }
     return self;
@@ -78,7 +79,7 @@
     HowToPlayAimLayer *howToPlayLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:NO];
     [[[CCDirector sharedDirector] runningScene] addChild:howToPlayLayer z:1];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[howToPlayLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[howToPlayLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -91,7 +92,7 @@
 - (void)reviewAppButtonTapped:(id)sender
 {
     //TODO change the appID!
-    NSString *appID = @"608072046";
+    NSString *appID = APPLE_ID;
     NSString *urlstring = [NSString stringWithFormat: @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", appID];
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString:urlstring]];
 }
@@ -101,7 +102,7 @@
     CreditsLayer *creditsLayer = [[CreditsLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:creditsLayer z:1];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[creditsLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[creditsLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -110,7 +111,7 @@
     MainMenuLayer *mainMenuLayer = [[MainMenuLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:mainMenuLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[mainMenuLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[mainMenuLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 

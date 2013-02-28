@@ -8,6 +8,7 @@
 
 #import "CreditsLayer.h"
 #import "AboutLayer.h"
+#import "GameConfig.h"
 
 @interface CreditsLayer ()
 
@@ -42,13 +43,13 @@
                                             selectedImage:@"LicenseButtonSelected.png"
                                             target:self
                                             selector:@selector(licenseButtonTapped:)];
-        licenseMenuItem.position = ccp(158, 182);
+        licenseMenuItem.position = ccp(LICENSE_X_COORD, LICENSE_Y_COORD);
         
         //Create the Backwards Menu Item and add to menu
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
-        backwardsMenuItem.position = ccp(76, 51);
+        backwardsMenuItem.position = ccp(BACK_X_COORD, BACK_Y_COORD);
         
         CCMenu *menu = [CCMenu menuWithItems:licenseMenuItem, backwardsMenuItem, nil];
         menu.position = CGPointZero;
@@ -62,7 +63,7 @@
     AboutLayer *aboutLayer = [[AboutLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:aboutLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[aboutLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[aboutLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 

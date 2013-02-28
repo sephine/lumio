@@ -10,6 +10,7 @@
 #import "HowToPlayMovementLayer.h"
 #import "AboutLayer.h"
 #import "GameLayer.h"
+#import "GameConfig.h"
 
 @interface HowToPlayPowerupLayer ()
 
@@ -47,12 +48,12 @@
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
-        backwardsMenuItem.position = ccp(76, 51);
+        backwardsMenuItem.position = ccp(BACK_X_COORD, BACK_Y_COORD);
         
         CCMenuItemImage *forwardsMenuItem = [CCMenuItemImage
                                              itemWithNormalImage:@"DoneButton.png" selectedImage:@"DoneButtonSelected.png"
                                              target:self selector:@selector(forwardsButtonTapped:)];
-        forwardsMenuItem.position = ccp(250, 51);
+        forwardsMenuItem.position = ccp(NEXT_X_COORD, NEXT_Y_COORD);
         
         CCMenu *menu = [CCMenu menuWithItems:backwardsMenuItem, forwardsMenuItem, nil];
         menu.position = CGPointZero;
@@ -66,7 +67,7 @@
     HowToPlayMovementLayer *movementLayer = [[HowToPlayMovementLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:movementLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[movementLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[movementLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -77,12 +78,12 @@
     
     //if goToGame is yes start a new game otherwise return to the About screen.
     if (self.goToGame) {
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.6 scene:[GameLayer scene] withColor:ccBLACK]];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:MENU_TRANSITION_TIME scene:[GameLayer scene] withColor:ccBLACK]];
     } else {
         AboutLayer *aboutLayer = [[AboutLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
         [[[CCDirector sharedDirector] runningScene] addChild:aboutLayer z:2];
         
-        [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[aboutLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+        [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[aboutLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
         [self removeFromParentAndCleanup:YES];
     }
 }

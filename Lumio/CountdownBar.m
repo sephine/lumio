@@ -134,7 +134,7 @@
     
     //change the colour to black if time left until bar empties is less than the warning time.
     GLubyte red, green, blue;
-    float timeRemaining = self.value / self.countdownSpeed;
+    //float timeRemaining = self.value / self.countdownSpeed;
     if (self.value <= COUNTDOWN_WARNING_START_PERCENTAGE) {
         //float flashTimeProportion = fmodf(timeRemaining, COUNTDOWN_BAR_WARNING_FLASH_TIME) / COUNTDOWN_BAR_WARNING_FLASH_TIME;
         /*if (flashTimeProportion <= 0.5) {

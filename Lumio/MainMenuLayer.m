@@ -35,7 +35,7 @@
         
         //add the logo to the top of the page.
         CCSprite *logo = [CCSprite spriteWithFile:@"logo.png"];
-        logo.position = ccp(160, 347);
+        logo.position = ccp(LOGO_X_COORD, LOGO_Y_COORD);
         [self addChild:logo];
         
         //Create the Continue Menu Item.
@@ -65,8 +65,8 @@
             menu = [CCMenu menuWithItems:newGameMenuItem, aboutMenuItem, settingsMenuItem, nil];
         }
         
-        menu.position = ccp(160, 190);
-        [menu alignItemsVerticallyWithPadding:10.0];
+        menu.position = ccp(MAIN_MENU_MENU_X_COORD, MAIN_MENU_MENU_Y_COORD);
+        [menu alignItemsVerticallyWithPadding:MENU_PADDING];
         [self addChild:menu];
     }
     return self;
@@ -78,10 +78,10 @@
         HowToPlayAimLayer *howToPlayLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseLayer showContinue:self.showContinue goToGame:YES];
         [[[CCDirector sharedDirector] runningScene] addChild:howToPlayLayer z:1];
         
-        [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[howToPlayLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+        [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[howToPlayLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
         [self removeFromParentAndCleanup:YES];
     } else {
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.6 scene:[GameLayer scene] withColor:ccBLACK]];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:MENU_TRANSITION_TIME scene:[GameLayer scene] withColor:ccBLACK]];
     }
 }
 
@@ -91,7 +91,7 @@
     CCScene *gameScene = self.baseLayer.gameScene;
     ReadyLayer *readyLayer = [[ReadyLayer alloc] init];
     [gameScene addChild:readyLayer z:2];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.6 scene:gameScene withColor:ccBLACK]];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:MENU_TRANSITION_TIME scene:gameScene withColor:ccBLACK]];
     //GameLayer *gameLayer = (GameLayer *)[gameScene getChildByTag:GAME_LAYER_TAG];
     
     //[self scheduleOnce:@selector(unPauseGameLayer:) delay:0.7];
@@ -104,7 +104,7 @@
     AboutLayer *aboutLayer = [[AboutLayer alloc] initWithBaseLayer:self.baseLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:aboutLayer z:1];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[aboutLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[aboutLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -113,7 +113,7 @@
     SettingsLayer *settingsLayer = [[SettingsLayer alloc] initWithBaseLayer:self.baseLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:settingsLayer z:1];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[settingsLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[settingsLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 

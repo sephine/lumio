@@ -49,9 +49,9 @@
         self.scoreLabel = [CCLabelTTF labelWithString:scoreString
                                            dimensions:CGSizeMake(SCORE_WIDTH, SCORE_HEIGHT)
                                             alignment:UITextAlignmentLeft
-                                             fontName:@"Helvetica"
-                                             fontSize:19];
-        self.scoreLabel.color = ccc3(160, 48, 252);
+                                             fontName:FONT_NAME
+                                             fontSize:FONT_SIZE];
+        self.scoreLabel.color = STANDARD_PURPLE;
         self.scoreLabel.anchorPoint = ccp(0, 0);
         [self addChild:self.scoreLabel];
         
@@ -66,9 +66,9 @@
         self.starsToLevelUpLabel = [CCLabelTTF labelWithString:starsToLevelUpString
                                            dimensions:CGSizeMake(STARS_REMAINING_WIDTH, STARS_REMAINING_HEIGHT)
                                             alignment:UITextAlignmentLeft
-                                             fontName:@"Helvetica"
-                                             fontSize:19];
-        self.starsToLevelUpLabel.color = ccc3(3, 171, 255);
+                                             fontName:FONT_NAME
+                                             fontSize:FONT_SIZE];
+        self.starsToLevelUpLabel.color = STANDARD_BLUE;
         self.starsToLevelUpLabel.anchorPoint = ccp(0, 0);
         self.starsToLevelUpLabel.position =ccp(STARS_REMAINING_X_COORD, STARS_REMAINING_Y_COORD);
         [self addChild:self.starsToLevelUpLabel];
