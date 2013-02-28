@@ -14,12 +14,18 @@
 #import "InGameMenuLayer.h"
 #import "GameConfig.h"
 
+//bugsnag added to track exceptions.
+#import "Bugsnag.h"
+
 @implementation AppController
 
 @synthesize window=window_, navController=navController_, director=director_;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //register with Bugsnag.
+    [Bugsnag startBugsnagWithApiKey:@"b8dad58d5ad6d115cb747e28bf9048d6"];
+    
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
