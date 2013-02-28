@@ -62,7 +62,7 @@
     AboutLayer *aboutLayer = [[AboutLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:aboutLayer z:2];
     
-    [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[aboutLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[aboutLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
     [self removeFromParentAndCleanup:YES];
 }
 

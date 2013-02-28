@@ -72,7 +72,7 @@
     }
     [[[CCDirector sharedDirector] runningScene] addChild:newLayer z:2];
     
-    [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[newLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[newLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -81,7 +81,7 @@
     HowToPlayMovementLayer *movementLayer = [[HowToPlayMovementLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:movementLayer z:2];
     
-    [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[movementLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[movementLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
     [self removeFromParentAndCleanup:YES];
 }
 

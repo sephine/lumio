@@ -78,7 +78,7 @@
         HowToPlayAimLayer *howToPlayLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseLayer showContinue:self.showContinue goToGame:YES];
         [[[CCDirector sharedDirector] runningScene] addChild:howToPlayLayer z:1];
         
-        [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[howToPlayLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+        [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[howToPlayLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
         [self removeFromParentAndCleanup:YES];
     } else {
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.6 scene:[GameLayer scene] withColor:ccBLACK]];
@@ -104,7 +104,7 @@
     AboutLayer *aboutLayer = [[AboutLayer alloc] initWithBaseLayer:self.baseLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:aboutLayer z:1];
     
-    [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[aboutLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[aboutLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -113,7 +113,7 @@
     SettingsLayer *settingsLayer = [[SettingsLayer alloc] initWithBaseLayer:self.baseLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:settingsLayer z:1];
     
-    [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[settingsLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[settingsLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
     [self removeFromParentAndCleanup:YES];
 }
 

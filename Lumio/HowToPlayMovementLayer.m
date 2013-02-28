@@ -65,7 +65,7 @@
     HowToPlayAimLayer *aimLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:aimLayer z:2];
     
-    [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[aimLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[aimLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -74,7 +74,7 @@
     HowToPlayPowerupLayer *powerupLayer = [[HowToPlayPowerupLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:powerupLayer z:2];
     
-    [CCSequence actionOne:[self runAction:[CCFadeOut actionWithDuration:0.3]] two:[powerupLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
+    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:0.3]] two:(CCFiniteTimeAction *)[powerupLayer runAction:[CCFadeIn actionWithDuration:0.3]]];
     [self removeFromParentAndCleanup:YES];
 }
 

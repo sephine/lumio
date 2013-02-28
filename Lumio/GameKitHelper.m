@@ -110,6 +110,11 @@
     [rootController presentViewController:viewController animated:YES completion:nil];
 }
 
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    //no action required.
+}
+
 - (void)submitScore:(int64_t)score
 {
     //only try and submit score if game center features enabled.
