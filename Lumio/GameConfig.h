@@ -1,11 +1,12 @@
 //
 //  GameConfig.h
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/19/13.
-//
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
+//File contains all the values used to configure the game.
 #ifndef GameConfig_h
 #define GameConfig_h
 

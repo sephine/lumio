@@ -1,9 +1,9 @@
 //
 //  Route.h
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/19/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,6 +17,7 @@
 @class LightManager;
 @class Player;
 
+//used to handle the routing of the player around the lights.
 @interface Route : CCNode {
 }
 

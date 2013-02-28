@@ -3,7 +3,7 @@
 //  Lumio
 //
 //  Created by Joanne Dyer on 2/24/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "SettingsLayer.h"
@@ -11,6 +11,7 @@
 #import "SimpleAudioEngine.h"
 #import "GameConfig.h"
 
+//layer for the Settings menu.
 @interface SettingsLayer ()
 
 //these properties exist to pass on the information to the main menu layer when it is recreated.
@@ -30,9 +31,10 @@
         self.baseMenuLayer = baseLayer;
         self.showContinue = showContinue;
         
+        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
-        //TODO for now show the selected button image for settings as the tile of the page.
+        //show the selected button image for settings as the tile of the page.
         CCSprite *settingsTitle = [CCSprite spriteWithFile:@"SettingsButtonSelected.png"];
         settingsTitle.position = ccp(SETTINGS_TITLE_X_COORD, size.height == 568 ? SETTINGS_TITLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : SETTINGS_TITLE_Y_COORD);
         [self addChild:settingsTitle];
@@ -115,6 +117,7 @@
 
 - (void)soundEffectsSettingButtonTapped:(id)sender
 {
+    //toggle the stored setting for sound effects and set the effects volume.
     BOOL newSetting = !self.baseMenuLayer.soundEffectsOn;
     self.baseMenuLayer.soundEffectsOn = newSetting;
     [SimpleAudioEngine sharedEngine].effectsVolume = newSetting ? SOUND_EFFECTS_VOLUME : SILENT;
@@ -122,6 +125,7 @@
 
 - (void)musicSettingButtonTapped:(id)sender
 {
+    //toggle the stored setting for music and set the music volume.
     BOOL newSetting = !self.baseMenuLayer.musicOn;
     self.baseMenuLayer.musicOn = newSetting;
     [SimpleAudioEngine sharedEngine].backgroundMusicVolume = newSetting ? MUSIC_VOLUME : SILENT;
@@ -132,6 +136,7 @@
 
 - (void)backwardsButtonTapped:(id)sender
 {
+    //transition layers back to the main menu layer.
     MainMenuLayer *mainMenuLayer = [[MainMenuLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:mainMenuLayer z:2];
     

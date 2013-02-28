@@ -1,12 +1,10 @@
 //
 //  AppDelegate.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/19/13.
-//  Copyright __MyCompanyName__ 2013. All rights reserved.
+//  Copyright Joanne Dyer 2013. All rights reserved.
 //
-
-//#import "cocos2d.h"
 
 #import "AppDelegate.h"
 #import "IntroLayer.h"
@@ -99,7 +97,7 @@
 	return YES;
 }
 
-// Supported orientations: Landscape. Customize it for your own needs
+// Supported orientations: Portrait.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return UIInterfaceOrientationIsPortrait(interfaceOrientation);
@@ -110,7 +108,7 @@
 {
 	if( [navController_ visibleViewController] == director_ )
 		[director_ pause];
-    //pause the game and open up the pause screen.
+    //pause the game and open up the pause screen if the game is playing.
     CCScene *currentScene = [[CCDirector sharedDirector] runningScene];
     GameLayer *gameLayer = (GameLayer *)[currentScene getChildByTag:GAME_LAYER_TAG];
     

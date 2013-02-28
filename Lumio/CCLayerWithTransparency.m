@@ -1,13 +1,14 @@
 //
 //  CCLayerWithTransparency.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 2/21/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "CCLayerWithTransparency.h"
 
+//Created in order to give a fade transition between layers (only normally available for scenes.)
 @implementation CCLayerWithTransparency
 
 @synthesize opacity = _opacity;

@@ -1,9 +1,9 @@
 //
 //  GameKitHelper.h
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 2/20/13.
-//
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,6 +16,7 @@
 
 @end
 
+//used by the other objects to handle all interaction with GameCenter
 @interface GameKitHelper : NSObject <GKLeaderboardViewControllerDelegate>
 
 @property (nonatomic, strong) id<GameKitHelperProtocol> delegate;
@@ -25,9 +26,6 @@
 
 //holds the last Game Center error
 @property (nonatomic, strong) NSError *lastError;
-
-//used to stop sign in popup appearing during game
-//@property (nonatomic) BOOL inGame;
 
 + (id)sharedGameKitHelper;
 - (void)authenticateLocalPlayer;

@@ -1,14 +1,15 @@
 //
 //  LightManager.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/26/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "LightManager.h"
 #import "GameConfig.h"
 
+//used to handle interactions which involve the group of lights as a whole, or the position of the light in the group.
 @interface LightManager ()
 
 @property (nonatomic, strong) NSMutableArray *twoDimensionalLightArray;
@@ -18,11 +19,11 @@
 @implementation LightManager
 
 @synthesize route = _route;
-//@synthesize spawnCountdown = _spawnCountdown;
 @synthesize maxCooldown = _maxCooldown;
 @synthesize countdownReduction = _countdownReduction;
 @synthesize twoDimensionalLightArray = _twoDimensionalLightArray;
 
+//lightarray is a two dimensional array that contains all the light objects created by game layer first by row then by column.
 - (id)initWithLightArray:(NSMutableArray *)lightArray
 {
     if (self = [super init]) {
@@ -43,6 +44,7 @@
     return self;
 }
 
+//calls the update methods for all the stored lights.
 - (void)update:(ccTime)dt {
     for (NSMutableArray *innerArray in self.twoDimensionalLightArray) {
         for (Light *light in innerArray) {
@@ -51,18 +53,21 @@
     }
 }
 
+//called only when the game is first created to make the new value lights.
 - (void)chooseFirstLightWithValue:(LightValue)value
 {
     NSNumber *boxedValue = [NSNumber numberWithInt:value];
     [self chooseNewLightFollowingDelayWithValue:boxedValue];
 }
 
+//called when a value has been taken and a new one is required. Adds a delay before the new value is added.
 - (void)chooseNewLightWithValue:(LightValue)value
 {
     NSNumber *boxedValue = [NSNumber numberWithInt:value];
     [self performSelector:@selector(chooseNewLightFollowingDelayWithValue:) withObject:boxedValue afterDelay:NEW_VALUE_DELAY_IN_SECONDS];
 }
 
+//creates a new value light of the appropriate value.
 - (void)chooseNewLightFollowingDelayWithValue:(NSNumber *)value
 {
     LightValue lightValue = [value intValue];
@@ -95,6 +100,7 @@
     return selectedLight;
 }
 
+//returns the light at the provided row and column.
 - (Light *)getLightAtRow:(int)row column:(int)column
 {
     NSMutableArray *rowArray = [self.twoDimensionalLightArray objectAtIndex:row];

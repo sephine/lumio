@@ -1,14 +1,15 @@
 //
 //  Score.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 2/19/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "Score.h"
 #import "GameConfig.h"
 
+//class counts up the score and displays it on it's label. Also handles the stars remaining to level up.
 @interface Score ()
 
 @property (nonatomic, strong) GameLayer *gameLayer;
@@ -29,6 +30,7 @@
 @synthesize starsToLevelUp = _starsToLevelUp;
 @synthesize starsToLevelUpLabel = _starsToLevelUpLabel;
 
+//when the score's position is set also need to set the position of it's label. The positioning of the remaining stars to level up sprite and label are handled seperately.
 - (void)setPosition:(CGPoint)position
 {
     _position = position;
@@ -47,6 +49,7 @@
         // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
+        //set up the score label and show the intial level of 0.
         self.scoreValue = 0;
         NSString *scoreString = [NSString stringWithFormat:@"Score - %d", self.scoreValue];
         self.scoreLabel = [CCLabelTTF labelWithString:scoreString
@@ -76,6 +79,7 @@
     return self;
 }
 
+//called by the player when it gets a value. Increase the score by the appropriate amount and decrease the stars to level up appropriately.
 - (void)increaseScoreByValue:(LightValue)lighValue
 {
     if (lighValue == High) {
@@ -91,14 +95,17 @@
     
     if (self.scoreValue > MAX_SCORE) self.scoreValue = MAX_SCORE;
     
+    //update the score label with the new core.
     NSString *scoreString = [NSString stringWithFormat:@"Score - %d", self.scoreValue];
     [self.scoreLabel setString:scoreString];
     
+    //if stars to level up is 0 or less than 0, reset it and tell level to increase.
     if (self.starsToLevelUp <= 0) {
         self.starsToLevelUp = STARS_TO_LEVEL_UP;
         [self.level increaseLevel];
     }
     
+    //update the stars to level up label with the new value.
     NSString *starsToLevelUpString = [NSString stringWithFormat:@"%d", self.starsToLevelUp];
     [self.starsToLevelUpLabel setString:starsToLevelUpString];
 }

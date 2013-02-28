@@ -1,9 +1,9 @@
 //
 //  Connector.h
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/20/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,6 +11,7 @@
 #import "GameLayer.h"
 #import "Common.h"
 
+//class contains all the functionality for the coloured bars that connect the lights.
 @interface Connector : CCNode {
 }
 

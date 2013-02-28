@@ -1,14 +1,15 @@
 //
 //  Light.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/19/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "Light.h"
 #import "GameConfig.h"
 
+//class contains all the functionality for the game light objects.
 @interface Light ()
 
 @property (nonatomic, strong) GameLayer *gameLayer;
@@ -26,7 +27,6 @@
 @implementation Light
 
 @synthesize position = _position;
-//@synthesize route = _route;
 @synthesize lightManager = _lightManager;
 @synthesize row = _row;
 @synthesize column = _column;
@@ -53,14 +53,13 @@
     self.routedSprite.position = position;
     self.valueSprite.position = position;
     
-    //CGSize size = [[CCDirector sharedDirector] winSize];
     CGPoint topConnectorPosition = ccp(position.x, position.y + 0.5 * SQUARE_SIDE_LENGTH);
     self.topConnector.position = topConnectorPosition;
     CGPoint rightConnectorPosition = ccp(position.x + 0.5 * SQUARE_SIDE_LENGTH, position.y);
     self.rightConnector.position = rightConnectorPosition;
 }
 
-//set sprites based on whether the light is routed.
+//show routed sprite based on whether the light is routed.
 - (void)setIsPartOfRoute:(BOOL)isPartOfRoute
 {
     _isPartOfRoute = isPartOfRoute;
@@ -80,27 +79,28 @@
             if (self.lightValue == NoValue) {
                 self.innerCircleSprite = [CCSprite spriteWithFile:@"active.png"];
                 self.outerCircleSprite.opacity = OPAQUE;
-            } else if (self.lightValue == Charge ) {
+            } else {
                 self.innerCircleSprite = [CCSprite spriteWithFile:@"buffcircle.png"];
                 self.outerCircleSprite.opacity = TRANSPARENT;
-            } else {
-                self.innerCircleSprite = [CCSprite spriteWithFile:@"buffcircle.png"]; //TODO prefer purple to white
-                self.outerCircleSprite.opacity = TRANSPARENT;
             }
+            //let the light manager know the light is now active so it can handle the connectors from the light appropriately.
             [self.lightManager lightNowActive:self];
             break;
         case Cooldown:
             self.innerCircleSprite = [CCSprite spriteWithFile:@"inactive.png"];
             self.outerCircleSprite.opacity = TRANSPARENT;
-            //self.lightValue = [self generateLightValue];
+            //set the light value to no value and let the light manager know if it had a value so it can choose a new value light.
             LightValue oldValue = self.lightValue;
             self.lightValue = NoValue;
             if (oldValue != NoValue) {
                 [self.lightManager chooseNewLightWithValue:oldValue];
             }
             
+            //reset the timers.
             self.activeTimeRemaining = [self generateSpawnActiveTime];
             self.cooldownTimeRemaining = [self generateCooldownTime];
+            
+            //let the light manager know the light is now on cooldown so it can handle the connectors from the light appropriately.
             [self.lightManager lightNowOnCooldown:self];
             break;
         case Charging:
@@ -292,7 +292,6 @@
 //used by the player at the moment it moves from a light, sets the state to active again with a new time and value.
 - (void)leaveLight
 {
-    //self.lightValue = [self generateLightValue];
     self.activeTimeRemaining = [self generateRefreshActiveTime];
     self.lightState = Active;
 }
@@ -308,26 +307,14 @@
     self.lightState = Active;
 }
 
-//generates a random value based on the high, medium and low percentages.
-/*- (LightValue)generateLightValue
-{
-    LightValue lightValue = Low;
-    int randomPercentage = arc4random() % 100;
-    if (randomPercentage < HIGH_VALUE_PERCENTAGE) {
-        lightValue = High;
-    } else if (randomPercentage < HIGH_VALUE_PERCENTAGE + MEDIUM_VALUE_PERCENTAGE) {
-        lightValue = Medium;
-    }
-    return lightValue;
-}*/
-
-//generates a time based on the split between high countdowns and low countdowns and randomly chooses a time in the given range.
+//generates a time based on the split between high refresh countdowns and low refresh countdowns and randomly chooses a time in the given range.
 - (float)generateRefreshActiveTime
 {
     float activeTimeBeforeReduction = arc4random() % (MAX_REFRESH_COUNTDOWN - MIN_REFRESH_COUNTDOWN + 1) + MIN_REFRESH_COUNTDOWN;
     return activeTimeBeforeReduction - self.lightManager.countdownReduction;
 }
 
+//generates a time based on the split between high spawn countdowns and low spawn countdowns and randomly chooses a time in the given range.
 - (float)generateSpawnActiveTime
 {
     float spawnTimeBeforeReduction = arc4random() % (MAX_SPAWN_COUNTDOWN - MIN_SPAWN_COUNTDOWN + 1) + MIN_SPAWN_COUNTDOWN;
@@ -337,7 +324,6 @@
 //generates a random cooldown time within the given range.
 - (float)generateCooldownTime
 {
-    //return arc4random() % (MAX_COOLDOWN - MIN_COOLDOWN + 1) + MIN_COOLDOWN;
     int maxCooldown = self.lightManager.maxCooldown;
     return arc4random() % (maxCooldown - MIN_COOLDOWN + 1) + MIN_COOLDOWN;
 }
@@ -345,17 +331,10 @@
 //sets the scale and colour of the outer circle sprite based on the active or cooldown time remaining. It will start out green then transition to red at the critical threshold then transition to black.
 - (void)setSpriteScaleAndColourForTimeRemaining
 {
-    float timeProportion;
-    CGFloat newScale;
-    //if (self.lightState == Cooldown) {
-    //    timeProportion = self.cooldownTimeRemaining / MAX_REFRESH_COUNTDOWN;
-    //    if (timeProportion > 1) timeProportion = 1;
-    //    newScale = 12.0/MAX_RADIUS;
-    //} else {
-    timeProportion = self.activeTimeRemaining / MAX_REFRESH_COUNTDOWN;
+    float timeProportion = self.activeTimeRemaining / MAX_REFRESH_COUNTDOWN;
     if (timeProportion > 1) timeProportion = 1;
-    newScale = ((MAX_RADIUS - MIN_RADIUS) * timeProportion + MIN_RADIUS)/MAX_RADIUS;
-    //}
+    
+    CGFloat newScale = ((MAX_RADIUS - MIN_RADIUS) * timeProportion + MIN_RADIUS)/MAX_RADIUS;
     
     self.outerCircleSprite.scale = newScale;
     GLubyte red = 0;

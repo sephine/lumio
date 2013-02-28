@@ -3,13 +3,14 @@
 //  Lumio
 //
 //  Created by Joanne Dyer on 2/27/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "CreditsLayer.h"
 #import "AboutLayer.h"
 #import "GameConfig.h"
 
+//layer for the Credits menu.
 @interface CreditsLayer ()
 
 //these properties exist to pass on the information to the main menu layer when it is recreated.
@@ -60,6 +61,7 @@
 
 - (void)backwardsButtonTapped:(id)sender
 {
+    //transition layers back to the about layer.
     AboutLayer *aboutLayer = [[AboutLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:aboutLayer z:2];
     
@@ -69,6 +71,7 @@
 
 - (void)licenseButtonTapped:(id)sender
 {
+    //open up the webpage showing the license information.
     NSString *urlstring = @"http://creativecommons.org/licenses/by-nc-sa/3.0/";
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString:urlstring]];
 }

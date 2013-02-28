@@ -1,21 +1,21 @@
 //
 //  Level.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/25/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "Level.h"
 #import "SimpleAudioEngine.h"
 #import "GameConfig.h"
 
+//class controls the levelling up process and the labels showing current level.
 @interface Level ()
 
 @property (nonatomic, strong) GameLayer *gameLayer;
 @property (nonatomic, strong) CountdownBar *countdownBar;
 @property (nonatomic, strong) LightManager *lightManager;
-//TODO change this to the better CCLabelBMFont using a tool like heiro??
 @property (nonatomic, strong) CCLabelTTF *levelLabel;
 @property (nonatomic) int level;
 
@@ -30,6 +30,7 @@
 @synthesize levelLabel = _levelLabel;
 @synthesize level = _level;
 
+//when the level's position is set also need to set the position of it's label.
 - (void)setPosition:(CGPoint)position
 {
     _position = position;
@@ -48,6 +49,7 @@
         self.lightManager.maxCooldown = INITIAL_MAX_COOLDOWN;
         self.lightManager.countdownReduction = INITIAL_COUNTDOWN_REDUCTION;
         
+        //set up the level label and show the intial level of 1.
         self.level = 1;
         NSString *levelString = [NSString stringWithFormat:@"Level - %d", self.level];
         self.levelLabel = [CCLabelTTF labelWithString:levelString
@@ -61,10 +63,13 @@
     return self;
 }
 
+//increase level, called when enough stars have been collected to level up.
 - (void)increaseLevel
 {
     self.level += 1;
     if (self.level > MAX_LEVEL) self.level = MAX_LEVEL;
+    
+    //change the text in the lable to show the new level.
     NSString *levelString = [NSString stringWithFormat:@"Level - %d", self.level];
     [self.levelLabel setString:levelString];
     

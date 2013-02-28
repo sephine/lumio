@@ -1,14 +1,15 @@
 //
 //  Route.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/19/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "Route.h"
 #import "GameConfig.h"
 
+//used to handle the routing of the player around the lights.
 @interface Route ()
 
 //light stays on route when occupied, array should never be empty.
@@ -32,18 +33,12 @@
     if (self = [super init]) {
         self.gameLayer = gameLayer;
         [self.gameLayer addChild:self];
-        
         self.lightManager = lightManager;
+        
         //set the light manager route property to self.
         self.lightManager.route = self;
         
-        //give all the lights in the array a reference to itself.
-        /*for (NSMutableArray *innerArray in self.twoDimensionalLightArray) {
-            for (Light *light in innerArray) {
-                light.route = self;
-            }
-        }*/
-        
+        //create an empty array for the lights in route.
         self.lightsInRoute = [NSMutableArray array];
         self.containsCooldownLight = NO;
     }
@@ -188,7 +183,6 @@
         nextLight = [self.lightsInRoute objectAtIndex:1];
     } 
     return nextLight;
-    //TODO make sure player changes this to occupied.
 }
 
 //used by player when it starts moving to the next light in the route from the first.
@@ -207,6 +201,7 @@
     }
 }
 
+//change connectors from routed to enabled for lights removed from route.
 - (void)updateConntectorsFollowingDelayForFirstLight:(Light *)firstLight
 {
     //The previous first light will have been removed from the array.
@@ -264,6 +259,7 @@
     [self updateContainsCooldownLight];
 }
 
+//called to check if the route still contains a cooldown light and so cannot contain another.
 - (void)updateContainsCooldownLight
 {
     //check if route still contains a cooldown or charging light.

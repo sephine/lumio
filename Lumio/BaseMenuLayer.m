@@ -1,9 +1,9 @@
 //
 //  MenuLayer.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/26/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "BaseMenuLayer.h"
@@ -14,10 +14,11 @@
 #import "GameConfig.h"
 #import "GameKitHelper.h"
 
+//layer that acts as a base to all the menu layers. Creates a containing scene.
 @interface BaseMenuLayer ()
 
+//the menu circle generator creates the animated circles in the background of the menus.
 @property (nonatomic, strong) MenuCircleGenerator *circles;
-//@property (nonatomic, strong) CCScene *containerScene;
 
 @end
 
@@ -26,6 +27,7 @@
 @synthesize gameScene = _gameScene;
 @synthesize circles = _circles;
 
+//gets and sets information to NSUserDefaults to save whether the sound effects should be turned on.
 - (BOOL)soundEffectsOn
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -45,6 +47,7 @@
     [defaults setBool:soundEffectsOn forKey:SOUND_EFFECTS_ON_KEY];
 }
 
+//gets and sets information to NSUserDefaults to save whether the music should be turned on.
 - (BOOL)musicOn
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -64,6 +67,7 @@
     [defaults setBool:musicOn forKey:MUSIC_ON_KEY];
 }
 
+//gets and sets information to NSUserDefaults to ensure that the how to play screens are only shown the first time a game is played.
 - (BOOL)firstPlay
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -83,13 +87,11 @@
     [defaults setBool:firstPlay forKey:FIRST_PLAY_KEY];
 }
 
-// Helper class method that creates a Scene with the MenuLayer as the only child.
+// Helper class method that creates a Scene with the BaseMenuLayer as the only child.
+//Called when the main menu is being created the first time or from the game layer on game over.
 +(CCScene *) scene
 {
-	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
 	BaseMenuLayer *layer = [[BaseMenuLayer alloc] initWithPreviousScene:nil];
 	
 	// add layer as a child to scene
@@ -99,6 +101,7 @@
 	return scene;
 }
 
+//Called when a game in in progress and the menu is re-opened.
 + (CCScene *)sceneWithPreviousScene:(CCScene *)previousScene
 {
 	// 'scene' is an autorelease object.
@@ -130,20 +133,19 @@
             [sae preloadEffect:@"purpleSoundEfect.wav"];
             [sae preloadEffect:@"warningSoundEfect.wav"];
             [sae preloadBackgroundMusic:@"music.mp3"];
-            //TODO add all the other sounds and music.
             
             //load sound and music settings and set the volumes accordingly.
             sae.effectsVolume = self.soundEffectsOn ? SOUND_EFFECTS_VOLUME : 0;
             sae.backgroundMusicVolume = self.musicOn ? MUSIC_VOLUME : 0;
             
-            //play background music. TODO
+            //play the background music, it will automatically loop.
             [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music.mp3"];
         }
         
         //create the menu circle generator.
         self.circles = [[MenuCircleGenerator alloc] initWithMenuLayer:self];
         
-        //currently if a previous scene is provided it will always be the game scene. Create the main menu layer scene with continue or not as appropriate.
+        //if a previous scene is provided it will always be the game scene. Create the main menu layer scene with continue or not as appropriate.
         MainMenuLayer *menuLayer;
         if (previousScene) {
             self.gameScene = previousScene;
@@ -156,17 +158,16 @@
         self.isTouchEnabled = YES;
         
         [self schedule:@selector(update:)];
-        
-        //TODO add button press sound.
     }
     return self;
 }
 
+//this is used to animate the circles each frame.
 - (void)update:(ccTime)dt {
     [self.circles update:dt];
 }
 
-//prevent touches going to over layers.
+//prevent touches going to over layers. No touches need actually be handled as UIMenus handle their own touches.
 - (void)registerWithTouchDispatcher
 {
 	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];

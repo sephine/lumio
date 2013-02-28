@@ -1,13 +1,11 @@
 //
 //  GameLayer.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/19/13.
-//  Copyright __MyCompanyName__ 2013. All rights reserved.
+//  Copyright Joanne Dyer 2013. All rights reserved.
 //
 
-
-// Import the interfaces
 #import "GameLayer.h"
 #import "InGameMenuLayer.h"
 #import "ReadyLayer.h"
@@ -26,6 +24,7 @@
 
 #pragma mark - GameLayer
 
+//Game Layer controls all the game objects and handles pausing and game over.
 @interface GameLayer ()
 
 @property (nonatomic, strong) CCMenu *menuItems;
@@ -38,7 +37,6 @@
 
 @end
 
-// HelloWorldLayer implementation
 @implementation GameLayer
 
 @synthesize menuItems = _menuItems;
@@ -53,10 +51,7 @@
 // Helper class method that creates a Scene with the GameLayer as the only child.
 +(CCScene *) scene
 {
-	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
-	
-	// 'gameLayer' is an autorelease object.
 	GameLayer *gameLayer = [GameLayer node];
     
     //readylayer will initially cover the paused game layer.
@@ -70,11 +65,8 @@
 	return scene;
 }
 
-// on "init" you need to initialize your instance
 -(id) init
 {
-	// always call "super" init
-	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super initWithColor:STANDARD_BACKGROUND]) ) {
         
         //gamelayer starts paused and covered by the ready layer.
@@ -102,16 +94,15 @@
         self.menuItems.position = CGPointZero;
         [self addChild:self.menuItems];
         
-        //add the footer TODO add level and score.
+        //add the footer
         CCSprite *footer = [CCSprite spriteWithFile:@"footer.png"];
         footer.position = ccp(FOOTER_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_FOOTER_Y_COORD : FOOTER_Y_COORD);
         [self addChild:footer z:0];
         
         //create the player object and add it to layer.
         self.player = [[Player alloc] init];
-        //TODO set position and add to layer.
         
-        // create and initialize our light effects.
+        // create and initialize all the lights.
         NSMutableArray *twoDimensionallightArray = [NSMutableArray array];
         for (int row = 0; row < NUMBER_OF_ROWS; row++) {
             NSMutableArray *innerArray = [NSMutableArray array];
@@ -132,13 +123,11 @@
         //create the light manager and pass it the light array.
         self.lightManager = [[LightManager alloc] initWithLightArray:twoDimensionallightArray];
         
-        //choose a high, medium, low and charge new value light from all the added lights.
+        //choose a high, medium, low and two charge new value lights from all the added lights.
         [self.lightManager chooseFirstLightWithValue:High];
         [self.lightManager chooseFirstLightWithValue:Medium];
         [self.lightManager chooseFirstLightWithValue:Low];
         [self.lightManager chooseFirstLightWithValue:Charge];
-        
-        //TODO remove second charge possibly.
         [self.lightManager chooseFirstLightWithValue:Charge];
         
         //create the level object and set its position.
@@ -165,7 +154,7 @@
 	return self;
 }
 
-//update method calls similar methods on Light and player to manage transition of lights and movement of player.
+//update method calls similar methods on gmae objects to manage transition of lights and movement of player etc
 - (void)update:(ccTime)dt {
     //only update if game is not paused.
     if (!self.gameIsPaused) {
@@ -184,6 +173,7 @@
     return YES;
 }
 
+//handles when the user taps the lights.
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint location = [self convertTouchToNodeSpace:touch];
     
@@ -194,6 +184,7 @@
     }
 }
 
+//called to pause the game.
 - (void)pauseButtonTapped:(id)sender
 {
     //make sure the button does nothing if the game is already paused.
@@ -204,6 +195,7 @@
     }
 }
 
+//called by the countdown bar when it empties
 - (void)gameOver
 {
     self.gameIsPaused = YES;
@@ -214,16 +206,18 @@
     GameKitHelper *helper = [GameKitHelper sharedGameKitHelper];
     [helper submitScore:score];
     
-    //TODO pass score to layer for display?
+    //pass score to ingame menu layer for display
     InGameMenuLayer *menuLayer = [[InGameMenuLayer alloc] initForGameOverMenuWithScore:score];
     [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
 }
 
+//unpause the game.
 - (void)unPauseGame
 {
     self.gameIsPaused = NO;
 }
 
+//restarts game by creating a new copy of the game scene to replace the current one. 
 - (void)restartGame
 {
     //remove layer and then add it again.

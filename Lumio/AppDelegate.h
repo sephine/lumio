@@ -1,9 +1,9 @@
 //
 //  AppDelegate.h
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/19/13.
-//  Copyright __MyCompanyName__ 2013. All rights reserved.
+//  Copyright Joanne Dyer 2013. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

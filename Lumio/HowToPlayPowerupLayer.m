@@ -3,7 +3,7 @@
 //  Lumio
 //
 //  Created by Joanne Dyer on 2/25/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "HowToPlayPowerupLayer.h"
@@ -12,6 +12,7 @@
 #import "GameLayer.h"
 #import "GameConfig.h"
 
+//layer for the How To Play Powerup menu (the third how to play screen).
 @interface HowToPlayPowerupLayer ()
 
 //these properties exist to pass on the information to the main menu layer when it is recreated.
@@ -44,12 +45,13 @@
         background.position = ccp(size.width/2, size.height/2);
         [self addChild:background];
         
-        //Create the Backwards Menu Item and put it in its own menu.
+        //Create the Backwards Menu Item and put it in the menu.
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
         backwardsMenuItem.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
         
+        //Create the forwards (done) Menu Item and put it in the menu.
         CCMenuItemImage *forwardsMenuItem = [CCMenuItemImage
                                              itemWithNormalImage:@"DoneButton.png" selectedImage:@"DoneButtonSelected.png"
                                              target:self selector:@selector(forwardsButtonTapped:)];
@@ -64,6 +66,7 @@
 
 - (void)backwardsButtonTapped:(id)sender
 {
+    //transition layers back to the how to play movement layer (the second how to play layer).
     HowToPlayMovementLayer *movementLayer = [[HowToPlayMovementLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:movementLayer z:2];
     
@@ -73,7 +76,7 @@
 
 - (void)forwardsButtonTapped:(id)sender
 {
-    //not the how to play has been read. set first game to no so it is not shown again on startup.
+    //now the how to play has been read. set first game to no so it is not shown again on startup.
     self.baseMenuLayer.firstPlay = NO;
     
     //if goToGame is yes start a new game otherwise return to the About screen.

@@ -1,15 +1,16 @@
 //
 //  CountdownBar.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/24/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "CountdownBar.h"
 #import "SimpleAudioEngine.h"
 #import "GameConfig.h"
 
+//represents the countdown bar object that counts down and when empty causes game over.
 @interface CountdownBar ()
 
 @property (nonatomic, strong) GameLayer *gameLayer;
@@ -33,6 +34,7 @@
 @synthesize countdownSpeed = _countdownSpeed;
 @synthesize glowTimeRemaining = _glowTimeRemaining;
 
+//when the countdown bar's position is set also need to set the position of it's sprites.
 - (void)setPosition:(CGPoint)position
 {
     _position = position;
@@ -45,10 +47,15 @@
 {
     if (self = [super init]) {
         self.gameLayer = gameLayer;
+        
+        //set the bar to initially be full (percentage of 100)
         self.value = 100;
         self.countdownSpeed = INITIAL_COUNTDOWN_SPEED_IN_PERCENTAGE_PER_SECOND;
+        
+        //set the glow time remaining to 0, it will be increased when a glow should be shown.
         self.glowTimeRemaining = 0;
         
+        //set up all the sprites.
         self.centreSprite = [CCSprite spriteWithFile:@"energy.png"];
         self.centreSprite.position = self.position;
         self.centreSprite.anchorPoint = ccp(0, 0);
@@ -71,6 +78,7 @@
     return self;
 }
 
+//update the value of the countdown bar based on it's speed and the time that has passed.
 - (void)update:(ccTime)dt
 {
     float initialValue = self.value;
@@ -79,29 +87,24 @@
     float percentageDecrease = self.countdownSpeed * dt;
     self.value -= percentageDecrease;
     
+    //decrease the glow time by the time passed.
     self.glowTimeRemaining -= dt;
     if (self.glowTimeRemaining < 0) self.glowTimeRemaining = 0;
     
+    //when the bar is empty call game over, else update the sprite appearance.
     if (self.value <= 0) {
         [self.gameLayer gameOver];
     } else {
         [self setTheCentreSpriteScaleAndColour];
     }
     
-    //play warning sound once in warning zone.
+    //play warning sound the first time it enters the warning zone.
     if (self.value <= COUNTDOWN_WARNING_START_PERCENTAGE && initialValue > COUNTDOWN_WARNING_START_PERCENTAGE) {
         [[SimpleAudioEngine sharedEngine] playEffect:@"warningSoundEffect.wav"];
     }
-    
-    //if (newTimeRemaining <= COUNTDOWN_WARNING_START_TIME) {
-    //    float initialSoundTimeRemaining = fmodf(initialTimeRemaining, COUNTDOWN_WARNING_START_TIME /4);
-    //    float newSoundTimeRemaining = fmodf(newTimeRemaining, COUNTDOWN_WARNING_START_TIME /4);
-    //    if (newSoundTimeRemaining > initialSoundTimeRemaining) {
-    //        [[SimpleAudioEngine sharedEngine] playEffect:@"drumSoundEffect.mp3"];
-    //    }
-    //}
 }
 
+//increase the value of the countdown bar based on the value.
 - (void)addValue:(LightValue)value
 {
     if (value == High) {
@@ -112,14 +115,17 @@
         self.value += COUNTDOWN_LOW_INCREASE_PERCENTAGE;
     }
     
+    //the value can never exceed 100 percent.
     if (self.value > 100) self.value = 100;
 }
 
+//increase the speed with which the countdown bar empties.
 - (void)increaseCountdownSpeed:(float)speedIncrease
 {
     self.countdownSpeed += speedIncrease;
 }
 
+//refill bar, called when the player levels up.
 - (void)refillBar
 {
     self.value = 100;
@@ -134,18 +140,7 @@
     
     //change the colour to black if time left until bar empties is less than the warning time.
     GLubyte red, green, blue;
-    //float timeRemaining = self.value / self.countdownSpeed;
     if (self.value <= COUNTDOWN_WARNING_START_PERCENTAGE) {
-        //float flashTimeProportion = fmodf(timeRemaining, COUNTDOWN_BAR_WARNING_FLASH_TIME) / COUNTDOWN_BAR_WARNING_FLASH_TIME;
-        /*if (flashTimeProportion <= 0.5) {
-            red = 3 + 252 * flashTimeProportion * 2;
-            green = 171 - 171 * flashTimeProportion * 2;
-            blue = 255 - 255 * flashTimeProportion * 2;
-        } else {
-            red = 255 - 252 * (flashTimeProportion - 0.5) * 2;
-            green = 0 + 171 * (flashTimeProportion - 0.5) * 2;
-            blue = 0 + 255 * (flashTimeProportion - 0.5) * 2;
-        }*/
         red = 0;
         green = 0;
         blue = 255;

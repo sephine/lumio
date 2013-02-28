@@ -1,15 +1,16 @@
 //
 //  GameKitHelper.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 2/20/13.
-//
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "GameKitHelper.h"
 #import "AppDelegate.h"
 #import "GameConfig.h"
 
+//used by the other objects to handle all interaction with GameCenter
 @interface GameKitHelper () <GKGameCenterControllerDelegate>
 
 @property (nonatomic) BOOL userAuthenticated;
@@ -20,7 +21,6 @@
 
 @synthesize delegate = _delegate;
 @synthesize lastError = _lastError;
-//@synthesize inGame = _inGame;
 @synthesize userAuthenticated = _gameCenterFeaturesEnabled;
 @synthesize authenticationAttempted = _authenticationAttempted;
 @synthesize highScore = _highScore;
@@ -62,6 +62,7 @@
     return self;
 }
 
+//called to authenticate the local player when the app first opens so that game center functionality can be used.
 - (void)authenticateLocalPlayer
 {
     self.authenticationAttempted = YES;
@@ -75,7 +76,6 @@
             self.lastError = error;
             
             if (viewController) {
-                //TODO ensure this either doesn't appear in game or that it pauses the game.
                 [self presentViewController:viewController];
             } else if (localPlayer.isAuthenticated) {
                 self.userAuthenticated = YES;
@@ -92,6 +92,7 @@
     }
 }
 
+//called when the authentication changes (only for ios5)
 - (void)authenticationChanged
 {
     GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
@@ -104,6 +105,7 @@
     }
 }
 
+//used to show the controller to login to game center.
 - (void)presentViewController:(UIViewController *)viewController
 {
     UIViewController *rootController = [UIApplication sharedApplication].keyWindow.rootViewController;
@@ -131,11 +133,10 @@
             BOOL success = (error == nil);
             [self.delegate onScoresSubmitted:success];
         }];
-        
-        //TODO shouldn't we let them know if the score wasn't submitted cause they're not logged in to Game Center?
     }
 }
 
+//get the player's high score from game center if possible. Calls localPlayerScoreReceived when done.
 - (void)getHighScore
 {
     self.highScoreFetchedOK = NO;
@@ -162,6 +163,7 @@
     self.highScoreFetchedOK = YES;
 }
 
+//called by the menu to open the game center leaderboard up.
 - (void)showLeaderboard
 {
     GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];

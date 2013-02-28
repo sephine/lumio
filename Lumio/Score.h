@@ -1,9 +1,9 @@
 //
 //  Score.h
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 2/19/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,6 +14,7 @@
 
 @class Level;
 
+//class counts up the score and displays it on it's label. Also handles the stars remaining to level up.
 @interface Score : CCNode {
 }
 

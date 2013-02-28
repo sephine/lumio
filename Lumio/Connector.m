@@ -1,14 +1,15 @@
 //
 //  Connector.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/20/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "Connector.h"
 #import "GameConfig.h"
 
+//class contains all the functionality for the coloured bars that connect the lights.
 @interface Connector ()
 
 @property (nonatomic, strong) GameLayer *gameLayer;
@@ -25,12 +26,14 @@
 @synthesize orientation = _orientation;
 @synthesize sprite = _sprite;
 
+//when the connector position is set also need to set the position of it's sprite.
 - (void)setPosition:(CGPoint)position
 {
     _position = position;
     self.sprite.position = position;
 }
 
+//show or hide the connectors based on the state.
 - (void)setState:(ConnectorState)state
 {
     _state = state;
@@ -40,9 +43,6 @@
             self.sprite.opacity = OPAQUE;
             break;
         case Enabled:
-            //self.sprite = [CCSprite spriteWithFile:@"Connector.png"];
-            //self.sprite.opacity = TRANSPARENT;
-            //break;
         case Disabled:
             self.sprite.opacity = TRANSPARENT;
             break;

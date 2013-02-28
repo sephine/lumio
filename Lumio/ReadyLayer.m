@@ -3,13 +3,14 @@
 //  Lumio
 //
 //  Created by Joanne Dyer on 2/27/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "ReadyLayer.h"
 #import "GameLayer.h"
 #import "GameConfig.h"
 
+//simple layer that covers up the game layer when it starts and is removed when you tap it.
 @interface ReadyLayer ()
 
 @end
@@ -23,14 +24,7 @@
         // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
-        CCSprite *background;
-        
-        if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
-            background = [CCSprite spriteWithFile:@"ReadyLayer.png"];
-            //background.rotation = 90;
-        } else {
-            background = [CCSprite spriteWithFile:@"ReadyLayer.png"];
-        }
+        CCSprite *background = [CCSprite spriteWithFile:@"ReadyLayer.png"];
         background.position = ccp(size.width/2, size.height/2);
         
         // add the background as a child to this Layer

@@ -1,9 +1,9 @@
 //
 //  AboutLayer.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 2/21/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "AboutLayer.h"
@@ -13,6 +13,7 @@
 #import "GameConfig.h"
 #import "GameKitHelper.h"
 
+//layer for the About menu.
 @interface AboutLayer ()
 
 //these properties exist to pass on the information to the main menu layer when it is recreated.
@@ -32,33 +33,43 @@
         self.baseMenuLayer = baseLayer;
         self.showContinue = showContinue;
         
+        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
-        //TODO for now show the selected button image for about as the tile of the page.
+        //show the selected button image for about as the tile of the page.
         CCSprite *aboutTitle = [CCSprite spriteWithFile:@"AboutButtonSelected.png"];
         aboutTitle.position = ccp(ABOUT_TITLE_X_COORD, size.height == 568 ? ABOUT_TITLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : ABOUT_TITLE_Y_COORD);
         [self addChild:aboutTitle];
         
         //Create the How To Play Menu Item.
         CCMenuItemImage *howToPlayMenuItem = [CCMenuItemImage
-                                             itemWithNormalImage:@"HowToPlayButton.png" selectedImage:@"HowToPlayButtonSelected.png"
-                                             target:self selector:@selector(howToPlayButtonTapped:)];
+                                              itemWithNormalImage:@"HowToPlayButton.png"
+                                              selectedImage:@"HowToPlayButtonSelected.png"
+                                              target:self
+                                              selector:@selector(howToPlayButtonTapped:)];
         
         //Create the Leaderboard Menu Item.
         CCMenuItemImage *leaderboardMenuItem = [CCMenuItemImage
-                                            itemWithNormalImage:@"LeaderboardButton.png" selectedImage:@"LeaderboardButtonSelected.png"
-                                            target:self selector:@selector(leaderboardButtonTapped:)];
+                                                itemWithNormalImage:@"LeaderboardButton.png"
+                                                selectedImage:@"LeaderboardButtonSelected.png"
+                                                target:self
+                                                selector:@selector(leaderboardButtonTapped:)];
         
         //Create the Review App Menu Item.
         CCMenuItemImage *reviewAppMenuItem = [CCMenuItemImage
-                                          itemWithNormalImage:@"LeaveARatingButton.png" selectedImage:@"LeaveARatingButtonSelected.png"
-                                          target:self selector:@selector(reviewAppButtonTapped:)];
+                                              itemWithNormalImage:@"LeaveARatingButton.png"
+                                              selectedImage:@"LeaveARatingButtonSelected.png"
+                                              target:self
+                                              selector:@selector(reviewAppButtonTapped:)];
         
         //Create the Credits Menu Item.
         CCMenuItemImage *creditsMenuItem = [CCMenuItemImage
-                                              itemWithNormalImage:@"CreditsButton.png" selectedImage:@"CreditsButtonSelected.png"
-                                              target:self selector:@selector(creditsButtonTapped:)];
+                                            itemWithNormalImage:@"CreditsButton.png"
+                                            selectedImage:@"CreditsButtonSelected.png"
+                                            target:self
+                                            selector:@selector(creditsButtonTapped:)];
         
+        //create the menu.
         CCMenu *menu = [CCMenu menuWithItems:howToPlayMenuItem, leaderboardMenuItem, reviewAppMenuItem, creditsMenuItem, nil];
         menu.position = ccp(ABOUT_MENU_X_COORD, size.height == 568 ? ABOUT_MENU_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : ABOUT_MENU_Y_COORD); //230
         [menu alignItemsVerticallyWithPadding:MENU_PADDING];
@@ -78,6 +89,7 @@
 
 - (void)howToPlayButtonTapped:(id)sender
 {
+    //transition layers to the how to play layer.
     HowToPlayAimLayer *howToPlayLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:NO];
     [[[CCDirector sharedDirector] runningScene] addChild:howToPlayLayer z:1];
     
@@ -87,13 +99,14 @@
 
 - (void)leaderboardButtonTapped:(id)sender
 {
+    //show the game center leaderboard
     GameKitHelper *helper = [GameKitHelper sharedGameKitHelper];
     [helper showLeaderboard];
 }
 
 - (void)reviewAppButtonTapped:(id)sender
 {
-    //TODO change the appID!
+    //open up the review page of the app in the app store.
     NSString *appID = APPLE_ID;
     NSString *urlstring = [NSString stringWithFormat: @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", appID];
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString:urlstring]];
@@ -101,6 +114,7 @@
 
 - (void)creditsButtonTapped:(id)sender
 {
+    //transition layers to the credits layer.
     CreditsLayer *creditsLayer = [[CreditsLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:creditsLayer z:1];
     
@@ -110,6 +124,7 @@
 
 - (void)backwardsButtonTapped:(id)sender
 {
+    //transition layers back to the main menu layer.
     MainMenuLayer *mainMenuLayer = [[MainMenuLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:mainMenuLayer z:2];
     

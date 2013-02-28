@@ -1,9 +1,9 @@
 //
 //  Player.h
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/19/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,6 +17,7 @@
 @class Light;
 @class Score;
 
+//class contains all the functionality for the player object whose movement is controlled by the user.
 @interface Player : CCNode {
 }
 

@@ -1,11 +1,12 @@
 //
 //  Common.h
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 2/5/13.
-//
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
+//File contains all the enums used by the classes.
 #ifndef CircleGame_Common_h
 #define CircleGame_Common_h
 

@@ -3,7 +3,7 @@
 //  Lumio
 //
 //  Created by Joanne Dyer on 2/25/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "HowToPlayMovementLayer.h"
@@ -43,12 +43,13 @@
         background.position = ccp(size.width/2, size.height/2);
         [self addChild:background];
         
-        //Create the Backwards Menu Item and put it in its own menu.
+        //Create the Backwards Menu Item and put it in the menu.
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
         backwardsMenuItem.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
         
+        //Create the forwards (next) Menu Item and put it in the menu.
         CCMenuItemImage *forwardsMenuItem = [CCMenuItemImage
                                              itemWithNormalImage:@"NextButton.png" selectedImage:@"NextButtonSelected.png"
                                              target:self selector:@selector(forwardsButtonTapped:)];
@@ -63,6 +64,7 @@
 
 - (void)backwardsButtonTapped:(id)sender
 {
+    //transition layers back to the how to play aim layer (the first how to play layer).
     HowToPlayAimLayer *aimLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:aimLayer z:2];
     
@@ -72,6 +74,7 @@
 
 - (void)forwardsButtonTapped:(id)sender
 {
+    //transition layers to the how to play powerup layer (the third how to play layer).
     HowToPlayPowerupLayer *powerupLayer = [[HowToPlayPowerupLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:powerupLayer z:2];
     

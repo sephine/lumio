@@ -3,7 +3,7 @@
 //  Lumio
 //
 //  Created by Joanne Dyer on 2/25/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "HowToPlayAimLayer.h"
@@ -12,6 +12,7 @@
 #import "HowToPlayMovementLayer.h"
 #import "GameConfig.h"
 
+//layer for the How To Play Aim menu (the first how to play screen).
 @interface HowToPlayAimLayer ()
 
 //these properties exist to pass on the information to the main menu layer when it is recreated.
@@ -44,12 +45,13 @@
         background.position = ccp(size.width/2, size.height/2);
         [self addChild:background];
         
-        //Create the Backwards Menu Item and put it in its own menu.
+        //Create the Backwards Menu Item and put it in the menu.
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
         backwardsMenuItem.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
         
+        //Create the forwards (next) Menu Item and put it in the menu.
         CCMenuItemImage *forwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"NextButton.png" selectedImage:@"NextButtonSelected.png"
                                               target:self selector:@selector(forwardsButtonTapped:)];
@@ -65,7 +67,7 @@
 - (void)backwardsButtonTapped:(id)sender
 {
     CCLayer *newLayer;
-    //if the how to play is on the way to playing the game it will have opened from the main menu, otherwise it will be from the about screen.
+    //if the how to play is preceding the start of a new game it will have opened from the main menu, otherwise it will be from the about screen.
     if (self.goToGame) {
         newLayer = [[MainMenuLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     } else {
@@ -73,12 +75,14 @@
     }
     [[[CCDirector sharedDirector] runningScene] addChild:newLayer z:2];
     
+    //transition to the main menu or about layer as applicable.
     [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[newLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 
 - (void)forwardsButtonTapped:(id)sender
 {
+    //transition layers to the how to play movement layer (the second how to play layer).
     HowToPlayMovementLayer *movementLayer = [[HowToPlayMovementLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:movementLayer z:2];
     

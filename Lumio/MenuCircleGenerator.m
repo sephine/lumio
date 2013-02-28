@@ -1,14 +1,15 @@
 //
 //  MenuCircleGenerator.m
-//  CircleGame
+//  Lumio
 //
 //  Created by Joanne Dyer on 1/26/13.
-//  Copyright 2013 __MyCompanyName__. All rights reserved.
+//  Copyright 2013 Joanne Dyer. All rights reserved.
 //
 
 #import "MenuCircleGenerator.h"
 #import "GameConfig.h"
 
+//class handles the creation and animation of the background circles for the menu screens.
 @interface MenuCircleGenerator ()
 
 @property (nonatomic, strong) BaseMenuLayer *menuLayer;
@@ -23,6 +24,7 @@
 @synthesize spriteArray = _spriteArray;
 @synthesize timeArray = _timeArray;
 
+//creates 6 circles positioned in various places in the screen and at different states based on the time remaining set. Adds all the circles to the base menu layer and to the sprite array. Adds all the time remainings to the time array.
 - (id)initWithMenuLayer:(BaseMenuLayer *)menuLayer
 {
     if (self = [super init]) {
@@ -81,7 +83,7 @@
     return self;
 }
 
-//updates the time remaining on the timers.
+//updates the time remaining on the timers and resets them when they reach 0.
 - (void)update:(ccTime)dt
 {
     for (int i = 0; i < 6; i++) {
@@ -94,6 +96,7 @@
     [self setTheSpritesScaleAndColour];
 }
 
+//sets all six sprites scales based on their time remaining. Sprites will fade in when first appearing and transition to black at the end.
 - (void)setTheSpritesScaleAndColour
 {
     for (int i = 0; i < 6; i++) {        
