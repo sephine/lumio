@@ -168,6 +168,7 @@
 {
     GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
     leaderboardViewController.leaderboardDelegate = self;
+    leaderboardViewController.category = HIGH_SCORE_CATEGORY;
     
     AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
     
