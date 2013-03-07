@@ -87,10 +87,10 @@
 - (void)update:(ccTime)dt
 {
     for (int i = 0; i < 6; i++) {
-        //reduce the time by dt.
+        //reduce the time by dt (take the module with the max time so that the delay is never larger than the max time.
         float time = [[self.timeArray objectAtIndex:i] floatValue];
-        time -= dt;
-        if (time <= 0) time = MAX_CIRCLE_TIME;
+        time -= fmodf(dt, MAX_CIRCLE_TIME);
+        if (time <= 0) time += MAX_CIRCLE_TIME;
         [self.timeArray replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:time]];
     }
     [self setTheSpritesScaleAndColour];
