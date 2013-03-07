@@ -136,6 +136,14 @@
 		B02EAE6B16E00232003F21D1 /* NewMainMenuButton.png in Resources */ = {isa = PBXBuildFile; fileRef = B02EAE6A16E00232003F21D1 /* NewMainMenuButton.png */; };
 		B02EAE6D16E00236003F21D1 /* NewMainMenuButtonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = B02EAE6C16E00236003F21D1 /* NewMainMenuButtonSelected.png */; };
 		B02EAE6F16E00240003F21D1 /* InGameMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = B02EAE6E16E00240003F21D1 /* InGameMenu.png */; };
+		B04A923816E908B8009F173B /* ScreenShot1.png in Resources */ = {isa = PBXBuildFile; fileRef = B04A923716E908B8009F173B /* ScreenShot1.png */; };
+		B04A923A16E908BC009F173B /* ScreenShot2.png in Resources */ = {isa = PBXBuildFile; fileRef = B04A923916E908BC009F173B /* ScreenShot2.png */; };
+		B04A923C16E908C0009F173B /* ScreenShot3.png in Resources */ = {isa = PBXBuildFile; fileRef = B04A923B16E908C0009F173B /* ScreenShot3.png */; };
+		B04A923E16E908C4009F173B /* ScreenShot4.png in Resources */ = {isa = PBXBuildFile; fileRef = B04A923D16E908C4009F173B /* ScreenShot4.png */; };
+		B04A924016E908C8009F173B /* LargeScreenShot1.png in Resources */ = {isa = PBXBuildFile; fileRef = B04A923F16E908C8009F173B /* LargeScreenShot1.png */; };
+		B04A924216E908CC009F173B /* LargeScreenShot2.png in Resources */ = {isa = PBXBuildFile; fileRef = B04A924116E908CC009F173B /* LargeScreenShot2.png */; };
+		B04A924416E908D1009F173B /* LargeScreenShot3.png in Resources */ = {isa = PBXBuildFile; fileRef = B04A924316E908D1009F173B /* LargeScreenShot3.png */; };
+		B04A924616E908D5009F173B /* LargeScreenShot4.png in Resources */ = {isa = PBXBuildFile; fileRef = B04A924516E908D5009F173B /* LargeScreenShot4.png */; };
 		B0D8A43616D84D230022641B /* BlueRoutedLayer-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0D8A43516D84D230022641B /* BlueRoutedLayer-hd.png */; };
 		B0DB62AC16DE647400B25E19 /* ReadyLayer-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B0DB62AB16DE647400B25E19 /* ReadyLayer-hd.png */; };
 		B0DB62B316DE6B3600B25E19 /* ReadyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B0DB62B216DE6B3600B25E19 /* ReadyLayer.m */; };
@@ -339,6 +347,14 @@
 		B02EAE6A16E00232003F21D1 /* NewMainMenuButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NewMainMenuButton.png; path = "Lumio/Resources/SD Images/Menu/NewMainMenuButton.png"; sourceTree = SOURCE_ROOT; };
 		B02EAE6C16E00236003F21D1 /* NewMainMenuButtonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NewMainMenuButtonSelected.png; path = "Lumio/Resources/SD Images/Menu/NewMainMenuButtonSelected.png"; sourceTree = SOURCE_ROOT; };
 		B02EAE6E16E00240003F21D1 /* InGameMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InGameMenu.png; path = "Lumio/Resources/SD Images/Menu/InGameMenu.png"; sourceTree = SOURCE_ROOT; };
+		B04A923716E908B8009F173B /* ScreenShot1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScreenShot1.png; path = Lumio/Resources/Screenshots/ScreenShot1.png; sourceTree = SOURCE_ROOT; };
+		B04A923916E908BC009F173B /* ScreenShot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScreenShot2.png; path = Lumio/Resources/Screenshots/ScreenShot2.png; sourceTree = SOURCE_ROOT; };
+		B04A923B16E908C0009F173B /* ScreenShot3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScreenShot3.png; path = Lumio/Resources/Screenshots/ScreenShot3.png; sourceTree = SOURCE_ROOT; };
+		B04A923D16E908C4009F173B /* ScreenShot4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScreenShot4.png; path = Lumio/Resources/Screenshots/ScreenShot4.png; sourceTree = SOURCE_ROOT; };
+		B04A923F16E908C8009F173B /* LargeScreenShot1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LargeScreenShot1.png; path = Lumio/Resources/Screenshots/LargeScreenShot1.png; sourceTree = SOURCE_ROOT; };
+		B04A924116E908CC009F173B /* LargeScreenShot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LargeScreenShot2.png; path = Lumio/Resources/Screenshots/LargeScreenShot2.png; sourceTree = SOURCE_ROOT; };
+		B04A924316E908D1009F173B /* LargeScreenShot3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LargeScreenShot3.png; path = Lumio/Resources/Screenshots/LargeScreenShot3.png; sourceTree = SOURCE_ROOT; };
+		B04A924516E908D5009F173B /* LargeScreenShot4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LargeScreenShot4.png; path = Lumio/Resources/Screenshots/LargeScreenShot4.png; sourceTree = SOURCE_ROOT; };
 		B0D8A43516D84D230022641B /* BlueRoutedLayer-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BlueRoutedLayer-hd.png"; path = "Lumio/Resources/HD Images/Game/BlueRoutedLayer-hd.png"; sourceTree = SOURCE_ROOT; };
 		B0DB62AB16DE647400B25E19 /* ReadyLayer-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ReadyLayer-hd.png"; path = "Lumio/Resources/HD Images/Menu/ReadyLayer-hd.png"; sourceTree = SOURCE_ROOT; };
 		B0DB62B116DE6B3100B25E19 /* ReadyLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadyLayer.h; path = Lumio/ReadyLayer.h; sourceTree = SOURCE_ROOT; };
@@ -679,6 +695,7 @@
 			isa = PBXGroup;
 			children = (
 				B0DBC80C16D9608F0050F9CF /* Icons & Launch Images */,
+				B04A923616E90861009F173B /* Screenshots */,
 				B0A0EEDF16B1AFD400E47369 /* SD Images */,
 				B0A0EEE016B1AFDE00E47369 /* HD Images */,
 				B00ABEB616D8330000DC78F4 /* Sounds */,
@@ -694,6 +711,21 @@
 				B00ABEF816D83F7700DC78F4 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B04A923616E90861009F173B /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				B04A923716E908B8009F173B /* ScreenShot1.png */,
+				B04A923916E908BC009F173B /* ScreenShot2.png */,
+				B04A923B16E908C0009F173B /* ScreenShot3.png */,
+				B04A923D16E908C4009F173B /* ScreenShot4.png */,
+				B04A923F16E908C8009F173B /* LargeScreenShot1.png */,
+				B04A924116E908CC009F173B /* LargeScreenShot2.png */,
+				B04A924316E908D1009F173B /* LargeScreenShot3.png */,
+				B04A924516E908D5009F173B /* LargeScreenShot4.png */,
+			);
+			name = Screenshots;
 			sourceTree = "<group>";
 		};
 		B0A0EEDF16B1AFD400E47369 /* SD Images */ = {
@@ -930,6 +962,14 @@
 				B02EAE6B16E00232003F21D1 /* NewMainMenuButton.png in Resources */,
 				B02EAE6D16E00236003F21D1 /* NewMainMenuButtonSelected.png in Resources */,
 				B02EAE6F16E00240003F21D1 /* InGameMenu.png in Resources */,
+				B04A923816E908B8009F173B /* ScreenShot1.png in Resources */,
+				B04A923A16E908BC009F173B /* ScreenShot2.png in Resources */,
+				B04A923C16E908C0009F173B /* ScreenShot3.png in Resources */,
+				B04A923E16E908C4009F173B /* ScreenShot4.png in Resources */,
+				B04A924016E908C8009F173B /* LargeScreenShot1.png in Resources */,
+				B04A924216E908CC009F173B /* LargeScreenShot2.png in Resources */,
+				B04A924416E908D1009F173B /* LargeScreenShot3.png in Resources */,
+				B04A924616E908D5009F173B /* LargeScreenShot4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
