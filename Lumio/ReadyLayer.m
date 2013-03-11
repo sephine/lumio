@@ -31,13 +31,13 @@
         [self addChild: background z:0];
         
         self.isTouchEnabled = YES;
-	}
-	return self;
+    }
+    return self;
 }
 
 - (void)registerWithTouchDispatcher
 {
-	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {

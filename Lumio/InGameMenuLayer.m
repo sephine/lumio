@@ -37,8 +37,8 @@
         [self addChild: background z:0];
         
         self.isTouchEnabled = YES;
-	}
-	return self;
+    }
+    return self;
 }
 
 //init the scene for the pause menu. Will display a pause title and show the resume button.
@@ -162,7 +162,7 @@
 //prevent touches going to over layers. No touches need actually be handled as UIMenus handle their own touches.
 - (void)registerWithTouchDispatcher
 {
-	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {

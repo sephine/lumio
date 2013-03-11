@@ -91,30 +91,30 @@
 //Called when the main menu is being created the first time or from the game layer on game over.
 +(CCScene *) scene
 {
-	CCScene *scene = [CCScene node];
-	BaseMenuLayer *layer = [[BaseMenuLayer alloc] initWithPreviousScene:nil];
+    CCScene *scene = [CCScene node];
+    BaseMenuLayer *layer = [[BaseMenuLayer alloc] initWithPreviousScene:nil];
 	
-	// add layer as a child to scene
-	[scene addChild: layer z:0];
+    // add layer as a child to scene
+    [scene addChild: layer z:0];
 	
-	// return the scene
-	return scene;
+    // return the scene
+    return scene;
 }
 
 //Called when a game in in progress and the menu is re-opened.
 + (CCScene *)sceneWithPreviousScene:(CCScene *)previousScene
 {
-	// 'scene' is an autorelease object.
-	CCScene *scene = [CCScene node];
+    // 'scene' is an autorelease object.
+    CCScene *scene = [CCScene node];
 	
-	// 'layer' is an autorelease object.
-	BaseMenuLayer *layer = [[BaseMenuLayer alloc] initWithPreviousScene:previousScene];
+    // 'layer' is an autorelease object.
+    BaseMenuLayer *layer = [[BaseMenuLayer alloc] initWithPreviousScene:previousScene];
 	
-	// add layer as a child to scene
-	[scene addChild: layer z:0];
+    // add layer as a child to scene
+    [scene addChild: layer z:0];
 	
-	// return the scene
-	return scene;
+    // return the scene
+    return scene;
 }
 
 - (id)initWithPreviousScene:(CCScene *)previousScene

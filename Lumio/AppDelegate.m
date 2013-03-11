@@ -25,7 +25,7 @@
     [Bugsnag startBugsnagWithApiKey:@"b8dad58d5ad6d115cb747e28bf9048d6"];
     
 	// Create the main window
-	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
 
 	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
@@ -55,7 +55,6 @@
 
 	// 2D projection
 	[director_ setProjection:kCCDirectorProjection2D];
-//	[director setProjection:kCCDirectorProjection3D];
 
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
 	if( ! [director_ enableRetinaDisplay:YES] )
@@ -88,7 +87,6 @@
 	navController_.navigationBarHidden = YES;
 	
 	// set the Navigation Controller as the root view controller
-//	[window_ addSubview:navController_.view];	// Generates flicker.
 	[window_ setRootViewController:navController_];
 	
 	// make main window visible

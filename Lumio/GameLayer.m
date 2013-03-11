@@ -51,23 +51,23 @@
 // Helper class method that creates a Scene with the GameLayer as the only child.
 +(CCScene *) scene
 {
-	CCScene *scene = [CCScene node];
-	GameLayer *gameLayer = [GameLayer node];
+    CCScene *scene = [CCScene node];
+    GameLayer *gameLayer = [GameLayer node];
     
     //readylayer will initially cover the paused game layer.
     ReadyLayer *readyLayer = [ReadyLayer node];
 	
-	// add gameLayer as a child to scene
-	[scene addChild:gameLayer z:0 tag:GAME_LAYER_TAG];
+    // add gameLayer as a child to scene
+    [scene addChild:gameLayer z:0 tag:GAME_LAYER_TAG];
     [scene addChild:readyLayer z:1];
 	
-	// return the scene
-	return scene;
+    // return the scene
+    return scene;
 }
 
 -(id) init
 {
-	if( (self=[super initWithColor:STANDARD_BACKGROUND]) ) {
+    if( (self=[super initWithColor:STANDARD_BACKGROUND]) ) {
         
         //gamelayer starts paused and covered by the ready layer.
         self.gameIsPaused = YES;
@@ -150,8 +150,8 @@
         self.isTouchEnabled = YES;
     
         [self schedule:@selector(update:)];
-	}
-	return self;
+    }
+    return self;
 }
 
 //update method calls similar methods on gmae objects to manage transition of lights and movement of player etc
@@ -166,7 +166,7 @@
 
 - (void)registerWithTouchDispatcher
 {
-	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
