@@ -11,8 +11,6 @@
 //Created in order to give a fade transition between layers (only normally available for scenes.)
 @implementation CCLayerWithTransparency
 
-@synthesize opacity = _opacity;
-
 // Set the opacity of all of our children that support it
 - (void)setOpacity: (GLubyte) opacity
 {

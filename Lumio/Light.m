@@ -27,22 +27,6 @@
 @implementation Light
 
 @synthesize position = _position;
-@synthesize lightManager = _lightManager;
-@synthesize row = _row;
-@synthesize column = _column;
-@synthesize isPartOfRoute = _isPartOfRoute;
-@synthesize topConnector = _topConnector;
-@synthesize rightConnector = _rightConnector;
-@synthesize lightState = _lightState;
-@synthesize lightValue = _lightValue;
-@synthesize gameLayer = _gameLayer;
-@synthesize innerCircleSprite = _innerCircleSprite;
-@synthesize outerCircleSprite = _outerCircleSprite;
-@synthesize routedSprite = _routedSprite;
-@synthesize valueSprite = _valueSprite;
-@synthesize activeTimeRemaining = _activeTimeRemaining;
-@synthesize cooldownTimeRemaining = _cooldownTimeRemaining;
-@synthesize chargeTimeRemaining = _chargeTimeRemaining;
 
 //when the light position is set also need to set the position of it's sprites and connectors.
 - (void)setPosition:(CGPoint)position
@@ -202,7 +186,6 @@
         }
         [self setSpriteScaleAndColourForTimeRemaining];
         
-        //add to game layer.
         [self.gameLayer addChild:self];
     }
     return self;

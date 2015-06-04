@@ -26,8 +26,6 @@
 @implementation MainMenuLayer
 
 //base layer and show continue are passed to all menu layers created so that the game layer can be restored when needed (and shared data there can be accessed).
-@synthesize baseLayer = _baseLayer;
-@synthesize showContinue = _showContinue;
 
 - (id)initWithBaseLayer:(BaseMenuLayer *)baseLayer showContinue:(BOOL)showContinue
 {
@@ -35,7 +33,6 @@
         self.baseLayer = baseLayer;
         self.showContinue = showContinue;
         
-        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         //add the logo to the top of the page.
@@ -43,28 +40,24 @@
         logo.position = ccp(LOGO_X_COORD, size.height == 568 ? LOGO_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : LOGO_Y_COORD);
         [self addChild:logo];
         
-        //Create the Continue Menu Item.
         CCMenuItemImage *continueMenuItem = [CCMenuItemImage
                                              itemWithNormalImage:@"ContinueButton.png"
                                              selectedImage:@"ContinueButtonSelected.png"
                                              target:self
                                              selector:@selector(continueButtonTapped:)];
         
-        //Create the New Game Menu Item.
         CCMenuItemImage *newGameMenuItem = [CCMenuItemImage
                                             itemWithNormalImage:@"NewGameButton.png"
                                             selectedImage:@"NewGameButtonSelected.png"
                                             target:self
                                             selector:@selector(newGameButtonTapped:)];
         
-        //Create the About Menu Item.
         CCMenuItemImage *aboutMenuItem = [CCMenuItemImage
                                           itemWithNormalImage:@"AboutButton.png"
                                           selectedImage:@"AboutButtonSelected.png"
                                           target:self
                                           selector:@selector(aboutButtonTapped:)];
         
-        //Create the Setting Menu Item.
         CCMenuItemImage *settingsMenuItem = [CCMenuItemImage
                                              itemWithNormalImage:@"SettingsButton.png"
                                              selectedImage:@"SettingsButtonSelected.png"

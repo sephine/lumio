@@ -22,16 +22,12 @@
 
 @implementation SettingsLayer
 
-@synthesize baseMenuLayer = _baseMenuLayer;
-@synthesize showContinue = _showContinue;
-
 - (id)initWithBaseLayer:(BaseMenuLayer *)baseLayer showContinue:(BOOL)showContinue
 {
     if (self = [super init]) {
         self.baseMenuLayer = baseLayer;
         self.showContinue = showContinue;
         
-        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         //show the selected button image for settings as the tile of the page.
@@ -44,7 +40,6 @@
         soundEffectsTitle.position = ccp(SOUND_EFFECTS_TITLE_X_COORD, size.height == 568 ? SOUND_EFFECTS_TITLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : SOUND_EFFECTS_TITLE_Y_COORD);
         [self addChild:soundEffectsTitle];
         
-        //Create the Sound Effects Setting Toggle Menu Items.
         CCMenuItem *soundEffectsOnMenuItem = [CCMenuItemImage itemWithNormalImage:@"OnButton.png"
                                                                     selectedImage:@"OnButtonSelected.png"
                                                                            target:nil
@@ -73,7 +68,6 @@
         musicTitle.position = ccp(MUSIC_TITLE_X_COORD, size.height == 568 ? MUSIC_TITLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : MUSIC_TITLE_Y_COORD);
         [self addChild:musicTitle];
         
-        //Create the Music Setting Menu Item.
         CCMenuItem *musicOnMenuItem = [CCMenuItemImage itemWithNormalImage:@"OnButton.png"
                                                              selectedImage:@"OnButtonSelected.png"
                                                                     target:nil

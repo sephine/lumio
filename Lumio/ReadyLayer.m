@@ -21,13 +21,10 @@
 {
     if( (self=[super init]) ) {
         
-        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         CCSprite *background = [CCSprite spriteWithFile:@"ReadyLayer.png"];
         background.position = ccp(size.width/2, size.height/2);
-        
-        // add the background as a child to this Layer
         [self addChild: background z:0];
         
         self.isTouchEnabled = YES;

@@ -28,15 +28,6 @@
 @implementation Player
 
 @synthesize position = _position;
-@synthesize hasCharge = _hasCharge;
-@synthesize gameLayer = _gameLayer;
-@synthesize route = _route;
-@synthesize countdownBar = _countdownBar;
-@synthesize score = _score;
-@synthesize currentLight = _currentLight;
-@synthesize nextLight = _nextLight;
-@synthesize possibleLight = _possibleLight;
-@synthesize sprite = _sprite;
 
 //when the player's position is set also need to set the position of it's sprite.
 - (void)setPosition:(CGPoint)position
@@ -70,12 +61,11 @@
     if (self = [super init]) {
         self.gameLayer = gameLayer;
         self.route = route;
-        
-        //set the route's player property to self.
         self.route.player = self;
         
         self.countdownBar = countdownBar;
         self.score = score;
+        
         self.currentLight = currentLight;
         
         //let the current light know it has been occupied by the player.
@@ -108,11 +98,9 @@
         Light *nextLightInRoute = [self.route getNextLightFromRoute];
         if (nextLightInRoute) {
             if (nextLightInRoute.lightState == Cooldown) {
-                //if the next light in the route is on cooldown start it charging.
                 self.possibleLight = nextLightInRoute;
                 self.possibleLight.lightState = Charging;
             } else {
-                //if the next light in the route is active set it as the next light and remove the current light from the route and almost occupy the next.
                 self.nextLight = nextLightInRoute;
                 [self.route removeFirstLightFromRoute];
                 [self.currentLight leaveLight];
@@ -143,11 +131,9 @@
             self.currentLight = self.nextLight;
             LightValue value = [self.currentLight occupyLightAndGetValue];
             if (value == Charge) {
-                //if the value is a charge make the player charged and play the purple sound effect.
                 self.hasCharge = YES;
                 [[SimpleAudioEngine sharedEngine] playEffect:@"purpleSoundEffect.wav"];
             } else if (value != NoValue) {
-                //else if there is a value (just not a charge) let the countdown bar and score know about it and play the purple sound effect.
                 [self.countdownBar addValue:value];
                 [self.score increaseScoreByValue:value];
                 [[SimpleAudioEngine sharedEngine] playEffect:@"purpleSoundEffect.wav"];

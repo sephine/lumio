@@ -21,19 +21,14 @@
 
 @implementation InGameMenuLayer
 
-@synthesize gameOver = _gameOver;
-
 - (id)init
 {
     if( (self=[super init]) ) {
         
-        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         CCSprite *background = [CCSprite spriteWithFile:@"InGameMenu.png"];
         background.position = ccp(size.width/2, size.height/2);
-        
-        // add the background as a child to this Layer
         [self addChild: background z:0];
         
         self.isTouchEnabled = YES;
@@ -64,7 +59,6 @@
 {
     self.gameOver = gameOver;
     
-    // ask director for the window size
     CGSize size = [[CCDirector sharedDirector] winSize];
     
     //if it is not game over, show the paused title.
@@ -91,7 +85,6 @@
             helper.highScore = highScore;
         }
         
-        //show the score.
         NSString *scoreString = [NSString stringWithFormat:@"Score:\n%d", score];
         CCLabelTTF *scoreLabel = [CCLabelTTF labelWithString:scoreString
                                                    dimensions:CGSizeMake(SCORE_LABEL_WIDTH, SCORE_LABEL_HEIGHT)
@@ -123,7 +116,6 @@
         }
     }
     
-    //Create the Resume Menu Item.
     CCMenuItemImage *resumeMenuItem = [CCMenuItemImage
                                        itemWithNormalImage:@"NewResumeButton.png"
                                        selectedImage:@"NewResumeButtonSelected.png"
@@ -131,7 +123,6 @@
                                        selector:@selector(resumeButtonTapped:)];
     resumeMenuItem.position = ccp(RESUME_BUTTON_X_COORD, size.height == 568 ? RESUME_BUTTON_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : RESUME_BUTTON_Y_COORD);
     
-    //Create the Restart Menu Item.
     CCMenuItemImage *restartMenuItem = [CCMenuItemImage
                                         itemWithNormalImage:@"NewRestartButton.png"
                                         selectedImage:@"NewRestartButtonSelected.png"
@@ -140,7 +131,6 @@
     restartMenuItem.position = ccp(RESTART_BUTTON_X_COORD, size.height == 568 ? RESTART_BUTTON_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : RESTART_BUTTON_Y_COORD);
 
     
-    //Create the 'Main Menu' Menu Item.
     CCMenuItem *mainMenuMenuItem = [CCMenuItemImage
                                     itemWithNormalImage:@"NewMainMenuButton.png"
                                     selectedImage:@"NewMainMenuButtonSelected.png"

@@ -22,12 +22,6 @@
 
 @implementation Route
 
-@synthesize player = _player;
-@synthesize gameLayer = _gameLayer;
-@synthesize lightManager = _lightManager;
-@synthesize lightsInRoute = _lightsInRoute;
-@synthesize containsCooldownLight = _containsCooldownLight;
-
 - (id)initWithGameLayer:(GameLayer *)gameLayer lightManager:(LightManager *)lightManager
 {
     if (self = [super init]) {
@@ -35,10 +29,8 @@
         [self.gameLayer addChild:self];
         self.lightManager = lightManager;
         
-        //set the light manager route property to self.
         self.lightManager.route = self;
         
-        //create an empty array for the lights in route.
         self.lightsInRoute = [NSMutableArray array];
         self.containsCooldownLight = NO;
     }
@@ -77,7 +69,6 @@
         if (routeDirection == Right) {
             viableRoute = YES;
             for (int column = lastLightInRoute.column + 1; column <= light.column; column++) {
-                //get light for the relevant row and column.
                 Light *lightAtLocation = [self.lightManager getLightAtRow:light.row column:column];
                 
                 //if the light is in the correct state to be routed, or is the selected light and the player is charged add it to the array of lights to add, else break the loop as no lights will be added.
@@ -94,7 +85,6 @@
         } else if (routeDirection == Left) {
             viableRoute = YES;
             for (int column = lastLightInRoute.column - 1; column >= light.column; column--) {
-                //get light for the relevant row and column.
                 Light *lightAtLocation = [self.lightManager getLightAtRow:light.row column:column];
                 
                 //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
@@ -110,8 +100,7 @@
             }
         } else if (routeDirection == Up) {
             viableRoute = YES;
-            for (int row = lastLightInRoute.row + 1; row <= light.row; row++) {                
-                //get light for the relevant row and column.
+            for (int row = lastLightInRoute.row + 1; row <= light.row; row++) {
                 Light *lightAtLocation = [self.lightManager getLightAtRow:row column:light.column];
                 
                 //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.
@@ -128,7 +117,6 @@
         } else if (routeDirection == Down) {
             viableRoute = YES;
             for (int row = lastLightInRoute.row - 1; row >= light.row; row--) {
-                //get light for the relevant row and column.
                 Light *lightAtLocation = [self.lightManager getLightAtRow:row column:light.column];
                 
                 //if the light is in the correct state to be routed add it to the array of lights to add, else break the loop as no lights will be added.

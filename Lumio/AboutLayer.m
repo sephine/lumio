@@ -24,16 +24,12 @@
 
 @implementation AboutLayer
 
-@synthesize baseMenuLayer = _baseMenuLayer;
-@synthesize showContinue = _showContinue;
-
 - (id)initWithBaseLayer:(BaseMenuLayer *)baseLayer showContinue:(BOOL)showContinue
 {
     if (self = [super init]) {
         self.baseMenuLayer = baseLayer;
         self.showContinue = showContinue;
         
-        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         //show the selected button image for about as the tile of the page.
@@ -41,35 +37,30 @@
         aboutTitle.position = ccp(ABOUT_TITLE_X_COORD, size.height == 568 ? ABOUT_TITLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : ABOUT_TITLE_Y_COORD);
         [self addChild:aboutTitle];
         
-        //Create the How To Play Menu Item.
         CCMenuItemImage *howToPlayMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"HowToPlayButton.png"
                                               selectedImage:@"HowToPlayButtonSelected.png"
                                               target:self
                                               selector:@selector(howToPlayButtonTapped:)];
         
-        //Create the Leaderboard Menu Item.
         CCMenuItemImage *leaderboardMenuItem = [CCMenuItemImage
                                                 itemWithNormalImage:@"LeaderboardButton.png"
                                                 selectedImage:@"LeaderboardButtonSelected.png"
                                                 target:self
                                                 selector:@selector(leaderboardButtonTapped:)];
         
-        //Create the Review App Menu Item.
         CCMenuItemImage *reviewAppMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"LeaveARatingButton.png"
                                               selectedImage:@"LeaveARatingButtonSelected.png"
                                               target:self
                                               selector:@selector(reviewAppButtonTapped:)];
         
-        //Create the Credits Menu Item.
         CCMenuItemImage *creditsMenuItem = [CCMenuItemImage
                                             itemWithNormalImage:@"CreditsButton.png"
                                             selectedImage:@"CreditsButtonSelected.png"
                                             target:self
                                             selector:@selector(creditsButtonTapped:)];
         
-        //create the menu.
         CCMenu *menu = [CCMenu menuWithItems:howToPlayMenuItem, leaderboardMenuItem, reviewAppMenuItem, creditsMenuItem, nil];
         menu.position = ccp(ABOUT_MENU_X_COORD, size.height == 568 ? ABOUT_MENU_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : ABOUT_MENU_Y_COORD); //230
         [menu alignItemsVerticallyWithPadding:MENU_PADDING];

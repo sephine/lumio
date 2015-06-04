@@ -21,16 +21,12 @@
 
 @implementation CreditsLayer
 
-@synthesize baseMenuLayer = _baseMenuLayer;
-@synthesize showContinue = _showContinue;
-
 - (id)initWithBaseLayer:(BaseMenuLayer *)baseLayer showContinue:(BOOL)showContinue
 {
     if (self = [super init]) {
         self.baseMenuLayer = baseLayer;
         self.showContinue = showContinue;
         
-        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         //add the background image showing the credits
@@ -38,7 +34,6 @@
         background.position = ccp(size.width/2, size.height/2);
         [self addChild:background];
         
-        //Create the license menu item.
         CCMenuItemImage *licenseMenuItem = [CCMenuItemImage
                                             itemWithNormalImage:@"LicenseButton.png"
                                             selectedImage:@"LicenseButtonSelected.png"
@@ -46,7 +41,6 @@
                                             selector:@selector(licenseButtonTapped:)];
         licenseMenuItem.position = ccp(LICENSE_X_COORD, size.height == 568 ? LICENSE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : LICENSE_Y_COORD);
         
-        //Create the Backwards Menu Item and add to menu
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];

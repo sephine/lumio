@@ -18,11 +18,6 @@
 
 @implementation LightManager
 
-@synthesize route = _route;
-@synthesize maxCooldown = _maxCooldown;
-@synthesize countdownReduction = _countdownReduction;
-@synthesize twoDimensionalLightArray = _twoDimensionalLightArray;
-
 //lightarray is a two dimensional array that contains all the light objects created by game layer first by row then by column.
 - (id)initWithLightArray:(NSMutableArray *)lightArray
 {

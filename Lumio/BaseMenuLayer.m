@@ -24,9 +24,6 @@
 
 @implementation BaseMenuLayer
 
-@synthesize gameScene = _gameScene;
-@synthesize circles = _circles;
-
 //gets and sets information to NSUserDefaults to save whether the sound effects should be turned on.
 - (BOOL)soundEffectsOn
 {
@@ -94,26 +91,17 @@
     CCScene *scene = [CCScene node];
     BaseMenuLayer *layer = [[BaseMenuLayer alloc] initWithPreviousScene:nil];
 	
-    // add layer as a child to scene
     [scene addChild: layer z:0];
-	
-    // return the scene
     return scene;
 }
 
 //Called when a game in in progress and the menu is re-opened.
 + (CCScene *)sceneWithPreviousScene:(CCScene *)previousScene
 {
-    // 'scene' is an autorelease object.
     CCScene *scene = [CCScene node];
-	
-    // 'layer' is an autorelease object.
     BaseMenuLayer *layer = [[BaseMenuLayer alloc] initWithPreviousScene:previousScene];
 	
-    // add layer as a child to scene
     [scene addChild: layer z:0];
-	
-    // return the scene
     return scene;
 }
 
@@ -127,14 +115,12 @@
             //delay authenticating the player until the transition has finished so that the banner appearing doesn't make it stutter.
             [[GameKitHelper sharedGameKitHelper] performSelector:@selector(authenticateLocalPlayer) withObject:nil afterDelay:INTRO_TRANSITION_TIME];
             
-            //preload sound and music.
             SimpleAudioEngine *sae = [SimpleAudioEngine sharedEngine];
             [sae preloadEffect:@"levelUpSoundEfect.wav"];
             [sae preloadEffect:@"purpleSoundEfect.wav"];
             [sae preloadEffect:@"warningSoundEfect.wav"];
             [sae preloadBackgroundMusic:@"music.mp3"];
             
-            //load sound and music settings and set the volumes accordingly.
             sae.effectsVolume = self.soundEffectsOn ? SOUND_EFFECTS_VOLUME : 0;
             sae.backgroundMusicVolume = self.musicOn ? MUSIC_VOLUME : 0;
             

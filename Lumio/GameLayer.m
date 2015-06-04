@@ -39,15 +39,6 @@
 
 @implementation GameLayer
 
-@synthesize menuItems = _menuItems;
-@synthesize gameIsPaused = _gameIsPaused;
-@synthesize player = _player;
-@synthesize route = _route;
-@synthesize lightManager = _lightManager;
-@synthesize countdownBar = _countdownBar;
-@synthesize level = _level;
-@synthesize score = _score;
-
 // Helper class method that creates a Scene with the GameLayer as the only child.
 +(CCScene *) scene
 {
@@ -57,11 +48,9 @@
     //readylayer will initially cover the paused game layer.
     ReadyLayer *readyLayer = [ReadyLayer node];
 	
-    // add gameLayer as a child to scene
     [scene addChild:gameLayer z:0 tag:GAME_LAYER_TAG];
     [scene addChild:readyLayer z:1];
 	
-    // return the scene
     return scene;
 }
 
@@ -72,7 +61,6 @@
         //gamelayer starts paused and covered by the ready layer.
         self.gameIsPaused = YES;
         
-        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         //add the header which will include the countdown bar and the pause button.
@@ -84,7 +72,6 @@
         self.countdownBar = [[CountdownBar alloc] initWithGameLayer:self];
         self.countdownBar.position = ccp(COUNTDOWN_BAR_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_COUNTDOWN_BAR_Y_COORD : COUNTDOWN_BAR_Y_COORD);
         
-        //add the pause button.
         CCMenuItem *pauseMenuItem = [CCMenuItemImage
                                         itemWithNormalImage:@"pause.png" selectedImage:@"pause.png"
                                         target:self selector:@selector(pauseButtonTapped:)];
@@ -94,12 +81,10 @@
         self.menuItems.position = CGPointZero;
         [self addChild:self.menuItems];
         
-        //add the footer
         CCSprite *footer = [CCSprite spriteWithFile:@"footer.png"];
         footer.position = ccp(FOOTER_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_FOOTER_Y_COORD : FOOTER_Y_COORD);
         [self addChild:footer z:0];
         
-        //create the player object and add it to layer.
         self.player = [[Player alloc] init];
         
         // create and initialize all the lights.
@@ -120,7 +105,6 @@
         Light *firstLight = [[twoDimensionallightArray objectAtIndex:MIDDLE_ROW_INDEX] objectAtIndex:MIDDLE_COLUMN_INDEX];
         [firstLight setAsInitialLight];
         
-        //create the light manager and pass it the light array.
         self.lightManager = [[LightManager alloc] initWithLightArray:twoDimensionallightArray];
         
         //choose a high, medium, low and two charge new value lights from all the added lights.
@@ -130,21 +114,17 @@
         [self.lightManager chooseFirstLightWithValue:Charge];
         [self.lightManager chooseFirstLightWithValue:Charge];
         
-        //create the level object and set its position.
         self.level = [[Level alloc] initWithGameLayer:self countdownBar:self.countdownBar lightManager:self.lightManager];
         self.level.position = ccp(LEVEL_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_LEVEL_Y_COORD : LEVEL_Y_COORD);
         
-        //create the score object and set its position.
         self.score = [[Score alloc] initWithGameLayer:self level:self.level];
         self.score.position = ccp(SCORE_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_SCORE_Y_COORD : SCORE_Y_COORD);
         
-        //create the route object.
         self.route = [[Route alloc] initWithGameLayer:self lightManager:self.lightManager];
         
         //add the player starting position to the route.
         [self.route setInitialLight:firstLight];
         
-        //add the player and set it to the first light position.
         self.player = [[Player alloc] initWithGameLayer:self route:self.route currentLight:firstLight countdownBar:self.countdownBar score:self.score];
     
         self.isTouchEnabled = YES;
@@ -184,7 +164,6 @@
     }
 }
 
-//called to pause the game.
 - (void)pauseButtonTapped:(id)sender
 {
     //make sure the button does nothing if the game is already paused.
@@ -211,7 +190,6 @@
     [[[CCDirector sharedDirector] runningScene] addChild:menuLayer z:1];
 }
 
-//unpause the game.
 - (void)unPauseGame
 {
     self.gameIsPaused = NO;

@@ -22,10 +22,7 @@
     CCScene *scene = [CCScene node];
     IntroLayer *layer = [IntroLayer node];
     
-    // add layer as a child to scene
     [scene addChild: layer];
-    
-    // return the scene
     return scene;
 }
 
@@ -33,14 +30,12 @@
 {
     [super onEnter];
     
-    // ask director for the window size
     CGSize size = [[CCDirector sharedDirector] winSize];
     
     //add the launch screen as the background so that when this scene is entered it is seamless from the launch screen.
     CCSprite *background = [CCSprite spriteWithFile:@"Default.png"];
     background.position = ccp(size.width/2, size.height/2);
 
-    // add the background as a child to this Layer
     [self addChild: background];
     
     // In one second transition to the new scene

@@ -21,10 +21,6 @@
 @implementation Connector
 
 @synthesize position = _position;
-@synthesize state = _state;
-@synthesize gameLayer = _gameLayer;
-@synthesize orientation = _orientation;
-@synthesize sprite = _sprite;
 
 //when the connector position is set also need to set the position of it's sprite.
 - (void)setPosition:(CGPoint)position

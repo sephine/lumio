@@ -23,12 +23,6 @@
 @implementation Score
 
 @synthesize position = _position;
-@synthesize gameLayer = _gameLayer;
-@synthesize level = _level;
-@synthesize scoreLabel = _scoreLabel;
-@synthesize scoreValue = _scoreValue;
-@synthesize starsToLevelUp = _starsToLevelUp;
-@synthesize starsToLevelUpLabel = _starsToLevelUpLabel;
 
 //when the score's position is set also need to set the position of it's label. The positioning of the remaining stars to level up sprite and label are handled seperately.
 - (void)setPosition:(CGPoint)position
@@ -46,7 +40,6 @@
         
         [self.gameLayer addChild:self];
         
-        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         //set up the score label and show the intial level of 0.
@@ -60,12 +53,10 @@
         self.scoreLabel.color = STANDARD_PURPLE;
         [self addChild:self.scoreLabel];
         
-        //add the star sprite
         CCSprite *starSprite = [CCSprite spriteWithFile:@"1star.png"];
         starSprite.position = ccp(STAR_SPRITE_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_STAR_SPRITE_Y_COORD : STAR_SPRITE_Y_COORD);
         [self addChild:starSprite];
         
-        //add the stars remaining label.
         NSString *starsToLevelUpString = [NSString stringWithFormat:@"%d", self.starsToLevelUp];
         self.starsToLevelUpLabel = [CCLabelTTF labelWithString:starsToLevelUpString
                                            dimensions:CGSizeMake(STARS_REMAINING_WIDTH, STARS_REMAINING_HEIGHT)

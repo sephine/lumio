@@ -24,10 +24,6 @@
 
 @implementation HowToPlayMovementLayer
 
-@synthesize baseMenuLayer = _baseMenuLayer;
-@synthesize showContinue = _showContinue;
-@synthesize goToGame = _goToGame;
-
 - (id)initWithBaseLayer:(BaseMenuLayer *)baseLayer showContinue:(BOOL)showContinue goToGame:(BOOL)goToGame;
 {
     if (self = [super init]) {
@@ -35,21 +31,17 @@
         self.showContinue = showContinue;
         self.goToGame = goToGame;
         
-        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
-        //add the background image describing how to play 'aim'.
         CCSprite *background = [CCSprite spriteWithFile:@"HowToPlayMovement.png"];
         background.position = ccp(size.width/2, size.height/2);
         [self addChild:background];
         
-        //Create the Backwards Menu Item and put it in the menu.
         CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
                                               itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
                                               target:self selector:@selector(backwardsButtonTapped:)];
         backwardsMenuItem.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
         
-        //Create the forwards (next) Menu Item and put it in the menu.
         CCMenuItemImage *forwardsMenuItem = [CCMenuItemImage
                                              itemWithNormalImage:@"NextButton.png" selectedImage:@"NextButtonSelected.png"
                                              target:self selector:@selector(forwardsButtonTapped:)];

@@ -26,13 +26,6 @@
 @implementation CountdownBar
 
 @synthesize position = _position;
-@synthesize gameLayer = _gameLayer;
-@synthesize borderSprite = _borderSprite;
-@synthesize centreSprite = _centreSprite;
-@synthesize maskSprite = _maskSprite;
-@synthesize value = _value;
-@synthesize countdownSpeed = _countdownSpeed;
-@synthesize glowTimeRemaining = _glowTimeRemaining;
 
 //when the countdown bar's position is set also need to set the position of it's sprites.
 - (void)setPosition:(CGPoint)position
@@ -55,7 +48,6 @@
         //set the glow time remaining to 0, it will be increased when a glow should be shown.
         self.glowTimeRemaining = 0;
         
-        //set up all the sprites.
         self.centreSprite = [CCSprite spriteWithFile:@"energy.png"];
         self.centreSprite.position = self.position;
         self.centreSprite.anchorPoint = ccp(0, 0);
@@ -83,15 +75,12 @@
 {
     float initialValue = self.value;
     
-    //decrease the value based on the time passed and the speed of decrease.
     float percentageDecrease = self.countdownSpeed * dt;
     self.value -= percentageDecrease;
     
-    //decrease the glow time by the time passed.
     self.glowTimeRemaining -= dt;
     if (self.glowTimeRemaining < 0) self.glowTimeRemaining = 0;
     
-    //when the bar is empty call game over, else update the sprite appearance.
     if (self.value <= 0) {
         [self.gameLayer gameOver];
     } else {

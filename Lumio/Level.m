@@ -24,11 +24,6 @@
 @implementation Level
 
 @synthesize position = _position;
-@synthesize gameLayer = _gameLayer;
-@synthesize countdownBar = _countdownBar;
-@synthesize lightManager = _lightManager;
-@synthesize levelLabel = _levelLabel;
-@synthesize level = _level;
 
 //when the level's position is set also need to set the position of it's label.
 - (void)setPosition:(CGPoint)position
@@ -49,7 +44,6 @@
         self.lightManager.maxCooldown = INITIAL_MAX_COOLDOWN;
         self.lightManager.countdownReduction = INITIAL_COUNTDOWN_REDUCTION;
         
-        //set up the level label and show the intial level of 1.
         self.level = 1;
         NSString *levelString = [NSString stringWithFormat:@"Level - %d", self.level];
         self.levelLabel = [CCLabelTTF labelWithString:levelString
@@ -69,7 +63,6 @@
     self.level += 1;
     if (self.level > MAX_LEVEL) self.level = MAX_LEVEL;
     
-    //change the text in the lable to show the new level.
     NSString *levelString = [NSString stringWithFormat:@"Level - %d", self.level];
     [self.levelLabel setString:levelString];
     
@@ -93,7 +86,6 @@
     if (countdownReduction > MAX_COUNTDOWN_REDUCTION) countdownReduction = MAX_COUNTDOWN_REDUCTION;
     self.lightManager.countdownReduction = countdownReduction;
     
-    //play level up sound.
     [[SimpleAudioEngine sharedEngine] playEffect:@"levelUpSoundEffect.wav"];
 }
 

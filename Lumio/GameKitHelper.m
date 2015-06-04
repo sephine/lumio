@@ -19,13 +19,6 @@
 
 @implementation GameKitHelper
 
-@synthesize delegate = _delegate;
-@synthesize lastError = _lastError;
-@synthesize userAuthenticated = _gameCenterFeaturesEnabled;
-@synthesize authenticationAttempted = _authenticationAttempted;
-@synthesize highScore = _highScore;
-@synthesize highScoreFetchedOK = _highScoreFetchedOK;
-
 - (void)setLastError:(NSError *)lastError
 {
     _lastError = [lastError copy];

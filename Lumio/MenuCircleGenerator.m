@@ -20,10 +20,6 @@
 
 @implementation MenuCircleGenerator
 
-@synthesize menuLayer = _menuLayer;
-@synthesize spriteArray = _spriteArray;
-@synthesize timeArray = _timeArray;
-
 //creates 6 circles positioned in various places in the screen and at different states based on the time remaining set. Adds all the circles to the base menu layer and to the sprite array. Adds all the time remainings to the time array.
 - (id)initWithMenuLayer:(BaseMenuLayer *)menuLayer
 {
@@ -33,7 +29,6 @@
         self.spriteArray = [NSMutableArray array];
         self.timeArray = [NSMutableArray array];
         
-        // ask director for the window size
         CGSize size = [[CCDirector sharedDirector] winSize];
         
         CCSprite *sprite1 = [CCSprite spriteWithFile:@"MenuCircle.png"];
