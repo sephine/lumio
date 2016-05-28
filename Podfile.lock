@@ -1,20 +1,33 @@
-
 PODS:
-- Bugsnag (2.2.3):
-  - Reachability (~> 3.1)
-- Reachability (3.1.0)
-- cocos2d (2.0.0):
-  - cocos2d/CocosDenshion (= 2.0.0)
-- cocos2d/CocosDenshion (2.0.0)
+  - Bugsnag (5.1.0):
+    - KSCrash/RecordingAdvanced (~> 1.0.3)
+  - cocos2d (2.0):
+    - cocos2d/CocosDenshion (= 2.0)
+  - cocos2d/CocosDenshion (2.0)
+  - KSCrash/no-arc (1.0.3)
+  - KSCrash/Recording (1.0.3):
+    - KSCrash/no-arc
+  - KSCrash/RecordingAdvanced (1.0.3):
+    - KSCrash/Recording
 
 DEPENDENCIES:
-- Bugsnag
-- cocos2d (~> 2.0.0)
+  - Bugsnag (from `https://github.com/bugsnag/bugsnag-cocoa.git`)
+  - cocos2d (~> 2.0.0)
+
+EXTERNAL SOURCES:
+  Bugsnag:
+    :git: https://github.com/bugsnag/bugsnag-cocoa.git
+
+CHECKOUT OPTIONS:
+  Bugsnag:
+    :commit: 9df620a605e947cf028d267f4ed7d330fecac9b2
+    :git: https://github.com/bugsnag/bugsnag-cocoa.git
 
 SPEC CHECKSUMS:
-  Bugsnag: 37bfc2e6c7d1720a5aee367fbc0a657f8c8cc691
-  Reachability: 1c8584c5f26fa776695efef95caaa50402c94cfb
-  cocos2d: ae22dc39f78c53d8b7c59a3f6c547d5a025d4ef7
-  cocos2d/CocosDenshion: ae22dc39f78c53d8b7c59a3f6c547d5a025d4ef7
+  Bugsnag: f766e45078ebdcf621e26739d41a1d26228d3988
+  cocos2d: f127fbbaff592614e0b40baa4e47d9dbc934fed8
+  KSCrash: e8f1367230da7e33f37deb7329c299079202b07e
 
-COCOAPODS: 0.16.1
+PODFILE CHECKSUM: 5704d4bff67a8b131bcfc1244582d5baad526a16
+
+COCOAPODS: 1.0.0
