@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6D5F69442E534FBAB53D0B79 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2132CA6C410E44B9B9E1D6CD /* libPods.a */; };
+		6E7C157FB3A57687F6CCAEFA /* libPods-Lumio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90977033338151525B545F62 /* libPods-Lumio.a */; };
 		B00ABDA016D826C200DC78F4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABD9F16D826C200DC78F4 /* AppDelegate.m */; };
 		B00ABDA316D826E400DC78F4 /* CCLayerWithTransparency.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABDA216D826E400DC78F4 /* CCLayerWithTransparency.m */; };
 		B00ABDA616D8275200DC78F4 /* BaseMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABDA516D8275200DC78F4 /* BaseMenuLayer.m */; };
@@ -195,7 +195,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2132CA6C410E44B9B9E1D6CD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5655A3B84B5996CD0AE3E36E /* Pods-Lumio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lumio/Pods-Lumio.debug.xcconfig"; sourceTree = "<group>"; };
+		90977033338151525B545F62 /* libPods-Lumio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lumio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90FA4A23BB2C9E808BB0D533 /* Pods-Lumio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumio.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lumio/Pods-Lumio.release.xcconfig"; sourceTree = "<group>"; };
 		B00ABD9E16D826BD00DC78F4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Lumio/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		B00ABD9F16D826C200DC78F4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Lumio/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		B00ABDA116D826DF00DC78F4 /* CCLayerWithTransparency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCLayerWithTransparency.h; path = Lumio/CCLayerWithTransparency.h; sourceTree = SOURCE_ROOT; };
@@ -409,7 +411,7 @@
 		B0DBC8A916DC44580050F9CF /* HowToPlayMovementLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HowToPlayMovementLayer.m; path = Lumio/HowToPlayMovementLayer.m; sourceTree = SOURCE_ROOT; };
 		B0DBC8AB16DC445E0050F9CF /* HowToPlayPowerupLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HowToPlayPowerupLayer.h; path = Lumio/HowToPlayPowerupLayer.h; sourceTree = SOURCE_ROOT; };
 		B0DBC8AC16DC44620050F9CF /* HowToPlayPowerupLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HowToPlayPowerupLayer.m; path = Lumio/HowToPlayPowerupLayer.m; sourceTree = SOURCE_ROOT; };
-		B7CBF786D3264DF6BFED9013 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		F910B1E63BED738929942EEA /* Pods-Lumio.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lumio.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Lumio/Pods-Lumio.appstore.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -426,13 +428,23 @@
 				B01B28DA16AB2B5200CD538A /* Foundation.framework in Frameworks */,
 				B01B28DC16AB2B5200CD538A /* CoreGraphics.framework in Frameworks */,
 				B01B28DE16AB2B5200CD538A /* GameKit.framework in Frameworks */,
-				6D5F69442E534FBAB53D0B79 /* libPods.a in Frameworks */,
+				6E7C157FB3A57687F6CCAEFA /* libPods-Lumio.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D490AAE1E37676A9B1F8429 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5655A3B84B5996CD0AE3E36E /* Pods-Lumio.debug.xcconfig */,
+				90FA4A23BB2C9E808BB0D533 /* Pods-Lumio.release.xcconfig */,
+				F910B1E63BED738929942EEA /* Pods-Lumio.appstore.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B00ABE0416D82C9800DC78F4 /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -602,7 +614,7 @@
 				B01B28DF16AB2B5200CD538A /* Lumio */,
 				B01B28CC16AB2B5200CD538A /* Frameworks */,
 				B01B28CA16AB2B5200CD538A /* Products */,
-				B7CBF786D3264DF6BFED9013 /* Pods.xcconfig */,
+				5D490AAE1E37676A9B1F8429 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -626,7 +638,7 @@
 				B01B28D916AB2B5200CD538A /* Foundation.framework */,
 				B01B28DB16AB2B5200CD538A /* CoreGraphics.framework */,
 				B01B28DD16AB2B5200CD538A /* GameKit.framework */,
-				2132CA6C410E44B9B9E1D6CD /* libPods.a */,
+				90977033338151525B545F62 /* libPods-Lumio.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -774,12 +786,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B01B2A6216AB2B5500CD538A /* Build configuration list for PBXNativeTarget "Lumio" */;
 			buildPhases = (
+				CF0BDF41C99F48AE0F52DC2D /* 📦 Check Pods Manifest.lock */,
 				B01B28C516AB2B5200CD538A /* Sources */,
 				B01B28C616AB2B5200CD538A /* Frameworks */,
 				B01B28C716AB2B5200CD538A /* Resources */,
-				4491B9AE249241069C93C595 /* Copy Pods Resources */,
-				D8949F9EC3384EBCA9093D15 /* Copy Pods Resources */,
-				89E85C48C9B445C886EDEE5A /* Copy Pods Resources */,
+				A9F02B7F68013EFF46FA7ABB /* 📦 Embed Pods Frameworks */,
+				A57120E09D2C5EC34632194A /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -976,47 +988,50 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4491B9AE249241069C93C595 /* Copy Pods Resources */ = {
+		A57120E09D2C5EC34632194A /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumio/Pods-Lumio-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
-		89E85C48C9B445C886EDEE5A /* Copy Pods Resources */ = {
+		A9F02B7F68013EFF46FA7ABB /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lumio/Pods-Lumio-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
-		D8949F9EC3384EBCA9093D15 /* Copy Pods Resources */ = {
+		CF0BDF41C99F48AE0F52DC2D /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1098,7 +1113,7 @@
 		};
 		B01B2A6316AB2B5500CD538A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7CBF786D3264DF6BFED9013 /* Pods.xcconfig */;
+			baseConfigurationReference = 5655A3B84B5996CD0AE3E36E /* Pods-Lumio.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -1112,13 +1127,14 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Lumio;
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Pods/cocos2d/CocosDenshion/CocosDenshion\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		B01B2A6416AB2B5500CD538A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7CBF786D3264DF6BFED9013 /* Pods.xcconfig */;
+			baseConfigurationReference = 90FA4A23BB2C9E808BB0D533 /* Pods-Lumio.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -1131,6 +1147,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Lumio;
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Pods/cocos2d/CocosDenshion/CocosDenshion\"";
 				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1158,7 +1175,7 @@
 		};
 		B02EAE7116E04040003F21D1 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7CBF786D3264DF6BFED9013 /* Pods.xcconfig */;
+			baseConfigurationReference = F910B1E63BED738929942EEA /* Pods-Lumio.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -1171,6 +1188,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Lumio;
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Pods/cocos2d/CocosDenshion/CocosDenshion\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
