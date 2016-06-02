@@ -7,13 +7,13 @@
 //
 
 #import "MainMenuLayer.h"
-#import "BaseMenuLayer.h"
 #import "GameLayer.h"
 #import "ReadyLayer.h"
 #import "AboutLayer.h"
 #import "SettingsLayer.h"
 #import "HowToPlayAimLayer.h"
 #import "GameConfig.h"
+#import "CCButton.h"
 
 //first menu layer that is shown on entering.
 @interface MainMenuLayer ()
@@ -33,48 +33,39 @@
         self.baseLayer = baseLayer;
         self.showContinue = showContinue;
         
-        CGSize size = [[CCDirector sharedDirector] winSize];
+        CGSize size = [CCDirector sharedDirector].viewSize;
         
         //add the logo to the top of the page.
-        CCSprite *logo = [CCSprite spriteWithFile:@"logo.png"];
+        CCSprite *logo = [CCSprite spriteWithImageNamed:@"logo.png"];
         logo.position = ccp(LOGO_X_COORD, size.height == 568 ? LOGO_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : LOGO_Y_COORD);
         [self addChild:logo];
         
-        CCMenuItemImage *continueMenuItem = [CCMenuItemImage
-                                             itemWithNormalImage:@"ContinueButton.png"
-                                             selectedImage:@"ContinueButtonSelected.png"
-                                             target:self
-                                             selector:@selector(continueButtonTapped:)];
+        CCButton *continueButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"ContinueButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"ContinueButtonSelected.png"] disabledSpriteFrame:nil];
+        [continueButton setTarget:self selector:@selector(continueButtonTapped:)];
         
-        CCMenuItemImage *newGameMenuItem = [CCMenuItemImage
-                                            itemWithNormalImage:@"NewGameButton.png"
-                                            selectedImage:@"NewGameButtonSelected.png"
-                                            target:self
-                                            selector:@selector(newGameButtonTapped:)];
-        
-        CCMenuItemImage *aboutMenuItem = [CCMenuItemImage
-                                          itemWithNormalImage:@"AboutButton.png"
-                                          selectedImage:@"AboutButtonSelected.png"
-                                          target:self
-                                          selector:@selector(aboutButtonTapped:)];
-        
-        CCMenuItemImage *settingsMenuItem = [CCMenuItemImage
-                                             itemWithNormalImage:@"SettingsButton.png"
-                                             selectedImage:@"SettingsButtonSelected.png"
-                                             target:self
-                                             selector:@selector(settingsButtonTapped:)];
+        CCButton *newGameButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"NewGameButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"NewGameButtonSelected.png"] disabledSpriteFrame:nil];
+        [continueButton setTarget:self selector:@selector(newGameButtonTapped:)];
+
+        CCButton *aboutButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"AboutButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"AboutButtonSelected.png"] disabledSpriteFrame:nil];
+        [continueButton setTarget:self selector:@selector(aboutButtonTapped:)];
+
+        CCButton *settingsButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"SettingsButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"SettingsButtonSelected.png"] disabledSpriteFrame:nil];
+        [continueButton setTarget:self selector:@selector(settingsButtonTapped:)];
         
         //create the menu and show the continue button if necessary.
-        CCMenu *menu;
+        CCLayoutBox *layout = [[CCLayoutBox alloc] init];
         if (showContinue) {
-            menu = [CCMenu menuWithItems:continueMenuItem, newGameMenuItem, aboutMenuItem, settingsMenuItem, nil];
-        } else {
-            menu = [CCMenu menuWithItems:newGameMenuItem, aboutMenuItem, settingsMenuItem, nil];
+            [layout addChild:continueButton];
         }
+        [layout addChild:newGameButton];
+        [layout addChild:aboutButton];
+        [layout addChild:settingsButton];
         
-        menu.position = ccp(MAIN_MENU_MENU_X_COORD, size.height == 568 ? MAIN_MENU_MENU_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : MAIN_MENU_MENU_Y_COORD);
-        [menu alignItemsVerticallyWithPadding:MENU_PADDING];
-        [self addChild:menu];
+        layout.spacing = MENU_PADDING;
+        layout.direction = CCLayoutBoxDirectionVertical;
+        [layout layout];
+        layout.position = ccp(MAIN_MENU_MENU_X_COORD, size.height == 568 ? MAIN_MENU_MENU_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : MAIN_MENU_MENU_Y_COORD);
+        [self addChild:layout];
     }
     return self;
 }
@@ -86,11 +77,11 @@
         HowToPlayAimLayer *howToPlayLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseLayer showContinue:self.showContinue goToGame:YES];
         [[[CCDirector sharedDirector] runningScene] addChild:howToPlayLayer z:1];
         
-        [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[howToPlayLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
+        [CCActionSequence actionOne:(CCActionFiniteTime *)[self runAction:[CCActionFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCActionFiniteTime *)[howToPlayLayer runAction:[CCActionFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
         [self removeFromParentAndCleanup:YES];
     } else {
         //else create a new GameLayer scene.
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:MENU_TRANSITION_TIME scene:[GameLayer scene] withColor:ccBLACK]];
+        [[CCDirector sharedDirector] presentScene:[GameLayer scene] withTransition:[CCTransition transitionFadeWithDuration:MENU_TRANSITION_TIME]];
     }
 }
 
@@ -100,7 +91,7 @@
     CCScene *gameScene = self.baseLayer.gameScene;
     ReadyLayer *readyLayer = [[ReadyLayer alloc] init];
     [gameScene addChild:readyLayer z:2];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:MENU_TRANSITION_TIME scene:gameScene withColor:ccBLACK]];
+    [[CCDirector sharedDirector] presentScene:gameScene withTransition:[CCTransition transitionFadeWithDuration:MENU_TRANSITION_TIME]];
 }
 
 - (void)aboutButtonTapped:(id)sender
@@ -109,7 +100,7 @@
     AboutLayer *aboutLayer = [[AboutLayer alloc] initWithBaseLayer:self.baseLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:aboutLayer z:1];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[aboutLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
+    [CCActionSequence actionOne:(CCActionFiniteTime *)[self runAction:[CCActionFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCActionFiniteTime *)[aboutLayer runAction:[CCActionFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -119,7 +110,7 @@
     SettingsLayer *settingsLayer = [[SettingsLayer alloc] initWithBaseLayer:self.baseLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:settingsLayer z:1];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[settingsLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
+    [CCActionSequence actionOne:(CCActionFiniteTime *)[self runAction:[CCActionFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCActionFiniteTime *)[settingsLayer runAction:[CCActionFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 

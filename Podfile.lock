@@ -1,18 +1,21 @@
 PODS:
   - Bugsnag (5.1.0):
     - KSCrash/RecordingAdvanced (~> 1.0.3)
-  - cocos2d (2.0):
-    - cocos2d/CocosDenshion (= 2.0)
-  - cocos2d/CocosDenshion (2.0)
+  - cocos2d (3.1.0-alpha):
+    - cocos2d/ObjectiveChipmunk (= 3.1.0-alpha)
+    - ObjectAL-for-iPhone
+  - cocos2d/ObjectiveChipmunk (3.1.0-alpha):
+    - ObjectAL-for-iPhone
   - KSCrash/no-arc (1.0.3)
   - KSCrash/Recording (1.0.3):
     - KSCrash/no-arc
   - KSCrash/RecordingAdvanced (1.0.3):
     - KSCrash/Recording
+  - ObjectAL-for-iPhone (2.5.2)
 
 DEPENDENCIES:
   - Bugsnag (from `https://github.com/bugsnag/bugsnag-cocoa.git`)
-  - cocos2d (~> 2.0.0)
+  - cocos2d (~> 3.0-rc4)
 
 EXTERNAL SOURCES:
   Bugsnag:
@@ -25,9 +28,10 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Bugsnag: f766e45078ebdcf621e26739d41a1d26228d3988
-  cocos2d: f127fbbaff592614e0b40baa4e47d9dbc934fed8
+  cocos2d: 86934a724952e63df00a9ba41bc6424b9f8a3494
   KSCrash: e8f1367230da7e33f37deb7329c299079202b07e
+  ObjectAL-for-iPhone: fa4c7a8b09dba6de7ef97778f0c1f72c3d297c0a
 
-PODFILE CHECKSUM: bc27ad56ad8f9603295179408cd5b1c6a520ce75
+PODFILE CHECKSUM: cddc1b5560beda02ad8b2e16b220f30414e5ecb5
 
 COCOAPODS: 1.0.0

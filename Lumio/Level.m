@@ -7,7 +7,6 @@
 //
 
 #import "Level.h"
-#import "SimpleAudioEngine.h"
 #import "GameConfig.h"
 
 //class controls the levelling up process and the labels showing current level.
@@ -23,12 +22,12 @@
 
 @implementation Level
 
-@synthesize position = _position;
+@synthesize position = _sPosition;
 
 //when the level's position is set also need to set the position of it's label.
 - (void)setPosition:(CGPoint)position
 {
-    _position = position;
+    _sPosition = position;
     self.levelLabel.position = position;
 }
 
@@ -86,7 +85,7 @@
     if (countdownReduction > MAX_COUNTDOWN_REDUCTION) countdownReduction = MAX_COUNTDOWN_REDUCTION;
     self.lightManager.countdownReduction = countdownReduction;
     
-    [[SimpleAudioEngine sharedEngine] playEffect:@"levelUpSoundEffect.wav"];
+    [[OALSimpleAudio sharedInstance] playEffect:@"levelUpSoundEffect.wav"];
 }
 
 @end

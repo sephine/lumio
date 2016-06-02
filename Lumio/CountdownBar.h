@@ -18,7 +18,7 @@
 @property (nonatomic) CGPoint position;
 
 - (id)initWithGameLayer:(GameLayer *)gameLayer;
-- (void)update:(ccTime)dt;
+- (void)update:(CCTime)dt;
 
 - (void)addValue:(LightValue)value;
 - (void)increaseCountdownSpeed:(float)speedIncrease;

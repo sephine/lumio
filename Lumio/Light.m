@@ -18,20 +18,20 @@
 @property (nonatomic, strong) CCSprite *outerCircleSprite;
 @property (nonatomic, strong) CCSprite *routedSprite;
 @property (nonatomic, strong) CCSprite *valueSprite;
-@property (nonatomic) ccTime activeTimeRemaining;
-@property (nonatomic) ccTime cooldownTimeRemaining;
-@property (nonatomic) ccTime chargeTimeRemaining;
+@property (nonatomic) CCTime activeTimeRemaining;
+@property (nonatomic) CCTime cooldownTimeRemaining;
+@property (nonatomic) CCTime chargeTimeRemaining;
 
 @end
 
 @implementation Light
 
-@synthesize position = _position;
+@synthesize position = _sPosition;
 
 //when the light position is set also need to set the position of it's sprites and connectors.
 - (void)setPosition:(CGPoint)position
 {
-    _position = position;
+    _sPosition = position;
     self.innerCircleSprite.position = position;
     self.outerCircleSprite.position = position;
     self.routedSprite.position = position;
@@ -61,17 +61,17 @@
     switch (lightState) {
         case Active:
             if (self.lightValue == NoValue) {
-                self.innerCircleSprite = [CCSprite spriteWithFile:@"active.png"];
+                self.innerCircleSprite = [CCSprite spriteWithImageNamed:@"active.png"];
                 self.outerCircleSprite.opacity = OPAQUE;
             } else {
-                self.innerCircleSprite = [CCSprite spriteWithFile:@"buffcircle.png"];
+                self.innerCircleSprite = [CCSprite spriteWithImageNamed:@"buffcircle.png"];
                 self.outerCircleSprite.opacity = TRANSPARENT;
             }
             //let the light manager know the light is now active so it can handle the connectors from the light appropriately.
             [self.lightManager lightNowActive:self];
             break;
         case Cooldown:
-            self.innerCircleSprite = [CCSprite spriteWithFile:@"inactive.png"];
+            self.innerCircleSprite = [CCSprite spriteWithImageNamed:@"inactive.png"];
             self.outerCircleSprite.opacity = TRANSPARENT;
             //set the light value to no value and let the light manager know if it had a value so it can choose a new value light.
             LightValue oldValue = self.lightValue;
@@ -100,19 +100,19 @@
     _lightValue = lightValue;
     switch (lightValue) {
         case Low:
-            self.valueSprite = [CCSprite spriteWithFile:@"1star.png"];
+            self.valueSprite = [CCSprite spriteWithImageNamed:@"1star.png"];
             self.valueSprite.opacity = OPAQUE;
             break;
         case Medium:
-            self.valueSprite = [CCSprite spriteWithFile:@"2star.png"];
+            self.valueSprite = [CCSprite spriteWithImageNamed:@"2star.png"];
             self.valueSprite.opacity = OPAQUE;
             break;
         case High:
-            self.valueSprite = [CCSprite spriteWithFile:@"3star.png"];
+            self.valueSprite = [CCSprite spriteWithImageNamed:@"3star.png"];
             self.valueSprite.opacity = OPAQUE;
             break;
         case Charge:
-            self.valueSprite = [CCSprite spriteWithFile:@"buff.png"];
+            self.valueSprite = [CCSprite spriteWithImageNamed:@"buff.png"];
             self.valueSprite.opacity = OPAQUE;
             break;
         case NoValue:
@@ -150,11 +150,11 @@
         self.lightValue = NoValue;
         
         //create outer sprite and routed sprite and add to layer. The other layers are added in their setters as they are frequently changed.
-        self.outerCircleSprite = [CCSprite spriteWithFile:@"glow.png"];
+        self.outerCircleSprite = [CCSprite spriteWithImageNamed:@"glow.png"];
         self.outerCircleSprite.position = self.position;
         [self addChild:self.outerCircleSprite z:1];
         
-        self.routedSprite = [CCSprite spriteWithFile:@"BlueRoutedLayer.png"];
+        self.routedSprite = [CCSprite spriteWithImageNamed:@"BlueRoutedLayer.png"];
         self.routedSprite.position = self.position;
         self.routedSprite.opacity = TRANSPARENT;
         [self addChild:self.routedSprite z:3];
@@ -192,7 +192,7 @@
 }
 
 //updates the time remaining on the timers (unless the light has a value in which case it lasts forever).
-- (void)update:(ccTime)dt
+- (void)update:(CCTime)dt
 {
     if (self.lightValue == NoValue) {
         switch (self.lightState) {
@@ -320,18 +320,18 @@
     CGFloat newScale = ((MAX_RADIUS - MIN_RADIUS) * timeProportion + MIN_RADIUS)/MAX_RADIUS;
     
     self.outerCircleSprite.scale = newScale;
-    GLubyte red = 0;
-    GLubyte green = 0;
+    float red = 0;
+    float green = 0;
     if (timeProportion >= SPEED_UP_THRESHOLD) {
-        red = 130 - 130 * (timeProportion - SPEED_UP_THRESHOLD) / (1 - SPEED_UP_THRESHOLD);
-        green = 125 + 130 * (timeProportion - SPEED_UP_THRESHOLD) / (1 - SPEED_UP_THRESHOLD);
+        red = (130 - 130 * (timeProportion - SPEED_UP_THRESHOLD) / (1 - SPEED_UP_THRESHOLD))/255;
+        green = (125 + 130 * (timeProportion - SPEED_UP_THRESHOLD) / (1 - SPEED_UP_THRESHOLD))/255;
     } else if (timeProportion >= CRITICAL_THRESHOLD) {
-        red = 255 - 125 * (timeProportion - CRITICAL_THRESHOLD) / (SPEED_UP_THRESHOLD - CRITICAL_THRESHOLD);
-        green = 125 * (timeProportion - CRITICAL_THRESHOLD) / (SPEED_UP_THRESHOLD - CRITICAL_THRESHOLD);
+        red = (255 - 125 * (timeProportion - CRITICAL_THRESHOLD) / (SPEED_UP_THRESHOLD - CRITICAL_THRESHOLD))/255;
+        green = (125 * (timeProportion - CRITICAL_THRESHOLD) / (SPEED_UP_THRESHOLD - CRITICAL_THRESHOLD))/255;
     } else {
-        red = 240 * timeProportion / CRITICAL_THRESHOLD + 15;
+        red = (240 * timeProportion / CRITICAL_THRESHOLD + 15)/255;
     }
-    self.outerCircleSprite.color = ccc3(red, green, 0);
+    self.outerCircleSprite.color = [CCColor colorWithRed:red green:green blue:0.0];
 }
 
 @end

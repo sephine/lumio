@@ -7,7 +7,6 @@
 //
 
 #import "CountdownBar.h"
-#import "SimpleAudioEngine.h"
 #import "GameConfig.h"
 
 //represents the countdown bar object that counts down and when empty causes game over.
@@ -19,18 +18,18 @@
 @property (nonatomic, strong) CCSprite *maskSprite;
 @property (nonatomic) float value;
 @property (nonatomic) float countdownSpeed;
-@property (nonatomic) ccTime glowTimeRemaining;
+@property (nonatomic) CCTime glowTimeRemaining;
 
 @end
 
 @implementation CountdownBar
 
-@synthesize position = _position;
+@synthesize position = _sPosition;
 
 //when the countdown bar's position is set also need to set the position of it's sprites.
 - (void)setPosition:(CGPoint)position
 {
-    _position = position;
+    _sPosition = position;
     self.borderSprite.position = position;
     self.centreSprite.position = ccp(position.x + 4, position.y + 7);
     self.maskSprite.position = ccp(position.x + 4 + 235, position.y + 6);
@@ -71,7 +70,7 @@
 }
 
 //update the value of the countdown bar based on it's speed and the time that has passed.
-- (void)update:(ccTime)dt
+- (void)update:(CCTime)dt
 {
     float initialValue = self.value;
     
@@ -89,7 +88,7 @@
     
     //play warning sound the first time it enters the warning zone.
     if (self.value <= COUNTDOWN_WARNING_START_PERCENTAGE && initialValue > COUNTDOWN_WARNING_START_PERCENTAGE) {
-        [[SimpleAudioEngine sharedEngine] playEffect:@"warningSoundEffect.wav"];
+        [[OALSimpleAudio sharedInstance] playEffect:@"warningSoundEffect.wav"];
     }
 }
 
@@ -128,27 +127,27 @@
     self.maskSprite.scaleX = 1 - valueProportion;
     
     //change the colour to black if time left until bar empties is less than the warning time.
-    GLubyte red, green, blue;
+    float red, green, blue;
     if (self.value <= COUNTDOWN_WARNING_START_PERCENTAGE) {
-        red = 0;
-        green = 0;
-        blue = 255;
+        red = 0.0;
+        green = 0.0;
+        blue = 1.0;
     } else {
         //change the colour to white based on glow time remaining.
-        blue = 255;
+        blue = 1.0;
         float glowTimeProportion = self.glowTimeRemaining/ COUNTDOWN_BAR_GLOW_TIME;
         if (glowTimeProportion <= 0.4) {
-            red = 3 + 97 * glowTimeProportion * 2.5;
-            green = 171 + 59 * glowTimeProportion * 2.5;
+            red = (3 + 97 * glowTimeProportion * 2.5)/255;
+            green = (171 + 59 * glowTimeProportion * 2.5)/255;
         } else if (glowTimeProportion >= 0.6) {
-            red = 100 - 97 * (glowTimeProportion - 0.6) * 2.5;
-            green = 230 - 59 * (glowTimeProportion - 0.6) * 2.5;
+            red = (100 - 97 * (glowTimeProportion - 0.6) * 2.5)/255;
+            green = (230 - 59 * (glowTimeProportion - 0.6) * 2.5)/255;
         } else {
-            red = 100;
-            green = 230;
+            red = 100/255;
+            green = 230/255;
         }
     }
-    self.centreSprite.color = ccc3(red, green, blue);
+    self.centreSprite.color = [CCColor colorWithRed:red green:green blue:blue];
 }
 
 @end

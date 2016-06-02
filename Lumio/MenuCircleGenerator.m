@@ -29,7 +29,7 @@
         self.spriteArray = [NSMutableArray array];
         self.timeArray = [NSMutableArray array];
         
-        CGSize size = [[CCDirector sharedDirector] winSize];
+        CGSize size = [CCDirector sharedDirector].viewSize;
         
         CCSprite *sprite1 = [CCSprite spriteWithFile:@"MenuCircle.png"];
         sprite1.position = ccp(CIRCLE_1_X_COORD, size.height == 568 ? CIRCLE_1_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : CIRCLE_1_Y_COORD);
@@ -79,7 +79,7 @@
 }
 
 //updates the time remaining on the timers and resets them when they reach 0.
-- (void)update:(ccTime)dt
+- (void)update:(CCTime)dt
 {
     for (int i = 0; i < 6; i++) {
         //reduce the time by dt (take the module with the max time so that the delay is never larger than the max time.
@@ -100,17 +100,17 @@
         float time = [[self.timeArray objectAtIndex:i] floatValue];
         float timeProportion = time / MAX_CIRCLE_TIME;
         sprite.scale = timeProportion;
-        GLubyte red, green, blue;
+        float red, green, blue;
         if (timeProportion >= MENU_CRITICAL_THRESHOLD) {
-            red = 3;
-            green = 171;
-            blue = 255;
+            red = 3/255;
+            green = 171/255;
+            blue = 1.0;
         } else {
-            red = 3 * timeProportion / MENU_CRITICAL_THRESHOLD;
-            green = 171 * timeProportion / MENU_CRITICAL_THRESHOLD;
-            blue = 255 * timeProportion / MENU_CRITICAL_THRESHOLD;
+            red = 3/255 * timeProportion / MENU_CRITICAL_THRESHOLD;
+            green = 171/255 * timeProportion / MENU_CRITICAL_THRESHOLD;
+            blue = timeProportion / MENU_CRITICAL_THRESHOLD;
         }
-        sprite.color = ccc3(red, green, blue);
+        sprite.color = [CCColor colorWithRed:red green:green blue:blue];
         
         if (time >= MAX_CIRCLE_TIME - 1) {
             sprite.opacity = MENU_CIRCLE_OPACITY * (MAX_CIRCLE_TIME - time);

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		54894DD9B8B549EDF59F814E /* libPods-Loumio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69952B1A1D2C6D94D3B6221F /* libPods-Loumio.a */; };
 		9657E8191CFE9A1500B39127 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E8181CFE9A1500B39127 /* Icon-60@2x.png */; };
 		9657E81B1CFE9A1800B39127 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E81A1CFE9A1800B39127 /* Icon-60@3x.png */; };
 		9657E81D1CFE9A1E00B39127 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E81C1CFE9A1E00B39127 /* Icon-76.png */; };
@@ -16,7 +15,6 @@
 		9657E8231CFE9A2900B39127 /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E8221CFE9A2900B39127 /* Icon-Small-40@2x.png */; };
 		9657E8251CFE9A2E00B39127 /* Icon-Small-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E8241CFE9A2E00B39127 /* Icon-Small-40@3x.png */; };
 		B00ABDA016D826C200DC78F4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABD9F16D826C200DC78F4 /* AppDelegate.m */; };
-		B00ABDA316D826E400DC78F4 /* CCLayerWithTransparency.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABDA216D826E400DC78F4 /* CCLayerWithTransparency.m */; };
 		B00ABDA616D8275200DC78F4 /* BaseMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABDA516D8275200DC78F4 /* BaseMenuLayer.m */; };
 		B00ABDA916D8276700DC78F4 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABDA816D8276700DC78F4 /* MainMenuLayer.m */; };
 		B00ABDAC16D8278500DC78F4 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABDAB16D8278500DC78F4 /* IntroLayer.m */; };
@@ -213,10 +211,10 @@
 		9657E8201CFE9A2500B39127 /* Icon-Small-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-40.png"; path = "Lumio/Resources/Icons & Launch Images/Icon-Small-40.png"; sourceTree = SOURCE_ROOT; };
 		9657E8221CFE9A2900B39127 /* Icon-Small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-40@2x.png"; path = "Lumio/Resources/Icons & Launch Images/Icon-Small-40@2x.png"; sourceTree = SOURCE_ROOT; };
 		9657E8241CFE9A2E00B39127 /* Icon-Small-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-40@3x.png"; path = "Lumio/Resources/Icons & Launch Images/Icon-Small-40@3x.png"; sourceTree = SOURCE_ROOT; };
+		9657E8261D00D76F00B39127 /* libPods-Loumio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Loumio.a"; path = "../../../../Library/Developer/Xcode/DerivedData/Loumio-awfwhmxdythqfqevwlkomolwiprx/Build/Products/Debug-iphonesimulator/libPods-Loumio.a"; sourceTree = "<group>"; };
+		9657E8281D00D77500B39127 /* libObjectAL-for-iPhone;.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libObjectAL-for-iPhone;.a"; path = "Pods/../build/Debug-iphoneos/ObjectAL-for-iPhone/libObjectAL-for-iPhone;.a"; sourceTree = "<group>"; };
 		B00ABD9E16D826BD00DC78F4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Lumio/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		B00ABD9F16D826C200DC78F4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Lumio/AppDelegate.m; sourceTree = SOURCE_ROOT; };
-		B00ABDA116D826DF00DC78F4 /* CCLayerWithTransparency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCLayerWithTransparency.h; path = Lumio/CCLayerWithTransparency.h; sourceTree = SOURCE_ROOT; };
-		B00ABDA216D826E400DC78F4 /* CCLayerWithTransparency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCLayerWithTransparency.m; path = Lumio/CCLayerWithTransparency.m; sourceTree = SOURCE_ROOT; };
 		B00ABDA416D8274B00DC78F4 /* BaseMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseMenuLayer.h; path = Lumio/BaseMenuLayer.h; sourceTree = SOURCE_ROOT; };
 		B00ABDA516D8275200DC78F4 /* BaseMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseMenuLayer.m; path = Lumio/BaseMenuLayer.m; sourceTree = SOURCE_ROOT; };
 		B00ABDA716D8276200DC78F4 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuLayer.h; path = Lumio/MainMenuLayer.h; sourceTree = SOURCE_ROOT; };
@@ -443,7 +441,6 @@
 				B01B28DA16AB2B5200CD538A /* Foundation.framework in Frameworks */,
 				B01B28DC16AB2B5200CD538A /* CoreGraphics.framework in Frameworks */,
 				B01B28DE16AB2B5200CD538A /* GameKit.framework in Frameworks */,
-				54894DD9B8B549EDF59F814E /* libPods-Loumio.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +641,8 @@
 		B01B28CC16AB2B5200CD538A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9657E8281D00D77500B39127 /* libObjectAL-for-iPhone;.a */,
+				9657E8261D00D76F00B39127 /* libPods-Loumio.a */,
 				B01B28CD16AB2B5200CD538A /* QuartzCore.framework */,
 				B01B28CF16AB2B5200CD538A /* OpenGLES.framework */,
 				B01B28D116AB2B5200CD538A /* OpenAL.framework */,
@@ -664,8 +663,6 @@
 			children = (
 				B00ABD9E16D826BD00DC78F4 /* AppDelegate.h */,
 				B00ABD9F16D826C200DC78F4 /* AppDelegate.m */,
-				B00ABDA116D826DF00DC78F4 /* CCLayerWithTransparency.h */,
-				B00ABDA216D826E400DC78F4 /* CCLayerWithTransparency.m */,
 				B00ABDAA16D8278000DC78F4 /* IntroLayer.h */,
 				B00ABDAB16D8278500DC78F4 /* IntroLayer.m */,
 				B00ABDA416D8274B00DC78F4 /* BaseMenuLayer.h */,
@@ -831,7 +828,7 @@
 		B01B28C016AB2B5200CD538A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0730;
 				TargetAttributes = {
 					B01B28C816AB2B5200CD538A = {
 						DevelopmentTeam = AVVK9CE648;
@@ -1076,7 +1073,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B00ABDA016D826C200DC78F4 /* AppDelegate.m in Sources */,
-				B00ABDA316D826E400DC78F4 /* CCLayerWithTransparency.m in Sources */,
 				B00ABDA616D8275200DC78F4 /* BaseMenuLayer.m in Sources */,
 				B00ABDA916D8276700DC78F4 /* MainMenuLayer.m in Sources */,
 				B00ABDAC16D8278500DC78F4 /* IntroLayer.m in Sources */,
@@ -1109,7 +1105,6 @@
 		B01B2A6016AB2B5500CD538A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1123,16 +1118,17 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
 		B01B2A6116AB2B5500CD538A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1147,6 +1143,7 @@
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
@@ -1155,7 +1152,6 @@
 			baseConfigurationReference = 5843AF60C08A37979ABBE9FC /* Pods-Loumio.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
-				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1165,12 +1161,16 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Lumio/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/ObjectAL-for-iPhone",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Loumio;
 				PROVISIONING_PROFILE = "";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "\"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/CocosDenshion/CocosDenshion";
+				USER_HEADER_SEARCH_PATHS = "\"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/CocosDenshion/CocosDenshion\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Support\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Platforms/iOS\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d-ui\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1180,7 +1180,6 @@
 			baseConfigurationReference = CDBDAAA9AE3ADADAAD74188D /* Pods-Loumio.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
-				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -1189,12 +1188,16 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Lumio/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/ObjectAL-for-iPhone",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Loumio;
 				PROVISIONING_PROFILE = "";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "\"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/CocosDenshion/CocosDenshion";
+				USER_HEADER_SEARCH_PATHS = "\"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/CocosDenshion/CocosDenshion\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Support\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Platforms/iOS\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d-ui\"";
 				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1203,7 +1206,6 @@
 		B02EAE7016E04040003F21D1 /* AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Joanne Dyer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1219,6 +1221,7 @@
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = AppStore;
 		};
@@ -1227,7 +1230,6 @@
 			baseConfigurationReference = 304BD99F423B06F4CE2B6E1E /* Pods-Loumio.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
-				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -1236,12 +1238,16 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Lumio/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/ObjectAL-for-iPhone",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Loumio;
 				PROVISIONING_PROFILE = "";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "\"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/CocosDenshion/CocosDenshion";
+				USER_HEADER_SEARCH_PATHS = "\"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/CocosDenshion/CocosDenshion\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Support\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Platforms/iOS\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d-ui\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

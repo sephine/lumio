@@ -30,7 +30,7 @@
 {
     [super onEnter];
     
-    CGSize size = [[CCDirector sharedDirector] winSize];
+    CGSize size = [CCDirector sharedDirector].viewSize;
     
     //add the launch screen as the background so that when this scene is entered it is seamless from the launch screen.
     CCSprite *background = [CCSprite spriteWithFile:@"Default.png"];
@@ -42,8 +42,8 @@
     [self scheduleOnce:@selector(makeTransition:) delay:1];
 }
 
--(void) makeTransition:(ccTime)dt
+-(void) makeTransition:(CCTime)dt
 {
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:INTRO_TRANSITION_TIME scene:[BaseMenuLayer scene] withColor:ccBLACK]];
+    [[CCDirector sharedDirector] presentScene:[BaseMenuLayer scene] withTransition:[CCTransition transitionFadeWithDuration:INTRO_TRANSITION_TIME]];
 }
 @end

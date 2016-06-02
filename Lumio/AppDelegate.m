@@ -54,7 +54,7 @@
 	[director_ setDelegate:self];
 
 	// 2D projection
-	[director_ setProjection:kCCDirectorProjection2D];
+	[director_ setProjection:CCDirectorProjection2D];
 
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
 	if( ! [director_ enableRetinaDisplay:YES] )
@@ -63,7 +63,7 @@
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.
-	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+	[CCTexture setDefaultAlphaPixelFormat:CCTexturePixelFormat_RGBA8888];
 
 	// If the 1st suffix is not found and if fallback is enabled then fallback suffixes are going to searched. If none is found, it will try with the name without suffix.
 	// On iPad HD  : "-ipadhd", "-ipad",  "-hd"
@@ -76,7 +76,7 @@
 	[sharedFileUtils setiPadRetinaDisplaySuffix:@"-ipadhd"];	// Default on iPad RetinaDisplay is "-ipadhd"
 
 	// Assume that PVR images have premultiplied alpha
-	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
+	[CCTexture PVRImagesHavePremultipliedAlpha:YES];
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	[director_ pushScene: [IntroLayer scene]]; 
@@ -139,7 +139,7 @@
 // application will be killed
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-	CC_DIRECTOR_END();
+	//CC_DIRECTOR_END();            //TODO look at entire AppDelegate
 }
 
 // purge memory

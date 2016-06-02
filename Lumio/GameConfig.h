@@ -189,10 +189,10 @@
 #define MAX_SCORE 999999
 
 //COLOURS
-#define STANDARD_PURPLE ccc3(160, 48, 252)
-#define STANDARD_PINK ccc3(184, 108, 252)
-#define STANDARD_BLUE ccc3(3, 171, 255)
-#define STANDARD_BACKGROUND ccc4(15, 15, 15, 255)
+#define STANDARD_PURPLE [CCColor colorWithRed:0.63 green:0.19 blue:0.99]
+#define STANDARD_PINK [CCColor colorWithRed:0.72 green:0.42 blue:0.99]
+#define STANDARD_BLUE [CCColor colorWithRed:0.01 green:0.67 blue:1.0]
+#define STANDARD_BACKGROUND [CCColor colorWithRed:0.06 green:0.06 blue:0.06]
 #define OPAQUE 255
 #define TRANSPARENT 0
 

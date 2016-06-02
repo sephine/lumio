@@ -9,10 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "BaseMenuLayer.h"
-#import "CCLayerWithTransparency.h"
 
 //layer for the About menu.
-@interface AboutLayer : CCLayerWithTransparency {
+@interface AboutLayer : CCNode {
 }
 
 //base layer is provided so that the data there can be accessed and passed on to new layers. Show continue says whether the continue menu item should be shown on the main menu layer.

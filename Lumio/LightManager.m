@@ -40,7 +40,7 @@
 }
 
 //calls the update methods for all the stored lights.
-- (void)update:(ccTime)dt {
+- (void)update:(CCTime)dt {
     for (NSMutableArray *innerArray in self.twoDimensionalLightArray) {
         for (Light *light in innerArray) {
             [light update:dt];

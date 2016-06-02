@@ -24,7 +24,7 @@
 @property (nonatomic) float countdownReduction;
 
 - (id)initWithLightArray:(NSMutableArray *)lightArray;
-- (void)update:(ccTime)dt;
+- (void)update:(CCTime)dt;
 
 - (void)chooseFirstLightWithValue:(LightValue)value;
 - (void)chooseNewLightWithValue:(LightValue)value;

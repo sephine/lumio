@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 
 //The IntroLayer exists to give a delay before the menu screens appear so everything is loaded before you see the menu.
-@interface IntroLayer : CCLayer {
+@interface IntroLayer : CCNode {
 }
 
 // returns a CCScene that contains the IntroLayer as the only child

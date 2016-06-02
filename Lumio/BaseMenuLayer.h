@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 
 //layer that acts as a base to all the menu layers. Creates a containing scene.
-@interface BaseMenuLayer : CCLayerColor {
+@interface BaseMenuLayer : CCNodeColor {
 }
 
 //gameScene will contain a link to the main game scene if the main menu has been reopened after a game has been started.

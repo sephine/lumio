@@ -10,6 +10,7 @@
 #import "HowToPlayAimLayer.h"
 #import "HowToPlayPowerupLayer.h"
 #import "GameConfig.h"
+#import "CCButton.h"
 
 @interface HowToPlayMovementLayer ()
 
@@ -31,25 +32,21 @@
         self.showContinue = showContinue;
         self.goToGame = goToGame;
         
-        CGSize size = [[CCDirector sharedDirector] winSize];
+        CGSize size = [CCDirector sharedDirector].viewSize;
         
-        CCSprite *background = [CCSprite spriteWithFile:@"HowToPlayMovement.png"];
+        CCSprite *background = [CCSprite spriteWithImageNamed:@"HowToPlayMovement.png"];
         background.position = ccp(size.width/2, size.height/2);
         [self addChild:background];
         
-        CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
-                                              itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
-                                              target:self selector:@selector(backwardsButtonTapped:)];
-        backwardsMenuItem.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
+        CCButton *backwardsButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"BackButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"BackButtonSelected.png"] disabledSpriteFrame:nil];
+        [backwardsButton setTarget:self selector:@selector(backwardsButtonTapped:)];
+        backwardsButton.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
+        [self addChild:backwardsButton];
         
-        CCMenuItemImage *forwardsMenuItem = [CCMenuItemImage
-                                             itemWithNormalImage:@"NextButton.png" selectedImage:@"NextButtonSelected.png"
-                                             target:self selector:@selector(forwardsButtonTapped:)];
-        forwardsMenuItem.position = ccp(NEXT_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_NEXT_Y_COORD : NEXT_Y_COORD);
-        
-        CCMenu *menu = [CCMenu menuWithItems:backwardsMenuItem, forwardsMenuItem, nil];
-        menu.position = CGPointZero;
-        [self addChild:menu];
+        CCButton *forwardsButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"NextButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"NextButtonSelected.png"] disabledSpriteFrame:nil];
+        [forwardsButton setTarget:self selector:@selector(forwardsButtonTapped:)];
+        forwardsButton.position = ccp(NEXT_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_NEXT_Y_COORD : NEXT_Y_COORD);
+        [self addChild:forwardsButton];
     }
     return self;
 }
@@ -60,7 +57,7 @@
     HowToPlayAimLayer *aimLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:aimLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[aimLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
+    [CCActionSequence actionOne:(CCActionFiniteTime *)[self runAction:[CCActionFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCActionFiniteTime *)[aimLayer runAction:[CCActionFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -70,7 +67,7 @@
     HowToPlayPowerupLayer *powerupLayer = [[HowToPlayPowerupLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:self.goToGame];
     [[[CCDirector sharedDirector] runningScene] addChild:powerupLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[powerupLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
+    [CCActionSequence actionOne:(CCActionFiniteTime *)[self runAction:[CCActionFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCActionFiniteTime *)[powerupLayer runAction:[CCActionFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 

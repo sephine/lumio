@@ -21,13 +21,13 @@
 {
     if( (self=[super init]) ) {
         
-        CGSize size = [[CCDirector sharedDirector] winSize];
+        CGSize size = [CCDirector sharedDirector].viewSize;
         
-        CCSprite *background = [CCSprite spriteWithFile:@"ReadyLayer.png"];
+        CCSprite *background = [CCSprite spriteWithImageNamed:@"ReadyLayer.png"];
         background.position = ccp(size.width/2, size.height/2);
         [self addChild: background z:0];
         
-        self.isTouchEnabled = YES;
+        self.userInteractionEnabled = YES;
     }
     return self;
 }

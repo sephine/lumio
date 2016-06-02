@@ -15,6 +15,6 @@
 }
 
 - (id)initWithMenuLayer:(BaseMenuLayer *)menuLayer;
-- (void)update:(ccTime)dt;
+- (void)update:(CCTime)dt;
 
 @end

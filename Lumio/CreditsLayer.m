@@ -9,6 +9,7 @@
 #import "CreditsLayer.h"
 #import "AboutLayer.h"
 #import "GameConfig.h"
+#import "CCButton.h"
 
 //layer for the Credits menu.
 @interface CreditsLayer ()
@@ -27,28 +28,22 @@
         self.baseMenuLayer = baseLayer;
         self.showContinue = showContinue;
         
-        CGSize size = [[CCDirector sharedDirector] winSize];
+        CGSize size = [CCDirector sharedDirector].viewSize;
         
         //add the background image showing the credits
-        CCSprite *background = [CCSprite spriteWithFile:@"CreditsBackground.png"];
+        CCSprite *background = [CCSprite spriteWithImageNamed:@"CreditsBackground.png"];
         background.position = ccp(size.width/2, size.height/2);
         [self addChild:background];
         
-        CCMenuItemImage *licenseMenuItem = [CCMenuItemImage
-                                            itemWithNormalImage:@"LicenseButton.png"
-                                            selectedImage:@"LicenseButtonSelected.png"
-                                            target:self
-                                            selector:@selector(licenseButtonTapped:)];
-        licenseMenuItem.position = ccp(LICENSE_X_COORD, size.height == 568 ? LICENSE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : LICENSE_Y_COORD);
+        CCButton *licenseButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"LicenseButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"LicenseButtonSelected.png"] disabledSpriteFrame:nil];
+        [licenseButton setTarget:self selector:@selector(licenseButtonTapped:)];
+        licenseButton.position = ccp(LICENSE_X_COORD, size.height == 568 ? LICENSE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : LICENSE_Y_COORD);
+        [self addChild:licenseButton];
         
-        CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
-                                              itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
-                                              target:self selector:@selector(backwardsButtonTapped:)];
-        backwardsMenuItem.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
-        
-        CCMenu *menu = [CCMenu menuWithItems:licenseMenuItem, backwardsMenuItem, nil];
-        menu.position = CGPointZero;
-        [self addChild:menu];
+        CCButton *backwardsButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"BackButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"BackButtonSelected.png"] disabledSpriteFrame:nil];
+        [licenseButton setTarget:self selector:@selector(backwardsButtonTapped:)];
+        backwardsButton.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
+        [self addChild:backwardsButton];
     }
     return self;
 }
@@ -59,7 +54,7 @@
     AboutLayer *aboutLayer = [[AboutLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:aboutLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[aboutLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
+    [CCActionSequence actionOne:(CCActionFiniteTime *)[self runAction:[CCActionFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCActionFiniteTime *)[aboutLayer runAction:[CCActionFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 

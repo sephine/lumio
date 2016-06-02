@@ -22,12 +22,12 @@
 
 @implementation Score
 
-@synthesize position = _position;
+@synthesize position = _sPosition;
 
 //when the score's position is set also need to set the position of it's label. The positioning of the remaining stars to level up sprite and label are handled seperately.
 - (void)setPosition:(CGPoint)position
 {
-    _position = position;
+    _sPosition = position;
     self.scoreLabel.position = position;
 }
 
@@ -40,7 +40,7 @@
         
         [self.gameLayer addChild:self];
         
-        CGSize size = [[CCDirector sharedDirector] winSize];
+        CGSize size = [CCDirector sharedDirector].viewSize;
         
         //set up the score label and show the intial level of 0.
         self.scoreValue = 0;

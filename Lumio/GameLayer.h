@@ -11,7 +11,7 @@
 #import "cocos2d.h"
 
 //Game Layer controls all the game objects and handles pausing and game over.
-@interface GameLayer : CCLayerColor {
+@interface GameLayer : CCNodeColor {
 }
 
 @property (nonatomic) BOOL gameIsPaused;

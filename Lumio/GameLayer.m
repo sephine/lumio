@@ -18,6 +18,7 @@
 #import "Score.h"
 #import "GameKitHelper.h"
 #import "GameConfig.h"
+#import "CCButton.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -27,7 +28,6 @@
 //Game Layer controls all the game objects and handles pausing and game over.
 @interface GameLayer ()
 
-@property (nonatomic, strong) CCMenu *menuItems;
 @property (nonatomic, strong) Player *player;
 @property (nonatomic, strong) Route *route;
 @property (nonatomic, strong) LightManager *lightManager;
@@ -61,10 +61,10 @@
         //gamelayer starts paused and covered by the ready layer.
         self.gameIsPaused = YES;
         
-        CGSize size = [[CCDirector sharedDirector] winSize];
+        CGSize size = [CCDirector sharedDirector].viewSize;
         
         //add the header which will include the countdown bar and the pause button.
-        CCSprite *header = [CCSprite spriteWithFile:@"topmenu.png"];
+        CCSprite *header = [CCSprite spriteWithImageNamed:@"topmenu.png"];
         header.position = ccp(HEADER_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_HEADER_Y_COORD : HEADER_Y_COORD);
         [self addChild:header z:0];
         
@@ -72,16 +72,12 @@
         self.countdownBar = [[CountdownBar alloc] initWithGameLayer:self];
         self.countdownBar.position = ccp(COUNTDOWN_BAR_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_COUNTDOWN_BAR_Y_COORD : COUNTDOWN_BAR_Y_COORD);
         
-        CCMenuItem *pauseMenuItem = [CCMenuItemImage
-                                        itemWithNormalImage:@"pause.png" selectedImage:@"pause.png"
-                                        target:self selector:@selector(pauseButtonTapped:)];
-        pauseMenuItem.position = ccp(PAUSE_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_PAUSE_Y_COORD : PAUSE_Y_COORD);
+        CCButton *pauseButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"pause.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"pause.png"] disabledSpriteFrame:nil];
+        [pauseButton setTarget:self selector:@selector(pauseButtonTapped:)];
+        pauseButton.position = ccp(PAUSE_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_PAUSE_Y_COORD : PAUSE_Y_COORD);
+        [self addChild:pauseButton];
         
-        self.menuItems = [CCMenu menuWithItems:pauseMenuItem, nil];
-        self.menuItems.position = CGPointZero;
-        [self addChild:self.menuItems];
-        
-        CCSprite *footer = [CCSprite spriteWithFile:@"footer.png"];
+        CCSprite *footer = [CCSprite spriteWithImageNamed:@"footer.png"];
         footer.position = ccp(FOOTER_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_FOOTER_Y_COORD : FOOTER_Y_COORD);
         [self addChild:footer z:0];
         
@@ -127,7 +123,7 @@
         
         self.player = [[Player alloc] initWithGameLayer:self route:self.route currentLight:firstLight countdownBar:self.countdownBar score:self.score];
     
-        self.isTouchEnabled = YES;
+        self.userInteractionEnabled = YES;
     
         [self schedule:@selector(update:)];
     }
@@ -135,7 +131,7 @@
 }
 
 //update method calls similar methods on gmae objects to manage transition of lights and movement of player etc
-- (void)update:(ccTime)dt {
+- (void)update:(CCTime)dt {
     //only update if game is not paused.
     if (!self.gameIsPaused) {
         [self.lightManager update:dt];
@@ -155,8 +151,7 @@
 
 //handles when the user taps the lights.
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint location = [self convertTouchToNodeSpace:touch];
-    
+    CGPoint location = [self convertToNodeSpace:touch.locationInWorld];
     //find if any of the lights were touched and then call selected light on it.
     Light *selectedLight = [self.lightManager getSelectedLightFromLocation:location];
     if (selectedLight) {

@@ -10,7 +10,6 @@
 #import "GameLayer.h"
 #import "MenuCircleGenerator.h"
 #import "MainMenuLayer.h"
-#import "SimpleAudioEngine.h"
 #import "GameConfig.h"
 #import "GameKitHelper.h"
 
@@ -115,17 +114,17 @@
             //delay authenticating the player until the transition has finished so that the banner appearing doesn't make it stutter.
             [[GameKitHelper sharedGameKitHelper] performSelector:@selector(authenticateLocalPlayer) withObject:nil afterDelay:INTRO_TRANSITION_TIME];
             
-            SimpleAudioEngine *sae = [SimpleAudioEngine sharedEngine];
+            OALSimpleAudio *sae = [OALSimpleAudio sharedInstance];
             [sae preloadEffect:@"levelUpSoundEfect.wav"];
             [sae preloadEffect:@"purpleSoundEfect.wav"];
             [sae preloadEffect:@"warningSoundEfect.wav"];
-            [sae preloadBackgroundMusic:@"music.mp3"];
+            [sae preloadBg:@"music.mp3"];
             
             sae.effectsVolume = self.soundEffectsOn ? SOUND_EFFECTS_VOLUME : 0;
-            sae.backgroundMusicVolume = self.musicOn ? MUSIC_VOLUME : 0;
+            sae.bgVolume = self.musicOn ? MUSIC_VOLUME : 0;
             
             //play the background music, it will automatically loop.
-            [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"music.mp3"];
+            [sae playBgWithLoop:YES];
         }
         
         //create the menu circle generator.
@@ -141,7 +140,7 @@
         }
         [self addChild:menuLayer z:1];
         
-        self.isTouchEnabled = YES;
+        self.userInteractionEnabled = YES;
         
         [self schedule:@selector(update:)];
     }
@@ -149,7 +148,7 @@
 }
 
 //this is used to animate the circles each frame.
-- (void)update:(ccTime)dt {
+- (void)update:(CCTime)dt {
     [self.circles update:dt];
 }
 

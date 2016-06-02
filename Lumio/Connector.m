@@ -20,12 +20,12 @@
 
 @implementation Connector
 
-@synthesize position = _position;
+@synthesize position = _sPosition;
 
 //when the connector position is set also need to set the position of it's sprite.
 - (void)setPosition:(CGPoint)position
 {
-    _position = position;
+    _sPosition = position;
     self.sprite.position = position;
 }
 

@@ -25,6 +25,6 @@
 @property (nonatomic) BOOL hasCharge;
 
 - (id)initWithGameLayer:(GameLayer *)gameLayer route:(Route *)route currentLight:(Light *)currentLight countdownBar:(CountdownBar *)countdownBar  score:(Score *)score;
-- (void)update:(ccTime)dt;
+- (void)update:(CCTime)dt;
 
 @end

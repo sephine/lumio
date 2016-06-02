@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 
 //simple layer that covers up the game layer when it starts and is removed when you tap it.
-@interface ReadyLayer : CCLayer {
+@interface ReadyLayer : CCNode {
 }
 
 - (id)init;

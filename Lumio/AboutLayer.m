@@ -12,6 +12,7 @@
 #import "CreditsLayer.h"
 #import "GameConfig.h"
 #import "GameKitHelper.h"
+#import "CCButton.h"
 
 //layer for the About menu.
 @interface AboutLayer ()
@@ -30,50 +31,43 @@
         self.baseMenuLayer = baseLayer;
         self.showContinue = showContinue;
         
-        CGSize size = [[CCDirector sharedDirector] winSize];
+        CGSize size = [CCDirector sharedDirector].viewSize;
         
         //show the selected button image for about as the tile of the page.
-        CCSprite *aboutTitle = [CCSprite spriteWithFile:@"AboutButtonSelected.png"];
+        CCSprite *aboutTitle = [CCSprite spriteWithImageNamed:@"AboutButtonSelected.png"];
         aboutTitle.position = ccp(ABOUT_TITLE_X_COORD, size.height == 568 ? ABOUT_TITLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : ABOUT_TITLE_Y_COORD);
         [self addChild:aboutTitle];
         
-        CCMenuItemImage *howToPlayMenuItem = [CCMenuItemImage
-                                              itemWithNormalImage:@"HowToPlayButton.png"
-                                              selectedImage:@"HowToPlayButtonSelected.png"
-                                              target:self
-                                              selector:@selector(howToPlayButtonTapped:)];
+        CCButton *howToPlayButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"HowToPlayButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"HowToPlayButtonSelected.png"] disabledSpriteFrame:nil];
+        [howToPlayButton setTarget:self selector:@selector(howToPlayButtonTapped:)];
         
-        CCMenuItemImage *leaderboardMenuItem = [CCMenuItemImage
-                                                itemWithNormalImage:@"LeaderboardButton.png"
-                                                selectedImage:@"LeaderboardButtonSelected.png"
-                                                target:self
-                                                selector:@selector(leaderboardButtonTapped:)];
+        CCButton *leaderboardButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"LeaderboardButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"LeaderboardButtonSelected.png"] disabledSpriteFrame:nil];
+        [leaderboardButton setTarget:self selector:@selector(leaderboardButtonTapped:)];
         
-        CCMenuItemImage *reviewAppMenuItem = [CCMenuItemImage
-                                              itemWithNormalImage:@"LeaveARatingButton.png"
-                                              selectedImage:@"LeaveARatingButtonSelected.png"
-                                              target:self
-                                              selector:@selector(reviewAppButtonTapped:)];
+        CCButton *reviewAppButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"LeaveARatingButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"LeaveARatingButtonSelected.png"] disabledSpriteFrame:nil];
+        [reviewAppButton setTarget:self selector:@selector(reviewAppButtonTapped:)];
         
-        CCMenuItemImage *creditsMenuItem = [CCMenuItemImage
-                                            itemWithNormalImage:@"CreditsButton.png"
-                                            selectedImage:@"CreditsButtonSelected.png"
-                                            target:self
-                                            selector:@selector(creditsButtonTapped:)];
+        CCButton *creditsButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"CreditsButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"CreditsButtonSelected.png"] disabledSpriteFrame:nil];
+        [creditsButton setTarget:self selector:@selector(creditsButtonTapped:)];
         
-        CCMenu *menu = [CCMenu menuWithItems:howToPlayMenuItem, leaderboardMenuItem, reviewAppMenuItem, creditsMenuItem, nil];
-        menu.position = ccp(ABOUT_MENU_X_COORD, size.height == 568 ? ABOUT_MENU_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : ABOUT_MENU_Y_COORD); //230
-        [menu alignItemsVerticallyWithPadding:MENU_PADDING];
-        [self addChild:menu];
+        //create the menu and show the continue button if necessary.
+        CCLayoutBox *layout = [[CCLayoutBox alloc] init];
+        [layout addChild:howToPlayButton];
+        [layout addChild:leaderboardButton];
+        [layout addChild:reviewAppButton];
+        [layout addChild:creditsButton];
+        
+        layout.spacing = MENU_PADDING;
+        layout.direction = CCLayoutBoxDirectionVertical;
+        [layout layout];
+        layout.position = ccp(ABOUT_MENU_X_COORD, size.height == 568 ? ABOUT_MENU_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : ABOUT_MENU_Y_COORD); //230
+        [self addChild:layout];
         
         //Create the Backwards Menu Item and put it in its own menu.
-        CCMenuItemImage *backwardsMenuItem = [CCMenuItemImage
-                                              itemWithNormalImage:@"BackButton.png" selectedImage:@"BackButtonSelected.png"
-                                              target:self selector:@selector(backwardsButtonTapped:)];
-        
-        CCMenu *backwardsMenu = [CCMenu menuWithItems:backwardsMenuItem, nil];
-        backwardsMenu.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
-        [self addChild:backwardsMenu];
+        CCButton *backwardsButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"BackButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"BackButtonSelected.png"] disabledSpriteFrame:nil];
+        [backwardsButton setTarget:self selector:@selector(backwardsButtonTapped:)];
+        backwardsButton.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
+        [self addChild:backwardsButton];
     }
     return self;
 }
@@ -84,7 +78,7 @@
     HowToPlayAimLayer *howToPlayLayer = [[HowToPlayAimLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue goToGame:NO];
     [[[CCDirector sharedDirector] runningScene] addChild:howToPlayLayer z:1];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[howToPlayLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
+    [CCActionSequence actionOne:(CCActionFiniteTime *)[self runAction:[CCActionFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCActionFiniteTime *)[howToPlayLayer runAction:[CCActionFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -109,7 +103,7 @@
     CreditsLayer *creditsLayer = [[CreditsLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:creditsLayer z:1];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[creditsLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
+    [CCActionSequence actionOne:(CCActionFiniteTime *)[self runAction:[CCActionFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCActionFiniteTime *)[creditsLayer runAction:[CCActionFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 
@@ -119,7 +113,7 @@
     MainMenuLayer *mainMenuLayer = [[MainMenuLayer alloc] initWithBaseLayer:self.baseMenuLayer showContinue:self.showContinue];
     [[[CCDirector sharedDirector] runningScene] addChild:mainMenuLayer z:2];
     
-    [CCSequence actionOne:(CCFiniteTimeAction *)[self runAction:[CCFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCFiniteTimeAction *)[mainMenuLayer runAction:[CCFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
+    [CCActionSequence actionOne:(CCActionFiniteTime *)[self runAction:[CCActionFadeOut actionWithDuration:MENU_TRANSITION_TIME/2]] two:(CCActionFiniteTime *)[mainMenuLayer runAction:[CCActionFadeIn actionWithDuration:MENU_TRANSITION_TIME/2]]];
     [self removeFromParentAndCleanup:YES];
 }
 

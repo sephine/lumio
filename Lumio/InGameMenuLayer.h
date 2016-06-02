@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 
 //layer covers the game layer when the game is paused or on game over.
-@interface InGameMenuLayer : CCLayer {
+@interface InGameMenuLayer : CCNode {
 }
 
 - (id)initForPauseMenu;

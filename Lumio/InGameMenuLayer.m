@@ -11,6 +11,7 @@
 #import "GameLayer.h"
 #import "GameConfig.h"
 #import "GameKitHelper.h"
+#import "CCButton.h"
 
 //layer covers the game layer when the game is paused or on game over.
 @interface InGameMenuLayer ()
@@ -25,13 +26,13 @@
 {
     if( (self=[super init]) ) {
         
-        CGSize size = [[CCDirector sharedDirector] winSize];
+        CGSize size = [CCDirector sharedDirector].viewSize;
         
-        CCSprite *background = [CCSprite spriteWithFile:@"InGameMenu.png"];
+        CCSprite *background = [CCSprite spriteWithImageNamed:@"InGameMenu.png"];
         background.position = ccp(size.width/2, size.height/2);
         [self addChild: background z:0];
         
-        self.isTouchEnabled = YES;
+        self.userInteractionEnabled = YES;
     }
     return self;
 }
@@ -59,7 +60,7 @@
 {
     self.gameOver = gameOver;
     
-    CGSize size = [[CCDirector sharedDirector] winSize];
+    CGSize size = [CCDirector sharedDirector].viewSize;
     
     //if it is not game over, show the paused title.
     if (!self.gameOver) {
@@ -116,37 +117,22 @@
         }
     }
     
-    CCMenuItemImage *resumeMenuItem = [CCMenuItemImage
-                                       itemWithNormalImage:@"NewResumeButton.png"
-                                       selectedImage:@"NewResumeButtonSelected.png"
-                                       target:self
-                                       selector:@selector(resumeButtonTapped:)];
-    resumeMenuItem.position = ccp(RESUME_BUTTON_X_COORD, size.height == 568 ? RESUME_BUTTON_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : RESUME_BUTTON_Y_COORD);
-    
-    CCMenuItemImage *restartMenuItem = [CCMenuItemImage
-                                        itemWithNormalImage:@"NewRestartButton.png"
-                                        selectedImage:@"NewRestartButtonSelected.png"
-                                        target:self
-                                        selector:@selector(restartButtonTapped:)];
-    restartMenuItem.position = ccp(RESTART_BUTTON_X_COORD, size.height == 568 ? RESTART_BUTTON_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : RESTART_BUTTON_Y_COORD);
-
-    
-    CCMenuItem *mainMenuMenuItem = [CCMenuItemImage
-                                    itemWithNormalImage:@"NewMainMenuButton.png"
-                                    selectedImage:@"NewMainMenuButtonSelected.png"
-                                    target:self
-                                    selector:@selector(mainMenuButtonTapped:)];
-    mainMenuMenuItem.position = ccp(MENU_BUTTON_X_COORD, size.height == 568 ? MENU_BUTTON_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : MENU_BUTTON_Y_COORD);
-
-    //Only add resumeMenuItem it is not a game over screen.
-    CCMenu *inGameMenu;
-    if (self.gameOver) {
-        inGameMenu = [CCMenu menuWithItems:restartMenuItem, mainMenuMenuItem, nil];
-    } else {
-        inGameMenu = [CCMenu menuWithItems:resumeMenuItem, restartMenuItem, mainMenuMenuItem, nil];
+    CCButton *resumeButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"NewResumeButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"NewResumeButtonSelected.png"] disabledSpriteFrame:nil];
+    [resumeButton setTarget:self selector:@selector(resumeButtonTapped:)];
+    resumeButton.position = ccp(RESUME_BUTTON_X_COORD, size.height == 568 ? RESUME_BUTTON_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : RESUME_BUTTON_Y_COORD);
+    if (!self.gameOver) {
+        [self addChild:resumeButton];
     }
-    inGameMenu.position = CGPointZero;
-    [self addChild:inGameMenu];
+    
+    CCButton *restartButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"NewRestartButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"NewRestartButtonSelected.png"] disabledSpriteFrame:nil];
+    [restartButton setTarget:self selector:@selector(restartButtonTapped:)];
+    restartButton.position = ccp(RESTART_BUTTON_X_COORD, size.height == 568 ? RESTART_BUTTON_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : RESTART_BUTTON_Y_COORD);
+    [self addChild:restartButton];
+    
+    CCButton *mainMenuButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"NewMainMenuButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"NewMainMenuButtonSelected.png"] disabledSpriteFrame:nil];
+    [mainMenuButton setTarget:self selector:@selector(mainMenuButtonTapped:)];
+    mainMenuButton.position = ccp(MENU_BUTTON_X_COORD, size.height == 568 ? MENU_BUTTON_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : MENU_BUTTON_Y_COORD);
+    [self addChild:mainMenuButton];
 }
 
 //prevent touches going to over layers. No touches need actually be handled as UIMenus handle their own touches.
@@ -182,9 +168,9 @@
     [self removeFromParentAndCleanup:YES];
     CCScene *currentScene = [[CCDirector sharedDirector] runningScene];
     if (self.gameOver) {
-        [[CCDirector sharedDirector] pushScene:[CCTransitionFade transitionWithDuration:MENU_TRANSITION_TIME scene:[BaseMenuLayer scene] withColor:ccBLACK]];
+        [[CCDirector sharedDirector] presentScene:[BaseMenuLayer scene] withTransition:[CCTransition transitionFadeWithDuration:MENU_TRANSITION_TIME]];
     } else {
-        [[CCDirector sharedDirector] pushScene:[CCTransitionFade transitionWithDuration:MENU_TRANSITION_TIME scene:[BaseMenuLayer sceneWithPreviousScene:currentScene] withColor:ccBLACK]];
+        [[CCDirector sharedDirector] presentScene:[BaseMenuLayer sceneWithPreviousScene:currentScene] withTransition:[CCTransition transitionFadeWithDuration:MENU_TRANSITION_TIME]];
     }
 }
 

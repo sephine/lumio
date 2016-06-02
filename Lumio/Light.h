@@ -29,7 +29,7 @@
 @property (nonatomic, strong) Connector *rightConnector;
 
 - (id)initWithGameLayer:(GameLayer *)gameLayer row:(int)row column:(int)column;
-- (void)update:(ccTime)dt;
+- (void)update:(CCTime)dt;
 - (CGRect)getBounds;
 - (void)setAsInitialLight;
 

@@ -8,7 +8,6 @@
 
 #import "Player.h"
 #import "Light.h"
-#import "SimpleAudioEngine.h"
 #import "GameConfig.h"
 
 //class contains all the functionality for the player object whose movement is controlled by the user.
@@ -27,12 +26,12 @@
 
 @implementation Player
 
-@synthesize position = _position;
+@synthesize position = _sPosition;
 
 //when the player's position is set also need to set the position of it's sprite.
 - (void)setPosition:(CGPoint)position
 {
-    _position = position;
+    _sPosition = position;
     self.sprite.position = position;
 }
 
@@ -41,9 +40,9 @@
 {
     _hasCharge = hasCharge;
     if (hasCharge) {
-        self.sprite = [CCSprite spriteWithFile:@"playerbuffed.png"];
+        self.sprite = [CCSprite spriteWithImageNamed:@"playerbuffed.png"];
     } else {
-        self.sprite = [CCSprite spriteWithFile:@"player.png"];
+        self.sprite = [CCSprite spriteWithImageNamed:@"player.png"];
     }
 }
 
@@ -79,7 +78,7 @@
 }
 
 //moves the player along the route based on it's speed and the time since last update.
-- (void)update:(ccTime)dt
+- (void)update:(CCTime)dt
 {
     float distanceTravelled = SPEED_IN_POINTS_PER_SECOND * dt;
     
@@ -132,11 +131,11 @@
             LightValue value = [self.currentLight occupyLightAndGetValue];
             if (value == Charge) {
                 self.hasCharge = YES;
-                [[SimpleAudioEngine sharedEngine] playEffect:@"purpleSoundEffect.wav"];
+                [[OALSimpleAudio sharedInstance] playEffect:@"purpleSoundEffect.wav"];
             } else if (value != NoValue) {
                 [self.countdownBar addValue:value];
                 [self.score increaseScoreByValue:value];
-                [[SimpleAudioEngine sharedEngine] playEffect:@"purpleSoundEffect.wav"];
+                [[OALSimpleAudio sharedInstance] playEffect:@"purpleSoundEffect.wav"];
             }
             
             //move the light to the reached lights position. set the next light to nil as it has been reached.
