@@ -16,6 +16,8 @@
 		9657E8231CFE9A2900B39127 /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E8221CFE9A2900B39127 /* Icon-Small-40@2x.png */; };
 		9657E8251CFE9A2E00B39127 /* Icon-Small-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E8241CFE9A2E00B39127 /* Icon-Small-40@3x.png */; };
 		966DC8A31D05E5D900F8E07A /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966DC8A21D05E5D900F8E07A /* GameKit.framework */; };
+		966DC8B71D0604EA00F8E07A /* Intro.png in Resources */ = {isa = PBXBuildFile; fileRef = 966DC8B61D0604EA00F8E07A /* Intro.png */; };
+		966DC8B91D0604F600F8E07A /* Intro-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 966DC8B81D0604F600F8E07A /* Intro-hd.png */; };
 		96744DDC1D05154A00843C34 /* levelUpSoundEffect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96744DDB1D05154A00843C34 /* levelUpSoundEffect.mp3 */; };
 		B00ABDA016D826C200DC78F4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABD9F16D826C200DC78F4 /* AppDelegate.m */; };
 		B00ABDA616D8275200DC78F4 /* BaseMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABDA516D8275200DC78F4 /* BaseMenuLayer.m */; };
@@ -213,6 +215,8 @@
 		9657E8261D00D76F00B39127 /* libPods-Loumio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Loumio.a"; path = "../../../../Library/Developer/Xcode/DerivedData/Loumio-awfwhmxdythqfqevwlkomolwiprx/Build/Products/Debug-iphonesimulator/libPods-Loumio.a"; sourceTree = "<group>"; };
 		9657E8281D00D77500B39127 /* libObjectAL-for-iPhone;.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libObjectAL-for-iPhone;.a"; path = "Pods/../build/Debug-iphoneos/ObjectAL-for-iPhone/libObjectAL-for-iPhone;.a"; sourceTree = "<group>"; };
 		966DC8A21D05E5D900F8E07A /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		966DC8B61D0604EA00F8E07A /* Intro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Intro.png; path = "Lumio/Resources/SD Images/Menu/Intro.png"; sourceTree = SOURCE_ROOT; };
+		966DC8B81D0604F600F8E07A /* Intro-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Intro-hd.png"; path = "Lumio/Resources/HD Images/Menu/Intro-hd.png"; sourceTree = SOURCE_ROOT; };
 		96744DDB1D05154A00843C34 /* levelUpSoundEffect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = levelUpSoundEffect.mp3; path = Lumio/Resources/Sounds/levelUpSoundEffect.mp3; sourceTree = SOURCE_ROOT; };
 		96F784921D00FC1A00047072 /* libObjectAL-for-iPhoneb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libObjectAL-for-iPhoneb.a"; path = "Pods/../build/Debug-iphoneos/ObjectAL-for-iPhone/libObjectAL-for-iPhoneb.a"; sourceTree = "<group>"; };
 		9B9D83C1EA61C2815BFF23E9 /* Pods-Loumio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loumio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Loumio/Pods-Loumio.debug.xcconfig"; sourceTree = "<group>"; };
@@ -532,6 +536,7 @@
 				B0DBC81B16D961D70050F9CF /* NewMainMenuButton-hd.png */,
 				B0DBC81D16D961DC0050F9CF /* NewMainMenuButtonSelected-hd.png */,
 				B0DBC85716DA9AEE0050F9CF /* InGameMenu-hd.png */,
+				966DC8B81D0604F600F8E07A /* Intro-hd.png */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 				B02EAE6A16E00232003F21D1 /* NewMainMenuButton.png */,
 				B02EAE6C16E00236003F21D1 /* NewMainMenuButtonSelected.png */,
 				B02EAE6E16E00240003F21D1 /* InGameMenu.png */,
+				966DC8B61D0604EA00F8E07A /* Intro.png */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -913,6 +919,7 @@
 				B0DBC84816DA7BA70050F9CF /* Music-hd.png in Resources */,
 				B0DBC84A16DA7BAF0050F9CF /* SoundEffects-hd.png in Resources */,
 				B0DBC85816DA9AEF0050F9CF /* InGameMenu-hd.png in Resources */,
+				966DC8B91D0604F600F8E07A /* Intro-hd.png in Resources */,
 				B0DBC85A16DA9CA30050F9CF /* logo-hd.png in Resources */,
 				B0DBC85C16DAA0150050F9CF /* Default.png in Resources */,
 				B0DBC85E16DAA01C0050F9CF /* Default@2x.png in Resources */,
@@ -972,6 +979,7 @@
 				B02EAE1D16E00101003F21D1 /* AboutButtonSelected.png in Resources */,
 				9657E81F1CFE9A2200B39127 /* Icon-76@2x.png in Resources */,
 				B02EAE1F16E00107003F21D1 /* ContinueButton.png in Resources */,
+				966DC8B71D0604EA00F8E07A /* Intro.png in Resources */,
 				B02EAE2116E0010B003F21D1 /* ContinueButtonSelected.png in Resources */,
 				9657E8191CFE9A1500B39127 /* Icon-60@2x.png in Resources */,
 				B02EAE2316E00112003F21D1 /* HowToPlayButton.png in Resources */,
