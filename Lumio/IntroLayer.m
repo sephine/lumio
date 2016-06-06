@@ -33,7 +33,7 @@
     CGSize size = [CCDirector sharedDirector].viewSize;
     
     //add the launch screen as the background so that when this scene is entered it is seamless from the launch screen.
-    CCSprite *background = [CCSprite spriteWithFile:@"Default.png"];
+    CCSprite *background = [CCSprite spriteWithImageNamed:@"Default.png"];
     background.position = ccp(size.width/2, size.height/2);
 
     [self addChild: background];

@@ -131,11 +131,11 @@
             LightValue value = [self.currentLight occupyLightAndGetValue];
             if (value == Charge) {
                 self.hasCharge = YES;
-                [[OALSimpleAudio sharedInstance] playEffect:@"purpleSoundEffect.wav"];
+                [[OALSimpleAudio sharedInstance] playEffect:@"purpleSoundEffect.mp3"];
             } else if (value != NoValue) {
                 [self.countdownBar addValue:value];
                 [self.score increaseScoreByValue:value];
-                [[OALSimpleAudio sharedInstance] playEffect:@"purpleSoundEffect.wav"];
+                [[OALSimpleAudio sharedInstance] playEffect:@"purpleSoundEffect.mp3"];
             }
             
             //move the light to the reached lights position. set the next light to nil as it has been reached.

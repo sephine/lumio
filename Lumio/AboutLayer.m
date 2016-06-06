@@ -52,14 +52,15 @@
         
         //create the menu and show the continue button if necessary.
         CCLayoutBox *layout = [[CCLayoutBox alloc] init];
-        [layout addChild:howToPlayButton];
-        [layout addChild:leaderboardButton];
-        [layout addChild:reviewAppButton];
         [layout addChild:creditsButton];
+        [layout addChild:reviewAppButton];
+        [layout addChild:leaderboardButton];
+        [layout addChild:howToPlayButton];
         
         layout.spacing = MENU_PADDING;
         layout.direction = CCLayoutBoxDirectionVertical;
         [layout layout];
+        layout.anchorPoint = ccp(0.5f,0.5f);
         layout.position = ccp(ABOUT_MENU_X_COORD, size.height == 568 ? ABOUT_MENU_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : ABOUT_MENU_Y_COORD); //230
         [self addChild:layout];
         

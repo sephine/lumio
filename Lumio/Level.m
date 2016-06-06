@@ -46,10 +46,10 @@
         self.level = 1;
         NSString *levelString = [NSString stringWithFormat:@"Level - %d", self.level];
         self.levelLabel = [CCLabelTTF labelWithString:levelString
-                                           dimensions:CGSizeMake(LEVEL_WIDTH, LEVEL_HEIGHT)
-                                            alignment:UITextAlignmentLeft
                                              fontName:FONT_NAME
-                                             fontSize:FONT_SIZE];
+                                             fontSize:FONT_SIZE
+                                           dimensions:CGSizeMake(LEVEL_WIDTH, LEVEL_HEIGHT)];
+        self.levelLabel.horizontalAlignment = CCTextAlignmentLeft;
         self.levelLabel.color = STANDARD_BLUE;
         [self addChild:self.levelLabel];
     }
@@ -85,7 +85,7 @@
     if (countdownReduction > MAX_COUNTDOWN_REDUCTION) countdownReduction = MAX_COUNTDOWN_REDUCTION;
     self.lightManager.countdownReduction = countdownReduction;
     
-    [[OALSimpleAudio sharedInstance] playEffect:@"levelUpSoundEffect.wav"];
+    [[OALSimpleAudio sharedInstance] playEffect:@"levelUpSoundEffect.mp3"];
 }
 
 @end

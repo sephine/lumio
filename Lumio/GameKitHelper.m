@@ -81,7 +81,7 @@
         };
     } else {
         // Gamekit login for ios 5
-        [localPlayer authenticateWithCompletionHandler:nil];
+        //[localPlayer authenticateWithCompletionHandler:nil];
     }
 }
 
@@ -164,14 +164,15 @@
     leaderboardViewController.category = HIGH_SCORE_CATEGORY;
     
     AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-    
-    [[app navController] presentModalViewController:leaderboardViewController animated:YES];
+    //[[app navController] presentModalViewController:leaderboardViewController animated:YES];
+    [[app navController] presentViewController:leaderboardViewController animated:YES completion:nil];
 }
 
 -(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
 {
     AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-    [[app navController] dismissModalViewControllerAnimated:YES];
+    //[[app navController] dismissModalViewControllerAnimated:YES];
+    [[app navController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

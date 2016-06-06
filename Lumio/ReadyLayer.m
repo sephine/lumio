@@ -22,6 +22,7 @@
     if( (self=[super init]) ) {
         
         CGSize size = [CCDirector sharedDirector].viewSize;
+        self.contentSize = size;
         
         CCSprite *background = [CCSprite spriteWithImageNamed:@"ReadyLayer.png"];
         background.position = ccp(size.width/2, size.height/2);
@@ -32,18 +33,18 @@
     return self;
 }
 
-- (void)registerWithTouchDispatcher
-{
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
-}
+//- (void)registerWithTouchDispatcher
+//{
+//    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+//}
 
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    return YES;
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    
 }
 
 //when the layer is touched anywhere, remove it and unpause game layer.
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    GameLayer *gameLayer = (GameLayer *)[[[CCDirector sharedDirector] runningScene] getChildByTag:GAME_LAYER_TAG];
+- (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    GameLayer *gameLayer = (GameLayer *)[[[CCDirector sharedDirector] runningScene] getChildByName:GAME_LAYER_TAG recursively:NO];
     [gameLayer unPauseGame];
     [self removeFromParentAndCleanup:YES];
 }

@@ -35,7 +35,7 @@
     _state = state;
     switch (_state) {
         case Routed:
-            self.sprite = [CCSprite spriteWithFile:@"connectorrouted.png"];
+            self.sprite = [CCSprite spriteWithImageNamed:@"connectorrouted.png"];
             self.sprite.opacity = OPAQUE;
             break;
         case Enabled:

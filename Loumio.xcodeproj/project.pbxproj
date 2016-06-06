@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34F842CF050589528D4CCFC3 /* libPods-Loumio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69952B1A1D2C6D94D3B6221F /* libPods-Loumio.a */; };
 		9657E8191CFE9A1500B39127 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E8181CFE9A1500B39127 /* Icon-60@2x.png */; };
 		9657E81B1CFE9A1800B39127 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E81A1CFE9A1800B39127 /* Icon-60@3x.png */; };
 		9657E81D1CFE9A1E00B39127 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E81C1CFE9A1E00B39127 /* Icon-76.png */; };
@@ -14,6 +15,8 @@
 		9657E8211CFE9A2500B39127 /* Icon-Small-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E8201CFE9A2500B39127 /* Icon-Small-40.png */; };
 		9657E8231CFE9A2900B39127 /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E8221CFE9A2900B39127 /* Icon-Small-40@2x.png */; };
 		9657E8251CFE9A2E00B39127 /* Icon-Small-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9657E8241CFE9A2E00B39127 /* Icon-Small-40@3x.png */; };
+		966DC8A31D05E5D900F8E07A /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966DC8A21D05E5D900F8E07A /* GameKit.framework */; };
+		96744DDC1D05154A00843C34 /* levelUpSoundEffect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96744DDB1D05154A00843C34 /* levelUpSoundEffect.mp3 */; };
 		B00ABDA016D826C200DC78F4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABD9F16D826C200DC78F4 /* AppDelegate.m */; };
 		B00ABDA616D8275200DC78F4 /* BaseMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABDA516D8275200DC78F4 /* BaseMenuLayer.m */; };
 		B00ABDA916D8276700DC78F4 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABDA816D8276700DC78F4 /* MainMenuLayer.m */; };
@@ -61,9 +64,8 @@
 		B00ABE9F16D8321500DC78F4 /* SettingsButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B00ABE9E16D8321500DC78F4 /* SettingsButton-hd.png */; };
 		B00ABEA116D8321B00DC78F4 /* SettingsButtonSelected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B00ABEA016D8321B00DC78F4 /* SettingsButtonSelected-hd.png */; };
 		B00ABEA316D8322B00DC78F4 /* MenuCircle-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B00ABEA216D8322B00DC78F4 /* MenuCircle-hd.png */; };
-		B00ABEB816D8332500DC78F4 /* levelUpSoundEffect.wav in Resources */ = {isa = PBXBuildFile; fileRef = B00ABEB716D8332500DC78F4 /* levelUpSoundEffect.wav */; };
-		B00ABEBA16D8332900DC78F4 /* purpleSoundEffect.wav in Resources */ = {isa = PBXBuildFile; fileRef = B00ABEB916D8332900DC78F4 /* purpleSoundEffect.wav */; };
-		B00ABEBC16D8332E00DC78F4 /* warningSoundEffect.wav in Resources */ = {isa = PBXBuildFile; fileRef = B00ABEBB16D8332E00DC78F4 /* warningSoundEffect.wav */; };
+		B00ABEBA16D8332900DC78F4 /* purpleSoundEffect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B00ABEB916D8332900DC78F4 /* purpleSoundEffect.mp3 */; };
+		B00ABEBC16D8332E00DC78F4 /* warningSoundEffect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B00ABEBB16D8332E00DC78F4 /* warningSoundEffect.mp3 */; };
 		B00ABEF916D83F7700DC78F4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B00ABEF816D83F7700DC78F4 /* main.m */; };
 		B01B28CE16AB2B5200CD538A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28CD16AB2B5200CD538A /* QuartzCore.framework */; };
 		B01B28D016AB2B5200CD538A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28CF16AB2B5200CD538A /* OpenGLES.framework */; };
@@ -73,7 +75,6 @@
 		B01B28D816AB2B5200CD538A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28D716AB2B5200CD538A /* UIKit.framework */; };
 		B01B28DA16AB2B5200CD538A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28D916AB2B5200CD538A /* Foundation.framework */; };
 		B01B28DC16AB2B5200CD538A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28DB16AB2B5200CD538A /* CoreGraphics.framework */; };
-		B01B28DE16AB2B5200CD538A /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01B28DD16AB2B5200CD538A /* GameKit.framework */; };
 		B02EADCB16DED9D1003F21D1 /* CreditsBackground-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B02EADCA16DED9D1003F21D1 /* CreditsBackground-hd.png */; };
 		B02EADD116DEDB16003F21D1 /* LicenseButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B02EADD016DEDB16003F21D1 /* LicenseButton-hd.png */; };
 		B02EADD316DEDB22003F21D1 /* LicenseButtonSelected-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = B02EADD216DEDB22003F21D1 /* LicenseButtonSelected-hd.png */; };
@@ -200,8 +201,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		304BD99F423B06F4CE2B6E1E /* Pods-Loumio.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loumio.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Loumio/Pods-Loumio.appstore.xcconfig"; sourceTree = "<group>"; };
-		5843AF60C08A37979ABBE9FC /* Pods-Loumio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loumio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Loumio/Pods-Loumio.debug.xcconfig"; sourceTree = "<group>"; };
 		69952B1A1D2C6D94D3B6221F /* libPods-Loumio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Loumio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C10F5423DD158CDE1940B62 /* libPods-Lumio.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lumio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9657E8181CFE9A1500B39127 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60@2x.png"; path = "Lumio/Resources/Icons & Launch Images/Icon-60@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -213,6 +212,10 @@
 		9657E8241CFE9A2E00B39127 /* Icon-Small-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-40@3x.png"; path = "Lumio/Resources/Icons & Launch Images/Icon-Small-40@3x.png"; sourceTree = SOURCE_ROOT; };
 		9657E8261D00D76F00B39127 /* libPods-Loumio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Loumio.a"; path = "../../../../Library/Developer/Xcode/DerivedData/Loumio-awfwhmxdythqfqevwlkomolwiprx/Build/Products/Debug-iphonesimulator/libPods-Loumio.a"; sourceTree = "<group>"; };
 		9657E8281D00D77500B39127 /* libObjectAL-for-iPhone;.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libObjectAL-for-iPhone;.a"; path = "Pods/../build/Debug-iphoneos/ObjectAL-for-iPhone/libObjectAL-for-iPhone;.a"; sourceTree = "<group>"; };
+		966DC8A21D05E5D900F8E07A /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		96744DDB1D05154A00843C34 /* levelUpSoundEffect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = levelUpSoundEffect.mp3; path = Lumio/Resources/Sounds/levelUpSoundEffect.mp3; sourceTree = SOURCE_ROOT; };
+		96F784921D00FC1A00047072 /* libObjectAL-for-iPhoneb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libObjectAL-for-iPhoneb.a"; path = "Pods/../build/Debug-iphoneos/ObjectAL-for-iPhone/libObjectAL-for-iPhoneb.a"; sourceTree = "<group>"; };
+		9B9D83C1EA61C2815BFF23E9 /* Pods-Loumio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loumio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Loumio/Pods-Loumio.debug.xcconfig"; sourceTree = "<group>"; };
 		B00ABD9E16D826BD00DC78F4 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Lumio/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		B00ABD9F16D826C200DC78F4 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Lumio/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		B00ABDA416D8274B00DC78F4 /* BaseMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseMenuLayer.h; path = Lumio/BaseMenuLayer.h; sourceTree = SOURCE_ROOT; };
@@ -279,9 +282,8 @@
 		B00ABE9E16D8321500DC78F4 /* SettingsButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SettingsButton-hd.png"; path = "Lumio/Resources/HD Images/Menu/SettingsButton-hd.png"; sourceTree = SOURCE_ROOT; };
 		B00ABEA016D8321B00DC78F4 /* SettingsButtonSelected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SettingsButtonSelected-hd.png"; path = "Lumio/Resources/HD Images/Menu/SettingsButtonSelected-hd.png"; sourceTree = SOURCE_ROOT; };
 		B00ABEA216D8322B00DC78F4 /* MenuCircle-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MenuCircle-hd.png"; path = "Lumio/Resources/HD Images/Menu/MenuCircle-hd.png"; sourceTree = SOURCE_ROOT; };
-		B00ABEB716D8332500DC78F4 /* levelUpSoundEffect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = levelUpSoundEffect.wav; path = Lumio/Resources/Sounds/levelUpSoundEffect.wav; sourceTree = SOURCE_ROOT; };
-		B00ABEB916D8332900DC78F4 /* purpleSoundEffect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = purpleSoundEffect.wav; path = Lumio/Resources/Sounds/purpleSoundEffect.wav; sourceTree = SOURCE_ROOT; };
-		B00ABEBB16D8332E00DC78F4 /* warningSoundEffect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = warningSoundEffect.wav; path = Lumio/Resources/Sounds/warningSoundEffect.wav; sourceTree = SOURCE_ROOT; };
+		B00ABEB916D8332900DC78F4 /* purpleSoundEffect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = purpleSoundEffect.mp3; path = Lumio/Resources/Sounds/purpleSoundEffect.mp3; sourceTree = SOURCE_ROOT; };
+		B00ABEBB16D8332E00DC78F4 /* warningSoundEffect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = warningSoundEffect.mp3; path = Lumio/Resources/Sounds/warningSoundEffect.mp3; sourceTree = SOURCE_ROOT; };
 		B00ABED616D8340500DC78F4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Lumio/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		B00ABEF816D83F7700DC78F4 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Lumio/main.m; sourceTree = SOURCE_ROOT; };
 		B00ABEFA16D83F8F00DC78F4 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = Lumio/Prefix.pch; sourceTree = SOURCE_ROOT; };
@@ -294,7 +296,6 @@
 		B01B28D716AB2B5200CD538A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B01B28D916AB2B5200CD538A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B01B28DB16AB2B5200CD538A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		B01B28DD16AB2B5200CD538A /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		B02EADCA16DED9D1003F21D1 /* CreditsBackground-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "CreditsBackground-hd.png"; path = "Lumio/Resources/HD Images/Menu/CreditsBackground-hd.png"; sourceTree = SOURCE_ROOT; };
 		B02EADD016DEDB16003F21D1 /* LicenseButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LicenseButton-hd.png"; path = "Lumio/Resources/HD Images/Menu/LicenseButton-hd.png"; sourceTree = SOURCE_ROOT; };
 		B02EADD216DEDB22003F21D1 /* LicenseButtonSelected-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LicenseButtonSelected-hd.png"; path = "Lumio/Resources/HD Images/Menu/LicenseButtonSelected-hd.png"; sourceTree = SOURCE_ROOT; };
@@ -424,7 +425,8 @@
 		B0DBC8A916DC44580050F9CF /* HowToPlayMovementLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HowToPlayMovementLayer.m; path = Lumio/HowToPlayMovementLayer.m; sourceTree = SOURCE_ROOT; };
 		B0DBC8AB16DC445E0050F9CF /* HowToPlayPowerupLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HowToPlayPowerupLayer.h; path = Lumio/HowToPlayPowerupLayer.h; sourceTree = SOURCE_ROOT; };
 		B0DBC8AC16DC44620050F9CF /* HowToPlayPowerupLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HowToPlayPowerupLayer.m; path = Lumio/HowToPlayPowerupLayer.m; sourceTree = SOURCE_ROOT; };
-		CDBDAAA9AE3ADADAAD74188D /* Pods-Loumio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loumio.release.xcconfig"; path = "Pods/Target Support Files/Pods-Loumio/Pods-Loumio.release.xcconfig"; sourceTree = "<group>"; };
+		CFE49B2CFB2DF9CE2CB09C4D /* Pods-Loumio.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loumio.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Loumio/Pods-Loumio.appstore.xcconfig"; sourceTree = "<group>"; };
+		E796DC85530E8DB56371B515 /* Pods-Loumio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Loumio.release.xcconfig"; path = "Pods/Target Support Files/Pods-Loumio/Pods-Loumio.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -440,7 +442,8 @@
 				B01B28D816AB2B5200CD538A /* UIKit.framework in Frameworks */,
 				B01B28DA16AB2B5200CD538A /* Foundation.framework in Frameworks */,
 				B01B28DC16AB2B5200CD538A /* CoreGraphics.framework in Frameworks */,
-				B01B28DE16AB2B5200CD538A /* GameKit.framework in Frameworks */,
+				34F842CF050589528D4CCFC3 /* libPods-Loumio.a in Frameworks */,
+				966DC8A31D05E5D900F8E07A /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,9 +453,9 @@
 		6C889B9CB1E6EF0CC5011C22 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5843AF60C08A37979ABBE9FC /* Pods-Loumio.debug.xcconfig */,
-				CDBDAAA9AE3ADADAAD74188D /* Pods-Loumio.release.xcconfig */,
-				304BD99F423B06F4CE2B6E1E /* Pods-Loumio.appstore.xcconfig */,
+				9B9D83C1EA61C2815BFF23E9 /* Pods-Loumio.debug.xcconfig */,
+				E796DC85530E8DB56371B515 /* Pods-Loumio.release.xcconfig */,
+				CFE49B2CFB2DF9CE2CB09C4D /* Pods-Loumio.appstore.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -612,9 +615,9 @@
 		B00ABEB616D8330000DC78F4 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				B00ABEB716D8332500DC78F4 /* levelUpSoundEffect.wav */,
-				B00ABEB916D8332900DC78F4 /* purpleSoundEffect.wav */,
-				B00ABEBB16D8332E00DC78F4 /* warningSoundEffect.wav */,
+				96744DDB1D05154A00843C34 /* levelUpSoundEffect.mp3 */,
+				B00ABEB916D8332900DC78F4 /* purpleSoundEffect.mp3 */,
+				B00ABEBB16D8332E00DC78F4 /* warningSoundEffect.mp3 */,
 				B0DBC83D16DA7B480050F9CF /* music.mp3 */,
 			);
 			name = Sounds;
@@ -641,6 +644,8 @@
 		B01B28CC16AB2B5200CD538A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				966DC8A21D05E5D900F8E07A /* GameKit.framework */,
+				96F784921D00FC1A00047072 /* libObjectAL-for-iPhoneb.a */,
 				9657E8281D00D77500B39127 /* libObjectAL-for-iPhone;.a */,
 				9657E8261D00D76F00B39127 /* libPods-Loumio.a */,
 				B01B28CD16AB2B5200CD538A /* QuartzCore.framework */,
@@ -651,7 +656,6 @@
 				B01B28D716AB2B5200CD538A /* UIKit.framework */,
 				B01B28D916AB2B5200CD538A /* Foundation.framework */,
 				B01B28DB16AB2B5200CD538A /* CoreGraphics.framework */,
-				B01B28DD16AB2B5200CD538A /* GameKit.framework */,
 				6C10F5423DD158CDE1940B62 /* libPods-Lumio.a */,
 				69952B1A1D2C6D94D3B6221F /* libPods-Loumio.a */,
 			);
@@ -806,12 +810,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B01B2A6216AB2B5500CD538A /* Build configuration list for PBXNativeTarget "Loumio" */;
 			buildPhases = (
-				7A0E08F78B85912A74340E64 /* 📦 Check Pods Manifest.lock */,
+				7A0E08F78B85912A74340E64 /* [CP] Check Pods Manifest.lock */,
 				B01B28C516AB2B5200CD538A /* Sources */,
 				B01B28C616AB2B5200CD538A /* Frameworks */,
 				B01B28C716AB2B5200CD538A /* Resources */,
-				24CC4BA81CCC0A1E4D8309B6 /* 📦 Embed Pods Frameworks */,
-				AB17ACBB3E3714794D230326 /* 📦 Copy Pods Resources */,
+				24CC4BA81CCC0A1E4D8309B6 /* [CP] Embed Pods Frameworks */,
+				AB17ACBB3E3714794D230326 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -832,6 +836,11 @@
 				TargetAttributes = {
 					B01B28C816AB2B5200CD538A = {
 						DevelopmentTeam = AVVK9CE648;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -887,9 +896,8 @@
 				B00ABE9F16D8321500DC78F4 /* SettingsButton-hd.png in Resources */,
 				B00ABEA116D8321B00DC78F4 /* SettingsButtonSelected-hd.png in Resources */,
 				B00ABEA316D8322B00DC78F4 /* MenuCircle-hd.png in Resources */,
-				B00ABEB816D8332500DC78F4 /* levelUpSoundEffect.wav in Resources */,
-				B00ABEBA16D8332900DC78F4 /* purpleSoundEffect.wav in Resources */,
-				B00ABEBC16D8332E00DC78F4 /* warningSoundEffect.wav in Resources */,
+				B00ABEBA16D8332900DC78F4 /* purpleSoundEffect.mp3 in Resources */,
+				B00ABEBC16D8332E00DC78F4 /* warningSoundEffect.mp3 in Resources */,
 				B0D8A43616D84D230022641B /* BlueRoutedLayer-hd.png in Resources */,
 				B0DBC81416D961C40050F9CF /* NewResumeButton-hd.png in Resources */,
 				B0DBC81616D961C80050F9CF /* NewResumeButtonSelected-hd.png in Resources */,
@@ -924,6 +932,7 @@
 				B0DBC89116DC281E0050F9CF /* HowToPlayAim-hd.png in Resources */,
 				B0DBC89316DC28240050F9CF /* HowToPlayMovement-hd.png in Resources */,
 				B0DBC89516DC28290050F9CF /* HowToPlayPowerup-hd.png in Resources */,
+				96744DDC1D05154A00843C34 /* levelUpSoundEffect.mp3 in Resources */,
 				B0DBC89716DC2B440050F9CF /* BackButton-hd.png in Resources */,
 				9657E81B1CFE9A1800B39127 /* Icon-60@3x.png in Resources */,
 				B0DBC89916DC2B490050F9CF /* BackButtonSelected-hd.png in Resources */,
@@ -1020,14 +1029,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		24CC4BA81CCC0A1E4D8309B6 /* 📦 Embed Pods Frameworks */ = {
+		24CC4BA81CCC0A1E4D8309B6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1035,14 +1044,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Loumio/Pods-Loumio-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7A0E08F78B85912A74340E64 /* 📦 Check Pods Manifest.lock */ = {
+		7A0E08F78B85912A74340E64 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1050,14 +1059,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		AB17ACBB3E3714794D230326 /* 📦 Copy Pods Resources */ = {
+		AB17ACBB3E3714794D230326 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1117,8 +1126,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				ONLY_ACTIVE_ARCH = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = NO;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1139,7 +1148,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1149,7 +1158,7 @@
 		};
 		B01B2A6316AB2B5500CD538A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5843AF60C08A37979ABBE9FC /* Pods-Loumio.debug.xcconfig */;
+			baseConfigurationReference = 9B9D83C1EA61C2815BFF23E9 /* Pods-Loumio.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1170,14 +1179,14 @@
 				PROVISIONING_PROFILE = "";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "\"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/CocosDenshion/CocosDenshion\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Support\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Platforms/iOS\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d-ui\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Pods/cocos2d\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		B01B2A6416AB2B5500CD538A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CDBDAAA9AE3ADADAAD74188D /* Pods-Loumio.release.xcconfig */;
+			baseConfigurationReference = E796DC85530E8DB56371B515 /* Pods-Loumio.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1197,7 +1206,7 @@
 				PROVISIONING_PROFILE = "";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "\"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/CocosDenshion/CocosDenshion\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Support\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Platforms/iOS\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d-ui\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Pods/cocos2d\"/**";
 				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1216,7 +1225,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6177D1B7-2F0E-4926-B40A-213092614C3F";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;
@@ -1227,7 +1236,7 @@
 		};
 		B02EAE7116E04040003F21D1 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 304BD99F423B06F4CE2B6E1E /* Pods-Loumio.appstore.xcconfig */;
+			baseConfigurationReference = CFE49B2CFB2DF9CE2CB09C4D /* Pods-Loumio.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1247,7 +1256,7 @@
 				PROVISIONING_PROFILE = "";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "\"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/CocosDenshion/CocosDenshion\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Support\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d/Platforms/iOS\" \"/Users/joanne/Projects/iOS/Cocos2D/lumio/Pods/cocos2d/cocos2d-ui\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Pods/cocos2d\"/**";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

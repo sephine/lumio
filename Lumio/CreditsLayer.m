@@ -41,7 +41,7 @@
         [self addChild:licenseButton];
         
         CCButton *backwardsButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"BackButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"BackButtonSelected.png"] disabledSpriteFrame:nil];
-        [licenseButton setTarget:self selector:@selector(backwardsButtonTapped:)];
+        [backwardsButton setTarget:self selector:@selector(backwardsButtonTapped:)];
         backwardsButton.position = ccp(BACK_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_BACK_Y_COORD : BACK_Y_COORD);
         [self addChild:backwardsButton];
     }

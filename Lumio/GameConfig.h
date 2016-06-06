@@ -124,7 +124,7 @@
 #define CIRCLE_6_Y_COORD 65
 #define CIRCLE_6_INITIAL_TIME 4
 #define MAX_CIRCLE_TIME 24
-#define MENU_CIRCLE_OPACITY 30
+#define MENU_CIRCLE_OPACITY 30.0/255.0
 //general
 #define MENU_PADDING 10.0
 #define MENU_TRANSITION_TIME 0.6
@@ -145,7 +145,7 @@
 #define MIN_RADIUS 20.0
 #define SPEED_UP_THRESHOLD 0.5
 #define CRITICAL_THRESHOLD 0.1
-#define OUTER_CIRCLE_OPACITY 150
+#define OUTER_CIRCLE_OPACITY 150.0/255.0
 //timers
 #define MAX_REFRESH_COUNTDOWN 14
 #define MIN_REFRESH_COUNTDOWN 11
@@ -193,8 +193,8 @@
 #define STANDARD_PINK [CCColor colorWithRed:0.72 green:0.42 blue:0.99]
 #define STANDARD_BLUE [CCColor colorWithRed:0.01 green:0.67 blue:1.0]
 #define STANDARD_BACKGROUND [CCColor colorWithRed:0.06 green:0.06 blue:0.06]
-#define OPAQUE 255
-#define TRANSPARENT 0
+#define OPAQUE 1.0
+#define TRANSPARENT 0.0
 
 //FONTS
 #define FONT_NAME @"Helvetica"
@@ -209,7 +209,7 @@
 #define SILENT 0.0
 
 //MISC
-#define GAME_LAYER_TAG 1
+#define GAME_LAYER_TAG @"1"
 #define HIGH_SCORE_CATEGORY @"1"
 #define APPLE_ID @"608072046"
 #define FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT 44

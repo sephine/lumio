@@ -47,17 +47,17 @@
         //set the glow time remaining to 0, it will be increased when a glow should be shown.
         self.glowTimeRemaining = 0;
         
-        self.centreSprite = [CCSprite spriteWithFile:@"energy.png"];
+        self.centreSprite = [CCSprite spriteWithImageNamed:@"energy.png"];
         self.centreSprite.position = self.position;
         self.centreSprite.anchorPoint = ccp(0, 0);
         [self addChild:self.centreSprite z:1];
         
-        self.maskSprite = [CCSprite spriteWithFile:@"energymask.png"];
+        self.maskSprite = [CCSprite spriteWithImageNamed:@"energymask.png"];
         self.maskSprite.position = self.position;
         self.maskSprite.anchorPoint = ccp(1, 0);
         [self addChild:self.maskSprite z:2];
         
-        self.borderSprite = [CCSprite spriteWithFile:@"energybar.png"];
+        self.borderSprite = [CCSprite spriteWithImageNamed:@"energybar.png"];
         self.borderSprite.position = self.position;
         self.borderSprite.anchorPoint = ccp(0, 0);
         [self addChild:self.borderSprite z:3];
@@ -88,7 +88,7 @@
     
     //play warning sound the first time it enters the warning zone.
     if (self.value <= COUNTDOWN_WARNING_START_PERCENTAGE && initialValue > COUNTDOWN_WARNING_START_PERCENTAGE) {
-        [[OALSimpleAudio sharedInstance] playEffect:@"warningSoundEffect.wav"];
+        [[OALSimpleAudio sharedInstance] playEffect:@"warningSoundEffect.mp3"];
     }
 }
 

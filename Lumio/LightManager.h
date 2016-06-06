@@ -23,8 +23,8 @@
 @property (nonatomic) int maxCooldown;
 @property (nonatomic) float countdownReduction;
 
-- (id)initWithLightArray:(NSMutableArray *)lightArray;
-- (void)update:(CCTime)dt;
+- (id)initWithGameLayer:(GameLayer *)gameLayer lightArray:(NSMutableArray *)lightArray;
+//- (void)update:(CCTime)dt;
 
 - (void)chooseFirstLightWithValue:(LightValue)value;
 - (void)chooseNewLightWithValue:(LightValue)value;

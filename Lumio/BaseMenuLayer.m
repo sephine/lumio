@@ -115,9 +115,9 @@
             [[GameKitHelper sharedGameKitHelper] performSelector:@selector(authenticateLocalPlayer) withObject:nil afterDelay:INTRO_TRANSITION_TIME];
             
             OALSimpleAudio *sae = [OALSimpleAudio sharedInstance];
-            [sae preloadEffect:@"levelUpSoundEfect.wav"];
-            [sae preloadEffect:@"purpleSoundEfect.wav"];
-            [sae preloadEffect:@"warningSoundEfect.wav"];
+            [sae preloadEffect:@"levelUpSoundEfect.mp3"];
+            [sae preloadEffect:@"purpleSoundEfect.mp3"];
+            [sae preloadEffect:@"warningSoundEfect.mp3"];
             [sae preloadBg:@"music.mp3"];
             
             sae.effectsVolume = self.soundEffectsOn ? SOUND_EFFECTS_VOLUME : 0;
@@ -141,25 +141,19 @@
         [self addChild:menuLayer z:1];
         
         self.userInteractionEnabled = YES;
-        
-        [self schedule:@selector(update:)];
+        //[self schedule:@selector(update:)];
     }
     return self;
 }
 
-//this is used to animate the circles each frame.
-- (void)update:(CCTime)dt {
-    [self.circles update:dt];
-}
-
 //prevent touches going to over layers. No touches need actually be handled as UIMenus handle their own touches.
-- (void)registerWithTouchDispatcher
-{
-	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
-}
+//- (void)registerWithTouchDispatcher
+//{
+//	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+//}
 
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    return YES;
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    
 }
 
 @end

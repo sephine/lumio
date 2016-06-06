@@ -57,8 +57,8 @@
 	[director_ setProjection:CCDirectorProjection2D];
 
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director_ enableRetinaDisplay:YES] )
-		CCLOG(@"Retina Display Not supported");
+	//if( ! [director_ enableRetinaDisplay:YES] )
+	//	CCLOG(@"Retina Display Not supported");
 
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
@@ -70,13 +70,13 @@
 	// On iPad     : "-ipad", "-hd"
 	// On iPhone HD: "-hd"
 	CCFileUtils *sharedFileUtils = [CCFileUtils sharedFileUtils];
-	[sharedFileUtils setEnableFallbackSuffixes:NO];				// Default: NO. No fallback suffixes are going to be used
+	//[sharedFileUtils setEnableFallbackSuffixes:NO];				// Default: NO. No fallback suffixes are going to be used
 	[sharedFileUtils setiPhoneRetinaDisplaySuffix:@"-hd"];		// Default on iPhone RetinaDisplay is "-hd"
 	[sharedFileUtils setiPadSuffix:@"-ipad"];					// Default on iPad is "ipad"
 	[sharedFileUtils setiPadRetinaDisplaySuffix:@"-ipadhd"];	// Default on iPad RetinaDisplay is "-ipadhd"
 
 	// Assume that PVR images have premultiplied alpha
-	[CCTexture PVRImagesHavePremultipliedAlpha:YES];
+	//[CCTexture PVRImagesHavePremultipliedAlpha:YES];
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	[director_ pushScene: [IntroLayer scene]]; 
@@ -108,7 +108,7 @@
 		[director_ pause];
     //pause the game and open up the pause screen if the game is playing.
     CCScene *currentScene = [[CCDirector sharedDirector] runningScene];
-    GameLayer *gameLayer = (GameLayer *)[currentScene getChildByTag:GAME_LAYER_TAG];
+    GameLayer *gameLayer = (GameLayer *)[currentScene getChildByName:GAME_LAYER_TAG recursively:NO];
     
     if (gameLayer && !gameLayer.gameIsPaused) {
         gameLayer.gameIsPaused = YES;

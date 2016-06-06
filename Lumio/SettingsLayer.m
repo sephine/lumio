@@ -43,6 +43,8 @@
         CCButton *soundEffectsButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"OnButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"OffButton.png"] disabledSpriteFrame:nil];
         [soundEffectsButton setTarget:self selector:@selector(soundEffectsSettingButtonTapped:)];
         soundEffectsButton.togglesSelectedState = YES;
+        soundEffectsButton.selected = !self.baseMenuLayer.soundEffectsOn;
+        
         soundEffectsButton.position = ccp(SOUND_EFFECTS_TOGGLE_X_COORD, size.height == 568 ? SOUND_EFFECTS_TOGGLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : SOUND_EFFECTS_TOGGLE_Y_COORD);
         [self addChild:soundEffectsButton];
         
@@ -54,6 +56,7 @@
         CCButton *musicButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"OnButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"OffButton.png"] disabledSpriteFrame:nil];
         [musicButton setTarget:self selector:@selector(musicSettingButtonTapped:)];
         musicButton.togglesSelectedState = YES;
+        musicButton.selected = !self.baseMenuLayer.musicOn;
         musicButton.position = ccp(MUSIC_TOGGLE_X_COORD, size.height == 568 ? MUSIC_TOGGLE_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : MUSIC_TOGGLE_Y_COORD);
         [self addChild:musicButton];
         

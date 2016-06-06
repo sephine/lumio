@@ -44,26 +44,27 @@
         [continueButton setTarget:self selector:@selector(continueButtonTapped:)];
         
         CCButton *newGameButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"NewGameButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"NewGameButtonSelected.png"] disabledSpriteFrame:nil];
-        [continueButton setTarget:self selector:@selector(newGameButtonTapped:)];
+        [newGameButton setTarget:self selector:@selector(newGameButtonTapped:)];
 
         CCButton *aboutButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"AboutButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"AboutButtonSelected.png"] disabledSpriteFrame:nil];
-        [continueButton setTarget:self selector:@selector(aboutButtonTapped:)];
+        [aboutButton setTarget:self selector:@selector(aboutButtonTapped:)];
 
         CCButton *settingsButton = [CCButton buttonWithTitle:nil spriteFrame:[CCSpriteFrame frameWithImageNamed:@"SettingsButton.png"] highlightedSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"SettingsButtonSelected.png"] disabledSpriteFrame:nil];
-        [continueButton setTarget:self selector:@selector(settingsButtonTapped:)];
+        [settingsButton setTarget:self selector:@selector(settingsButtonTapped:)];
         
         //create the menu and show the continue button if necessary.
         CCLayoutBox *layout = [[CCLayoutBox alloc] init];
+        [layout addChild:settingsButton];
+        [layout addChild:aboutButton];
+        [layout addChild:newGameButton];
         if (showContinue) {
             [layout addChild:continueButton];
         }
-        [layout addChild:newGameButton];
-        [layout addChild:aboutButton];
-        [layout addChild:settingsButton];
         
         layout.spacing = MENU_PADDING;
         layout.direction = CCLayoutBoxDirectionVertical;
         [layout layout];
+        layout.anchorPoint = ccp(0.5f,0.5f);
         layout.position = ccp(MAIN_MENU_MENU_X_COORD, size.height == 568 ? MAIN_MENU_MENU_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : MAIN_MENU_MENU_Y_COORD);
         [self addChild:layout];
     }

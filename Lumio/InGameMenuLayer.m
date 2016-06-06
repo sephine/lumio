@@ -27,6 +27,7 @@
     if( (self=[super init]) ) {
         
         CGSize size = [CCDirector sharedDirector].viewSize;
+        self.contentSize = size;
         
         CCSprite *background = [CCSprite spriteWithImageNamed:@"InGameMenu.png"];
         background.position = ccp(size.width/2, size.height/2);
@@ -66,10 +67,10 @@
     if (!self.gameOver) {
         NSString *pausedString = @"Paused";
         CCLabelTTF *pausedLabel = [CCLabelTTF labelWithString:pausedString
-                                                 dimensions:CGSizeMake(PAUSED_LABEL_WIDTH, PAUSED_LABEL_HEIGHT)
-                                                  alignment:UITextAlignmentCenter
-                                                   fontName:FONT_NAME
-                                                   fontSize:FONT_SIZE];
+                                                     fontName:FONT_NAME
+                                                     fontSize:FONT_SIZE
+                                                   dimensions:CGSizeMake(PAUSED_LABEL_WIDTH, PAUSED_LABEL_HEIGHT)];
+        pausedLabel.horizontalAlignment = CCTextAlignmentCenter;
         pausedLabel.color = STANDARD_PURPLE;
         pausedLabel.position = ccp(PAUSED_LABEL_X_COORD, size.height == 568 ? PAUSED_LABEL_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : PAUSED_LABEL_Y_COORD);
         pausedLabel.anchorPoint = ccp(PAUSED_LABEL_ANCHOR_X_COORD, PAUSED_LABEL_ANCHOR_Y_COORD);
@@ -88,10 +89,10 @@
         
         NSString *scoreString = [NSString stringWithFormat:@"Score:\n%d", score];
         CCLabelTTF *scoreLabel = [CCLabelTTF labelWithString:scoreString
-                                                   dimensions:CGSizeMake(SCORE_LABEL_WIDTH, SCORE_LABEL_HEIGHT)
-                                                    alignment:UITextAlignmentCenter
-                                                     fontName:FONT_NAME
-                                                     fontSize:FONT_SIZE];
+                                                    fontName:FONT_NAME
+                                                    fontSize:FONT_SIZE
+                                                  dimensions:CGSizeMake(SCORE_LABEL_WIDTH, SCORE_LABEL_HEIGHT)];
+        scoreLabel.horizontalAlignment = CCTextAlignmentCenter;
         scoreLabel.color = STANDARD_PURPLE;
         scoreLabel.position = ccp(SCORE_LABEL_X_COORD, size.height == 568 ? SCORE_LABEL_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : SCORE_LABEL_Y_COORD);
         scoreLabel.anchorPoint = ccp(SCORE_LABEL_ANCHOR_X_COORD, SCORE_LABEL_ANCHOR_Y_COORD);
@@ -106,10 +107,10 @@
                 highScoreString = [NSString stringWithFormat:@"High Score:\n%lld", highScore];
             }
             CCLabelTTF *highScoreLabel = [CCLabelTTF labelWithString:highScoreString
-                                                      dimensions:CGSizeMake(HIGH_SCORE_LABEL_WIDTH, HIGH_SCORE_LABEL_HEIGHT)
-                                                       alignment:UITextAlignmentCenter
-                                                        fontName:FONT_NAME
-                                                        fontSize:FONT_SIZE];
+                                                            fontName:FONT_NAME
+                                                            fontSize:FONT_SIZE
+                                                          dimensions:CGSizeMake(HIGH_SCORE_LABEL_WIDTH, HIGH_SCORE_LABEL_HEIGHT)];
+            highScoreLabel.horizontalAlignment = CCTextAlignmentCenter;
             highScoreLabel.color = STANDARD_PINK;
             highScoreLabel.position = ccp(HIGH_SCORE_LABEL_X_COORD, size.height == 568 ? HIGH_SCORE_LABEL_Y_COORD + FOUR_INCH_SCREEN_HEIGHT_ADJUSTMENT : HIGH_SCORE_LABEL_Y_COORD);
             highScoreLabel.anchorPoint = ccp(HIGH_SCORE_LABEL_ANCHOR_X_COORD, HIGH_SCORE_LABEL_ANCHOR_Y_COORD);
@@ -136,19 +137,19 @@
 }
 
 //prevent touches going to over layers. No touches need actually be handled as UIMenus handle their own touches.
-- (void)registerWithTouchDispatcher
-{
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
-}
+//- (void)registerWithTouchDispatcher
+//{
+//    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+//}
 
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    return YES;
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    
 }
 
 //will remove the in game menu and unpause the game (only available when it is not game over)
 - (void)resumeButtonTapped:(id)sender
 {
-    GameLayer *gameLayer = (GameLayer *)[[[CCDirector sharedDirector] runningScene] getChildByTag:GAME_LAYER_TAG];
+    GameLayer *gameLayer = (GameLayer *)[[[CCDirector sharedDirector] runningScene] getChildByName:GAME_LAYER_TAG recursively:NO];
     [gameLayer unPauseGame];
     [self removeFromParentAndCleanup:YES];
 }
@@ -156,7 +157,7 @@
 //will remove the in game menu and restart the game.
 - (void)restartButtonTapped:(id)sender
 {
-    GameLayer *gameLayer = (GameLayer *)[[[CCDirector sharedDirector] runningScene] getChildByTag:GAME_LAYER_TAG];
+    GameLayer *gameLayer = (GameLayer *)[[[CCDirector sharedDirector] runningScene] getChildByName:GAME_LAYER_TAG recursively:NO];
     [gameLayer restartGame];
     [self removeFromParentAndCleanup:YES];
 }

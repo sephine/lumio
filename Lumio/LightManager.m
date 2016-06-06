@@ -12,6 +12,7 @@
 //used to handle interactions which involve the group of lights as a whole, or the position of the light in the group.
 @interface LightManager ()
 
+@property (nonatomic, strong) GameLayer *gameLayer;
 @property (nonatomic, strong) NSMutableArray *twoDimensionalLightArray;
 
 @end
@@ -19,9 +20,10 @@
 @implementation LightManager
 
 //lightarray is a two dimensional array that contains all the light objects created by game layer first by row then by column.
-- (id)initWithLightArray:(NSMutableArray *)lightArray
+- (id)initWithGameLayer:(GameLayer *)gameLayer lightArray:(NSMutableArray *)lightArray
 {
     if (self = [super init]) {
+        self.gameLayer = gameLayer;
         self.twoDimensionalLightArray = lightArray;
         
         //set self as the light manager for all the lights and ensure the connectors are in the correct initial states.
@@ -35,18 +37,19 @@
                 }
             }
         }
+        [self.gameLayer addChild:self];
     }
     return self;
 }
 
 //calls the update methods for all the stored lights.
-- (void)update:(CCTime)dt {
-    for (NSMutableArray *innerArray in self.twoDimensionalLightArray) {
-        for (Light *light in innerArray) {
-            [light update:dt];
-        }
-    }
-}
+//- (void)update:(CCTime)dt {
+//    for (NSMutableArray *innerArray in self.twoDimensionalLightArray) {
+//        for (Light *light in innerArray) {
+//            [light update:dt];
+//        }
+//    }
+//}
 
 //called only when the game is first created to make the new value lights.
 - (void)chooseFirstLightWithValue:(LightValue)value

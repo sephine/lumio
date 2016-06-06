@@ -39,6 +39,11 @@
 
 @implementation GameLayer
 
+- (void)setGameIsPaused:(BOOL)gameIsPaused {
+    _gameIsPaused = gameIsPaused;
+    self.paused = gameIsPaused;
+}
+
 // Helper class method that creates a Scene with the GameLayer as the only child.
 +(CCScene *) scene
 {
@@ -48,7 +53,7 @@
     //readylayer will initially cover the paused game layer.
     ReadyLayer *readyLayer = [ReadyLayer node];
 	
-    [scene addChild:gameLayer z:0 tag:GAME_LAYER_TAG];
+    [scene addChild:gameLayer z:0 name:GAME_LAYER_TAG];
     [scene addChild:readyLayer z:1];
 	
     return scene;
@@ -62,6 +67,7 @@
         self.gameIsPaused = YES;
         
         CGSize size = [CCDirector sharedDirector].viewSize;
+        self.contentSize = size;
         
         //add the header which will include the countdown bar and the pause button.
         CCSprite *header = [CCSprite spriteWithImageNamed:@"topmenu.png"];
@@ -101,7 +107,7 @@
         Light *firstLight = [[twoDimensionallightArray objectAtIndex:MIDDLE_ROW_INDEX] objectAtIndex:MIDDLE_COLUMN_INDEX];
         [firstLight setAsInitialLight];
         
-        self.lightManager = [[LightManager alloc] initWithLightArray:twoDimensionallightArray];
+        self.lightManager = [[LightManager alloc] initWithGameLayer:self lightArray:twoDimensionallightArray];
         
         //choose a high, medium, low and two charge new value lights from all the added lights.
         [self.lightManager chooseFirstLightWithValue:High];
@@ -124,33 +130,21 @@
         self.player = [[Player alloc] initWithGameLayer:self route:self.route currentLight:firstLight countdownBar:self.countdownBar score:self.score];
     
         self.userInteractionEnabled = YES;
-    
-        [self schedule:@selector(update:)];
     }
     return self;
 }
 
-//update method calls similar methods on gmae objects to manage transition of lights and movement of player etc
-- (void)update:(CCTime)dt {
-    //only update if game is not paused.
-    if (!self.gameIsPaused) {
-        [self.lightManager update:dt];
-        [self.player update:dt];
-        [self.countdownBar update:dt];
-    }
-}
+//- (void)registerWithTouchDispatcher
+//{
+//    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+//}
 
-- (void)registerWithTouchDispatcher
-{
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
-}
-
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    return YES;
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    
 }
 
 //handles when the user taps the lights.
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+- (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint location = [self convertToNodeSpace:touch.locationInWorld];
     //find if any of the lights were touched and then call selected light on it.
     Light *selectedLight = [self.lightManager getSelectedLightFromLocation:location];
@@ -197,7 +191,7 @@
     [self removeFromParentAndCleanup:YES];
     GameLayer *layer = [GameLayer node];
     [layer unPauseGame];
-    [[[CCDirector sharedDirector] runningScene] addChild:layer z:0 tag:GAME_LAYER_TAG];
+    [[[CCDirector sharedDirector] runningScene] addChild:layer z:0 name:GAME_LAYER_TAG];
 }
 
 @end

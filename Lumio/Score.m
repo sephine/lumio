@@ -46,23 +46,23 @@
         self.scoreValue = 0;
         NSString *scoreString = [NSString stringWithFormat:@"Score - %d", self.scoreValue];
         self.scoreLabel = [CCLabelTTF labelWithString:scoreString
-                                           dimensions:CGSizeMake(SCORE_WIDTH, SCORE_HEIGHT)
-                                            alignment:UITextAlignmentLeft
                                              fontName:FONT_NAME
-                                             fontSize:FONT_SIZE];
+                                             fontSize:FONT_SIZE
+                                           dimensions:CGSizeMake(SCORE_WIDTH, SCORE_HEIGHT)];
+        self.scoreLabel.horizontalAlignment = CCTextAlignmentLeft;
         self.scoreLabel.color = STANDARD_PURPLE;
         [self addChild:self.scoreLabel];
         
-        CCSprite *starSprite = [CCSprite spriteWithFile:@"1star.png"];
+        CCSprite *starSprite = [CCSprite spriteWithImageNamed:@"1star.png"];
         starSprite.position = ccp(STAR_SPRITE_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_STAR_SPRITE_Y_COORD : STAR_SPRITE_Y_COORD);
         [self addChild:starSprite];
         
         NSString *starsToLevelUpString = [NSString stringWithFormat:@"%d", self.starsToLevelUp];
         self.starsToLevelUpLabel = [CCLabelTTF labelWithString:starsToLevelUpString
-                                           dimensions:CGSizeMake(STARS_REMAINING_WIDTH, STARS_REMAINING_HEIGHT)
-                                            alignment:UITextAlignmentLeft
-                                             fontName:FONT_NAME
-                                             fontSize:FONT_SIZE];
+                                                      fontName:FONT_NAME
+                                                      fontSize:FONT_SIZE
+                                                    dimensions:CGSizeMake(STARS_REMAINING_WIDTH, STARS_REMAINING_HEIGHT)];
+        self.starsToLevelUpLabel.horizontalAlignment = CCTextAlignmentLeft;
         self.starsToLevelUpLabel.color = STANDARD_BLUE;
         self.starsToLevelUpLabel.position =ccp(STARS_REMAINING_X_COORD, size.height == 568 ? EXPLICIT_FOUR_INCH_SCREEN_STAR_REMAINING_Y_COORD : STARS_REMAINING_Y_COORD);
         [self addChild:self.starsToLevelUpLabel];
